@@ -1,0 +1,407 @@
+<?php
+########################################################################
+#
+#	 FILE DI CONFIGURAZIONE VFRONT
+#
+#
+#	 This file is part of VFront.
+#
+#    VFront is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    any later version.
+#
+#    VFront is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+########################################################################
+
+/**
+ * @desc File di configurazione di VFront
+ * @package VFront
+ * @subpackage Config
+ * @author M.Marcello Verona
+ * @copyright 2007-2009 M.Marcello Verona
+ * @version 0.95
+ * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
+ */
+
+
+/*  PARAMETRI DI CONNESSIONE DB  */
+
+
+// Connessione a MYSQL 5.x: commentare il blocco nel caso si utilizzi altro DB (Postgres)
+$db1['dbtype']="mysql";
+$db1['host']="localhost";
+$db1['port']="3306";
+$db1['user']="root";
+$db1['passw']="";
+$db1['dbname']="";
+$db1['frontend']="";
+$db1['sep']='.';
+
+define('VFRONT_DBTYPE', $db1['dbtype']);
+
+
+// POSTGRES 8.x commentare il blocco nel caso si utilizzi altro DB (MYSQL)
+/*$db1['dbtype']="postgres";
+$db1['host']="localhost";
+$db1['port']="5432";
+$db1['user']="postgres";
+$db1['passw']="";
+$db1['postgres_dbname']="";
+$db1['dbname']="public"; // non modificare questo!
+$db1['frontend']="frontend"; // non modificare questo!
+$db1['sep']='.';
+ */
+
+
+// ORACLE
+/*$db1['dbtype']="oracle";
+$db1['host']="localhost";
+$db1['port']="";
+$db1['user']="youruser";
+$db1['passw']="yourpassw";
+$db1['dbname']=""; // non modificare questo!
+$db1['frontend']="VF_"; // non modificare questo!
+$db1['sep']='';
+$db1['service']="XE";
+ */
+
+
+// SQLite
+/*
+$db1['filename']=''; // path of sqlite database
+$db1['host']="";
+$db1['port']="";
+$db1['passw']="";
+$db1['dbname']="";
+$db1['frontend']="";
+$db1['sep']='';
+*/
+
+
+
+
+
+
+
+
+
+
+// PARAMETRI PER LA MODALITA' DI AUTENTICAZIONE ESTERNA  --------------------------------------------------------------------
+
+
+// Questo parametro permette di effettuare l'autenticazion mediante uno strumento esterno (database, ldap, eccetera)
+// Qualora si volesse effettuare l'autenticazione direttamente dal database di VFront si imposti la variabile = '' oppure null
+
+$conf_auth['tipo_external_auth']= ''; // 'db' | 'db_ext' | 'ldap' | 'soap' | null
+
+
+// Nomi dei campi dove trovare email, password eventuali nome e cognome dell'utente da DB, DB esterno, LDAP o SOAP
+// queste variabili vanno impostate in caso di autenticazione esterna
+$conf_auth['campo_nick']='email';
+$conf_auth['campo_email']='email';
+$conf_auth['campo_password']='passwd';
+$conf_auth['campo_nome']='nome'; // opzionale
+$conf_auth['campo_cognome']='cognome'; // opzionale
+$conf_auth['password_crypt']='md5'; // md5 | sha1 | null  // impostare se le password dovessero essere criptate o si dovesse usare un hash 
+
+
+
+/*  SECTION DB */
+// qualora si sia scelta l'autenticazione esterna mediante DB diverso da VFront, impostare i seguenti parametri 
+// per leggere nome utente e password dal database e tabella scelti per l'autenticazione esterna
+$conf_auth['db']['database']=$db1['dbname']; // deve risiedere sullo stesso server (Solo Mysql) -- per altri server utilizzare DB_EXT, SOAP o altri metodi
+$conf_auth['db']['tabella']='test_utente';
+
+
+
+/*  SECTION DB_EXT (DB EXTERNAL) */
+// qualora si sia scelta l'autenticazione esterna mediante DB esterno e|o residente su altro server, impostare i seguenti parametri 
+// verranno utilizzati anche i parametri generici $conf_auth['campo_email'], $conf_auth['campo_password'], $conf_auth['campo_nome'],$conf_auth['campo_cognome']
+// sopra definiti
+$conf_auth['db_ext']['dbtype']="mysql"; // mysql | postgres | odbc
+$conf_auth['db_ext']['host']="localhost"; // host del server DB esterno utilizzato per l'autenticazione
+$conf_auth['db_ext']['port']="3306"; // port del server DB esterno utilizzato per l'autenticazione
+$conf_auth['db_ext']['user']="root"; // user
+$conf_auth['db_ext']['passw']="secret"; // password
+$conf_auth['db_ext']['dbname']="vfront_test"; // nome del database
+$conf_auth['db_ext']['tabella']="user"; // nome della tabella
+$conf_auth['db_ext']['odbc_dsn']=""; // solo per connessioni ODBC
+
+
+/*  SECTION LDAP (o Active Directory)  */
+// qualora si sia scelta l'autenticazione esterna mediante LDAP (o Active Directory) impostare i seguenti parametri 
+// per leggere nome utente e password dal server 
+$conf_auth['ldap']['base_dn']='o=Nome del server,c=IT';
+$conf_auth['ldap']['host']='localhost';
+$conf_auth['ldap']['port']='389';
+$conf_auth['ldap']['anonymus_bind']=1;
+$conf_auth['ldap']['bind_user']='someuser';
+$conf_auth['ldap']['bind_passw']='somepassword';
+
+
+
+
+/*  SECTION SOAP  */
+// qualora si sia scelta l'autenticazione esterna mediante SOAP impostare i seguenti parametri 
+// per leggere nome utente e password dal server 
+$conf_auth['soap']['wsdl']='';
+$conf_auth['soap']['function_get_user']='';
+$conf_auth['soap']['function_get_user_results']='';
+
+
+//--------------   Fine autenticazione esterna  --------------  //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// SECTION SMTP E MAIL  
+// qualora si voglia utilizzare un SMTP personalizzato per la gestione delle email 
+
+$conf_mail['SMTP_AUTH']=false;
+$conf_mail['SMTP']="";
+$conf_mail['SMTP_AUTH_USER']="";
+$conf_mail['SMTP_AUTH_PASSW']="";
+
+$conf_mail['MAIL_SENDER']="";
+$conf_mail['MAIL_SENDER_NAME']="";
+
+/**
+ * mail amministratore di sistema
+ */
+define('_SYS_ADMIN_MAIL','admin@vfront.org');
+
+/**
+ * mail dello sviluppatore (per le email di debug
+ */
+define('_DEV_MAIL','dev@vfront.org');
+
+
+
+
+
+/* SECTION DEBUG */
+
+/**
+ * errori a video | errori in email
+ * In ambiente di produzione si consiglia di 
+ * impostare la variabile su FALSE: in caso di errore verrà spedita una email all'amministratore
+ * ed allo sviluppatore. L'utente vede una schermata dove si comunica che è stato generato un errore.
+ * In caso la variabile sia TRUE gli errori verranno invece mostrati a video
+ */
+$DEBUG_SQL=true;
+
+/**
+ * scrivi le chiamate SQL in un file (di default ./rpc.debug.txt)  - default: FALSE
+ */
+$RPC_DEBUG=true;
+
+/**
+ * apri un popup via javascript che mostra le query SQL  - default: FALSE
+ */
+$DEBUG_SQL_SHOW_QUERY=false;
+
+
+
+/* SECTION LOG */
+
+/**
+ * scrive un log delle chiamate SQL di inserimento, modifica e cancellazione - default: TRUE
+ */
+$RPC_LOG=true;
+
+
+
+
+
+
+/*  SECTION LANGUAGE AND ENCODING  */
+
+/**
+ * Language : Valori possibili: en_US, fr_FR
+ */
+define('FRONT_LANG','it_IT');
+
+
+
+/**
+ * Encoding: UTF-8, ISO-8859-1
+ */
+define('FRONT_ENCODING','UTF-8');
+
+
+
+/*  SEZIONE DATE */
+
+/**
+ * Date format: (iso,eng,ita)
+ */
+define('FRONT_DATE_FORMAT','iso');
+
+
+
+/*  FILESYSTEM PATHS  */
+
+/**
+ * path reale
+ */
+define('FRONT_ROOT','/var/www/vfront');
+
+/**
+ * path reale
+ */
+define('FRONT_REALPATH','/var/www/vfront');
+
+
+
+
+/*  OTHER PATHS  */
+
+/**
+ * Path della document root
+ */
+define('FRONT_DOCROOT','http://localhost/vfront');
+
+/**
+ * Path mysqldump (per l'esportazione di MySQL) - Default: mysqldump
+ */
+define('_PATH_MYSQLDUMP',"mysqldump");
+
+/**
+ * path pg_dump (per l'esportazione di Postgres) - Default: pg_dump
+ */
+define('_PATH_PG_DUMP',"pg_dump");
+
+/**
+ * path per il filesystem allegati
+ */
+define('_PATH_ATTACHMENT',FRONT_REALPATH."/files");
+
+/**
+ * path di tmp per il filesystem allegati
+ */
+define('_PATH_ATTACHMENT_TMP',FRONT_REALPATH."/files/tmp");
+
+/**
+ * path per il filesystem documenti utili
+ */
+define('_PATH_HELPDOCS',FRONT_REALPATH."/files/docs");
+
+/**
+ * path per il filesystem documenti utili
+ */
+define('_PATH_HELPDOCS2',FRONT_REALPATH."/files/docsadmin");
+
+/**
+ * path di tmp accessibile via web
+ */
+define('_PATH_TMP',FRONT_REALPATH."/files/tmp");
+
+/**
+ * path per i fogli di stile XSL allegati
+ */
+define('_PATH_XSL',FRONT_REALPATH."/files/xsl_custom");
+
+/**
+ * path web per i fogli di stile XSL allegati
+ */
+define('_PATH_WEB_XSL',FRONT_DOCROOT."/files/xsl_custom");
+
+/**
+ * path per error log
+ */
+define('FRONT_ERROR_LOG',FRONT_REALPATH.'/files/error_log.txt');
+
+
+
+
+
+/*  SECTION FOP  */
+/* Utilizza l'applicazione Apache FOP http://xmlgraphics.apache.org/fop/ 
+per generare la versione PDF dei file XML */
+
+/**
+ * Imposta se Vfront può utilizzare l'applicazione FOP 
+ */
+define('_FOP_ENABLED',true);
+
+/**
+ * Imposta se Vfront può utilizzare l'applicazione FOP 
+ */
+define('_PATH_FOP','/usr/bin/fop');
+
+
+
+
+
+
+/*  SECTION ATTACHEMENTS AND LINKS  */
+
+/**
+ * definizione della tabella allegato
+ */
+define('_TABELLA_ALLEGATO',"{$db1['frontend']}{$db1['sep']}allegato");
+
+/**
+ * definizione della tabella link
+ */
+define('_TABELLA_LINK',"{$db1['frontend']}{$db1['sep']}link");
+
+
+
+
+
+
+/*   SECTION MISC  */
+
+
+/**
+ * massimo tempo di editing di un record per considerarlo bloccato (in secondi)
+ */
+define('_MAX_TEMPO_EDIT',240);
+
+/**
+ * passphrase per le codifiche base64
+ */
+define('_BASE64_PASSFRASE',"passfrase");
+
+/**
+ * Nome progetto
+ */
+define('_NOME_PROJ','VFront');
+
+
+
+
+
+
+
+/* SECTION REGISTRY SQLITE */
+
+define('USE_REG_SQLITE',false);
+define('VERSION_REG_SQLITE',3); // 3 or 2
+
+// SQLite Reg
+$db1['filename_reg']=FRONT_ROOT."/files/db/vfront.sqlite"; // path of sqlite database
+
+
+
+?>

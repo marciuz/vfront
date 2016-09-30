@@ -1,0 +1,7 @@
+Directoryindex index.php
+
+# Avvio esplicitamente il rewrite
+RewriteEngine On
+
+# XML da registro
+RewriteRule ^(.*)$ index.php?qs=$1 [QSA,L]

@@ -1,0 +1,88 @@
+/* $Id: red.css 1068 2014-06-12 17:30:42Z marciuz $ */
+
+/* =Structure
+----------------------------------------------- */
+
+html, body{
+
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size:0.9em;
+	margin:0;
+	border:0;
+	padding: 0;
+}
+
+body{
+	background: #FFF url(./back-top2.jpg) repeat-x;
+}
+
+body#sottomaschera{
+	background: #FFF url(./back-top4.jpg) repeat-x;
+}
+
+#contenuto{
+	margin:0px 12px 12px 12px;
+	padding-bottom:20px;
+}
+
+
+
+/* =NAV
+----------------------------------------------- */
+
+a:visited{
+	color:#009;
+}
+
+a:hover{
+	color:#FFF;
+	background-color: #009;
+	text-decoration:none;
+}
+
+
+
+/* =HEADER
+----------------------------------------------- */
+
+#header span{
+	position:absolute;
+	top:0;
+	width:500px;
+	height:38px;
+	background: url(./logo.jpg) 0 0 no-repeat;
+}
+
+
+#header ul a:link, #header ul a:visited {
+	display: block;
+	float: left;
+	padding: 10px 15px 10px 15px; 
+	font-weight: bold;
+	background: url(./link-top1.jpg) 0 100% ;
+	text-decoration: none;
+	border-left: 1px solid #999;
+	/*border-top: 1px solid #D4E5FF;*/
+	color:#003;
+	height: 38px;
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	height: 15px;
+	
+} #ignored {}
+
+#header ul li a:hover {
+	font-weight: bold;
+	border-left: 1px solid #999;
+	text-decoration: underline;
+	background: url(./link-top1.jpg) 100% 100% ;
+	color:#003;
+}
+
+#header {
+	padding-bottom: 40px;
+}
+
+#version{
+   color: #03032C;
+}

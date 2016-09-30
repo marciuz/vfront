@@ -1,0 +1,109 @@
+/* $Id: tabelle.css 285 2009-04-25 12:47:32Z marciuz $ */
+
+/* tabella colore */
+
+.tab-report-dip{
+	border: 1px solid #AAA;
+	border-collapse:collapse;
+	padding:0;
+	margin: 0 22px 25px 0;
+	
+}
+
+.tab-report-dip th{
+	font-size:1.2em;
+	text-align: left;
+	background: url(../img/back_th_report.jpg) 0 0 repeat-x;
+	border: 1px solid #666;
+	padding:4px;
+}
+
+.tab-report-dip td{
+	padding:4px;
+	border: 1px solid #AAA;
+}
+
+.tab-color{
+	border: 1px solid #AAA;
+	border-collapse:collapse;
+	padding:0;
+	margin: 0 22px 25px 0;
+}
+
+.tab-color th{
+	font-size:1.2em;
+	text-align: left;
+	background: url(../img/back_th_report.jpg) 0 0 repeat-x;
+	border: 1px solid #666;
+	padding:4px;
+}
+
+table.arancio th {
+	background: url(../img/back_th_report_arancio.jpg) 0 0 repeat-x;
+}
+
+table.lilla th{
+	background: url(../img/back_th_report_lilla.jpg) 0 0 repeat-x;
+}
+
+table.marrone th{
+	background: url(../img/back_th_report_marrone.jpg) 0 0 repeat-x;
+}
+
+table.verde th{
+	background: url(../img/back_th_report_verde.jpg) 0 0 repeat-x;
+}
+
+table.grigia th{
+	background: url(../img/back_th_report_grigio.jpg) 0 0 repeat-x;
+}
+
+
+.tab-color td{
+	font-size:0.9em;
+	border: 1px solid #AAA;
+	padding:4px;
+}
+
+
+
+
+
+/* colori celle */
+
+
+th.giallo{
+	background: url(../img/back_th_report.jpg) 0 0 repeat-x;
+}
+
+th.arancio{
+	background: url(../img/back_th_report_arancio.jpg) 0 0 repeat-x;
+}
+
+th.lilla{
+	background: url(../img/back_th_report_lilla.jpg) 0 0 repeat-x;
+}
+
+th.marrone{
+	background: url(../img/back_th_report_marrone.jpg) 0 0 repeat-x;
+}
+
+th.verde{
+	background: url(../img/back_th_report_verde.jpg) 0 0 repeat-x;
+}
+
+th.grigia{
+	background: url(../img/back_th_report_grigio.jpg) 0 0 repeat-x;
+}
+
+
+a.link-ord:link, a.link-ord:visited{
+	text-decoration: none;
+	color:#555;
+}
+
+a.link-ord:hover{
+	text-decoration: underline;
+	color:#555;
+	background-color: transparent;
+}

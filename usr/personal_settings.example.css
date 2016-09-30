@@ -1,0 +1,51 @@
+/* 
+
+This is an example.
+Is a CSS overwrite to change some visual settings of VFront form
+Please modify and copy as /usr/personal_settings.php
+
+*/
+
+/* == Normal input state color */
+.off{
+    background-color: #FC9 !important;
+    color: #000 !important;
+}
+
+/* == Update state input color */
+.on{
+    background-color: #CCF !important;
+    color: #000 !important;
+}
+
+/* == Search state input color */
+.s{
+    background-color: #00C !important;
+    color: #FFF !important;
+}
+
+/* == Margin bottom more compact */
+.off, .on, .s {
+    margin-bottom: 10px !important; 
+}
+
+/* == Margin bottom wider */
+.off, .on, .s {
+    margin-bottom: 30px !important;
+}
+
+.table-submask tr td input, .table-submask tr td select {
+    background-color: white !important;
+}
+
+/* == Box width for inputs (two cols) == */
+.row-d1, .row.d2 {
+    width: 380px !important;
+}
+
+/* == Box width for inputs (once column) should be the single col width x2 == */
+.row-s{
+    width: 720px !important;
+}
+
+

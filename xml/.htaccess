@@ -1,0 +1,45 @@
+Directoryindex index.php
+
+# Avvio esplicitamente il rewrite
+RewriteEngine On
+
+# XML
+RewriteRule ^(@)?([A-Za-z0-9_-]+)/?$ xml.php?querybased=$1&action=$2&riepilogo [QSA,L]
+
+RewriteRule ^(@)?([A-Za-z0-9_-]+)/(all|[0-9]+)/?(XML)?$ xml.php?querybased=$1&action=$2&c=$3&type=$4 [QSA,L]
+
+RewriteRule ^(@)?([A-Za-z0-9_-]+)/([0-9]+,[0-9]+)/?(XML)?$ xml.php?querybased=$1&action=$2&c=$3&type=$4 [QSA,L]
+
+RewriteRule ^(@)?([A-Za-z0-9_-]+)/id/([0-9]+)/?(XML)?$ xml.php?querybased=$1&action=$2&id=$3&type=$4 [QSA,L]
+
+
+# XML da registro
+RewriteRule ^([0-9]+)/(all|[0-9]+)/([0|1])/?(XML)?$ xmlsub.php?oid=$1&c=$2&sub=$3&type=$4 [QSA,L]
+
+RewriteRule ^([0-9]+)/([0-9]+,[0-9]+)/([0|1])/?(XML)?$ xmlsub.php?oid=$1&c=$2&sub=$3&type=$4 [QSA,L]
+
+RewriteRule ^([0-9]+)/id/([0-9]+)/([0|1])/?(XML)?$ xmlsub.php?oid=$1&c=$2&sub=$3&type=$4 [QSA,L]
+
+
+
+# XSL
+RewriteRule ^(@)?([A-Za-z0-9_-]+)/(0|1)?/?stile.xml?$ xsl.php?querybased=$1&action=$2&vis=$3 [QSA,L]
+
+
+#
+# Apache FOP
+#
+# Allo stato attuale sono supportati i formati numerosi formati PDF, RTF (solo FOP 0.9x o successivo), TXT, ecc...
+# Per permettere o bloccare alcuni formati, aggiungere (o togliere) le estensioni dalla regole sottostanti
+#
+
+RewriteRule ^(@)?([A-Za-z0-9_]+)/([0-9]+,[0-9]+)/(PDF|RTF|TXT|TIFF|PNG|SVG|PS)/?$ fop_exec.php?querybased=$1&action=$2&c=$3&type=$4 [QSA,L]
+
+RewriteRule ^(@)?([A-Za-z0-9_]+)/id/([0-9]+)/(PDF|RTF|TXT|TIFF|PNG|SVG|PS)/?$ fop_exec.php?querybased=$1&action=$2&id=$3&type=$4 [QSA,L]
+
+RewriteRule ^(@)?([A-Za-z0-9_]+)/all/(PDF|RTF|TXT|TIFF|PNG|SVG|PS)/?$ fop_exec.php?querybased=$1&action=$2&type=$3 [QSA,L]
+
+
+# DTD
+RewriteRule ^DTD/(0|1)/([A-Za-z0-9_]+)\.dtd$ dtd.php?action=$2&vis=$1 [NC,QSA,L]
+

@@ -1,0 +1,616 @@
+VFront - Guida all'installazione
+Versione documento: 1.0 - Ultima modifica: 2007-08-23
+
+
+## Licenza di questa documentazione ##
+
+Copyright (c) 2007 Marcello Verona <marcelloverona@gmail.com>
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts. A copy of the license is included in the section entitled "GNU
+Free Documentation License".
+
+## NOTA ##
+
+Questa è la versione testuale di un documento presente nella distribuzione di VFront
+dal nome Guida_installazione presente in formato HTML, PDF e LaTeX nella cartella _docs.
+Per una maggiore fruibilità si suggerisce di utilizzare la versione HTML del documento.
+
+
+
+## Indice ##
+
+Licenza
+Requisiti di base
+Per chi ha fretta...
+Copia dei file ed impostazione dei diritti a file e cartelle
+Il file di configurazione
+	Connessione al database
+	Impostazioni di autenticazione
+	Sezione SMTP e e-mail
+	Sezione Debug
+	Sezione Log
+	Sezione Path
+	Sezione FOP
+	Sezione allegati e link
+	Sezione Misc
+Inclusione del file di configurazione
+Procedura di installazione automatica
+Procedura di installazione manuale
+Dopo l'installazione
+	Inizializzazione del sistema
+	Test di impostazioni di VFront
+	
+	
+	
+	
+	
+	
+## Requisiti di base ##
+
+Per funzionare VFront necessita il seguente software:
+
+    * Server web Apache 2.x (l'applicazione è stata sviluppata e testata per il server Apache 2.x, 
+      potrebbe funzionare con altri server web)
+    * MySQL 5.x oppure PostgreSQL 8.x (Attenzione! il supporto a PostgreSQL è in fase alpha)
+    * PHP versione 5.x
+
+Sono richiesti inoltre i seguenti moduli per PHP:
+
+    * php_mysqli (MySQL Improved) - qualora si utilizzasse un database mysql 
+      (o ci si volesse autenticare tramite server mysql esterno)
+    * php_pgsql (libreria Postgres) - qualora si utilizzasse invece un database postgresql 
+      (o ci si volesse autenticare tramite server postgresql esterno)
+
+Opzionalmente si richiedono inoltre i seguenti moduli
+
+    * php_gd2 - GD library versione >=2.x
+    * php_xsl per l'utilizzo delle trasformazioni XSL lato server. 
+      Qualora non si avesse la possibilità di usare questa estensione si potranno comunque utilizzare 
+      le trasformazioni lato client.
+    * php_ldap - qualora si volesse impostare l'autenticazione esterna via LDAP
+    * php_odbc - qualora si volesse impostare l'autenticazione esterna via ODBC
+    * php_soap - qualora si volesse impostare l'autenticazione esterna via SOAP (sperimentale)
+
+La sezione statistiche utilizza invece PEAR (http://pear.php.net/) per la generazione dei grafici. 
+Sono richiesti dunque, oltre a PEAR i pacchetti:
+
+    * Image/Graph (http://pear.php.net/package/Image_Graph )
+    * Image/Canvas (http://pear.php.net/package/Image_Canvas ) come dipendenza di image/Graph
+
+Nota bene: al momento in cui si scrive il pacchetto Image_Graph è alla release 0.72. 
+Questa release ha un piccolo bug nella benerazione delle etichette dei grafici a torta, 
+che non vengono mostrate senza generare alcun errore. Per risolvere il problema 
+utilizzare la versione CVS del file Image/Graph/Plot/Pie.php recuperabile dall'indirizzo
+http://cvs.php.net/viewcvs.cgi/pear/Image_Graph/Graph/Plot/Pie.php?content-type=text%2Fplain&view=co
+
+
+
+
+
+
+
+
+
+## Per chi ha fretta... ##
+
+   1. Estrai i file di VFront sulla cartella htdocs di Apache
+   2. Apri il file conf/conf.vfront.php e impostare corrrettamente i parametri seguendo i commenti del file
+   3. Apri il file inc/conn.php e per includere il path reale del file di configurazione conf.vfront.php
+   4. Esegui l'installazione da http://nome_del_server/path_vfront/_install/
+   5. Accedi all'amministrazione di Vfront, inizializzalo e configura da interfaccia grafica diritti e tabelle.
+   6. Appena hai più tempo leggiti il resto del documento...
+
+
+   
+   
+   
+## Copia dei file ed impostazione dei diritti a file e cartelle ##
+
+Scompattare l'archivio di VFront nella directory sottoposta a browsing.
+La struttura della directory dovrebbe apparire così:
+
+VFRONT_ROOT
+- _install
+- admin
+- conf
+- files
+	-- docs
+	-- tmp
+	-- xls_custom
+- html
+- img
+- inc
+- js
+- plugins
+	-- FCKeditor
+	-- ods
+- stats
+- sty
+- tmp
+- usr
+- xml
+
+Alcune cartelle devono essere scrivibili da Apache. Queste sono:
+
+    * files e le sue sottocartelle 
+    * html
+    * tmp
+
+Qualora si volesse utilizzare il debug attraverso il fil rpc.debug.txt (si veda oltra per una descrizione) 
+anche questo file deve essere accessibile in scrittura da Apache.
+
+
+
+
+
+
+
+## Il file di configurazione ## 
+
+Il file di configurazione si chiama conf/conf.vfront.php. 
+Per ragioni di sicurezza, si suggerisce di spostare la cartella conf in un'area del server non sottoposta a browsing.
+Attraverso il file di configurazione si possono impostare gran parte dei parametri di VFront. 
+Altri parametri relativi all'uso ed all'aspetto saranno impostabili mediante l'area di amministrazione 
+e la configurazione delle variabili della tabella "variabili".
+
+
+
+
+
+
+
+## Connessione al database ## 
+
+La prima sezione del file di configurazione è relativa alla connessione al database.
+E' possibile scegliere se utilizzare VFront come front-end di un database MySQL 5.x oppure PostgreSQL 8.x. 
+Si ricorda che mentre il supporto per MySQL 5.x ha avuto numerosi test ed applicazioni reali, 
+il supporto per PostgreSQL è allo stato attuale ancora instabile e da considerarsi in fase alpha.
+
+I parametri richiesti sono:
+
+$db1['dbtype']="mysql"; 
+// indica la tipologia di databas: può essere "mysql" oppure "postgres". DEVE essere specificato
+
+$db1['host']="localhost";
+// host del server: 
+
+$db1['port']="3306";
+// porta del server: di default 3306 per MySQL e 5432 per PosgreSQL
+
+$db1['user']="nomeutente";
+// utente per la connessione al database
+
+$db1['passw']="segreta";
+// password per la connessione al database
+
+$db1['dbname']="banca";
+// nome del database: nel caso di postgres utilizzare "public", cioè il nome dello schema
+
+$db1['frontend']="vfront_test";
+// nome del database di VFront. In postgres corrisponde al nome dello schema (si suggerisce "frontend")
+
+$db1['postgres_dbname']="nome_database";
+// nome reale del database (solo nel caso si utilizzi Postgres)
+
+
+
+
+
+
+
+
+## Impostazioni di autenticazione ## 
+
+VFront permette l'autenticazione mediante la propria tabella "utente", oppure mediante altro sistema. 
+La logica di autenticazione e quella di accreditamento di diritti dell'utente sono infatti disgiunte.
+Quando si fa un'autenticazione esterna (ad esempio mediante LDAP) se l'utente esiste viene 
+automaticamente autenticato su VFront. 
+Il passaggio successivo sarà l'accreditamento di diritti mediante la tabella utente: 
+qualora l'utente esistesse su LDAP e non sulla tabella utente verrà automaticamente iscritto in questa, 
+e gli saranno attribuiti i diritti di default (gruppo 0). Per maggiori informazioni sull'uso dei gruppi 
+e i diritti degli utenti si rimanda alla documentazione di VFront.
+
+Il parametro per l'autenticazione è
+
+$conf_auth['tipo_external_auth']= ''; 
+
+Se impostato ='' oppure =null l'autenticazione avverrà mediante il database di VFront e la sua tabella utente.
+Gli altri parametri possibili al momento sono
+
+    * 'db' : indica un'autenticazione tramite altro database presente sullo stesso server (solo MySQL)
+    * 'db_ext' : indica un database MySQL, PosgreSQL o genericamente collegato via ODBC, presente su altro server
+    * 'ldap' : indica un'autenticazione mediante server LDAP come OpenLDAP o Active DIrectory
+    * 'soap' : indica un'autenticazione mediante collegamento a WSDL SOAP. Questo tipo di autenticazione è sperimentale.
+
+Qualora si impostasse uno di questi parametri saranno richiesti altre variabili:
+
+$conf_auth['campo_email']='email';
+// indica il nome del campo database o LDAP per recuperare l'email dell'utente,
+// utilizzata per l'autenticazione
+
+$conf_auth['campo_password']='passwd';
+// indica il nome del campo database o LDAP per recuperare la password dell'utente,
+// utilizzata per l'autenticazione
+
+$conf_auth['campo_nome']='nome'; // opzionale
+// Indica il nome del campo database o LDAP da cui recuperare il nome dell'utente
+
+$conf_auth['campo_cognome']='cognome'; // opzionale
+// Indica il nome del campo database o LDAP da cui recuperare il nome dell'utente
+
+$conf_auth['password_crypt']='md5'; // md5 | sha1 | null 
+// Qualora le password fossero archiviate come hash md5 o sha1 impostare questo parametro
+
+
+
+
+
+- Autenticazione mediante dabase presente sullo stesso server (solo MySQL)
+Qualora si sia scelta l'autenticazione esterna mediante DB diverso da VFront, impostare i seguenti parametri :
+
+$conf_auth['db']['database']='nome_database'; 
+// deve risiedere sullo stesso server (Solo Mysql) -- per altri server utilizzare DB_EXT, SOAP o altri metodi
+
+$conf_auth['db']['tabella']='nome_tabella';
+// nome della tabella da interrogare per l'autenticazione
+
+
+
+
+- Autenticazione mediante database esterno e/o residente su altro server (MySQL, PostgreSQL, ODBC)
+
+Qualora si sia scelta l'autenticazione esterna mediante DB esterno e|o residente su altro server, 
+impostare i seguenti parametri
+
+$conf_auth['db_ext']['dbtype']="mysql"; 
+// Può essere "mysql" oppure "postgres" oppure genericamente "odbc"
+
+$conf_auth['db_ext']['host']="localhost"; 
+// host del server DB esterno utilizzato per l'autenticazione 
+
+$conf_auth['db_ext']['port']="3306"; 
+// porta del server DB esterno utilizzato per l'autenticazione: 
+// di default 3306 per MySQL e 5432 per PosgreSQL
+
+$conf_auth['db_ext']['user']="utente"; 
+// utente per l'autenticazione 
+
+$conf_auth['db_ext']['passw']="barchetta"; 
+// password
+
+$conf_auth['db_ext']['dbname']="vfront_test"; 
+// nome del database
+
+$conf_auth['db_ext']['tabella']="utente"; 
+// nome della tabella
+
+$conf_auth['db_ext']['odbc_dsn']=""; 
+// solo per connessioni ODBC: scrivere il DSN
+
+
+
+
+
+- Autenticazione mediante LDAP o Active Directory
+Qualora si sia scelta l'autenticazione esterna mediante LDAP (o Active Directory) impostare i seguenti parametri :
+
+$conf_auth['ldap']['base_dn']='o=Nome del server,c=IT';
+// DN completo del server LDAP
+
+$conf_auth['ldap']['host']='localhost';
+// host del server LDAP
+
+
+
+
+
+- Autenticazione mediante SOAP (sperimentale)
+L'autenticazione SOAP è sperimentale e per ora si basa su file WSDL
+Qualora si sia scelta l'autenticazione esterna mediante SOAP impostare i seguenti parametri :
+
+$conf_auth['soap']['wsdl']='';
+// indirizzo http(s) del file WSDL
+
+$conf_auth['soap']['function_get_user']='';
+//nome di funzione per interrogare l'elenco degli utenti
+
+$conf_auth['soap']['function_get_user_results']='';
+// nome di funzione per recuperare i dati degli utenti
+
+
+
+
+
+
+## Sezione SMTP e e-mail ## 
+
+VFront utilizza la classe PHPMailer per l'invio delle email. 
+Per maggiori approfondimenti si veda http://phpmailer.sourceforge.net/
+E' possibile configurare l'invio di email tramite SMTP mediante i seguenti parametri:
+
+$conf_mail['SMTP_AUTH']=false;
+// indica se utilizzare un SMTP personalizzato. In caso contrario verrà utilizzato l'SMTP del server.
+
+// Le seguenti tre variabili sono da impostare qualora l'autenticazione SMTP sia impostata su TRUE:
+
+	$conf_mail['SMTP']="";
+	// Indirizzo SMTP da utilizzare qualora si voglia fare uso di STMP personalizzato
+
+	$conf_mail['SMTP_AUTH_USER']="";
+	// utente smtp
+
+	$conf_mail['SMTP_AUTH_PASSW']="";
+	// password smtp
+
+
+$conf_mail['MAIL_SENDER']="";
+// email del mittente per gli invii effettuati da VFront (principalmente per il debug)
+// ad esempio "noreply@vfront.org"
+
+$conf_mail['MAIL_SENDER_NAME']="";
+// Nome in chiaro del mittente per gli invii effettuati da VFront
+// ad esempio "Admin VFront"
+
+
+E' richiesto inoltre di impostare le costanti:
+
+// mail amministratore di sistema
+define('_SYS_ADMIN_MAIL','admin@vfront.org');
+
+// mail dello sviluppatore (per le email di debug)
+define('_DEV_MAIL','dev@vfront.org');
+
+La mail dello sviluppatore può essere utile qualora si volesse far arrivare un debug allo sviluppatore. 
+Le email vengono inviate qualora VFront generi un errore e il debug sia impostato 
+su FALSE (si veda la sezione successiva).
+
+
+
+
+
+
+## Sezione Debug ## 
+
+La sezione debug consta di tre variabili qui descritte:
+
+// errori a video | errori in email
+$DEBUG_SQL=true;
+
+
+In ambiente di produzione si consiglia di impostare la variabile su FALSE: in caso di errore 
+verrà spedita una email all'amministratore ed allo sviluppatore. L'utente vedrà in questo 
+caso una schermata dove si comunica che è stato generato un errore.
+In caso la variabile sia TRUE gli errori e l'SQL verranno invece mostrati a video.
+
+$RPC_DEBUG=true;
+// scrivi le chiamate SQL in un file (di default ./rpc.debug.txt) - default: FALSE
+
+
+Questa funzione  può essere molto utile per leggere cosa VFront ha eseguito mediante chiamate esterne. 
+Il file ./rpc.debug.txt deve essere scrivibile da Apache.
+
+
+
+
+
+## Sezione Log ## 
+
+In questa sezione è presentu una sola variabile che abilita o disabilita i log.
+Il log di VFront permette di registrare data, ora, e autore di tutte le operazioni compiute 
+attraverso le maschere, mostra uno storico dei record e permette un rollback delle cancellazioni e delle modifiche. 
+Si consiglia caldamente di tente il parametro impostato su TRUE.
+
+$RPC_LOG=true;
+// scrive un log delle chiamate SQL di inserimento, modifica e cancellazione - default: TRUE
+
+
+
+Sezione Path
+In questa sezione sono configurati gli indirizzi web e sul server di VFront:
+
+// path reale
+define('FRONT_ROOT','D:/htdocs/vfront_test');
+
+// path reale
+define('FRONT_REALPATH','D:/htdocs/vfront_test');
+
+// Path della document root
+define('FRONT_DOCROOT','http://localhost/vfront_test');
+
+
+
+// Nella maggior parte dei casi i seguenti si possono lasciare così come sono:
+
+// path mysqldump (per l'esportazione di MySQL) - Default: mysqldump
+define('_PATH_MYSQLDUMP',"mysqldump");
+
+// path pg_dump (per l'esportazione di Postgres) - Default: pg_dump
+define('_PATH_PG_DUMP',"pg_dump");
+
+// path per il filesystem allegati
+define('_PATH_ATTACHMENT',FRONT_REALPATH."/files");
+
+// path di tmp per il filesystem allegati
+define('_PATH_ATTACHMENT_TMP',FRONT_REALPATH."/files/tmp");
+
+// path per il filesystem documenti utili
+define('_PATH_HELPDOCS',FRONT_REALPATH."/files/docs");
+
+// path di tmp accessibile via web
+define('_PATH_TMP',FRONT_REALPATH."/tmp");
+
+// path per i fogli di stile XSL allegati
+define('_PATH_XSL',FRONT_REALPATH."/files/xsl_custom");
+
+// path web per i fogli di stile XSL allegati
+define('_PATH_WEB_XSL',FRONT_DOCROOT."/files/xsl_custom");
+
+
+
+
+## Sezione FOP ##
+
+VFront utilizza Apache FOP ( http://xmlgraphics.apache.org/fop/ ) per le trasformazioni XSL-FO 
+e la generazione dei report in PDF.
+FOP non è distribuito insieme a VFront, ma va scaricato ed installato a parte.
+
+// Imposta se Vfront può utilizzare l'applicazione FOP (true o false)
+define('_FOP_ENABLED',true);
+
+// Path di FOP sul server:
+//define('_PATH_FOP','C:/fop-0.20.5/foptest/fop.bat');
+//define('_PATH_FOP','/usr/local/fop/fop.sh');
+
+Il server Apache deve poter eseguire FOP perché le funzioni vengano eseguite correttamente.
+
+
+
+
+
+
+
+
+
+## Sezione Allegati e Link ##
+
+Ogni tabella del database su cui si sta eseguendo VFront può essere potenzialmente 
+abilitata al supporto di allegati e link. I seguenti parametri solitamente sono funzionanti 
+e si consiglia di modificarli solo qualora si utilizzassero altre tabelle per allegati e link.
+Si noti che in tal caso i nomi dei campi dovrebbero coincidere con quelli 
+delle tabelle del datbase VFront.
+
+// definizione della tabella allegato
+define('_TABELLA_ALLEGATO',"{$db1['frontend']}.allegato");
+
+// definizione della tabella link
+define('_TABELLA_LINK',"{$db1['frontend']}.link");
+
+
+
+
+
+
+
+
+## Sezione Misc ## 
+
+In questa sezione sono definite costanti di vario genere:
+
+define('_MAX_TEMPO_EDIT',240);
+
+VFront è pensato come front-end multiutente: per evitare accessi concorrenti in modifica 
+allo stesso record, c'è una procedura di "lock" del singolo record quando questo viene 
+aperto in modifica da un utente. Questa costante esprime in secondi il tempo massimo 
+secondo il quale il record debba essere considerato bloccato (di default 240 secondi, cioè 4 minuti).
+
+
+define('_BASE64_PASSFRASE',"passfrase");
+
+In alcune operazioni viene utilizzata una codifica in base64 di parametri negli URL. 
+Questa costante imposta una frase per la codifica.
+
+define('_IMG_LOGO',FRONT_DOCROOT.'/img/vfront090.jpg');
+
+Indica il path del logo in alto a sinistra per le pagine di VFront
+
+define('_NOME_PROJ','VFront');
+
+Nome descrittivo dell'installazione di VFront  (ad esempio "Front-end Biblioteca" o semplicemente "VFront")
+
+
+
+
+
+
+## Inclusione del file di configurazione ##
+
+Come ultima operazione di configurazione è necessario aprire il file inc/conn.php per 
+scrivere il path reale del file di configurazione.
+
+####################################################
+#
+# COLLEGAMENTO AL FILE CONF
+#
+
+// ad esempio
+require_once("D:/htdocs/vfront_test/conf/conf.vfront.php");
+
+// oppure
+require_once("/var/www/vfront/conf/conf.vfront.php");
+
+
+
+
+
+
+## Procedura di installazione automatica ##
+VFront possiede un istaller automatico. Prima di avviare la procedura, assicurarsi 
+che il file conf.vfront.php sia stato correttamente configurato. 
+La procedura di installazione si avvia direttamente da web mediante l'url:
+
+http://nome_del_server/path_vfront/_install/
+
+La procedura richiederà
+
+   1. Il path del file di configurazione, che verrà letto per l'installazione
+   2. Un'autenticazione di alto livello sul database (root o simile) per creare le tabelle, 
+      l'utente specificato nel file CONF e i diritti a lui riservati 
+   3. email e password per il primo utente (l'amministratore)
+
+Durante l'installazione è possibile dare un'occhiata alle query che si stanno per eseguire.
+Dopo l'installazione si consiglia caldamente di cancellare la cartella _install per ovvie ragioni di sicurezza.
+
+
+
+
+
+
+## Procedura di installazione manuale ## 
+Qualora non si volesse o non si potesse lanciare la procedura di installazione automatica procedere come segue:
+
+   1. assicurarsi che il file conf.vfront.php sia stato correttamente configurato
+   2. Modificare il file inc/conn.php per funtare correttaente al file di configurazione
+   3. Creare l'utente database specificato nel file conf e attribuire diritti d'uso 
+      (SELECT, DELETE,INSERT, UPDATE) nonché il diritto SHOW VIEW sul database che si vuole leggere con VFront
+   4. Attribuire i diritti d'uso sul database (o schema su Postgres) di VFront
+   5. Attribuire i diritti di lettura sull' information_schema se necessario
+   6. Eseguire sul server database i file _install/vfront.mysql.sql oppure _install/vfront.postgres.sql 
+      a seconda del DB che si vuole utilizzare
+   7. Creare un utente nella tabella "utente" del database (o schema) di VFront che abbia livello=3 e gruppo=0. 
+      Nota bene che la password deve essere espressa in hash md5. 
+      Per generare un hash md5 della tua password utilizzare md5 da shell (su Linux) 
+      oppure utilizzare uno dei tanti convertitori presenti su web, ad es. http://pajhome.org.uk/crypt/md5/
+
+
+Dopo l'installazione si consiglia caldamente di cancellare la cartella _install per ovvie ragioni di sicurezza.
+
+
+
+
+
+
+## Dopo l'installazione ## 
+Inizializzazione del sistema
+Una volta eseguita l'installazione è necessario inizializzare il sistema. 
+VFront deve leggere l'information schema e inserire le informazioni sul database che si 
+sta leggendo nelle proprie tabelle. Per farlo
+
+   1. Fare login con il proprio account di amministatore
+   2. Accedere alla sezione amministrazione
+   3. Nel primo menu scegliere "Inizializza registri"
+
+Verrà avviata una procedura automatica che creerà le regole di base per la consultazione delle tabelle.
+Per la configurazione delle tabelle si rimanda al manuale di riferimento di VFront.
+
+Test impostazioni VFront
+Si suggerisce inoltre di accedere al menu di Amministrazione, 
+sezione "Varie" ed eseguire il "Test impostazioni VFront".
+
+Per ulteriori informazioni si rimanda al manuale di riferimento di VFront.
+
+
+// fine del documento
+

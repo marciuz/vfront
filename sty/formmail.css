@@ -1,0 +1,57 @@
+/* $Id: formmail.css 285 2009-04-25 12:47:32Z marciuz $ */
+
+textarea{
+
+	font-family: Arial, sans;
+	font-size:0.9em;
+	
+}
+
+#tab-formail{
+
+	border:0;
+}
+
+#tab-formail tr td{
+
+	vertical-align:middle;
+}
+
+.lab{
+
+	text-align:right;
+	font-weight:bold;
+}
+
+#inviamail{
+	font-weight:bold;
+}
+
+
+/* IMPOSTAZIONI SUGGEST */
+
+	div.campo-update {
+        width: 350px;
+        background: #EFF6FF;
+    }
+  div.campo-update ul {
+    border:1px solid #888;
+    margin:0;
+    padding:0;
+    width:100%;
+    list-style-type:none;
+  }
+  div.campo-update ul li {
+    margin:0;
+    padding:3px;
+  }
+  div.campo-update ul li.selected { 
+    background-color: #DFEEFF; 
+  }
+  div.campo-update ul strong.highlight { 
+    color: #800; 
+    margin:0;
+    padding:0;
+  }
+  
+/* fine suggest */

@@ -1,0 +1,246 @@
+/* $Id: sottomaschera.css 1021 2012-09-20 12:34:07Z marciuz $ */
+
+body{
+	/*background: url(../img/logo_small.png) no-repeat !important;*/
+}
+
+h1{
+	
+}
+
+.table-submask{
+
+	/*border: 1px solid #999;*/
+	border-collapse:collapse;
+}
+
+
+.table-submask tr td{
+	padding:2px;
+	border: 1px solid #999;
+	border-collapse:collapse;
+}
+
+.table-submask tr th{
+	padding:2px;
+	text-align:left;
+	border: 1px solid #999;
+	border-collapse:collapse;
+	background-color:#FC0;
+	
+}
+
+.table-submask tr th.sm-update, 
+.table-submask tr th.sm-delete{
+	background-color:#FFF;
+	font-weight: normal;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+.table-submask tr th.nocolor{
+	border-left-color: #FFF;
+	border-top-color: #FFF;
+	background-color:#FFF;
+}
+
+
+.table-submask tr th.nocolor-r{
+	border-left-color: #FFF;
+	border-top-color: #FFF;
+	border-right-color: #FFF;
+	background-color:#FFF;
+}
+
+.table-submask tr td input, 
+.table-submask tr td select{
+
+	background-color:#FFF;
+	font-size:0.9em;
+	border:0;
+}
+
+.table-submask tr.riga-modifica td input, 
+.table-submask tr.riga-modifica td select {
+	background-color:#FFFFE0;
+	border-color:#FFFFE0;
+}
+
+
+
+
+.table-submask tr.riga-modifica td{
+	background-color:#FFFFE0;
+}
+
+.table-submask tr.riga-annulla td input,
+.table-submask tr.riga-annulla td select{
+	background-color:#FFF;
+	border-color:#FFF;
+}
+
+.table-submask tr.riga-annulla td{
+	background-color:#FFF;
+}
+
+
+
+
+
+
+
+
+#pulsanti-azioni{
+	margin-bottom:20px;
+	padding-top:13px;
+}
+
+#pulsanti-azioni input{
+	font-weight:bold;
+	font-family:Arial;	
+}
+
+
+
+
+.etichetta-record{
+	
+	border:1px solid #666;
+	background-color: #EEE;
+	padding:20px;
+	color:#800;
+	font-size:1.1em;
+	font-weight:bold;	
+	margin-bottom:15px;
+	width:70%;
+}
+
+
+select {
+	
+	border:0;
+	border-color:#F00;
+
+}
+
+
+/* IMPOSTAZIONI FEEDBACK */
+
+
+
+#feedback{
+   position: relative;
+	z-index:0;
+	width:400px;		
+	top:0px;
+	margin:auto;
+	text-align:center;
+	font-weight:bold;
+}
+
+.risposta-giallo{
+	padding:3px;
+	background-color: #FFD71F;
+}
+
+.risposta-arancio{
+	padding:3px;
+	background-color: #FF981F;
+}
+
+.risposta-rosso{
+	padding:3px;
+	background-color: #FF1F1F;
+}
+
+.risposta-verdino{
+	padding:3px;
+	background-color: #ACFFAD;
+}
+
+/*-----------------------------------------*/
+
+
+/* IMPOSTAZIONI DIV */
+
+td.label{
+	text-align:right;
+	margin-rigth:8px;
+}
+
+div.entry-record, div.divs-modifica{
+	
+	margin: 16px 0 16px 0;
+	padding: 0 0 4px 0;
+	border-bottom: 1px solid #000;
+}
+
+
+div.entry-record select,
+div.entry-record input,
+div.entry-record textarea
+{
+
+	background-color:#EEE;
+	border: 1px solid #666;
+	padding:1px;
+	
+}
+
+.ty-short, .ty-long
+{
+	width: 420px;
+}
+
+div.entry-record select, .divs-modifica select {
+	font-size:0.7em;
+}
+
+.divs-modifica input, 
+.divs-modifica select,
+.divs-modifica textarea {
+	background-color:#FFFFE0;
+	border: 1px solid #666;
+	padding:1px;
+}
+
+
+td.numerone{
+	font-size:5em;
+	color:#EEE;
+	padding:3px;
+	vertical-aling:middle;
+}
+
+.tab-format{
+	margin-top:6px;
+}
+
+
+
+
+/* campo onlyread */
+
+.onlyread-field-sub{
+
+	border:1px dotted #666;
+	overflow:hidden;
+	width:201px;
+	padding:1px;
+	font-size:0.9em;
+	margin: 0 0 1em 0;
+	margin-top:-9px;
+}
+
+
+
+#identita {
+	display:none;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,305 @@
+body{
+	
+	font-family: Arial, sans; 
+	font-size:0.8em;
+	background: url(../img/back-top0.jpg) repeat-x;
+}
+
+h1{
+	font-size:2.0em;
+	margin-top:54px;
+}
+
+h2{
+	font-size:1.4em;
+	font-weight:lighter;
+	border-bottom: 1px solid #900;
+	margin-top:30px;
+	width:70%;
+}
+
+li{
+	margin-left:30px;
+	padding: 0.5em 0;
+}
+
+p, h2{
+	margin-left:75px;
+}
+	
+
+hr{
+	visibility:hidden;
+}
+
+
+label{
+
+	float:left;
+	width:20em;
+}
+
+.radio-label{
+
+	float:none;
+	clear:left;
+	width:10em;
+}
+
+
+#iauth label{
+	width:14em;
+}
+
+.fakelink{
+	color:#00C;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+.par{
+	width:65em;
+	border: 1px solid #CCC;
+	padding:10px;
+	background-color:#EEE;
+}
+
+/*
+#boxsql{
+
+	border: 1px dashed #000;
+	background-color:#F4FCFC;
+	padding:20px;
+	margin:10px;
+	
+	font-family: Courier, sans; 
+}*/
+
+.desc{
+	font-size:0.7em;
+	color: #333;
+	/*display:block;
+	margin-left:14.5em;*/
+}
+
+.auth-box{
+	
+}
+
+.ok{
+	color: #070;
+}
+
+
+.ko{
+	color: #F00;
+}
+
+.help-image{
+	cursor:click;
+	
+}
+
+/* iBOX */
+
+#idbrules{
+	background: url(../img/database_vfront.gif) no-repeat;
+}
+
+#idbrules div {
+
+	margin-left: 70px;
+	padding: 0.5em;
+}
+
+
+#idbrules div label{
+
+	float: none !important;
+}
+
+#idbrules div span.desc{
+
+	display: block;
+}
+
+
+#idb{
+	background: url(../img/database.gif) no-repeat;
+}
+
+#iauth{
+	background: url(../img/referenti.gif) no-repeat;
+}
+
+
+#imail{
+	background: url(../img/mailing.gif) no-repeat;
+}
+
+#ipath{
+	background: url(../img/enhanced_browsing.gif) no-repeat;
+}
+
+#imisc{
+	background: url(../img/scelte_form.gif) no-repeat;
+}
+
+#idatetime{
+	background: url(../img/date.gif) no-repeat;
+}
+
+#iadmin{
+	background: url(../img/utenti.gif) no-repeat;
+}
+
+#idebug{
+	background: url(../img/bug.gif) no-repeat;
+}
+
+#ifop{
+	background: url(../img/fop_logo.jpg) no-repeat;
+}
+
+#ifeedback{
+	background: url(../img/enti.gif) no-repeat;
+}
+
+
+#isupport{
+	background: url(../img/share.png) no-repeat;
+}
+
+#ilanguage{
+	background: url(../img/network.gif) no-repeat;
+}
+
+
+#ilang{
+	background: url(../img/font.gif) no-repeat;
+}
+
+
+#ilicense{
+	background: url(../img/babygnu.png) no-repeat;
+}
+
+#createdb{
+	background: url(../img/db_add.gif) no-repeat;
+}
+
+#license{
+	font-size:0.9em;
+	font-family: arial, sans;
+}
+
+.install-err, .install-ok, .install-alert, .install-na {
+
+	width: 60%;
+	color: #000;
+	/*padding:0.7em 0.7em 0.5em 2.5em;*/
+	padding: 0.4em 0.4em 0.4em 2.1em;
+	border: 1px solid;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	
+}
+
+
+.install-err{
+
+	background: url(../img/cancel.gif) 0.5em 50% #FFCFD1  no-repeat;
+	border-color: #F00;
+}
+.install-ok{
+
+	background: url(../img/op_ok.gif) 0.5em 50% #D6FFCF no-repeat;
+	border-color: #060;
+}
+
+.install-alert{
+
+	background: url(../img/op_ko.gif) 0.5em 50% #FFF2CF no-repeat;
+	border-color: #FC9;
+}
+
+
+.install-na{
+
+	background: url(../img/op_ko.gif) 0.5em 50% #EEE no-repeat;
+	border-color: #666;
+}
+
+#sendinfo{
+	margin-left:75px;
+	width:300px;
+	border:1px solid #777;
+	padding:1em;
+}
+
+#boxsql{
+
+	background-color: #EEE;
+	margin:0 75px 0 75px;
+	border-top: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	padding:0.5em;
+	font-size:1.1em;
+}
+
+#boxsql .keyword{
+	font-weight:bold;
+}
+
+#boxsql .literal{
+	color:#C00;
+}
+
+#boxsql .comment{
+	color:#444;
+}
+
+#check_feed{
+	color: #F00;
+}
+
+#isupport-ul{
+	margin-left:30px;
+}
+
+#isupport-ul li{
+	line-height: 0.25em;
+}
+
+#support_form{
+	margin-left:80px;
+}
+
+#support_form select{
+	vertical-align: top;
+	margin:5px 5px 0 0;
+}
+
+#support_form .valuta{
+	position:relative;
+	vertical-align: top;
+	margin: 10px 5px 0 0;
+	display:inline;
+	top:5px;
+}
+
+.margin_left{
+	margin-left: 75px;
+}
+
+
+#error_log{
+
+	border: 1px dashed #666;
+	overflow: auto;
+	height: 400px;
+	margin: 10px 50px 10px 75px;
+	background-color: #d0e5ff;
+	padding: 1.5em;
+
+}

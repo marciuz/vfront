@@ -1,0 +1,11 @@
+Directoryindex index.php
+
+# AUTENTICAZIONE (qualora servisse) 
+
+#AuthType Basic
+#AuthName "Area Riservata"
+#AuthUserFile "/var/www/passwd/filepassword.pwd"
+#AuthGroupFile /dev/null
+#require user nome_utente
+
+# FINE AUTENTICAZIONE -----------

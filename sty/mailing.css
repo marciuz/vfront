@@ -1,0 +1,64 @@
+/* $Id: mailing.css 285 2009-04-25 12:47:32Z marciuz $ */
+
+table.mailinglist{
+	
+	border-collapse:collapse;
+	border:1px solid #999;
+	border-left:0;
+	border-right:0;
+	
+	
+	margin: 20px 0px 20px 3px;
+	
+}
+
+table.mailinglist tr td{
+
+	border: 0 0 0 0;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	padding: 1px 3px 1px 6px;
+}
+
+
+
+table.mailinglist tr.tr-utente{
+
+	background-color:#EFF6FF;
+}
+
+table.mailinglist tr.tr-ente{
+
+	background-color:#FEFAD3;
+}
+
+.td-check{
+
+	background-color:#FFDC7F;
+}
+
+.td-unckeck{
+
+	background-color: trasparent;
+}
+
+
+.idbox{
+
+	border-left:0px;
+	width:35px;
+}
+
+
+.descrizione{
+
+	border-right:0px;
+}
+
+.grigia{
+	color:#888;
+}
+
+label{
+	cursor:pointer;
+}

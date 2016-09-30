@@ -1,0 +1,19 @@
+/* $Id: tabella_res.css 285 2009-04-25 12:47:32Z marciuz $ */
+
+.trunc div{ 
+  /*overflow: hidden;*/
+  font-size:0.8em;
+  margin:0;padding:0;
+}
+
+.trunc{
+	border: 1px solid green; 
+  	height: 16px;
+}
+
+.tab-res{
+	border-collapse:collapse;
+	padding:0;
+	overflow: scroll;
+	margin:0;
+}

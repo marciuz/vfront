@@ -1,0 +1,116 @@
+/* $Id: import.css 285 2009-04-25 12:47:32Z marciuz $ */
+
+
+
+
+/* =PASSO 2
+---------------------------------------------*/
+#csv-table{
+
+	border:0;
+	border-collapse:collapse;
+}
+
+
+#csv-table tr td{
+	padding:0.2em;
+}
+
+#csv-table tr td, #csv-table tr th{
+
+	border:solid 1px #444;
+	font-size:0.85em;
+}
+
+#tr-sep td{
+	background-color:#333;
+}
+
+#csv-table select{
+	font-size: 0.8em;
+}
+
+
+/* =PASSO 3
+---------------------------------------------*/
+
+#tabella-conversioni{
+
+	border:0;
+	border-collapse:collapse;
+}
+
+#tabella-conversioni tr td{
+
+	border:solid 2px #666;
+	border-left: 0;
+	border-right: 0;
+	padding:1em 0 1em 1em;
+}
+
+#tabella-conversioni tr td select, #tabella-conversioni tr td input{
+
+	font-size:0.9em;
+}
+
+.acapo{
+	display:block;
+}
+
+.small{
+	font-size:0.8em;
+}
+
+
+
+
+
+
+
+/* =ESECUZIONE IMPORT
+---------------------------------------------*/
+
+#importa{
+	font-weight:bold;
+}
+
+#txt{
+	font-size:0.8em;
+	position:relative;
+	width:600px;
+	height:250px;
+	border: 1px solid #000;
+	background-color: #FDFDFF;
+	overflow:auto;
+	padding:0.5em;
+}
+
+#txt_errore{
+	color:red;
+}
+
+#ins{
+	font-weight:bold;
+}
+
+#barra{
+	position:relative;
+	width:606px;
+	height:23px;
+	border: 1px solid #666;
+	background-color: #FDFDFF;
+	padding:2px;
+	margin-bottom: 1em;
+	
+}
+
+#perc-barra{
+	position:absolute;
+	top:223px;
+	left:294px;
+	width:20px;
+	heigth:20px;
+	color:#000;
+	font-weight:bold;
+	z-index:100;
+}

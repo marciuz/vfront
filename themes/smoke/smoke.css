@@ -1,0 +1,91 @@
+/* $Id: orange.css 257 2009-04-24 18:30:39Z marciuz $ */
+
+/* =Structure
+----------------------------------------------- */
+
+html, body{
+
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size:0.9em;
+	margin:0;
+	border:0;
+	padding: 0;
+}
+
+body{
+	background: #FFF url(./back-top2.jpg) repeat-x;
+}
+
+body#sottomaschera{
+	background: #FFF url(./back-top4.jpg) repeat-x;
+}
+
+#contenuto{
+	margin:0px 12px 12px 12px;
+	padding-bottom:20px;
+}
+
+
+
+/* =NAV
+----------------------------------------------- */
+
+a:visited{
+	color:#009;
+}
+
+a:hover{
+	color:#FFF;
+	background-color: #009;
+	text-decoration:none;
+}
+
+
+
+/* =HEADER
+----------------------------------------------- */
+
+
+
+#header span{
+	position:absolute;
+	top:0;
+	width:500px;
+	height:38px;
+	background: url(./logo.jpg) 0 -1px no-repeat;
+	/*visibility: hidden;*/
+}
+
+
+#header ul a:link, #header ul a:visited {
+	display: block;
+	float: left;
+	padding: 11px 15px ; 
+	font-weight: bold;
+	background: url(./link-top1.jpg) 0 100% ;
+	text-decoration: none;
+	border-left: 1px solid #999;
+	color:#222;
+	height: 38px;
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	height: 15px;
+	
+} #ignored {}
+
+#header ul li a:hover {
+	font-weight: bold;
+	border-left: 1px solid #999;
+	text-decoration: underline;
+	background: url(./link-top1.jpg) 97% 100% ;
+	color:#222;
+}
+
+#header {
+	padding-bottom: 40px;
+}
+
+
+#version{
+   color: #FFF6D9;
+}

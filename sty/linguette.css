@@ -1,0 +1,56 @@
+/* $Id: linguette.css 993 2012-07-11 14:50:27Z marciuz $ */
+
+#box-etichette{
+	
+		margin:0 0 -1px 0;
+		padding:20px 0 0 0;
+	}
+	
+	.eti-var-gr{
+		margin:0;
+		padding:0;
+	}
+	
+	.eti-var-gr li.attiva{
+	
+	}
+	.eti-var-gr li{
+		position:relative;
+		display:inline;
+		list-style:none;
+		line-height:22px;
+		padding: 4px 6px 3px 7px;
+		width:130px;
+		height:60px;
+		margin:0 0 0 4px;
+		border:1px solid #CCC;
+		
+		font-weight:bold;
+	}
+	
+	.eti-var-gr li.attiva{
+		border-bottom: 1px solid #FFF;
+		background-color:#FFF;
+	}
+	
+	.eti-var-gr li.disattiva{
+		border-bottom: 1px solid #CCC;
+		background-color:#EEE;
+		cursor:pointer;
+	}
+	
+	.eti-var-gr li.disattiva:hover{
+		border-bottom: 1px solid #CCC;
+		background-color:#CFF;
+	}
+	
+	.cont-eti{
+		border:1px solid #CCC;
+		margin:0;
+		padding:10px;
+		width:80%;
+	}
+	
+	.invisibile{
+		display:none;
+	}

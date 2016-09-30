@@ -1,0 +1,35 @@
+/* $Id: attach.css 558 2010-03-20 01:25:40Z marciuz $ */
+
+#cont-eti-allegati{
+	text-align:left
+}
+
+.allegato{
+	margin:18px 0px 18px 8px;
+	clear:left;
+}
+
+.allegato-img{
+
+	float:left;
+	padding:10px;
+	vertical-align:middle;
+	text-align:center;
+}
+
+.allegato-info{
+
+}
+
+
+.thumb{
+
+	padding:2px;
+	margin:0px 3px 0px 3px;
+	border: 3px solid #D9E8FE;
+}
+
+h1{
+	font-size:1.6em;
+	padding: 1em 0 0 80px;
+}

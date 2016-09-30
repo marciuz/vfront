@@ -1,0 +1,82 @@
+/* $Id: log.css 285 2009-04-25 12:47:32Z marciuz $ */
+
+#info_log{
+
+	border: 1px solid #333;
+	border-collapse:collapse;
+	background-color:#FFF2CF;
+	width:500px;
+}
+
+#info_log tr th {
+
+	width:30%;
+	text-align:right;
+	padding:2px 4px 2px 2px;
+}
+
+
+#info_log tr td{
+
+	text-align:left;
+	padding:2px 2px 2px 4px;
+}
+
+#tabella-comparazione{
+	border: 1px solid #333;
+	border-collapse:collapse;
+}
+
+#tabella-comparazione tr td{
+	padding:2px;
+}
+
+#tabella-comparazione tr th{
+	padding:2px;
+	background-color:#FFF2CF;
+}
+
+.modificato_new{
+	font-weight:bold;
+	color:#060;
+}
+
+
+.modificato_old{
+	font-weight:bold;
+	color:#F00;
+}
+
+
+.null_old{
+	color:#AAA;
+}
+
+.intatto_old{
+	color:#333;
+}
+
+td.intatto{
+	background-color:#EEE;
+}
+
+tr.evidenza td{
+	background-color:#FEFF6F;
+}
+
+
+tr.colore-insert td{
+	background-color:#EFFFEF;
+}
+
+tr.colore-update td{
+	background-color:#FFFBEF;
+}
+
+tr.colore-delete td{
+	background-color:#FFEFEF;
+}
+
+tr.colore-ripristino td{
+	background-color:#EEEEEE;
+}

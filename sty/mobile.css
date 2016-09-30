@@ -1,0 +1,114 @@
+/* VFront Mobile CSS $Id: mobile.css 1107 2014-09-28 21:33:49Z marciuz $ */
+
+body{
+	max-width:320px;
+}
+
+h1{
+	font-size:1.5em;
+}
+
+.box-home {
+	width:210px !important;
+}
+
+.box-home h2{
+	font-size: 1.3em !important;
+}
+
+
+/* Scheda */
+
+textarea.fulltextarea, 
+input.longchar, 
+input.char,
+select 
+{
+	width:290px;	
+}
+
+#pulsanti-submask{
+	width:275px;	
+}
+
+.row-s,
+.row-d1,
+.row-d2,
+.row-d
+{
+	width:305px;	
+}
+
+select {
+	max-width:290px;
+}
+
+.row-s iframe select{
+	width:290px;	
+}
+
+
+
+
+/*
+#tipo-vista2 td{
+	display: none;
+}
+*/
+
+
+#tipo-vista2 td + img{
+	display: inline;
+}
+
+#header span {
+	background:transparent url(../img/logo_small.png) no-repeat scroll 1px -3px;
+	height:38px;
+	position:absolute;
+	top:0;
+	width:50px;
+}
+
+
+
+
+
+
+#identita,
+#popup-hotkeys
+{
+	display:none;
+}
+
+
+/* Form buttons */
+
+#tipo-vista2,
+#tipo-vista1
+{
+	left: 195px;
+	width: 30px;
+	top:52px;
+}
+
+.comm_img{
+	padding: 0 7px 0 0 !important;
+	margin:0;
+	max-width:32px;
+}
+
+.comm_img img{
+	width:30px;
+}
+
+.comm_txt{
+	display:none;
+}
+
+#version{
+    display: none;
+}
+
+.info{
+    width: initial;
+}

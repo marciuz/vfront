@@ -1,0 +1,220 @@
+CHANGE IN 0.99.4 2016-04-25
+Support for PHP7
+Bugfix in Postgresql >= 9.4
+Bugfix in Import process
+
+CHANGE IN 0.99.3 2015-11-25
+Bugfix NULL values in PostgreSQL
+Bugfix TINYINT(1) in MySQL
+and more minor bugs.
+
+CHANGE IN 0.99.2 2015-04-24
+Bugfix in PostgreSQL installation and administration. 
+Bugfix in Default filters
+Better parsing of the SQL in the Select from fields
+Bugfix in the Select from sorting (changes in the JSON data method)
+
+
+CHANGE IN 0.99.1 2015-04-01
+Bugfix in Select fields and Select_Enum fields
+
+
+CHANGE IN 0.99 2015-02-24
+Now you can use the grid view as default
+API
+Geofields (only postgresql) with leaflet
+Better administration for the tables/views
+Embedded subforms
+Autofilter in forms
+Row-level filters by registries/group
+A lot of bugfix and improvements
+Code refactoring
+
+CHANGE IN 0.96c 2011-05-12
+Updated Adminer (3.2.2)
+Fixed bug in submasks (Fixed field with number)
+Added CSS in Adminer menu
+
+CHANGE IN 0.96b 2011-04-29
+Added support for non-numeric PK
+Fix ENUM type bug
+Added sorting by table_alias
+Some minor bugfix
+
+CHANGE IN 0.96 2010-11-06
+Switched the default language as English
+Added SQLite as option as DB data
+Added SQLite as method for VF registry
+Added Adminer (www.adminer.org) as plugin
+Added Check DB compatibility script
+Improved Error handling system
+Removed dependencies from PEAR (PEAR-Image, PEAR Canvas, etc)
+Added pChart as graph library
+Added Error log viewer for database
+Changed the vmsql.* libraries. Now the functions are embedded in a class vmsql::*
+Added function vmsql::escape
+Separed queries for registry (class vmreg) and DB (class vmsql)
+Fixed security issuee on postgres
+Code refactoring and optimization for many features
+Fix bug in syncronization with a lot of groups
+Added button settings in clone group operation
+Now VFront use CKEditor instead of FCKeditor
+Added Slovak language (thanks to Stano Kobella!)
+Added table aliases (Show a different name for the table)
+
+CHANGE IN 0.95m 2010-10-26
+Added table alias
+Some minor bugfix
+
+CHANGE IN 0.95l 2010-07-22
+Added improved english translation (thanks to John McClenahan!)
+Fixed bug in updatable views (MySQL)
+Fixed bug in Mysql Version Test
+Added Labels values in custom buttons
+Added default image for hotkeys
+Added check update system
+Some other little bugfix
+
+CHANGE IN 0.95i 2010-07-06
+Added settings in Custom buttons
+Added PHP 5.3 compatibility
+Fixed some bugs in UTF-8 encoding
+Added JS controls for field type "numeric"
+Changed rules for onlyread fields
+Added var for max records results
+Added language setting in group variables (overwriting default settings)
+Fixed IE8 CSS bug
+Fixed security bug in user administration
+Better support for UTF-8
+Added German translation (thanks to Grille!)
+
+CHANGE IN 0.95h 2010-03-29
+Added shadowbox option in Customs buttons
+Added Mobile support (alpha version)
+Added search results export option
+New system for search results
+Added autocompleter gif animation
+Added column button.settings
+Fixed form counter on new record
+Fixed Calendar in Subforms
+Fixed textarea in subforms
+Fixed clone settings (is nullable)
+Fixed Import process
+Fixed JS for Custom buttons
+
+CHANGE IN 0.95g 2010-03-17
+Fixed Update Script
+Added Custom buttons system
+
+CHANGE IN 0.95f 2010-03-14
+Added change user data for the administrator level 2 and 3 (only in vfront internal authentication)
+Added iSchema class: VFront now no longer uses the INFORMATION_SCHEMA with Mysql (better performances)
+Fixed report with Apache FOP
+Fixed PosgreSQL VFront update script
+Added some JS translations (ENG)
+Added some themes (Smoke and Dark Green)
+Fixed error_log.txt (with Debug=false)
+Fixed XSL generator
+Added 'mediumint' type
+Added wildcard '%' (as alternative to '*') on search by form
+Added publishing statistics optionally in home page
+Some little fix on HTML and CSS
+
+
+CHANGE IN 0.95e 2010-03-02
+Fixed password recovery system
+
+CHANGE IN 0.95d 2010-02-22
+Fixed PostreSQL installation
+Fixed PHP-CGI installation
+Fixed delete in link and attachments
+Added new translations Eng
+Fixed JS error in ENG install (password control)
+
+CHANGE IN 0.95a 2009-05-04
+Added Update script
+Added new form fields sort & order 
+Fixed LDAP auth
+Added new vars for alerts in home page
+Added Administer link in forms for the administrator and "view" in forms administration
+Scriptaculous 1.8.2
+Fixed some HTML error or warning
+
+
+CHANGE IN 0.95 2009-04-25
+Added Theme settings in variables
+Added php_mysql support (in case mysqli not exists) - experimental
+Some changes in english translation
+Added comment name in table form (optional)
+Fixed a lot of little bugs
+
+
+CHANGE IN 0.94rc5 2008-12-27
+
+Now in grid (table) view the data are formatted like in the form view.
+
+
+
+CHANGE IN 0.94r4 2008-12-27
+
+Fix little important bug in IE (6-7)
+
+
+CHANGE IN 0.94r3 2008-12-25
+
+New "order by" system with multiple fields for tables
+Added Cron system
+Some changes in english translation
+
+
+CHANGE IN 0.94r2 2008-10-14
+
+Fixed important bug in import process
+Removed the "in_search" field and search option for fields: the fields is alway searchable
+Added language strings
+
+
+
+
+CHANGE IN 0.94r1 2008-10-12
+
+New Installer
+Updated language settings
+New system for date in filds and application pages
+Data importer (alpha!)
+Fixed a lot of bug
+
+
+
+
+CHANGE IN 0.92 2007-12-09
+
+Update comment update system in MySQL registry
+Update in vmsql_try, added TRUNCATE in secure_mode forbidden words
+Update func.campi_submask.php for the hiddens fields
+./helpdocs.php		Deleted debug string
+./scheda.php		Added datetime input format with calendar. Optimization of jscalendar behavior i...
+./sottomaschera.php	Add CDATA comment on inline Javascript
+./index.php			Bugfix for tables comment
+_install/vfront.postgres.sql.php	Bugfix in log table definition, added 'info_browser' column
+_install/vmsql.postgres.sql	Bugfix in log table definition, added 'info_browser' column
+_install/vfront.mysql.sql	Bugfix in log table definition, added 'info_browser' column
+_install/vfront.mysql.sql.php	Bugfix in log table definition, added 'info_browser' column
+admin/gestione_tabelle_gruppi.php	Added gettext fields
+admin/export_data.php	fix in gettext fields in "for" label's attribute
+admin/gestione_registro.inc.php	Bugfix: added addslashes in column_default and comment fields
+inc/func.campi_submask.php	Added onlyread field in submask, changed calendar behavior
+inc/layouts.php		Added time and queries view in debug mode (popup windows)
+inc/vmsql.mysqli.php	Added time measurement for query in debug mode
+inc/func.tratta_campo.php	Added "onlyread" field type
+inc/conn.php	Bugfix: if the session name have blank chars the session is now ok
+inc/func.magic_excel.php	Bugfix: lost line in file. Now is ok.
+inc/func.comuni.php	Bugfix in default ORDER BY
+js/proto-scheda.js	Optimization for the submask AJAX request
+js/sottomaschera.js	Bugfix: added escape function on values in sndReqSubUpdate()
+sty/base.css	Updated in CSS
+sty/scheda.css	Updated in CSS
+sty/sottomaschera.css	Updated in CSS
+xml/.htaccess	Update in FOP rewrite rules
+xml/xml.php	Optimization in regexp query matching
+xml/fop_exec.php	Added comment todo

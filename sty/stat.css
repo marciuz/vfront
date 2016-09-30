@@ -1,0 +1,38 @@
+/* $Id: stat.css 865 2010-12-09 11:50:25Z marciuz $ */
+
+.tab-stat{
+
+	border:1px solid #666;
+	font-size:0.85em;
+	border-collapse: collapse;
+	
+}
+
+
+
+
+.tab-stat tr th, .tab-stat tr td {
+	border: 1px solid #BBB;
+	padding:4px;
+}
+
+.img-stat{
+	margin-right:20px;
+	float:left;
+	border: 1px solid #CCC;
+}
+
+.tab-cont tr td{
+	background-color:#FFF;
+	vertical-align: top;
+}
+
+tr.c2 td{
+	background-color:#EEE;
+	vertical-align: top;
+}
+
+.tab-stat tr th {
+	background-color:#EEEEFF;
+}
+

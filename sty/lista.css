@@ -1,0 +1,9 @@
+/* $Id: lista.css 285 2009-04-25 12:47:32Z marciuz $ */
+
+dt{
+	font-weight:bold;
+}
+dd{
+	color: #555;
+	margin: 3px 0px 16px 0px;
+}

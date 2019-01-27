@@ -191,7 +191,7 @@ function step0(){
 	echo "<div class=\"margin_left\">Welcome to the installer VFront. This procedure will install and configure VFront on your server.</div>";
 
 
-	$license=htmlspecialchars(join("",file("../license")));
+	$license=htmlspecialchars(join("",file("../LICENSE")));
 
 	echo "
 	<form action=\"" . htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . "\" method=\"get\" id=\"form1\">

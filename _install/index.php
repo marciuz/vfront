@@ -443,8 +443,7 @@ function step1(){
 		is_writable('../files/db') &&
 		is_writable('../files') &&
 		is_writable('../files/docs') &&
-		is_writable('../files/docsadmin') &&
-		is_writable('../files/xsl_custom')
+		is_writable('../files/docsadmin')
 	){
 		// ok
 		$class_alert['writable_files_dir']="install-ok";

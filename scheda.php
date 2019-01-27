@@ -11,7 +11,7 @@
 * @package VFront
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 M.Marcello Verona
-* @version 0.96 $Id: scheda.php 1155 2015-11-25 17:38:10Z marciuz $
+* @version 0.96 $Id: scheda.php 1169 2017-05-12 18:02:46Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
 
@@ -105,7 +105,7 @@ if(isset($_WHERE) && count($_WHERE)>0){
 
 }
 
-$FORM.= "<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\" id=\"singleform\" name=\"singleform\">\n";
+$FORM.= "<form action=\"" . Common::phpself() . "\" method=\"post\" id=\"singleform\" name=\"singleform\">\n";
 
 #########################################
 #

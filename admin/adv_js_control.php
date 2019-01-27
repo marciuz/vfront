@@ -9,7 +9,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: adv_js_control.php 1096 2014-06-19 09:16:31Z marciuz $
+ * @version 0.96 $Id: adv_js_control.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -323,7 +323,7 @@ if(isset($_GET['feed'])){
 }
 
 
-echo "<form name=\"controlli\" action=\"".$_SERVER['PHP_SELF']."\" method=\"get\">\n";
+echo "<form name=\"controlli\" action=\"" . Common::phpself() . "\" method=\"get\">\n";
 
 
 if(count($a_tipo)>0){
@@ -450,7 +450,7 @@ if(isset($_GET['tipo']) && $_GET['tipo']!='null'){
 	$onclick.="if($('tipo')){ $('tipo_sub').value=\$F('tipo');};";
 	$onclick.="submit();";
 	
-	echo "<br /><br /><form name=\"invia\" method=\"post\" action=\"".$_SERVER['PHP_SELF']."\" >
+	echo "<br /><br /><form name=\"invia\" method=\"post\" action=\"" . Common::phpself() . "\" >
 	<input type=\"hidden\" name=\"tipo_sub\" id=\"tipo_sub\" value=\"\" />
 	<input type=\"hidden\" name=\"control_1\" id=\"control_1\" value=\"\" />
 	<input type=\"hidden\" name=\"control_2\" id=\"control_2\" value=\"\" />

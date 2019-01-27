@@ -5,7 +5,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: themes.php 1076 2014-06-13 13:03:44Z marciuz $
+ * @version 0.96 $Id: themes.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -75,7 +75,7 @@ foreach ($themes as $theme){
 
 $T.="</table>\n";
 
-echo "<form id=\"theme-form\" action=\"".$_SERVER['PHP_SELF']."\" method=\"post\" >\n";
+echo "<form id=\"theme-form\" action=\"" . Common::phpself() . "\" method=\"post\" >\n";
 echo $T;
 echo "<p><input type=\"submit\" value=\""._('Set theme')."\" /></p>\n";
 echo "</form>\n";

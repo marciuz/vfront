@@ -16,7 +16,7 @@
 	
 	$n_button=$vmreg->num_rows($q_pulsanti);
 	
-	$qstring_button=$_SERVER['PHP_SELF']."?det=".intval($_GET['det'])."&amp;gid=".intval($_GET['gid'])."&amp;a=5";
+	$qstring_button=Common::phpself()."?det=".intval($_GET['det'])."&amp;gid=".intval($_GET['gid'])."&amp;a=5";
 	
 		
 		
@@ -34,7 +34,7 @@
 		
 		$button_reset="<input type=\"button\" id=\"button_reset\" value=\" "
 					._('Cancel')." \" onclick=\"location.href='".
-					$_SERVER['PHP_SELF']."?det=".$_GET['det']."&amp;gid=".$_GET['gid']."&amp;a=5'\" />";
+					Common::phpself()."?det=".$_GET['det']."&amp;gid=".$_GET['gid']."&amp;a=5'\" />";
 					
 		$sel_button_type=array();
 	
@@ -120,7 +120,7 @@
 	echo "
 	<div id=\"form_new_button_cont\" $show_form_button>
 	
-		<form id=\"form_new_button\" method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">
+		<form id=\"form_new_button\" method=\"post\" action=\"" . Common::phpself() . "\">
 	
 		
 			<fieldset id=\"form_new_button_fs\" style=\"max-width:780px;\">

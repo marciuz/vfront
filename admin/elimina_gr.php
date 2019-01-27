@@ -5,7 +5,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: elimina_gr.php 1076 2014-06-13 13:03:44Z marciuz $
+ * @version 0.96 $Id: elimina_gr.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -97,7 +97,7 @@ proteggi(3);
 		</p>";
 	}
 	
-	echo "<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."?conferma_del=$GID\">
+	echo "<form method=\"post\" action=\"" . Common::phpself() . "?conferma_del=$GID\">
 		<input type=\"hidden\" name=\"gid\" value=\"$GID\" />
 		<input type=\"submit\" name=\"conferma\" value=\""._('Confirm delete')."\" />
 		</form>

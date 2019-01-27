@@ -5,7 +5,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: flussi.php 1078 2014-06-13 15:35:53Z marciuz $
+ * @version 0.96 $Id: flussi.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -108,7 +108,7 @@ $SELECT_TABELLE.="\t</select>\n";
 			Se si ripristina la configurazione di una tabella si annulleranno tutte le impostazioni finora definite per quella tabella per tutti i gruppi,<br />
 			comprese le impostazioni per le sottomaschere. Usare questa funzione con cautela.</p>
 
-			<form action=\"".$_SERVER['PHP_SELF']."?passo2\" method=\"post\" >
+			<form action=\"" . Common::phpself() . "?passo2\" method=\"post\" >
 			
 				<ol>
 					<li id=\"modello\">$SELECT_TABELLE". " ". $CAMPO.

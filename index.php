@@ -25,7 +25,7 @@
 * @package VFront
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2008 Mario Marcello Verona
-* @version 0.96 $Id: index.php 1127 2014-12-17 10:56:54Z marciuz $
+* @version 0.96 $Id: index.php 1170 2017-05-12 18:06:01Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
  * @todo Escape data in external auth
 */
@@ -146,7 +146,7 @@ function mostra_login(){
 	
 	echo "
 		<div id=\"login\" align=\"center\">
-			<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."?login\" >
+			<form method=\"post\" action=\"" . Common::phpself() . "?login\" >
 				<fieldset>
 	
 					<legend>"._('System access')."</legend>

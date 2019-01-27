@@ -127,7 +127,7 @@ else if(isset($_GET['update']) || isset($_GET['new_key'])){
     
     $RW_sel = ($RS['rw']==1) ? 'selected="selected"' : '';
     
-    $OUT.="<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">";
+    $OUT.="<form action=\"" . Common::phpself() . "\" method=\"post\">";
     $OUT.="
         <fieldset style=\"width:70%; padding:20px;\">
         <legend style=\"font-weigth:bold\">"._('Parameter for the API KEY')."</legend>
@@ -166,7 +166,7 @@ else if(isset($_GET['delete'])){
     $OUT.="<p>"._('You will delete the api key. This operation is not recoverable')
             ."<br />"._('Are you sure?')."</p>\n";
     
-    $OUT.="<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\" >
+    $OUT.="<form action=\"" . Common::phpself() . "\" method=\"post\" >
             <input type=\"hidden\" name=\"deletekey\" value=\"1\" />
             <input type=\"hidden\" name=\"id\" value=\"".intval($_GET['delete'])."\" />
             <input type=\"submit\" value=\""._('Delete key')."\" />
@@ -236,7 +236,7 @@ $output= openLayout1(
                 "sty/tabelle.css", 
                 )
         );
-$breadcrumbs=array("HOME","ADMIN",$_SERVER['PHP_SELF']=>_('API administration'));
+$breadcrumbs=array("HOME","ADMIN",Common::phpself()=>_('API administration'));
 if(count($_GET)>0){
     $breadcrumbs[]='api key';
 }

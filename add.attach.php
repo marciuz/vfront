@@ -6,7 +6,7 @@
 * @package VFront
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 M.Marcello Verona
-* @version 0.96 $Id: add.attach.php 1078 2014-06-13 15:35:53Z marciuz $
+* @version 0.96 $Id: add.attach.php 1173 2017-05-12 20:46:23Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
 
@@ -391,7 +391,7 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 			$dimensione = RegTools::allegato_filesize($matrice_info_allegati[$i]['codiceallegato']);
 			
 			$scarica=(preg_match('|Dimensione|i',$dimensione)) ? "": " - <a href=\"download.php?f=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."\">Scarica</a>";
-			$elimina=($allegati_del) ? " - <span class=\"fakelink-rosso\" onclick=\"if(confirm('"._('Are you sure you want to delete this attachment?')."')){ window.location='".$_SERVER['PHP_SELF']."?t=$tabella&amp;id=$id&amp;del=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."';}\" >"._('Delete')."</span>" : "";
+			$elimina=($allegati_del) ? " - <span class=\"fakelink-rosso\" onclick=\"if(confirm('"._('Are you sure you want to delete this attachment?')."')){ window.location='".htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')."?t=$tabella&amp;id=$id&amp;del=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."';}\" >"._('Delete')."</span>" : "";
 			
 			$estensione=substr($matrice_info_allegati[$i]['nomefileall'],-3,3);
 			
@@ -432,7 +432,7 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 		<br />
 		";
 	?>
-	<form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" onsubmit="bUploaded.start('fileprogress');">
+        <form enctype="multipart/form-data" method="post" action="<?php echo Common::phpself();?>" onsubmit="bUploaded.start('fileprogress');">
 			<div>
 				<div id="contenitore-file"><div><input type="file" name="gfile[]" size="60" /> <span onclick="rimuovi_attach(this);" class="fakelink" style="font-size:0.7em;">rimuovi</span><br /></div></div>
 				

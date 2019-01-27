@@ -5,7 +5,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: export_data.php 1078 2014-06-13 15:35:53Z marciuz $
+ * @version 0.96 $Id: export_data.php 1169 2017-05-12 18:02:46Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -84,7 +84,7 @@ if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['q
 
  
  
- echo "<form action=\"".$_SERVER['PHP_SELF']."\" method=\"get\" style=\"margin:30px 0px 0px 90px\">\n";
+ echo "<form action=\"" . Common::phpself() . "\" method=\"get\" style=\"margin:30px 0px 0px 90px\">\n";
  
  
  if(isset($_GET['idt'])){

@@ -37,7 +37,7 @@ $OUT.="<h1>".$page_title."</h1>\n";
  * TODO: filter on date
  *
 
-$OUT.="<form action=\"".$_SERVER['PHP_SELF']."\" method=\"get\">
+$OUT.="<form action=\"" . Common::phpself() . "\" method=\"get\">
 
 	<div><label for=\"ym\">Start month:</label>
 		<select id=\"ym\" name=\"ym\">\n";

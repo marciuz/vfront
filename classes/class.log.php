@@ -12,17 +12,15 @@ class Log {
      * Qualora il record sia stato creato e gestito dalle maschere, 
      * viene riportata tutta la sua storia: inserimento, modifiche, etc.
      * 
-     * @desc Mostra lo storico di un dato record.
+     * @desc Show the history of a record
      */
-    public function mostra_storico() {
+    public function show_history($id_record, $table_name) {
 
-        global $vmsql, $vmreg, $db1;
+        global $vmreg, $db1;
 
         $files = array("sty/admin.css", "sty/tabelle.css", "js/mostra_nascondi_id.js", "sty/log.css");
 
-
-
-        $ID_RECORD = (int) $_GET['id_record'];
+        $ID_RECORD = (int) $id_record;
 
         echo openLayout1(_("Database records history"), $files);
 
@@ -30,10 +28,7 @@ class Log {
 
         echo "<h1>" . _("Record history") . "</h1>\n";
 
-
         // Query Storico
-
-
         $sql_log = "SELECT log.id_log,
 							log.op,
 							log.tabella,
@@ -52,22 +47,18 @@ class Log {
 	 			WHERE 1=1
 	 			AND u.gid=g.gid
 	 			AND log.id_record='$ID_RECORD'
+	 			AND log.tabella='".$vmreg->escape($table_name)."'
 	 			ORDER BY log.data ASC
 	 			";
         $q_log = $vmreg->query($sql_log);
 
 
-
-
-        #########################################################################
-        #
-	 #	CONTINUA A STAMPARE
-        #
+    #########################################################################
+    #
+    #	CONTINUA A STAMPARE
+    #
 	 	
-	 
-	 	
-	 	
-	 echo "<table class=\"tab-color\" summary=\"" . _("Log table") . "\">
+        echo "<table class=\"tab-color\" summary=\"" . _("Log table") . "\">
 	
 	 	<tr>
 			<th class=\"grigia\">" . _("date") . "</th>
@@ -112,9 +103,9 @@ class Log {
      * @param string $sql SQL da analizzare
      * @return array Array con frammenti di SQL
      */
-    private function parser_sql_update($sql) {
+    private function OLD_parser_sql_update($sql) {
 
-        global $db1, $vmreg;
+        global $vmreg;
 
         $sql = str_replace(array("\n", "\r"), " ", $sql);
 
@@ -163,8 +154,35 @@ class Log {
         }
 
         $out['modifiche'] = $arr_modifiche;
-
-
+        
+        return $out;
+    }
+    
+    private function parser_sql_update($sql) {
+        
+        require_once(FRONT_ROOT."/plugins/php-sql-parser/src/PHPSQLParser.php");
+        
+        $Parser = new PHPSQLParser();
+        
+        $psql = $Parser->parse($sql);
+        
+        $out['tabella'] = $psql['UPDATE'][0]['no_quotes'];
+        $out['modifiche'] = array();
+        
+        if(isset($psql['SET']) && count($psql['SET'])>0) {
+            foreach($psql['SET'] as $up) {
+                
+                $k = $up['sub_tree'][0]['no_quotes'];
+                $v = $up['sub_tree'][2]['base_expr'];
+                
+                if($v{0} == "'" && substr($v, -1, 1) == "'") {
+                    $v = substr($v, 1, strlen($v)-2);
+                }
+                
+                $out['modifiche'][$k] = $v;
+            }
+        }
+        
         return $out;
     }
 
@@ -230,7 +248,6 @@ class Log {
 
                 $storico_pre = is_array(unserialize($RS['storico_pre']));
                 $storico_post = count($this->parser_sql_update($RS['storico_post'])) == 2;
-
 
                 if ($storico_pre && $storico_post && $presenza_id) {
 
@@ -426,7 +443,7 @@ class Log {
                 // PROCEDURA DI RIPRISTINO IN CASO UPDATE
                 if ($info_op['rev']) {
 
-                    $OUT.= "<br /><form action=\"" . $_SERVER['PHP_SELF'] . "?ripristino=1&amp;type=update\" method=\"post\">
+                    $OUT.= "<br /><form action=\"" . Common::phpself() . "?ripristino=1&amp;type=update\" method=\"post\">
 					
 					<input type=\"hidden\" name=\"id_log\" value=\"$id_log\" />
 					<input type=\"button\" onclick=\"submit();\" name=\"ripristino_op\" value=\" " . _("Rollback this action") . " \" />
@@ -536,7 +553,7 @@ class Log {
             // PROCEDURA DI RIPRISTINO IN CASO DELETE
             if ($info_op['rev']) {
 
-                $OUT.= "<br /><form action=\"" . $_SERVER['PHP_SELF'] . "?ripristino=1&amp;type=delete\" method=\"post\">
+                $OUT.= "<br /><form action=\"" . Common::phpself() . "?ripristino=1&amp;type=delete\" method=\"post\">
 				
 					<input type=\"hidden\" name=\"id_log\" value=\"$id_log\" />
 					<input type=\"button\" onclick=\"submit();\" name=\"ripristino_op\" value=\" " . _("Rollback this action") . " \" />
@@ -773,7 +790,7 @@ class Log {
 
 
 
-            $PAG.= "<a href=\"" . $_SERVER['PHP_SELF'] . "?of=" . ($OFFSET - $PASSO) . $QS . "\">&lt; &lt; " . _("previous") . "</a>\n | ";
+            $PAG.= "<a href=\"" . Common::phpself() . "?of=" . ($OFFSET - $PASSO) . $QS . "\">&lt; &lt; " . _("previous") . "</a>\n | ";
         } else {
 
             $PAG.= "<span class=\"pag\">&lt; &lt; " . _("previous") . "</span>\n | ";
@@ -793,7 +810,7 @@ class Log {
 
                     $PAG.= " " . ($i + 1) . " \n | ";
                 } else {
-                    $PAG.= " <a href=\"" . $_SERVER['PHP_SELF'] . "?of=" . ($PASSO * $i) . $QS . "\">" . ($i + 1) . "</a>\n | ";
+                    $PAG.= " <a href=\"" . Common::phpself() . "?of=" . ($PASSO * $i) . $QS . "\">" . ($i + 1) . "</a>\n | ";
                 }
             }
         }
@@ -802,7 +819,7 @@ class Log {
 
             $PAG.= "<span class=\"pag\">" . _("next") . " &gt; &gt; </span>\n | ";
         } else {
-            $PAG.= "<a href=\"" . $_SERVER['PHP_SELF'] . "?of=" . ($OFFSET + $PASSO) . $QS . "\">" . _("next") . " &gt; &gt; </a>\n | ";
+            $PAG.= "<a href=\"" . Common::phpself() . "?of=" . ($OFFSET + $PASSO) . $QS . "\">" . _("next") . " &gt; &gt; </a>\n | ";
         }
 
 
@@ -842,7 +859,7 @@ class Log {
         $FILTRI.= "
 	 	<div id=\"filtri_log\" style=\"$mostra_filtri;\">
 	 
-	 	<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"get\">
+	 	<form action=\"" . Common::phpself() . "\" method=\"get\">
 		 	<fieldset style=\"margin:5px 20px 20px 0px; width:60%;\">
 		 		<label for=\"op\">" . _("Action type:") . "</label>
 		 		<select name=\"op\" id=\"op\">
@@ -998,7 +1015,7 @@ class Log {
 			<td>" . $RSlog['id_record'] . "</td>
 			<td>" . $RSlog['fonte'] . "</td>
 			<td><a href=\"log.php?dettaglio=" . $RSlog['id_log'] . "\">" . _("details") . "</a></td>
-			<td><a href=\"log.php?id_record=" . $RSlog['id_record'] . "\">" . _("history") . "</a></td>
+			<td><a href=\"log.php?id_record=" . $RSlog['id_record'] . "&amp;table_name=" . $RSlog['tabella'] . "\">" . _("history") . "</a></td>
 		</tr>
 		 ";
         }
@@ -1363,7 +1380,7 @@ class Log {
 
                             $storico_pre=$vmreg->escape(serialize($RS_pre));
                             $storico_post=$vmreg->escape($storico_post);
-
+                            
                             $sql="INSERT INTO {$db1['frontend']}{$db1['sep']}log (op,tabella,uid,gid,id_record,storico_pre,storico_post,info_browser) 
                                   VALUES ('$op','$tabella',$uid,$gid,'$id','$storico_pre','$storico_post','$info_browser')";
                             $test=$vmreg->query_try($sql,false);

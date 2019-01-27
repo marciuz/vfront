@@ -9,7 +9,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: utenze.db.php 1156 2015-11-25 20:43:23Z marciuz $
+ * @version 0.96 $Id: utenze.db.php 1172 2017-05-12 18:33:50Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -38,7 +38,7 @@ function tab_ord($eti,$n){
 	if($_ORD==$n) return $eti;
 	else{
 		
-		return "<a href=\"".basename($_SERVER['PHP_SELF'])."?gid=". $GID ."&amp;ord=$n\" class=\"link-ord\">$eti</a>";
+		return "<a href=\"".basename(Common::phpself())."?gid=". $GID ."&amp;ord=$n\" class=\"link-ord\">$eti</a>";
 	}
 }
 
@@ -59,7 +59,7 @@ if(isset($_POST['id_utente']) && isset($_GET['mod'])){
 	
 	if($_SESSION['user']['livello']<$_dati['livello']){
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?msg=no_lev");
+		header("Location: ?msg=no_lev");
 		exit;
 	}
 	
@@ -109,11 +109,11 @@ if(isset($_POST['id_utente']) && isset($_GET['mod'])){
 		
 		
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?feed=$feedok&mod=".$_dati['id_utente']);
+		header("Location: ?feed=$feedok&mod=".$_dati['id_utente']);
 		exit;
 	}
 	else{
-		header("Location: ".$_SERVER['PHP_SELF']."?feed=ko&mod=".$_dati['id_utente']);
+		header("Location: ?feed=ko&mod=".$_dati['id_utente']);
 		exit;
 	}
 	
@@ -136,7 +136,7 @@ else if(isset($_GET['insert_new']) && $_POST['nome']){
         unset($_SESSION['code_rand_value']);
     }
     else{
-        header("Location: ".$_SERVER['PHP_SELF']."?CSRF");
+        header("Location: ?CSRF");
 		exit;
     }
     
@@ -144,7 +144,7 @@ else if(isset($_GET['insert_new']) && $_POST['nome']){
 	// ripeto la clausola di sicurezza
 	if($_SESSION['user']['livello']<2 || $conf_auth['tipo_external_auth']!=''){
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?noauth");
+		header("Location: ?noauth");
 		exit;
 	}
 	// completezza lato server dei dati
@@ -155,7 +155,7 @@ else if(isset($_GET['insert_new']) && $_POST['nome']){
 		   $_data['passwd']!=$_data['passwd1']
 		){
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?nodata");
+		header("Location: ?nodata");
 		exit;
 	}
 	
@@ -177,12 +177,12 @@ else if(isset($_GET['insert_new']) && $_POST['nome']){
 	
 	if($vmreg->affected_rows($q)==1){
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?mod=$id_new");
+		header("Location: ?mod=$id_new");
 		exit;
 	}
 	else{
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?feed=noinsert");
+		header("Location: ?feed=noinsert");
 		exit;
 	}
 }
@@ -200,7 +200,7 @@ else if(isset($_POST['ch_data']) && isset($_POST['id_utente']) && intval($_POST[
 	
 	if(!valid_mail($_data['ch_email'])){
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?mod=$ID_UT&feed=ko_mail");
+		header("Location: ?mod=$ID_UT&feed=ko_mail");
 		exit;
 	}
 	else{
@@ -215,11 +215,11 @@ else if(isset($_POST['ch_data']) && isset($_POST['id_utente']) && intval($_POST[
 		
 		if($vmreg->affected_rows($q)==1){
 			
-			header("Location: ".$_SERVER['PHP_SELF']."?mod=$ID_UT&feed=ok_chuser");
+			header("Location: ?mod=$ID_UT&feed=ok_chuser");
 			exit;
 		}
 		else{
-			header("Location: ".$_SERVER['PHP_SELF']."?mod=$ID_UT&feed=ko_chuser");
+			header("Location: ?mod=$ID_UT&feed=ko_chuser");
 			exit;
 		}
 	}
@@ -239,13 +239,13 @@ else if(isset($_POST['ch_submit_passwd']) && isset($_POST['id_utente']) && intva
 	
 	if($_data['ch_passwd']==''){
 
-		header("Location: ".$_SERVER['PHP_SELF']."?mod=$ID_UT&feed=ko_no_passwd");
+		header("Location: ?mod=$ID_UT&feed=ko_no_passwd");
 		exit;
 		
 	}
 	else if($_data['ch_passwd']!=$_data['ch_passwd2']){
 		
-		header("Location: ".$_SERVER['PHP_SELF']."?mod=$ID_UT&feed=ko_pass_equal");
+		header("Location: ?mod=$ID_UT&feed=ko_pass_equal");
 		exit;
 	}
 	else{
@@ -257,11 +257,11 @@ else if(isset($_POST['ch_submit_passwd']) && isset($_POST['id_utente']) && intva
 		
 		if($vmreg->affected_rows($q)==1){
 			
-			header("Location: ".$_SERVER['PHP_SELF']."?mod=$ID_UT&feed=ok_passwd");
+			header("Location: ?mod=$ID_UT&feed=ok_passwd");
 			exit;
 		}
 		else{
-			header("Location: ".$_SERVER['PHP_SELF']."?mod=$ID_UT&feed=ko_passwd");
+			header("Location: ?mod=$ID_UT&feed=ko_passwd");
 			exit;
 		}
 	}
@@ -367,7 +367,7 @@ else if (isset($_GET['mod'])){
 	
 	<div style=\"float:left;\">
 	
-	<form action=\"".$_SERVER['PHP_SELF']."?mod\" method=\"post\">
+	<form action=\"" . Common::phpself() . "?mod\" method=\"post\">
 	
 	<fieldset  class=\"chuser\">
 	<legend>"._("Administration level")." </legend>
@@ -464,7 +464,7 @@ else if (isset($_GET['mod'])){
 		
 		echo "<div id=\"change_userdata\" style=\"float:left;\" >
 		
-		<form id=\"f_change_userdata\" action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">
+		<form id=\"f_change_userdata\" action=\"" . Common::phpself() . "\" method=\"post\">
 		
 			
 			<fieldset class=\"chuser\">
@@ -543,15 +543,15 @@ else if (isset($_GET['del'])){
 		
 		if($vmreg->affected_rows($q_del)==1){
 			
-			header("Location: ".$_SERVER['PHP_SELF']."?feed=del_ok");
+			header("Location: ?feed=del_ok");
 			exit;
 		}
 		else{
-			header("Location: ".$_SERVER['PHP_SELF']."?feed=del_ko");
+			header("Location: ?feed=del_ko");
 			exit;
 		}
 	}else{
-		header("Location: ".$_SERVER['PHP_SELF']."?feed=del_ko");
+		header("Location: ?feed=del_ko");
 		exit;
 	}
 	
@@ -578,7 +578,7 @@ else if(isset($_GET['new']) && $_SESSION['user']['livello']>=2 && $conf_auth['ti
     echo "<p>"._('All data are required')."</p>\n";
     
     echo "
-    <form id=\"f1\" action=\"".$_SERVER['PHP_SELF']."?insert_new\" method=\"post\">
+    <form id=\"f1\" action=\"" . Common::phpself() . "?insert_new\" method=\"post\">
     <fieldset style=\"width:70%\">
     <legend>"._('New user settings')."</legend>\n";
     
@@ -677,7 +677,7 @@ else if(isset($_GET['new']) && $_SESSION['user']['livello']>=2 && $conf_auth['ti
  
  
  // FILTRI:
-echo "<form action=\"".$_SERVER['PHP_SELF']."\" method=\"get\" >\n";
+echo "<form action=\"" . Common::phpself() . "\" method=\"get\" >\n";
 
 
 	// FILTRO PER GRUPPO -------------------------
@@ -793,12 +793,12 @@ echo "</form>\n";
  	 
  // Controllo sul livello di chi sta operando... se � 2 non fa modificare i 3
  	$link_modifica = ($RS['livello']<=$_SESSION['user']['livello']) 
- 		? "<a href=\"".$_SERVER['PHP_SELF']."?mod={$RS['id_utente']}\">"._("modify")."</a>" 
+ 		? "<a href=\"".Common::phpself()."?mod={$RS['id_utente']}\">"._("modify")."</a>" 
  		: "&nbsp;";
  		
  // Controllo sul livello di chi sta operando... se � 2 non fa modificare i 3
  	$link_delete = ($RS['livello']<=$_SESSION['user']['livello']) 
- 		? "<a href=\"".$_SERVER['PHP_SELF']."?del={$RS['id_utente']}\">"._("delete")."</a>" 
+ 		? "<a href=\"".Common::phpself()."?del={$RS['id_utente']}\">"._("delete")."</a>" 
  		: "&nbsp;";
  					
  $TAB.= " 	
@@ -828,5 +828,3 @@ echo "</form>\n";
 	echo $TAB;
 
 echo closeLayout1();
-
-?>

@@ -80,7 +80,7 @@ $st_sub = (isset($_GET['a']) && $_GET['a']==7) ? "" : "display:none;";
 
 echo "<div class=\"default-filters\" id=\"default-filters\" style=\"$st_sub\">\n";
 
-echo "<form action=\"".$_SERVER['PHP_SELF']."?det=".$_GET['det']."&amp;gid=".$_GET['gid']."&amp;a=7\" method=\"post\" >\n";
+echo "<form action=\"" . Common::phpself() . "?det=".$_GET['det']."&amp;gid=".$_GET['gid']."&amp;a=7\" method=\"post\" >\n";
 echo "<table class=\"tabella tab-default-filter\">\n";
 
 for($i=0;$i<count($campi_tabella);$i++){

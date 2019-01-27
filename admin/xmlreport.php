@@ -7,7 +7,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: xmlreport.php 1078 2014-06-13 15:35:53Z marciuz $
+ * @version 0.96 $Id: xmlreport.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -255,7 +255,7 @@ else if(isset($_GET['new']) || isset($_GET['newquery'])){
 	
 	echo "<h1>". $title_ ." $testo_tit</h1>\n";
  	
- 	echo "<form action=\"".$_SERVER['PHP_SELF']."?creanew\" method=\"post\" enctype=\"multipart/form-data\" >\n";
+ 	echo "<form action=\"" . Common::phpself() . "?creanew\" method=\"post\" enctype=\"multipart/form-data\" >\n";
  	
  	
  	echo "<label for=\"nome_report\" >"._("Report name (use only letters, numbers, underscore and dashes):")."</label>\n ";
@@ -414,7 +414,7 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
 
 	echo "<h1>"._("Modify XML report")."</h1>\n";
  	
- 	echo "<form action=\"".$_SERVER['PHP_SELF']."?appmod\" method=\"post\" enctype=\"multipart/form-data\" >\n";
+ 	echo "<form action=\"" . Common::phpself() . "?appmod\" method=\"post\" enctype=\"multipart/form-data\" >\n";
  	
  	$q=$vmreg->query("SELECT * FROM {$db1['frontend']}{$db1['sep']}xml_rules WHERE id_xml_rules=".intval($_GET['mod']));
  	

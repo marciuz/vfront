@@ -9,7 +9,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2009 M.Marcello Verona
- * @version 0.95 $Id: sync_reg_tab.mysql.php 1108 2014-10-20 20:25:04Z marciuz $
+ * @version 0.95 $Id: sync_reg_tab.mysql.php 1173 2017-05-12 20:46:23Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  * @see sync_reg_tab.postgres.php
  */
@@ -439,7 +439,7 @@ if(isset($_GET['diff'])){
 	echo openLayout1(_("Sincronizzazione database/frontend"),$files);
 	
  	echo "<div id=\"briciole\"><a href=\"index.php\">"._("home amministrazione")."</a> &raquo; "
- 	     ."<a href=\"".basename($_SERVER['PHP_SELF'])."\">"._("sincronizzazione db/frontend")."</a> &raquo; "._("differenze per la tabella")." $tabella</div>";
+ 	     ."<a href=\"".basename(Common::phpself())."\">"._("sincronizzazione db/frontend")."</a> &raquo; "._("differenze per la tabella")." $tabella</div>";
 
 	echo "<h1>"._("Differenze di impostazione per la tabella")." <span class=\"var\">$tabella</span></h1>\n";
 	
@@ -447,7 +447,7 @@ if(isset($_GET['diff'])){
 	
 	if($differenza){
 		
-		echo "<form action=\"".$_SERVER['PHP_SELF']."?aggiorna_campi\" method=\"post\">\n";
+		echo "<form action=\"" . Common::phpself() . "?aggiorna_campi\" method=\"post\">\n";
 		
 		foreach($campi_diversi as $k=>$v){
 			
@@ -749,7 +749,7 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 
 		$TAB_SYNC1.="\t</tbody>\n</table>
 		
-		<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">
+		<form action=\"" . Common::phpself() . "\" method=\"post\">
 			<input type=\"hidden\" name=\"nuove\" value=\"".substr($VAL1,0,-1)."\" />
 			
 			<input type=\"submit\" name=\"sincronizza_nuove\" value=\""._("Inserisci tabelle nel frontend")."\" />
@@ -789,7 +789,7 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 
 		$TAB_SYNC2.="\t</tbody>\n</table>
 		
-		<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">
+		<form action=\"" . Common::phpself() . "\" method=\"post\">
 			<input type=\"hidden\" name=\"obsolete\" value=\"".substr($VAL2,0,-1)."\" />
 			
 			<input type=\"submit\" name=\"elimina_obsolete\" value=\""._("Elimina tabelle obsolete")."\" />
@@ -813,7 +813,7 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 			
 				if(!in_array($tab_diverse[$k],$new_t) && !in_array($tab_diverse[$k],$old_t)){
 				
-					$tab_string.="<a class=\"rosso\" href=\"".$_SERVER['PHP_SELF']."?diff=".$tab_diverse[$k]."\">".$tab_diverse[$k]."</a>, <br />\n";
+					$tab_string.="<a class=\"rosso\" href=\"".Common::phpself()."?diff=".$tab_diverse[$k]."\">".$tab_diverse[$k]."</a>, <br />\n";
 					
 					$mostra_diff_campi=true;
 				}
@@ -887,7 +887,7 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 				<td>".$matrice_front[$i]['table_name']."</td>
 				<td>".$matrice_front[$i]['commento']."</td>
 				<td>".$data_config."</td>
-				<td><a href=\"".$_SERVER['PHP_SELF']."?azzera=".$matrice_front[$i]['table_name']."\">"._("ripristina")."</a></td>
+				<td><a href=\"".Common::phpself()."?azzera=".$matrice_front[$i]['table_name']."\">"._("ripristina")."</a></td>
 			</tr>
 			";
 		}

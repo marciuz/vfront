@@ -25,7 +25,7 @@
  * @subpackage VFront_Web_Installer
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: index.php 1165 2016-04-25 10:18:17Z marciuz $
+ * @version 0.96 $Id: index.php 1173 2017-05-12 20:46:23Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License
  * 
  */
@@ -194,7 +194,7 @@ function step0(){
 	$license=htmlspecialchars(join("",file("../license")));
 
 	echo "
-	<form action=\"".$_SERVER['PHP_SELF']."\" method=\"get\" id=\"form1\">
+	<form action=\"" . htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . "\" method=\"get\" id=\"form1\">
 
 
 		<div class=\"installbox\" id=\"ilanguage\">
@@ -272,7 +272,7 @@ function step1(){
 	// prova a cambiare i diritti della directory conf:
 	if(!$cartella_writable && !@chmod('../conf',0777)){
 
-		echo "<p class=\"install-err\">".sprintf(_("Please set the <em>conf</em> folder as writeable and %s"),"<a href=\"".$_SERVER['PHP_SELF']."?p=1\">"._('try again')."</a>")."</p>";
+		echo "<p class=\"install-err\">".sprintf(_("Please set the <em>conf</em> folder as writeable and %s"),"<a href=\"".htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')."?p=1\">"._('try again')."</a>")."</p>";
 
 		$fatal=true;
 	}
@@ -454,7 +454,7 @@ function step1(){
 		$class_alert['writable_files_dir']="install-err";
 		$fatal=true;
 		$txt_files_dir=sprintf(_('Please set the files folder as writeable and %s')
-						,"<a href=\"".$_SERVER['PHP_SELF']."?p=1\">"._('try again')."</a>");
+						,"<a href=\"".htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')."?p=1\">"._('try again')."</a>");
 	}
 
 	echo "<p class=\"".$class_alert['writable_files_dir']."\">".$txt_files_dir."<br />\n";
@@ -574,7 +574,7 @@ function step2(){
 	?>
 
 
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?p=2s" id="installform">
+<form method="post" action="<?php echo htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8');?>?p=2s" id="installform">
 
 
 	<a name="DBregistrymethod"></a>
@@ -1222,7 +1222,7 @@ function step2(){
 
 	<p>
 		<input type="hidden" name="file_connessione" value="" id="file_connessione" />
-		<input type="button" value="&lt;&lt; <?php echo _('Previous');?> " onclick="window.location='<?php echo $_SERVER['PHP_SELF'];?>'" id="back_button" />
+		<input type="button" value="&lt;&lt; <?php echo _('Previous');?> " onclick="window.location='<?php echo htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8');?>'" id="back_button" />
 		<input type="button" value="  <?php echo _('Next');?>  &gt;&gt;" onclick="check_installer()" id="submit_button" /> <span id="check_feed" >&nbsp;</span>
 	</p>
 
@@ -1340,7 +1340,7 @@ function step3(){
 		"._("Will try to create it if it does not exist (privileges required).")."
 		</p>
 
-		<form action=\"".$_SERVER['PHP_SELF']."?p=3s\" method=\"post\" >\n";
+		<form action=\"".htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')."?p=3s\" method=\"post\" >\n";
 
 		$PORTA = ($db1['dbtype']=='mysql') ? "3306" : "5432";
 
@@ -1412,7 +1412,7 @@ function step3(){
 		 "._("open")." <span class=\"fakelink\" onclick=\"$('boxsql').toggle();\">"._("this box")."</span></p>\n";
 
 
-		echo "<form action=\"".$_SERVER['PHP_SELF']."?install_db\" method=\"post\" >\n";
+		echo "<form action=\"".htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')."?install_db\" method=\"post\" >\n";
 	}
 
 	echo "

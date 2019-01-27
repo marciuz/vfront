@@ -10,7 +10,7 @@
 * @subpackage RPC
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 M.Marcello Verona
-* @version 0.96 $Id: rpc.php 1133 2014-12-17 14:31:28Z marciuz $
+* @version 0.96 $Id: rpc.php 1174 2017-05-12 21:44:50Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
 
@@ -55,7 +55,7 @@ if(count($_POST)>0){
 
 		// Prepara l'SQL
 		$sql_update = $RPC->rpc_query_update($_POST['dati'],$_POST['pk']);
-
+        
 		// INSERISCO IL LOG E PRENDO L'ID
 		$last_id_log= $Log->rpc_log('update',$_GET['action'],$_SESSION['user']['uid'],$_SESSION['gid'],$_POST['pk'],true,'',$sql_update,$info_browser); 
 		

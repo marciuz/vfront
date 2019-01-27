@@ -6,7 +6,7 @@
 * @package VFront
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 M.Marcello Verona
-* @version 0.96 $Id: helpdocs.php 1076 2014-06-13 13:03:44Z marciuz $
+* @version 0.96 $Id: helpdocs.php 1173 2017-05-12 20:46:23Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
 
@@ -351,7 +351,7 @@ echo openLayout1(_("Useful documents"),$files);
 		
 		    <p>'._('The following file extensions are allowed: <strong>doc, xls, pdf, rtf, zip, txt, odt, sxw').'</strong></p>
 		    
-		    <form method="post" enctype="multipart/form-data" action="'.$_SERVER['PHP_SELF'].'?add"> 
+		    <form method="post" enctype="multipart/form-data" action="'.Common::phpself().'?add"> 
 		    	
 		    	 <label for="immagine"><strong>'._('File to add').'</strong></label><br/>
   				<input type="file" name="documento" id="documento" size="60" />

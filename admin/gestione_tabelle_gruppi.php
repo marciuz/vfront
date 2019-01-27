@@ -8,7 +8,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: gestione_tabelle_gruppi.php 1146 2015-04-24 15:33:10Z marciuz $
+ * @version 0.96 $Id: gestione_tabelle_gruppi.php 1172 2017-05-12 18:33:50Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -185,7 +185,7 @@ function tab_menu($gid=0,$order='table_name'){
 		echo "\t\t<tr class=\"$colore\">
 				<td>".Common::highlight_yes_no($tab['visibile'])."</td>
 				
-				<td><a $title_href $color_href href=\"".$_SERVER['PHP_SELF']."?det=".$tab['id_table']."&amp;gid=$gid\">".$tab['table_name']."</a></td>
+				<td><a $title_href $color_href href=\"".Common::phpself()."?det=".$tab['id_table']."&amp;gid=$gid\">".$tab['table_name']."</a></td>
 				<td>".$data_mod."</td>
 				<td>".$n_sottomaschere."</td>
 				<td>".htmlentities($tab['commento'],ENT_QUOTES, FRONT_ENCODING)."</td>
@@ -458,7 +458,7 @@ function tab_dett($oid,$gid=0){
 	
 	<div class=\"tabella-gen\" id=\"tabella-gen\" style=\"$st_gen\" >
 	
-	<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">\n";
+	<form action=\"" . Common::phpself() . "\" method=\"post\">\n";
     
     
     // DEFAULT VIEW (new in 0.99)
@@ -910,7 +910,7 @@ function tab_dett($oid,$gid=0){
 	
 		if(count($mat_gruppi)>0){
 		
-		echo "\t<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\" id=\"form_copia_campi\">\n"; 
+		echo "\t<form method=\"post\" action=\"" . Common::phpself() . "\" id=\"form_copia_campi\">\n"; 
 		
 		
 		
@@ -938,7 +938,7 @@ function tab_dett($oid,$gid=0){
 	//------------------------------------
 	
 	
-	echo "\t<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">\n";
+	echo "\t<form method=\"post\" action=\"" . Common::phpself() . "\">\n";
 	
 	
 					   
@@ -1182,7 +1182,7 @@ else if(isset($_POST['sottomaschere'])){
 
 else if(isset($_POST['campo'])){
 	
-	$gid=(int) $_POST['gid'];
+	$gid= (int) $_POST['gid'];
 	
 	$campo=$vmreg->recursive_escape($_POST['campo']);
 	
@@ -1446,7 +1446,7 @@ else if(isset($_GET['mod_sub_campi']) && isset($_POST['campo_sub'])){
 
 
 # Funzioni di modifica di massa
-else if(isset($_GET['mass']) && is_numeric($_GET['gid'])){
+else if(isset($_GET['mass']) && intval($_GET['gid']) > 0){
 	
 	
 	

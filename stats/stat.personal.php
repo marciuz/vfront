@@ -8,7 +8,7 @@
  * @subpackage Stats
  * @author Mario Marcello Verona <marcelloverona@gmail.com>
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: stat.personal.php 1078 2014-06-13 15:35:53Z marciuz $
+ * @version 0.96 $Id: stat.personal.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License
  */
 
@@ -260,7 +260,7 @@ if(isset($_GET['new']) || isset($_GET['modifica'])){
 	</script>\n";
 	
 	
-	echo "<form name=\"f1\" action=\"".$_SERVER['PHP_SELF']."?$azione\" method=\"post\" onsubmit=\"return performCheck('f1', rules, 'classic');\" >\n";
+	echo "<form name=\"f1\" action=\"" . Common::phpself() . "?$azione\" method=\"post\" onsubmit=\"return performCheck('f1', rules, 'classic');\" >\n";
 	
 	echo "<fieldset style=\"width:70%; padding:20px;\">\n";
 	echo "<legend style=\"font-weigth:bold\">"._("Parameter for new statistic")."</legend>\n";
@@ -594,7 +594,7 @@ if(isset($_GET['elimina'])){
 		echo "</div>\n";
 		
 		
-		echo "<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\" >\n";
+		echo "<form action=\"".Common::phpself()."\" method=\"post\" >\n";
 		
 		// info statistica...
 		

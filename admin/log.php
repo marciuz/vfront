@@ -8,7 +8,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: log.php 1152 2015-06-02 12:36:26Z marciuz $
+ * @version 0.96 $Id: log.php 1174 2017-05-12 21:44:50Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -42,7 +42,7 @@ else if(isset($_GET['dettaglio']) && (intval($_GET['dettaglio'])>0)){
 }
 else if(isset($_GET['id_record']) && (intval($_GET['id_record'])>0)){
 	
-	$Log->mostra_storico();
+	$Log->show_history($_GET['id_record'], $_GET['table_name']);
 }
 else{
 	

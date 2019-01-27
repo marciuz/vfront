@@ -6,7 +6,7 @@
 * @subpackage DB-Libraries
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2010 M.Marcello Verona
-* @version 0.96 $Id: vmsql.sqlite3.php 1086 2014-06-16 12:42:09Z marciuz $
+* @version 0.96 $Id: vmsql.sqlite3.php 1174 2017-05-12 21:44:50Z marciuz $
 * @see vmsql.mysqli.php
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
@@ -640,7 +640,7 @@ class sqlite3_vmsql {
 	public function escape($string){
 
 		if(is_object($this->link_db)){
-			return $this->link_db->escapeString(stripslashes($string));
+			return $this->link_db->escapeString($string);
 		}
 		else return $string;
 	}

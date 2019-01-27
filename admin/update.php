@@ -6,7 +6,7 @@
 * @package VFront
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 Mario Marcello Verona
-* @version 0.96d $Id: update.php 1131 2014-12-17 12:31:14Z marciuz $
+* @version 0.96d $Id: update.php 1173 2017-05-12 20:46:23Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 * @todo Verificare con utility se se operazioni sono eseguibili dall'autore, in caso contrario segnalare le operazioni da compiere
 */
@@ -1175,7 +1175,7 @@ else{
 		if($updates>0){
 			
 			echo "<p>".sprintf(_('There are %d updates to install.'),$updates)."</p>\n";
-			echo "<p><a href=\"".$_SERVER['PHP_SELF']."\">"._("Proceed to VFront database update")."</a></p>\n";
+			echo "<p><a href=\"".Common::phpself()."\">"._("Proceed to VFront database update")."</a></p>\n";
 		}
 		else{
 			echo "<p>"._('No updates to be installed.')."</p>\n";

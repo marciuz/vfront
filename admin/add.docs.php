@@ -5,7 +5,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: add.docs.php 1078 2014-06-13 15:35:53Z marciuz $
+ * @version 0.96 $Id: add.docs.php 1173 2017-05-12 20:46:23Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -310,7 +310,7 @@ echo "<img src=\"./img/flussi.gif\" class=\"img-float\" alt=\""._('Manage attach
 			$dimensione = RegTools::allegato_filesize($matrice_info_allegati[$i]['codiceallegato']);
 			
 			$scarica=(preg_match('!Dimensione!',$dimensione)) ? "": " - <a href=\"download.php?f=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."\">Scarica</a>";
-			$elimina=($allegati_del) ? " - <span class=\"fakelink-rosso\" onclick=\"if(confirm('"._('Are you sure you want to delete this attachment?')."')){ window.location='".$_SERVER['PHP_SELF']."?t=$tabella&amp;id=$id&amp;del=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."';}\" >"._('Delete')."</span>" : "";
+			$elimina=($allegati_del) ? " - <span class=\"fakelink-rosso\" onclick=\"if(confirm('"._('Are you sure you want to delete this attachment?')."')){ window.location='".Common::phpself()."?t=$tabella&amp;id=$id&amp;del=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."';}\" >"._('Delete')."</span>" : "";
 			
 			$estensione=substr($matrice_info_allegati[$i]['nomefileall'],-3,3);
 			
@@ -349,7 +349,7 @@ echo "<img src=\"./img/flussi.gif\" class=\"img-float\" alt=\""._('Manage attach
 		<br />
 		";
 	?>
-	<form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" onsubmit="bUploaded.start('fileprogress');">
+	<form enctype="multipart/form-data" method="post" action="<?php echo Common::phpself();?>" onsubmit="bUploaded.start('fileprogress');">
 			<div>
 				<div id="contenitore-file"><div><input type="file" name="gfile[]" size="60" /> <span onclick="rimuovi_attach(this);" class="fakelink" style="font-size:0.7em;"><?php echo _('remove');?></span><br /></div></div>
 				

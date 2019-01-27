@@ -7,7 +7,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: menu_registri.php 1139 2015-04-23 21:04:10Z marciuz $
+ * @version 0.96 $Id: menu_registri.php 1173 2017-05-12 20:46:23Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -30,7 +30,7 @@ require_once("../inc/layouts.php");
 		$OUT = openLayout1(_("Group Administration"),$files);
 	
 		$OUT.= breadcrumbs(array("HOME","ADMIN",
-				basename($_SERVER['PHP_SELF'])=>_("Groups and registry menu"),
+				basename(Common::phpself())=>_("Groups and registry menu"),
 				_("modify group ")));
 
 
@@ -72,7 +72,7 @@ require_once("../inc/layouts.php");
 			
 			echo "
 			
-		<form action=\"".$_SERVER['PHP_SELF']."?gid=$GID&amp;esegui_modifica\" method=\"post\">
+		<form action=\"" . Common::phpself() . "?gid=$GID&amp;esegui_modifica\" method=\"post\">
 			
 			<label for=\"nome_g\" >"._("Group name (alphanumeric and <em>underscore</em> characters only) ")."</label><br />
 			<input type=\"text\" name=\"nome_g\" id=\"nome_g\" value=\"".$RS['nome_gruppo']."\" />
@@ -178,7 +178,7 @@ require_once("../inc/layouts.php");
 		
 		
 		$OUT.= "<p>"._("No groups in database")."<br/>
-		<a href=\"".$_SERVER['PHP_SELF']."?initreg\">"._("Initialize registry")."</a></p>\n";
+		<a href=\"".Common::phpself()."?initreg\">"._("Initialize registry")."</a></p>\n";
 	}
 	
 	else{
@@ -229,7 +229,7 @@ require_once("../inc/layouts.php");
 				$OUT.= "\t\t<td>".$val['n']."</td>\n";
 				$OUT.= "\t\t<td>".VFDate::date_encode($val['data_gruppo'],true)."</td>\n";
 				$OUT.= "\t\t<td><a href=\"gestione_tabelle_gruppi.php?gid=".$val['gid']."\">"._("administer")."</a></td>\n";
-				$OUT.= "\t\t<td><a href=\"".$_SERVER['PHP_SELF']."?modifica_gid=1&amp;gid=".$val['gid']."\">"._("modify")."</a></td>\n";
+				$OUT.= "\t\t<td><a href=\"".Common::phpself()."?modifica_gid=1&amp;gid=".$val['gid']."\">"._("modify")."</a></td>\n";
 				$OUT.= ($val['gid']!=0) ? "\t\t<td><a href=\"elimina_gr.php?gid=".$val['gid']."\">"._("delete")."</a></td>\n" : "\t\t<td> - </td>\n";
 				$OUT.= "\t</tr>\n";
 			}

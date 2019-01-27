@@ -1,3 +1,9 @@
+CHANGE IN 0.99.5 2017-05-12
+Security Fix - XSS vulnerability - Thanks to Robert Abela & Onur Yılmaz (https://www.netsparker.com/)
+Update in ODS export.
+Fix in select fields in subforms.
+Fix on Log Update (better SQL parsing) and Log History.
+
 CHANGE IN 0.99.4 2016-04-25
 Support for PHP7
 Bugfix in Postgresql >= 9.4

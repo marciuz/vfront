@@ -9,7 +9,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2014 M.Marcello Verona
- * @version 0.99 $Id: nuovo_gruppo.php 1098 2014-06-19 23:31:51Z marciuz $
+ * @version 0.99 $Id: nuovo_gruppo.php 1172 2017-05-12 18:33:50Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -23,6 +23,8 @@ require_once("../inc/layouts.php");
 	if(isset($_POST['gid_old'])){
 		
 		$_var=$vmreg->recursive_escape($_POST);
+        
+        $_var['nome_gr'] = Common::noxss($_var['nome_gr']);
 		
 		// controlli:
 		if(strlen($_var['nome_gr'])==0){
@@ -106,7 +108,7 @@ require_once("../inc/layouts.php");
 	
 	
 	echo "
-	<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">
+	<form action=\"" . Common::phpself() . "\" method=\"post\">
 		<fieldset style=\"width:90%\" >
 		
 		
@@ -160,13 +162,4 @@ require_once("../inc/layouts.php");
 	</form>
 	";
 		
-		
-		
-		
 	echo closeLayout1();
-
-
-
-
-
-?>

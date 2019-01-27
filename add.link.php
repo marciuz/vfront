@@ -6,7 +6,7 @@
 * @package VFront
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 M.Marcello Verona
-* @version 0.96 $Id: add.link.php 1078 2014-06-13 15:35:53Z marciuz $
+* @version 0.96 $Id: add.link.php 1173 2017-05-12 20:46:23Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
 
@@ -280,7 +280,7 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 		// MOSTRA GLI ALLEGATI
 		for($i=0;$i<count($matrice_info_link);$i++){
 			
-			$elimina= ($link_del) ? " - <span class=\"fakelink-rosso\" onclick=\"if(confirm('"._('Do you really want to cancel this link?')."')){ window.location='".$_SERVER['PHP_SELF']."?t=$tabella&amp;id=$id&amp;del=".base64_encode($matrice_info_link[$i]['codicelink']._BASE64_PASSFRASE)."';}\" >"._('Delete')."</span>" : "";
+			$elimina= ($link_del) ? " - <span class=\"fakelink-rosso\" onclick=\"if(confirm('"._('Do you really want to cancel this link?')."')){ window.location='".Common::phpself()."?t=$tabella&amp;id=$id&amp;del=".base64_encode($matrice_info_link[$i]['codicelink']._BASE64_PASSFRASE)."';}\" >"._('Delete')."</span>" : "";
 			
 			echo "
 			<div class=\"link\">
@@ -312,7 +312,7 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 	
 	
 	?>
-	<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" >
+        <form method="post" action="<?php echo Common::phpself();?>" >
 			<div>
 				<div id="contenitore-link"><div><input type="text" name="links[]" size="68" value="http://" /><?php echo $SELECT; ?>
 				<span onclick="rimuovi_link(this);" class="fakelink" style="font-size:0.7em;"><?php echo _('remove');?></span><br /></div></div>

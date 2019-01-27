@@ -6,7 +6,7 @@
 * @package VFront
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 M.Marcello Verona
-* @version 0.96 $Id: password_recover.php 1076 2014-06-13 13:03:44Z marciuz $
+* @version 0.96 $Id: password_recover.php 1169 2017-05-12 18:02:46Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
 
@@ -148,7 +148,7 @@ else{
 
 	echo "<p>"._("Lost your password?<br />Enter your email address and a new password will be send to that address")."</p>\n";
 	
-	echo "<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\" >
+	echo "<form action=\"" . Common::phpself() . "\" method=\"post\" >
 	
 		<label for=\"email\">"._("Email").":</label><br />
 		<input type=\"text\" name=\"email\" id=\"email\" size=\"45\" maxlength=\"200\" value=\"\" />

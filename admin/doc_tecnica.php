@@ -5,7 +5,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: doc_tecnica.php 1095 2014-06-19 09:14:39Z marciuz $
+ * @version 0.96 $Id: doc_tecnica.php 1169 2017-05-12 18:02:46Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 require_once("../inc/conn.php");
@@ -336,9 +336,9 @@ else if(isset($_GET['doc'])){
 		
 		    <p>'._('Files of the following formats are allowed:').' <strong>doc, xls, pdf, rtf, zip, txt, odt, sxw</strong></p>
 		    
-		    <form method="post" enctype="multipart/form-data" action="'.$_SERVER['PHP_SELF'].'?add"> 
+		    <form method="post" enctype="multipart/form-data" action="'.Common::phpself().'?add"> 
 		    	
-		    	 <label for="immagine"><strong>'._('File to add').'</strong></label><br/>
+		    	 <label for="documento"><strong>'._('File to add').'</strong></label><br/>
   				<input type="file" name="documento" id="documento" size="60" />
 				<br /><br />
 			    <input name="invia" value="   '._('Send').'   " type="submit" />

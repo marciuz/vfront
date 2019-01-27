@@ -17,7 +17,7 @@
 	
 	$n_widget=$vmreg->num_rows($q_widget);
 	
-	$qstring_widget=$_SERVER['PHP_SELF']."?det=".intval($_GET['det'])."&amp;gid=".intval($_GET['gid'])."&amp;a=6";
+	$qstring_widget=Common::phpself()."?det=".intval($_GET['det'])."&amp;gid=".intval($_GET['gid'])."&amp;a=6";
 	
 	$widget_order='';
 		
@@ -35,7 +35,7 @@
 		
 		$widget_reset="<input type=\"button\" id=\"widget_reset\" value=\" "
 					._('Cancel')." \" onclick=\"location.href='".
-					$_SERVER['PHP_SELF']."?det=".$_GET['det']."&amp;gid=".$_GET['gid']."&amp;a=6'\" />";
+					Common::phpself()."?det=".$_GET['det']."&amp;gid=".$_GET['gid']."&amp;a=6'\" />";
 					
 		$sel_widget_type=array();
 	
@@ -121,7 +121,7 @@
 	echo "
 	<div id=\"form_new_widget_cont\" $show_form_widget>
 	
-		<form id=\"form_new_widget\" method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">
+		<form id=\"form_new_widget\" method=\"post\" action=\"" . Common::phpself() . "\">
 	
 		
 			<fieldset id=\"form_new_widget_fs\" style=\"max-width:780px;\">

@@ -15,7 +15,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: variabili.php 1153 2015-06-02 12:46:40Z marciuz $
+ * @version 0.96 $Id: variabili.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -141,7 +141,7 @@ require_once("../inc/layouts.php");
 			$indicatore_locale="&amp;feedlocale=1";
 		}
 		
-		$OUT="<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."?{$azione}{$indicatore_locale}\" >\n";
+		$OUT="<form method=\"post\" action=\"" . Common::phpself() . "?{$azione}{$indicatore_locale}\" >\n";
 		
 		$q=$vmreg->query("SELECT * FROM ".$db1['frontend'].$db1['sep']."variabili WHERE gid=".intval($gid)." AND pubvar=1 ORDER BY variabile");
 		
@@ -389,7 +389,7 @@ require_once("../inc/layouts.php");
 					$FORM_VARIABILE="<p>"._("No variable set for this group")."</p>";
 				}
 				
-				$FORM_NUOVE_VARS= "<form action=\"".$_SERVER['PHP_SELF']."?add_locale=".$gids[$i]."\" method=\"post\" style=\"display:none\" id=\"nuove_variabili_".$gids[$i]."\">
+				$FORM_NUOVE_VARS= "<form action=\"" . Common::phpself() . "?add_locale=".$gids[$i]."\" method=\"post\" style=\"display:none\" id=\"nuove_variabili_".$gids[$i]."\">
 					$select_vars
 					<input type=\"submit\" name=\"nuova_variabile\" value=\""._("Add variable")."\"/>
 				</form>\n";

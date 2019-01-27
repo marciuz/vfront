@@ -6,7 +6,7 @@
 * @subpackage Function-Libraries
 * @author Mario Marcello Verona <marcelloverona@gmail.com>
 * @copyright 2007-2010 M.Marcello Verona
-* @version 0.96 $Id: class.export.php 1118 2014-12-16 00:44:03Z marciuz $
+* @version 0.96 $Id: class.export.php 1173 2017-05-12 20:46:23Z marciuz $
 * @license http://www.gnu.org/licenses/gpl.html GNU Public License
 */
 
@@ -591,23 +591,52 @@ $TR_TH
 
 		// METODO PHP
 		// CREA IL PACCHETTO
+        
+        if(class_exists('ZipArchive')) {
+            
+            $zip = new ZipArchive();
+            
+            $tmp_ods=_PATH_TMP.'/'.md5(time()).".ods";
+            
+            $zip->open($tmp_ods, ZipArchive::CREATE);
+            
+            $zip->addFile(_PATH_TMP."/content.xml", "content.xml");
+            
+            $zip->addEmptyDir("Configurations2");
+            $zip->addEmptyDir("META-INF");
+            $zip->addEmptyDir("Pictures");
+            $zip->addEmptyDir("Thumbnails");
+            
+            $zip->addFile(FRONT_REALPATH."/plugins/ods/META-INF/manifest.xml", "META-INF/manifest.xml");
+            $zip->addFile(FRONT_REALPATH."/plugins/ods/meta.xml", "meta.xml");
+            $zip->addFile(FRONT_REALPATH."/plugins/ods/settings.xml", "settings.xml");
+            $zip->addFile(FRONT_REALPATH."/plugins/ods/styles.xml", "styles.xml");
+            $zip->addFile(FRONT_REALPATH."/plugins/ods/mimetype", "mimetype");
+            
+            $zip->close();
+            
+        }
+        
+        // ALternative method
+        else {
 
-		require_once(FRONT_REALPATH."/inc/EasyZIP.class.php");
+            require_once(FRONT_REALPATH."/inc/EasyZIP.class.php");
 
-		$zip = new EasyZIP();
+            $zip = new EasyZIP();
 
-		$zip->addFile("content.xml",_PATH_TMP."/");
-		$zip->addDir(FRONT_REALPATH."/plugins/ods","Configurations2");
-		$zip->addDir(FRONT_REALPATH."/plugins/ods","META-INF");
-		$zip->addDir(FRONT_REALPATH."/plugins/ods","Pictures");
-		$zip->addFile("meta.xml",FRONT_REALPATH."/plugins/ods/");
-		$zip->addFile("settings.xml",FRONT_REALPATH."/plugins/ods/");
-		$zip->addFile("styles.xml",FRONT_REALPATH."/plugins/ods/");
-		$zip->addFile("mimetype",FRONT_REALPATH."/plugins/ods/");
+            $zip->addFile("content.xml",_PATH_TMP."/");
+            $zip->addDir(FRONT_REALPATH."/plugins/ods","Configurations2");
+            $zip->addDir(FRONT_REALPATH."/plugins/ods","META-INF");
+            $zip->addDir(FRONT_REALPATH."/plugins/ods","Pictures");
+            $zip->addFile("meta.xml",FRONT_REALPATH."/plugins/ods/");
+            $zip->addFile("settings.xml",FRONT_REALPATH."/plugins/ods/");
+            $zip->addFile("styles.xml",FRONT_REALPATH."/plugins/ods/");
+            $zip->addFile("mimetype",FRONT_REALPATH."/plugins/ods/");
 
-		$tmp_ods=_PATH_TMP.'/'.md5(time()).".ods";
+            $tmp_ods=_PATH_TMP.'/'.md5(time()).".ods";
 
-		$zip->zipFile($tmp_ods);
+            $zip->zipFile($tmp_ods);
+        }
 
 		$ctype="application/vnd.oasis.opendocument.spreadsheet";
 
@@ -627,7 +656,7 @@ $TR_TH
 			$header="Content-Disposition: attachment; filename={$this->nome_tabella}-".date("Ymd").".ods;";
 			header($header);
 
-			print join('',file($tmp_ods));
+			readfile($tmp_ods);
 		}
 		else{
 

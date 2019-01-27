@@ -101,7 +101,7 @@ echo breadcrumbs(array("HOME",strtolower($title_pag)));
 
 echo "<h1><img src=\"./img/search.png\" alt=\"search\" style=\"vertical-align:middle\" /> ".$title_pag."</h1>\n";
 
-echo "<form action=\"".$_SERVER['PHP_SELF']."\" method=\"get\">
+echo "<form action=\"" . Common::phpself() . "\" method=\"get\">
 	<p><label for=\"s\">"._('Search the entire database').":</label> 
 	<input type=\"text\" size=\"80\" id=\"s\" name=\"s\" value=\"$ss\" tabindex=\"1\" />
 	

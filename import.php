@@ -26,7 +26,7 @@
  * @subpackage VFront_Import
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: import.php 1164 2016-04-25 10:17:38Z marciuz $
+ * @version 0.96 $Id: import.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -162,7 +162,7 @@ function import_step0(){
 	if(intval($oid)>0 && RegTools::is_tabella_by_oid($oid)){
 	
 		$OUT.="<div id=\"form-container\">
-			<form enctype=\"multipart/form-data\" method=\"post\" action=\"".$_SERVER['PHP_SELF']."?step=1&amp;oid=$oid\" >
+			<form enctype=\"multipart/form-data\" method=\"post\" action=\"" . Common::phpself() . "?step=1&amp;oid=$oid\" >
 			
 			<p id=\"csvfile-box\">
 			<label for=\"csvfile\">"._('csv File ').":</label><br />
@@ -350,7 +350,7 @@ function import_step2(){
 	 
 	 
 	 
-	 echo "<form action=\"".$_SERVER['PHP_SELF']."?step=11\" method=\"post\">\n";
+	 echo "<form action=\"" . Common::phpself() . "?step=11\" method=\"post\">\n";
 	 
 	 $sepr[0]=($sep==';') ? ' selected="selected"' : '';
 	 $sepr[1]=($sep==',') ? ' selected="selected"' : '';
@@ -384,7 +384,7 @@ function import_step2(){
 	 
 	 echo "</form>\n";
 	 
-	 echo "<form action=\"".$_SERVER['PHP_SELF']."?step=21\" method=\"post\">\n";
+	 echo "<form action=\"" . Common::phpself() . "?step=21\" method=\"post\">\n";
 
 	 echo "<p><input type=\"checkbox\" id=\"prima_riga\" name=\"prima_riga\" value=\"1\" onclick=\"colora_prima_riga();\" /> <label for=\"prima_riga\">"._('Skip the first line')."</label> </p>\n";
 	 
@@ -459,7 +459,7 @@ function import_step3(){
 	echo "<p>"._('If you need to perform operations on the fields identified for the import or insert constants, operate from this window, otherwise go ahead')."</p>\n";
 	 
 	 
-	 echo "<form action=\"".$_SERVER['PHP_SELF']."?step=4\" method=\"post\" >\n";
+	 echo "<form action=\"" . Common::phpself() . "?step=4\" method=\"post\" >\n";
 	
 	  echo "<p><input type=\"button\" onclick=\"history.back()\" value=\"&lt;&lt; "._('Previous')."\" />   <input type=\"button\" onclick=\"submit()\" value=\""._('Next')." &gt;&gt;\" /></p>\n";
 	 

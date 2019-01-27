@@ -115,7 +115,7 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		
 		echo "\t\t<tr class=\"$colore\">
 				<td>".Common::highlight_yes_no($tab['sub_select'])."</td>
-				<td><a title=\"$title_href\" $color_href href=\"".$_SERVER['PHP_SELF']."?det=$oid&amp;conf_sub=".$tab['id_submask']."&amp;a=3&amp;gid=".$_GET['gid']."\">".$tab['nome_tabella']."</a></td>
+				<td><a title=\"$title_href\" $color_href href=\"".Common::phpself()."?det=$oid&amp;conf_sub=".$tab['id_submask']."&amp;a=3&amp;gid=".$_GET['gid']."\">".$tab['nome_tabella']."</a></td>
 				<td>".$data_mod."</td>
 				<td>".$tab['nome_frontend']."</td>
 				<td>".tipo_scheda_name($tab['tipo_vista'])."</td>
@@ -128,7 +128,7 @@ function submask_menu($oid=0,$order='nome_tabella'){
 	
 	echo "</table>\n";
 	
-	echo "<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."?elimina_submask\" id=\"elimina_submask\" name=\"elimina_submask\" style=\"display:none;\">
+	echo "<form method=\"post\" action=\"" . Common::phpself() . "?elimina_submask\" id=\"elimina_submask\" name=\"elimina_submask\" style=\"display:none;\">
 	
 		<input type=\"hidden\" name=\"id_del_submask\" id=\"id_submask\" value=\"0\" />
 		<input type=\"hidden\" name=\"oid\" value=\"$oid\" />
@@ -158,7 +158,7 @@ function submask_menu($oid=0,$order='nome_tabella'){
 	
 		echo "<div id=\"nuova-sottomaschera\" style=\"display:none;\">\n";
 		
-			echo "<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">
+			echo "<form action=\"" . Common::phpself() . "\" method=\"post\">
 			
 			
 				 <select size=\"13\" multiple=\"multiple\" name=\"new_submask[]\">
@@ -200,7 +200,7 @@ function submask_menu($oid=0,$order='nome_tabella'){
 	
 		if(count($mat_gruppi_sub)>0){
 		
-			echo "<form name=\"copia_sottomaschere\" action=\"".$_SERVER['PHP_SELF']."\" method=\"post\">\n";
+			echo "<form name=\"copia_sottomaschere\" action=\"" . Common::phpself() . "\" method=\"post\">\n";
 		
 			$sel_gruppi_sub="\t<select name=\"copia_sub_gid\" id=\"copia_sub_gid\" >\n";
 			
@@ -240,7 +240,7 @@ function submask_menu($oid=0,$order='nome_tabella'){
 				
 				
 				
-				echo "<form action=\"".$_SERVER['PHP_SELF']."?det=".$_GET['det']."&amp;gid=".$_GET['gid']."\" method=\"post\" >\n";
+				echo "<form action=\"" . Common::phpself() . "?det=".$_GET['det']."&amp;gid=".$_GET['gid']."\" method=\"post\" >\n";
 				
 				echo _("Clone from table:")." <select name=\"id_tabella\">\n";
 				
@@ -282,7 +282,7 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		
 		
 		
-		echo "<form name=\"sub_gen\" action=\"".$_SERVER['PHP_SELF']."?mod_sub_gen\" method=\"post\">\n";
+		echo "<form name=\"sub_gen\" action=\"" . Common::phpself() . "?mod_sub_gen\" method=\"post\">\n";
 		
 		
 		#######################################################################
@@ -535,7 +535,7 @@ function submask_menu($oid=0,$order='nome_tabella'){
 			echo "<h3 style=\"margin-top:60px;border-bottom:1px solid #CCC;width:75%;\">"._("Setting for subform fields")." <span class=\"var\">".$sottomaschere['nome_tabella'][$k_sub]."</span></h3>\n";
 		
 		
-			echo "\t<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."?gid=".$_GET['gid']."&amp;mod_sub_campi\">\n";
+			echo "\t<form method=\"post\" action=\"" . Common::phpself() . "?gid=".$_GET['gid']."&amp;mod_sub_campi\">\n";
 	
 		
 		

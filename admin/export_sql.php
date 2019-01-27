@@ -5,7 +5,7 @@
  * @subpackage Administration
  * @author M.Marcello Verona
  * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: export_sql.php 1079 2014-06-14 09:19:03Z marciuz $
+ * @version 0.96 $Id: export_sql.php 1170 2017-05-12 18:06:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 
@@ -167,7 +167,7 @@ include("../inc/layouts.php");
  
  	<div class=\"box-db\">
 		<h2>"._("Database data export")." (<span class=\"var\">{$db1['dbname']}</span>)</h2>
-		<form action=\"".$_SERVER['PHP_SELF']."?exp=dati\" method=\"post\">
+		<form action=\"" . Common::phpself() . "?exp=dati\" method=\"post\">
 		
 			<br />
 		
@@ -186,7 +186,7 @@ include("../inc/layouts.php");
  	<div class=\"box-db\">
 		<h2>"._("Registries database export")." (<span class=\"var\">$DBREG_NAME</span>)</h2>
 			
-		<form action=\"".$_SERVER['PHP_SELF']."?exp=registri\" method=\"post\">
+		<form action=\"" . Common::phpself() . "?exp=registri\" method=\"post\">
 		
 			<br />
 		

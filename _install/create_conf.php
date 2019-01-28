@@ -555,14 +555,3 @@ $file_conf_dest="../conf/conf.vfront.php";
 		$_SESSION['cont_file_connessione']=$WR;
 	}
 
-
-
-
-
-
-
-
-
-
-
-?>

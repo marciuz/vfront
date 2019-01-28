@@ -135,4 +135,3 @@ require_once("../inc/vmsql.".$_data['dbtype'].".php");
 		echo -2;
 	}
 	
-?>

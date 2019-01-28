@@ -80,6 +80,3 @@ elseif($_data['dbtype']=='sqlite'){
 }
 else echo -1;
 
-
-
-?>

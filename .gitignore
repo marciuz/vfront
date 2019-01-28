@@ -1,0 +1,25 @@
+# ignore IDE/hidden/OS cache files
+.*
+*~
+nbproject
+nb-configuration.xml
+Session.vim
+*.tmproj
+*.tmproject
+tmtags
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea
+
+# VFront files
+conf/.testvfront
+conf/conf.vfront.php
+files/db/vfront.sqlite
+
+
+# keep some hiddens
+!.htaccess
+!/.gitignore
+!/.travis.yml
+files/db/error_log.txt

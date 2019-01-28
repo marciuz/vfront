@@ -25,7 +25,7 @@ proteggi(1);
 		exit;
 	}
 
-	$RPC = new RPCGrid($tabella);
+	$RPC = new RpcGrid($tabella);
     
     $RPC->set_default_where();
 	

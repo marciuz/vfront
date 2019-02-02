@@ -39,7 +39,7 @@ if(isset($_REQUEST['campo']) && isset($_REQUEST['tabella'])){
 		list($sql_campo)=$vmsql->fetch_row($q);
 		
 		
-		$NEW_IFRAME = new hash_iframe($_REQUEST['campo'],$sql_campo);
+		$NEW_IFRAME = new Hash_Iframe($_REQUEST['campo'],$sql_campo);
 		
 		echo $NEW_IFRAME->hash_html;
 	

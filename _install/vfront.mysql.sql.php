@@ -504,5 +504,3 @@ $SQL_DEFINITION[]="
 
 COMMIT;
 ";
-
-?>

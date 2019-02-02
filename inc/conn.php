@@ -60,20 +60,23 @@ if(!@include_once($VFRONT_CONFIGURATION_FILE)){
 	exit;
 }
 
+// Load PSR-4 autoloader.
+require_once $dir_vfront.'/vendor/autoload.php';
+
 
 
 // DB connection
 
 if($db1['dbtype']=='mysql'){
 	
-	if(function_exists('mysqli_connect')){
-		require_once(FRONT_REALPATH."/inc/vmsql.mysqli.php");
-		$vmsql = new mysqli_vmsql();
-	}
-	else{
-		require_once(FRONT_REALPATH."/inc/vmsql.mysqlold.php");
-		$vmsql = new mysql_vmsql();
-	}
+    if(function_exists('mysqli_connect')){
+            require_once(FRONT_REALPATH."/inc/vmsql.mysqli.php");
+            $vmsql = new mysqli_vmsql();
+    }
+    else{
+            require_once(FRONT_REALPATH."/inc/vmsql.mysqlold.php");
+            $vmsql = new mysql_vmsql();
+    }
 }
 elseif($db1['dbtype']=='postgres'){
 	
@@ -194,12 +197,6 @@ if(!isset($_SESSION['VF_VARS'])){
 
 
 
-
-
-
-
-
-
 // Impostazione della lingua 
 $locale = (defined('FRONT_LANG')) ? FRONT_LANG : 'en_US';
 
@@ -249,27 +246,7 @@ else{
 }
 
 
-
-
-// Autoloader
-spl_autoload_register(function ($class) {
-    global $db1;
-    include_once FRONT_ROOT.'/classes/class.' . strtolower($class). '.php';
-});
-		
-
-
 $USE_JSON = true ;
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -281,20 +258,18 @@ $USE_JSON = true ;
  * @param int $livello Indica il livello di amministrazione per la pagina nel quale la funzione viene richiamata
  */
 function proteggi($livello=1){
-	
-	if($livello>0){
-	
-		if(!isset($_SESSION['user']['livello'])){
-		    
-			
-			
-			header("Location: ".FRONT_DOCROOT."/index.php?nolog=1&sessione_inesistente&urlreq=".$_SERVER['REQUEST_URI']);
-			exit;
-		}
-		elseif( $_SESSION['user']['livello'] < $livello ){
-			header("Location: ".FRONT_DOCROOT."/index.php?nolog=2&sessione_insuff");
-			exit;
-		}
-	}
+
+    if($livello>0){
+
+        if(!isset($_SESSION['user']['livello'])){
+
+            header("Location: ".FRONT_DOCROOT."/index.php?nolog=1&sessione_inesistente&urlreq=".$_SERVER['REQUEST_URI']);
+            exit;
+        }
+        elseif( $_SESSION['user']['livello'] < $livello ){
+            header("Location: ".FRONT_DOCROOT."/index.php?nolog=2&sessione_insuff");
+            exit;
+        }
+    }
 }
 

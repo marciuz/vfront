@@ -293,19 +293,16 @@ $OUT.="<div class=\"piccolo\">"._("VFront requires register_globals to be disabl
 
 
 // IMPOSTAZIONI IMPORTANTI ---------------------------------------------------------------------------------------------------
+$OUT.="<h2 class=\"title-vfrontinfo\">"._("Apache Modules")."</h2>";
 
-if(function_exists('apache_get_modules')) {
- 
-  $OUT.="<h2 class=\"title-vfrontinfo\">"._("Apache Modules")."</h2>";
- 
-  $modules_apache=(array) apache_get_modules();
+$modules_apache=(array) @apache_get_modules();
 
-  $flog.="ApacheLoadedModules: ".implode(",",$modules_apache)."\n";
+$flog.="ApacheLoadedModules: ".implode(",",$modules_apache)."\n";
 
-  $apache_mod_rewrite=(in_array("mod_rewrite", $modules_apache)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
-  $OUT.="<span class=\"grigio\">"._("Mod_rewrite:")."</span> <strong>$apache_mod_rewrite</strong>\n";
-  $OUT.="<div class=\"piccolo\">"._("VFront requires the use of mod_rewrite for different functions, such as generating reports")."</div><br />\n";
-}
+$apache_mod_rewrite=(in_array("mod_rewrite", $modules_apache)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
+$OUT.="<span class=\"grigio\">"._("Mod_rewrite:")."</span> <strong>$apache_mod_rewrite</strong>\n";
+$OUT.="<div class=\"piccolo\">"._("VFront requires the use of mod_rewrite for different functions, such as generating reports")."</div><br />\n";
+
 
 
 

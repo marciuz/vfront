@@ -537,6 +537,3 @@ $SQL_DEFINITION[]="
 COMMIT;
 ";
 
-
-
-?>

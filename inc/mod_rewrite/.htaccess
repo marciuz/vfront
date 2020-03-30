@@ -1,0 +1,4 @@
+<IfModule rewrite_module>
+RewriteEngine On
+RewriteRule ^test$ test.php
+</IfModule>

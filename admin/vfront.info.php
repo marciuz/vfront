@@ -302,7 +302,15 @@ if(function_exists('apache_get_modules')){
 }
 else{
         $flog.="ApacheLoadedModules: apache_get_modules() not available\n";
-        $apache_mod_rewrite="<span class=\"rosso\">??? ("._('This information is not available, since it seems to be using PHP as CGI').")</span>";
+        require_once("../inc/func.mod_rewrite.php");
+        if (check_mod_rewrite(FRONT_DOCROOT)) {
+                $flog.="mod_rewrite test succeeded\n";
+                $apache_mod_rewrite="<span class=\"verde\">"._("YES")."</span>";
+        }
+        else{
+                $flog.="mod_rewrite test failed\n";
+                $apache_mod_rewrite="<span class=\"rosso\">"._("NO")."</span>";
+        }
 }
 
 $OUT.="<span class=\"grigio\">"._("Mod_rewrite:")."</span> <strong>$apache_mod_rewrite</strong>\n";

@@ -2623,9 +2623,10 @@ jQuery(document).ready( function(){
                     text : RS[i][1]
                 }));
             }
+        }).done(function(){
+            jQuery('#feed_'+target).hide();
+            triggerLoadTendina();
         });
-        jQuery('#feed_'+target).hide();
-        triggerLoadTendina();
     });
     
     dhtmlxgrid_resize();

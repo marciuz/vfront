@@ -2285,7 +2285,24 @@ function richiediSUB(){
 
 function richiediEMBED(sm_embed_id){
 
-    var urlSUB= 'sottomaschera.php?oid_parent='+oid+'&pk='+VF.localIDRecord+'&id_submask='+sm_embed_id;
+    inputs=jQuery('input');
+    for(i=0;i<inputs.length;i++){
+        if(inputs[i].id.substring(0,3)=="pk_"){
+            var pk = inputs[i].value;
+            var var_pk_id =inputs[i].id.substring(3);
+        }
+    }
+
+	// se la chiave da passare è la PK
+    if(var_pk_id==VF.fkparent[sm_embed_id]){
+        var urlSUB='sottomaschera.php?oid_parent='+oid+'&pk='+pk+'&id_submask='+sm_embed_id;
+    }
+    else{
+        campo_fk_sub=$('dati_' + VF.fkparent[sm_embed_id]);
+        val_fk_sub=$(campo_fk_sub).value;
+        var urlSUB='sottomaschera.php?oid_parent='+oid+'&pk='+val_fk_sub+'&id_submask='+sm_embed_id;
+    }
+
     jQuery.ajax({
         url: urlSUB,
         success: function(htmlEMBED){

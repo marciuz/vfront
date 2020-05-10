@@ -438,7 +438,8 @@ table.switch-vista tr td {
         
 }
 
-.table-submask tr td input{
+.table-submask tr td input,
+.table-submask tr td select{
     margin: 0;
 }
 

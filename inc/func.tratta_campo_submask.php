@@ -108,9 +108,13 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	
 	switch (strtolower($data_type)){
 		
+		case 'tinyint'  :
+		case 'smallint' : $options = (preg_match("!tinyint\(1\)!i",$column_type)) ? "\t\t\t<option value=\"bool\" ".selected_def('bool',$in_tipo).">"._("boolean (true|false)")."</option>
+									<option value=\"int\" ".selected_def('int',$in_tipo).">"._("integer number")."</option>\n" 
+									:
+									"\t\t\t<option value=\"int\" ".selected_def('int',$in_tipo).">"._("integer number")."</option>\n" ;
+		break;
 		case 'integer' :
-		case 'tinyint' :
-		case 'smallint' :
 		case 'bigint' :
 		case 'number' :
 		case 'mediumint' :

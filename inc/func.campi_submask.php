@@ -175,7 +175,7 @@ function tipo_campo_submask($n, $valore, $info, $tipo_vista = 'tabella') {
 
         $SV->set_data($in_default, true);
         $input = "<div class=\"select_values\" data-target=\"" . $column_name . "\" data-require=\"$SV->hash_js\">";
-        $input .= "<select disabled=\"disabled\" name=\"dati[$n][" . $column_name . "]\" id=\"dati__{$n}__{$column_name}\" class=\"toup-{$column_name}\" data-startval=\"" . $valore . "\"></select>";
+        $input .= "<select disabled=\"disabled\" name=\"dati[$n][" . $column_name . "]\" id=\"dati__{$n}__{$column_name}\" class=\"off toup-{$column_name}\" data-startval=\"" . $valore . "\"></select>";
         $input .= "</div>\n";
     }
     //- FINE SELECT_FROM -----------------------------------------------------------------------------

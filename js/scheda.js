@@ -2291,6 +2291,27 @@ function richiediEMBED(sm_embed_id){
         success: function(htmlEMBED){
             $('sm_embed_'+sm_embed_id).innerHTML=htmlEMBED;
         }
+    }).done(function(){
+        jQuery('#sm_embed_'+sm_embed_id+' .select_values').each(function(i, el){
+            var hash_js = jQuery(el).data('require');
+            var target = jQuery(el).data('target');
+            console.log(target);
+            jQuery.getJSON( VF.basePath+'/files/html/'+hash_js+'.json', function (data){
+                jQuery(el).children('.toup-'+target).each( function(j, subel){
+                    // Blank value
+                    jQuery(subel).append(jQuery('<option>', { value: '', text : '' }));
+                    // values
+                    for(var i=0;i<data.length;i++){
+                        jQuery(subel).append(jQuery('<option>', {
+                            value: data[i][0],
+                            text : data[i][1]
+                        }));
+                    }
+                    // Set value
+                    jQuery(subel).val(jQuery(subel).data('startval'));
+                });
+            });
+        });
     });
 }
 
@@ -2623,9 +2644,10 @@ jQuery(document).ready( function(){
                     text : RS[i][1]
                 }));
             }
+        }).done(function(){
+            jQuery('#feed_'+target).hide();
+            triggerLoadTendina();
         });
-        jQuery('#feed_'+target).hide();
-        triggerLoadTendina();
     });
     
     dhtmlxgrid_resize();

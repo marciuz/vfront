@@ -20,10 +20,10 @@ foreach ($_POST['var'] as $k=>$v){
 }
 
 $WR="<?php
-########################################################################
+/**
+######################################################################
 #
-#	 FILE DI CONFIGURAZIONE VFRONT
-#
+#	 VFRONT Configuration file
 #
 #	 This file is part of VFront.
 #
@@ -40,7 +40,8 @@ $WR="<?php
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-########################################################################
+#######################################################################
+*/
 ";
 
 
@@ -50,7 +51,7 @@ $WR.="
  * @package VFront
  * @subpackage Config
  * @author M.Marcello Verona
- * @copyright 2007-2010 M.Marcello Verona
+ * @copyright 2007-2020 M.Marcello Verona
  * @version 0.96 \$Id: create_conf.php 1076 2014-06-13 13:03:44Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
@@ -74,8 +75,7 @@ if($var['dbtype']=='mysql'){
 $WR.=<<<PHPW
 /*  DB  CONNECTION */
 
-
-// Connessione a MYSQL 5.x: commentare il blocco nel caso si utilizzi altro DB (Postgres)
+// Connect to MYSQL 5.x: comment the block in case you use other DB (Postgres)
 \$db1['dbtype']="mysql";
 \$db1['host']="{$var['dbhost1']}";
 \$db1['port']="{$var['dbport1']}";
@@ -107,7 +107,7 @@ else if($var['dbtype']=='postgres'){
 $db_schema=(isset($var['dbschema2']) && trim($var['dbschema2'])!='') ? $var['dbschema2']:'public';
 
 $WR.=<<<PHPW
-// POSTGRES 8.x commentare il blocco nel caso si utilizzi altro DB (MYSQL)
+// POSTGRES - comment the block in case you use other DB (MYSQL)
 \$db1['dbtype']="postgres";
 \$db1['host']="{$var['dbhost2']}";
 \$db1['port']="{$var['dbport2']}";
@@ -193,8 +193,8 @@ if($authtype!=''){
 
 $WR.=<<<PHPW
 	
-// Nomi dei campi dove trovare email, password eventuali nome e cognome dell\'utente da DB, DB esterno, LDAP o SOAP
-// queste variabili vanno impostate in caso di autenticazione esterna
+// Names of the fields where to find email, password (if any), first and last name of the user from DB, external DB, LDAP or SOAP
+// these variables must be set in case of external authentication
 \$conf_auth['campo_nick']='{$var['authext_nick']}';
 \$conf_auth['campo_email']='{$var['authext_mail']}';
 \$conf_auth['campo_password']='{$var['authext_passwd']}';
@@ -211,9 +211,9 @@ if($authtype=='db'){
 
 $WR.=<<<PHPW
 
-/*  SEZIONE DB */
-// qualora si sia scelta l'autenticazione esterna mediante DB diverso da VFront, impostare i seguenti parametri 
-// per leggere nome utente e password dal database e tabella scelti per l'autenticazione esterna
+/* DB */
+// if you have chosen external authentication via DB other than VFront, set the following parameters 
+// to read user name and password from the database and table chosen for external authentication
 \$conf_auth['db']['database']='{$var['authdb_dbname']}'; // deve risiedere sullo stesso server (Solo Mysql) -- per altri server utilizzare DB_EXT, SOAP o altri metodi
 \$conf_auth['db']['tabella']='{$var['authdb_usertable']}';
 
@@ -227,9 +227,9 @@ else if($authtype=='db_ext'){
 $WR.=<<<PHPW
 
 /*  SEZIONE DB_EXT (DB ESTERNO) */
-// qualora si sia scelta l'autenticazione esterna mediante DB esterno e|o residente su altro server, impostare i seguenti parametri 
-// verranno utilizzati anche i parametri generici \$conf_auth['campo_email'], \$conf_auth['campo_password'], \$conf_auth['campo_nome'],\$conf_auth['campo_cognome']
-// sopra definiti
+// if you have chosen external authentication via external DB or resident on another server, set the following parameters 
+// Generic parameters will also be used \$conf_auth['campo_email'], \$conf_auth['campo_password'], \$conf_auth['campo_nome'],\$conf_auth['campo_cognome']
+// above defined
 \$conf_auth['db_ext']['dbtype']="{$var['authdb_ext_type']}"; // mysql | postgres | odbc
 \$conf_auth['db_ext']['host']="{$var['authdb_ext_host']}"; // host del server DB esterno utilizzato per l'autenticazione
 \$conf_auth['db_ext']['port']="{$var['authdb_ext_port']}"; // porta del server DB esterno utilizzato per l'autenticazione
@@ -250,9 +250,9 @@ else if($authtype=='ldap'){
 $WR.=<<<PHPW
 
 	
-/*  SEZIONE LDAP (o Active Directory)  */
-// qualora si sia scelta l'autenticazione esterna mediante LDAP (o Active Directory) impostare i seguenti parametri 
-// per leggere nome utente e password dal server 
+/*  LDAP Section (or Active Directory)  */
+// if you have chosen external authentication via LDAP (or Active Directory) set the following parameters 
+// to read user name and password from the server 
 \$conf_auth['ldap']['base_dn']='{$var['ldap_basedn']}';
 \$conf_auth['ldap']['host']='{$var['ldap_host']}';
 \$conf_auth['ldap']['anonymus_bind']={$var['ldap_anonymus_bind']};
@@ -264,28 +264,13 @@ PHPW;
 }
 
 
-/*  SEZIONE SOAP  */
-// qualora si sia scelta l'autenticazione esterna mediante SOAP impostare i seguenti parametri 
-// per leggere nome utente e password dal server 
-/*$conf_auth['soap']['wsdl']='';
-$conf_auth['soap']['function_get_user']='';
-$conf_auth['soap']['function_get_user_results']='';*/
-
-
-
-
-
-
-
-
-
 $WR.=<<<PHPW
 
-//--------------   Fine autenticazione esterna  --------------  //
+//--------------   End of external authentication  --------------  //
 
 
-// SEZIONE SMTP E MAIL  
-// qualora si voglia utilizzare un SMTP personalizzato per la gestione delle email 
+// SMTP AND MAIL SECTION
+// if you want to use a custom SMTP for email management 
 
 \$conf_mail['SMTP_AUTH']={$var['smtp_use']};
 \$conf_mail['SMTP']="{$var['smtp_address']}";
@@ -295,46 +280,46 @@ $WR.=<<<PHPW
 \$conf_mail['MAIL_SENDER_NAME']="{$var['smtp_sendername']}";
 
 /**
- * mail amministratore di sistema
+ * system administrator email
  */
 define('_SYS_ADMIN_MAIL','{$var['mail_sysamin']}');
 
 /**
- * mail dello sviluppatore (per le email di debug
+ * developer emails (for debug emails)
  */
 define('_DEV_MAIL','{$var['mail_dev']}');
 
 
 
 
-/* SEZIONE DEBUG */
+/* DEBUG Section */
 
 /**
- * errori a video | errori in email
- * In ambiente di produzione si consiglia di 
- * impostare la variabile su FALSE: in caso di errore verra' spedita una email all'amministratore
- * ed allo sviluppatore. L'utente vede una schermata dove si comunica che e' stato generato un errore.
- * In caso la variabile sia TRUE gli errori verranno invece mostrati a video
+ * errors on screen | errors in email
+ * In production environment we recommend 
+ * set the variable to FALSE: in case of error an email will be sent to the administrator
+ * and the developer. The user sees a screen where they are notified that an error has been generated.
+ * In case the variable is TRUE the errors will be shown on screen instead
  */
 \$DEBUG_SQL={$var['debug_sql']};
 
 /**
- * apri un popup via javascript che mostra le query SQL  - default: FALSE
+ * open a javascript popup showing SQL queries - default: FALSE
  */
 \$DEBUG_SQL_SHOW_QUERY=false;
 
 /**
- * scrivi le chiamate SQL in un file (di default ./rpc.debug.txt)  - default: FALSE
+ * write the SQL calls in a file (default ./rpc.debug.txt) - default: FALSE
  */
 \$RPC_DEBUG=false;
 
 
 
 
-/* SEZIONE LOG */
+/* LOG Secrion */
 
 /**
- * scrive un log delle chiamate SQL di inserimento, modifica e cancellazione - default: TRUE
+ * writes a log of the SQL calls for insertion, modification and deletion - default: TRUE
  */
 \$RPC_LOG=true;
 
@@ -373,12 +358,12 @@ define('FRONT_DATE_FORMAT','{$var['dateformat']}');
 /*  SEZIONE PATH  */
 
 /**
- * path reale
+ * Real path
  */
 define('FRONT_ROOT','{$var['front_root']}');
 
 /**
- * path reale
+ * Real path
  */
 define('FRONT_REALPATH','{$var['front_root']}');
 
@@ -449,8 +434,8 @@ define('FRONT_ERROR_LOG',FRONT_REALPATH.'/files/db/error_log.txt');
 
 
 /*  SEZIONE FOP  */
-/* Utilizza l'applicazione Apache FOP http://xmlgraphics.apache.org/fop/ 
-per generare la versione PDF dei file XML */
+/* Use the Apache FOP application http://xmlgraphics.apache.org/fop/ 
+to generate the PDF version of XML files */
 
 /**
  * Imposta se Vfront puo' utilizzare l'applicazione FOP 
@@ -521,15 +506,8 @@ define('VERSION_REG_SQLITE',$version_reg_sqlite);
 \$db1['filename_reg']=\"{$var['sqlite_path']}\"; // path of sqlite database
 
 
-
 ";
 
-
-
-
-$WR.="
-
-?>";
 
 
 ##################################################

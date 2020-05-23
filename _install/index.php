@@ -428,7 +428,7 @@ function step1(){
 
 
 
-// CARTELLE SCRIVIBILI O NO -------------------------------------
+// FOLDERS, WRITEABLE OR NOT -------------------------------------
 
 
 
@@ -1081,6 +1081,7 @@ function step2(){
 		<p>
 			<label for="lang"><?php echo _('Language');?></label>
 			<select name="var[lang]" id="lang">
+				<option value="en_US" selected="selected">en_US</option>
 			<?php
 
 			if ($handle = opendir('../locale')) {
@@ -1139,7 +1140,8 @@ function step2(){
 			$front_root0=  (substr(realpath(__FILE__),0,1)=='/')  ? __FILE__ : str_replace("\\","/",__FILE__) ;
 			$front_root= str_replace("/_install/index.php","",$front_root0);
 
-			$doc_root="http://".$_SERVER['HTTP_HOST'].str_replace("/_install/index.php",'',$_SERVER['PHP_SELF']);
+			$scheme = (empty($_SERVER['HTTPS'])) ? 'http' : 'https';
+			$doc_root= $scheme . "://".$_SERVER['HTTP_HOST'].str_replace("/_install/index.php",'',$_SERVER['PHP_SELF']);
 
 		?>
 

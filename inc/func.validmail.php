@@ -150,5 +150,3 @@ function estrai_mail_valide($testo){
 	
 	return (array) $mails[0];
 }
-
-?>

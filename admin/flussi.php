@@ -145,5 +145,3 @@ echo "<pre>";
 
 print_r($CAMPI);
 echo closeLayout1();
-
-?>

@@ -90,6 +90,3 @@ echo "<p>"._("'defined values' lists can be set in two ways:")."</p>
 
 
 echo closeLayout1();
-
-
-?>

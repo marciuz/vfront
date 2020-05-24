@@ -414,5 +414,3 @@ else{
 
 	print $OUT;
 }
-
-?>

@@ -393,6 +393,3 @@ function mostra_loggato(){
 	
 	
 }
-
-
-?>

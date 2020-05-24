@@ -384,6 +384,3 @@ class iSchema_postgres {
 
 	}
 }
-
-
-?>

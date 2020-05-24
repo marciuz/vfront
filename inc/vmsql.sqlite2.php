@@ -731,5 +731,3 @@ class sqlite2_vmsql {
 
 
 }
-
-?>

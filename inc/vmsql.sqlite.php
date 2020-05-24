@@ -26,6 +26,3 @@ else{
 
     die("SQLite not found");
 }
-
-
-?>

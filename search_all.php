@@ -200,6 +200,3 @@ echo "<p class=\"grigio piccolo\">"
 
 
 echo closeLayout1();
-
-
-?>

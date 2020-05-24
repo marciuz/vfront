@@ -21,6 +21,3 @@ if(function_exists('mysqli_query')){
 else{
 	require_once(dirname(__FILE__)."/vmsql.mysqlold.php");
 }
-
-
-?>

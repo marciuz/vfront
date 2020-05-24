@@ -95,5 +95,3 @@ class PhOSCo_Sniffs_Classes_ClassDeclarationSniff implements PHP_CodeSniffer_Sni
     }//end process()
 
 }//end class
-
-?>

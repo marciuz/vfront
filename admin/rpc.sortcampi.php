@@ -125,6 +125,3 @@ elseif(isset($_GET['ripristina']) && isset($_POST['oid'])){
 	header("Location: ".dirname($_SERVER['PHP_SELF'])."/gestione_tabelle_gruppi.php?".$_POST['url']."&a=4");
 	exit;	
 }
-
-
-?>

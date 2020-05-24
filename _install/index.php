@@ -1015,7 +1015,6 @@ function step2(){
 		<p>
 			<label for="lang"><?php echo _('Language');?></label>
 			<select name="var[lang]" id="lang">
-				<option value="en_US" selected="selected">en_US</option>
 			<?php
 
 			if ($handle = opendir('../locale')) {
@@ -1115,23 +1114,6 @@ function step2(){
 
 
 	?>
-
-	<div class="installbox" id="ifop">
-		<h2>Apache FOP</h2>
-
-			<p>
-				<label for="fop_enabled">FOP Enabled</label>
-				<select name="var[fop_enabled]" id="fop_enabled">
-					<option value="false" selected="selected">false</option>
-					<option value="true" >true</option>
-				</select>
-			</p>
-
-			<p>
-				<label for="path_fop">path fop</label>
-				<input type="text" name="var[path_fop]" id="path_fop" value="<?php // echo $front_root."/plugins/fop/".$FOP_EXEC;?>" size="50" />
-			</p>
-	</div> <!-- END ifop -->
 
 	<hr />
 

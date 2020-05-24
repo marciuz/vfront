@@ -542,5 +542,3 @@ function syntax_highlight($text, $language)
                 
     return $output;
 }
-
-?>

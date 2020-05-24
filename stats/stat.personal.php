@@ -575,6 +575,3 @@ if(isset($_GET['elimina'])){
 	
 	
 }
-
-
-?>

@@ -56,6 +56,3 @@ echo "<br style=\"clear:left;\" />";
  *
  *
  */
-
-
-?>

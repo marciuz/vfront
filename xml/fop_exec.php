@@ -138,6 +138,3 @@ else{
 $file_output= _PATH_TMP."/".date("Ymd")."_".$tabella.".".strtolower($TYPE_DOC);
 
 fop_exec('',$file_xml,$file_xsl,$file_output,$TYPE_DOC ,false);
-
-
-?>

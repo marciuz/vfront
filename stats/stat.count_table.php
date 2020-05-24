@@ -150,6 +150,3 @@ echo $OUT;
 
 
 echo closeLayout1();
-
-
-?>

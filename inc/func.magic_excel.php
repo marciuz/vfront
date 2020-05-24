@@ -50,4 +50,3 @@ function magic_excel($tabella,$filename,$titolo,$action='',$toglibr=false){
 	
 }
 
-?>

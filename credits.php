@@ -44,10 +44,6 @@ License: LGPL - http://www.opensource.org/licenses/lgpl-license.php</p>
 Tool di validazione Javascript<br />
 License: LGPL - http://www.opensource.org/licenses/lgpl-license.php</p>
 
-<p><b>Apache FOP</b>  <a href=\"http://xmlgraphics.apache.org/fop/\" target=\"_blank\">http://xmlgraphics.apache.org/fop/</a><br />
-Generazione di report PDF ed altri formati mediante trasformazione XSL-FO<br />
-License: Apache 2.0 - http://www.apache.org/licenses/</p>
-
 <p><b>DHTMLxGrid</b>  <a href=\"http://www.scbr.com/docs/products/dhtmlxGrid/\" target=\"_blank\">http://www.scbr.com/docs/products/dhtmlxGrid/</a><br />
 Generatore di tabelle dinamiche in javascript nella vista tabella<br />
 License: GPL - http://www.gnu.org/licenses/gpl.html</p>
@@ -76,5 +72,3 @@ License: LGPL  - http://www.everaldo.com/crystal/?action=license</p>
 
 echo closeLayout1();
 
-
-?>

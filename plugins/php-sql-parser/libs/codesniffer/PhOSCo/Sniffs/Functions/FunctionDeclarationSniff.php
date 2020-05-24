@@ -292,5 +292,3 @@ class PhOSCo_Sniffs_Functions_FunctionDeclarationSniff implements PHP_CodeSniffe
     }//end processMultiLineDeclaration()
 
 }//end class
-
-?>

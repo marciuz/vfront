@@ -206,5 +206,3 @@ class PhOSCo_Sniffs_Commenting_ClassCommentSniff extends PhOSCo_Sniffs_Commentin
     }//end processVersion()
 
 }//end class
-
-?>

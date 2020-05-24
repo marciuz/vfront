@@ -530,5 +530,3 @@ if (!function_exists('gettext')) {
                           $number, $category);
     }
 }
-
-?>

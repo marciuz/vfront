@@ -967,5 +967,3 @@ switch($step){
 	default: import_step0();
 	
 }
-
-?>

@@ -167,5 +167,3 @@ elseif(isset($_GET['f'])){
 
 }
 
-
-?>

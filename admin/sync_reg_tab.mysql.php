@@ -908,4 +908,3 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 	
 	
 echo closeLayout1();
-?>

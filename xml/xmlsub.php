@@ -247,6 +247,3 @@ function xmlize_sottomaschera($id_parent,$oid,$gid=0,$solo_campi_visibili=false)
 
 	header("Content-Type: text/xml; charset=".FRONT_ENCODING);
 	echo $XML;
-
-
-?>

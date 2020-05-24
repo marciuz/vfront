@@ -19,25 +19,5 @@ include("../inc/layouts.php");
  
  echo openLayout1(_("Report Administration"), array("sty/admin.css"));
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  echo closeLayout1();
  
- 
-?>

@@ -181,7 +181,3 @@ require_once("../inc/func.getxml.php");
 		}
 	}
 	
-		
-
-
-?>

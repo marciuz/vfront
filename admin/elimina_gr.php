@@ -105,4 +105,3 @@ proteggi(3);
 	
 	
 	echo closeLayout1();
-?>

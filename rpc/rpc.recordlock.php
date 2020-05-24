@@ -143,6 +143,3 @@ else if(isset($_GET['sblocca'])){
 	
 	echo sblocca_record($tabella,$colonna,$id);
 }
-
-
-?>

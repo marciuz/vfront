@@ -136,6 +136,3 @@ echo "<input type=\"button\" name=\"crea\" value=\""._("Create query")."\" oncli
 echo "</form>";
 
 echo closeLayout1();
-
-
-?>

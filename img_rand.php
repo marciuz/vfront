@@ -70,4 +70,3 @@ imagejpeg($image);
 
 // destroy the image to free up the memory
 imagedestroy($image);
-?>

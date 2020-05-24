@@ -67,5 +67,3 @@ $OUT.=closeLayout1();
 
 
 print $OUT;
-
-?>

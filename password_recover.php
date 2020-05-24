@@ -167,5 +167,3 @@ else{
 
 
 echo closeLayout1();
-
-?>

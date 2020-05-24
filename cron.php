@@ -81,6 +81,3 @@ cron_clean_html($DAYS_MIN);
 cron_clean_tmp($DAYS_MIN);
 
 cron_clean_files_tmp($DAYS_MIN);
-
-
-?>

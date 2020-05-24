@@ -345,4 +345,3 @@ echo "</div><!-- fine contenitore -->\n\n";
 
 
 echo closeLayout1();
-?>

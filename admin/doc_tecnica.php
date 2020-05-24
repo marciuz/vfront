@@ -345,5 +345,4 @@ else if(isset($_GET['doc'])){
   }
   
 	
-	echo closeLayout1();
-?>
+echo closeLayout1();

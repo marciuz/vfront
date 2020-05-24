@@ -356,5 +356,3 @@ echo openLayout1(_("Useful documents"),$files);
   
 	
 echo closeLayout1();
-	
-?>

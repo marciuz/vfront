@@ -97,4 +97,4 @@ class ForeignKeyBuilder {
         return substr($sql, 0, -1);
     }
 }
-?>
+

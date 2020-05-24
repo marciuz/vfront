@@ -100,6 +100,3 @@ echo openLayout1(_("Database statistics"),$files);
 
 
 echo closeLayout1();
-
-
-?>

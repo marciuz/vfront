@@ -89,4 +89,3 @@ class UploadProgressManager {
 		return $found;
 	}
 }
-?>

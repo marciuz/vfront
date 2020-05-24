@@ -916,4 +916,4 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 	
 	
 echo closeLayout1();
-?>
+

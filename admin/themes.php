@@ -77,5 +77,3 @@ echo "<p><input type=\"submit\" value=\""._('Set theme')."\" /></p>\n";
 echo "</form>\n";
 
 echo closeLayout1();
-
-?>

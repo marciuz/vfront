@@ -201,5 +201,3 @@ include("../inc/layouts.php");
  
  
  echo closeLayout1();
- 
-?>

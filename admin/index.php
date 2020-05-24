@@ -214,5 +214,3 @@ echo "
  
  
  echo closeLayout1();
-
-?>

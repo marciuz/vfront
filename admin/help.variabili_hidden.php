@@ -67,6 +67,3 @@ echo "<p>"._("You can use variables for hidden fields.")."<br />
 
 
 echo closeLayout1();
-
-
-?>

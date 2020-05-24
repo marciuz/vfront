@@ -679,4 +679,3 @@
      $this->pDataObject->Palette[$SliceID]["Alpha"] = $Alpha;
     }
   }
-?>

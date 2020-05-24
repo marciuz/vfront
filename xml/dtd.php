@@ -47,5 +47,3 @@ $dtd= genera_dtd($_GET['action'],$solo_visibili);
 
 header("Content-type: application/octet-stream");
 echo $dtd;
-
-?>

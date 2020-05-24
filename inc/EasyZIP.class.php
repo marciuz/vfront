@@ -356,5 +356,4 @@ class EasyZIP {
 	    return $array;
 	}
 
-} 
-?>
+}

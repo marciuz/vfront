@@ -675,6 +675,3 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
 
 
 echo closeLayout1();
-
-
-?>

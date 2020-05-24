@@ -91,5 +91,3 @@ echo "<h1>".$title."</h1>\n";
 echo $OUT;
 
 echo closeLayout1();
-
-?>

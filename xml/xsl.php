@@ -164,5 +164,3 @@ echo $XSL;
 }
 
 genera_xsl_base($_GET['action'],!intval($_GET['vis']));
-
-?>

@@ -185,5 +185,3 @@ class PhOSCo_Sniffs_ControlStructures_MultiLineConditionSniff implements PHP_Cod
 
 
 }//end class
-
-?>

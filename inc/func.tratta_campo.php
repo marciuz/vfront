@@ -497,5 +497,3 @@ function tratta_campo($ar_campo,$pk,$fk,$colref_fk=array()){
 	
 	return $OUT;
 }
-
-?>

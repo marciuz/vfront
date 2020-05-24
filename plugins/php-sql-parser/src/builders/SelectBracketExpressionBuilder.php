@@ -65,4 +65,4 @@ class SelectBracketExpressionBuilder {
         return $sql;
     }
 }
-?>
+

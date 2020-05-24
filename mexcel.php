@@ -45,5 +45,3 @@ XLS;
 
 print $OUT;
 }
-
-?>

@@ -54,5 +54,4 @@ function printThumbnail($imgfile,$max_width=100,$max_height=100) {
    if(is_file($IMG)){
    		printThumbnail($IMG,150,150);
    }
-   
-?>
+ 

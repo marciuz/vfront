@@ -456,5 +456,3 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	
 	return $OUT;
 }
-
-?>

@@ -136,5 +136,3 @@ function xmlize_campo($tag,$attr){
 		return "<".$tag.$attributi.">";
 	
 }
-
-?>

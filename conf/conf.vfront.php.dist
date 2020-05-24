@@ -348,5 +348,3 @@ define('VERSION_REG_SQLITE',3); // 3 or 2
 // SQLite Reg
 $db1['filename_reg']=FRONT_ROOT."/files/db/vfront.sqlite"; // path of sqlite database
 
-
-?>

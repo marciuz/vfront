@@ -158,5 +158,3 @@ class ExpressionToken {
         return $result;
     }
 }
-
-?>

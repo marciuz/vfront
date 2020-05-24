@@ -118,5 +118,3 @@ function check_db($return_type='php'){
 	}
 
 }
-
-?>

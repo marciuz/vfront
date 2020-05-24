@@ -466,6 +466,3 @@ if(isset($_GET['tipo']) && $_GET['tipo']!='null'){
 }
 
 echo closeLayout1();
-
-
-?>

@@ -514,6 +514,3 @@ function breadcrumbs($array,$separator=" &raquo; "){
 	return $OUT;
 	
 }
-
-
-?>

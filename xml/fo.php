@@ -235,5 +235,3 @@ XMLFO2;
 $fp=fopen(_PATH_TMP."/".$tabella.".xslt","w");
 fwrite($fp,$XSL);
 fclose($fp);
-
-?>

@@ -144,5 +144,3 @@ if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['q
  
  
  echo closeLayout1();
- 
-?>

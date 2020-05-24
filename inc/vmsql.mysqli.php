@@ -746,6 +746,3 @@ class mysqli_vmsql {
     }
 
 }
-
-
-?>

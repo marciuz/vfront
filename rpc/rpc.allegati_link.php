@@ -64,4 +64,3 @@ $allegati_trovati = cerca_allegati($_GET['action'],$_GET['id']);
 $link_trovati = cerca_link($_GET['action'],$_GET['id']);
 
 echo $allegati_trovati.",".$link_trovati;
-?>

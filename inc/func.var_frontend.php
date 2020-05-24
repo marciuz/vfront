@@ -56,5 +56,3 @@ function var_frontend($gid="session",$store_type=null){
 	}
 	
 }
-
-?>

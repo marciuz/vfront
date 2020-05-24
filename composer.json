@@ -1,7 +1,7 @@
 {
     "name": "vfront/vfront",
     "description": "VFront is a free, open source front-end for MySQL, PostgreSQL and SQLite databases written in PHP and Javascript.",
-    "version": "0.99.5",
+    "version": "0.99.52",
     "license": "GPL 2.0",
     "authors": [
         {
@@ -12,7 +12,6 @@
     ],
     "support": {
         "issues": "https://github.com/marciuz/vfront/issues",
-        "forum": "http://www.vfront.org/forum/",
         "wiki": "http://wiki.vfront.org/",
         "source": "https://github.com/marciuz/vfront",
         "docs": "https://github.com/marciuz/vfront/wiki"

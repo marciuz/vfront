@@ -36,7 +36,6 @@ require_once("./inc/layouts.php");
 proteggi(1);
 
 
-
 //workaround for 4th param.
 function vf_fgetcsv($fp, $lenght=null, $sep=null, $quote=null){
 	
@@ -79,7 +78,6 @@ function controllo_tipo($dato,$tipo,$is_nullable){
 }
 
 
-
 function modificatori($input,$i,$post_data){
 	
 	
@@ -105,7 +103,6 @@ function modificatori($input,$i,$post_data){
 }
 
 
-
 function errors_mysql($n){
 	
 	switch($n){
@@ -119,28 +116,6 @@ function errors_mysql($n){
 		default : return "";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // STEP 0
@@ -190,7 +165,6 @@ function import_step0(){
 }
 
 
-
 // STEP 1
 // UPLOAD FILE
 
@@ -212,7 +186,6 @@ function import_step1(){
 	else header("Location: ".$_SERVER['PHP_SELF']."?feed=nofile");
 	exit;
 }
-
 
 
 function import_step1_options(){
@@ -403,8 +376,6 @@ function import_step2(){
 }
 
 
-
-
 function import_step2_ins(){
 	
 	$_da_processare='';
@@ -428,8 +399,6 @@ function import_step2_ins(){
 	exit;
 	
 }
-
-
 
 
 // STEP 2 
@@ -504,11 +473,6 @@ function import_step3(){
 }
 
 
-
-
-
-
-
 // STEP 3
 // REFRESH WINDOWS
 
@@ -519,7 +483,6 @@ function import_step4(){
 	exit;
 }
 	
-
 
 
 function import_query($only_sql=false){
@@ -706,7 +669,6 @@ function import_query($only_sql=false){
 	fwrite($fp,$SQL_FINALE);
 	fclose($fp);
 }
-
 
 
 function exec_query_import(){

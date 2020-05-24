@@ -152,7 +152,6 @@ class EasyZIP {
 	}
 
 
-
 	function packFiles() {
 
 		$counter=0; 

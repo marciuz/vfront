@@ -130,12 +130,6 @@ for($i=0;$i<count($cols);$i++){
 }
 
 
-
-
-
-
-
-
 $XSL.=<<<XMLFO2
 									
 									<fo:block text-align="center" space-before.optimum="-8pt">

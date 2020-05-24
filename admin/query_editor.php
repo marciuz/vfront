@@ -101,7 +101,6 @@ function genera(){
 }
 
 
-
 ";
 
 $JS.="</script>\n";

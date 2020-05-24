@@ -41,7 +41,6 @@ foreach($CAMPI as $idt=>$arr_c){
 }
 
 
-
 $SELECT_TABELLE.="\t</select>\n";
 
 

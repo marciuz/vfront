@@ -9,7 +9,6 @@
 BEGIN;
 
 
-
 --
 --	create table group
 --
@@ -23,7 +22,6 @@ CREATE TABLE `gruppo` (
   UNIQUE KEY `gid` (`gid`),
   UNIQUE KEY `nome_gruppo` (`nome_gruppo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 --
@@ -48,7 +46,6 @@ CREATE TABLE `log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabella di log';
 
 
-
 --
 --	create table recordlock for the record multiaccess
 --
@@ -60,7 +57,6 @@ CREATE TABLE `recordlock` (
   `tempo` int(11) NOT NULL,
   PRIMARY KEY  (`tabella`,`colonna`,`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 --
@@ -103,7 +99,6 @@ CREATE TABLE `registro_tab` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 --
 --	Create table registry columns, the rule table used by vfront for store the columns settings 
 --
@@ -138,7 +133,6 @@ CREATE TABLE `registro_col` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Registro documentazione dei campi delle tabelle dello schema';
 
 
-
 --
 --	Create table registry for the subforms, the rule table used by vfront for store the submasks settings 
 --
@@ -163,7 +157,6 @@ CREATE TABLE `registro_submask` (
   -- UNIQUE KEY `u_idtable_nometabella` (`id_table`,`nome_tabella`),
   CONSTRAINT `registro_submask_fk` FOREIGN KEY (`id_table`) REFERENCES `registro_tab` (`id_table`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 --
@@ -192,7 +185,6 @@ CREATE TABLE `registro_submask_col` (
   KEY `i_id_submask` (`id_submask`),
   CONSTRAINT `registro_submask_col_fk` FOREIGN KEY (`id_submask`) REFERENCES `registro_submask` (`id_submask`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Registro documentazione dei campi delle colonne delle sottom';
-
 
 
 --
@@ -233,7 +225,6 @@ CREATE TABLE `variabili` (
   PRIMARY KEY  (`variabile`,`gid`),
   KEY `variabile` (`variabile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 --
@@ -349,7 +340,6 @@ CREATE TABLE `widget` (
   KEY `i_widget_id_table` (`id_table`),
   CONSTRAINT `fk_widget_id_table` FOREIGN KEY (`id_table`) REFERENCES `registro_tab` (`id_table`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Widget table';
-
 
 
 --

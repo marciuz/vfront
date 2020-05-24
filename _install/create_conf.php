@@ -175,7 +175,6 @@ $authtype=($var['authtype']=='null') ? '' : $var['authtype'];
 $WR.=<<<PHPW
 
 
-
 // PARAMETRI PER LA MODALITA' DI AUTENTICAZIONE ESTERNA  --------------------------------------------------------------------
 
 
@@ -185,8 +184,6 @@ $WR.=<<<PHPW
 \$conf_auth['tipo_external_auth']= '{$authtype}'; // 'db' | 'db_ext' | 'ldap' | 'soap' | null
 
 PHPW;
-
-
 
 
 if($authtype!=''){
@@ -290,8 +287,6 @@ define('_SYS_ADMIN_MAIL','{$var['mail_sysamin']}');
 define('_DEV_MAIL','{$var['mail_dev']}');
 
 
-
-
 /* DEBUG Section */
 
 /**
@@ -314,8 +309,6 @@ define('_DEV_MAIL','{$var['mail_dev']}');
 \$RPC_DEBUG=false;
 
 
-
-
 /* LOG Secrion */
 
 /**
@@ -336,13 +329,10 @@ $WR.="
 define('FRONT_LANG','{$var['lang']}');
 
 
-
 /**
  * Encoding
  */
 define('FRONT_ENCODING','{$var['encoding']}');
-
-
 
 
 /*  SEZIONE DATE */
@@ -351,8 +341,6 @@ define('FRONT_ENCODING','{$var['encoding']}');
  * Date format: (iso,eng,ita)
  */
 define('FRONT_DATE_FORMAT','{$var['dateformat']}');
-
-
 
 
 /*  SEZIONE PATH  */
@@ -366,7 +354,6 @@ define('FRONT_ROOT','{$var['front_root']}');
  * Real path
  */
 define('FRONT_REALPATH','{$var['front_root']}');
-
 
 
 /**
@@ -430,9 +417,6 @@ define('_PATH_WEB_XSL',FRONT_DOCROOT.'/files/xsl_custom');
 define('FRONT_ERROR_LOG',FRONT_REALPATH.'/files/db/error_log.txt');
 
 
-
-
-
 /*  SEZIONE FOP  */
 /* Use the Apache FOP application http://xmlgraphics.apache.org/fop/ 
 to generate the PDF version of XML files */
@@ -448,10 +432,6 @@ define('_FOP_ENABLED',{$var['fop_enabled']});
 define('_PATH_FOP','{$var['path_fop']}');
 
 
-
-
-
-
 /*  SEZIONE ALLEGATI E LINK  */
 
 /**
@@ -463,9 +443,6 @@ define('_TABELLA_ALLEGATO',\"{\$db1['frontend']}{\$db1['sep']}allegato\");
  * definizione della tabella link
  */
 define('_TABELLA_LINK',\"{\$db1['frontend']}{\$db1['sep']}link\");
-
-
-
 
 
 /*  SEZIONE MISC  */
@@ -507,7 +484,6 @@ define('VERSION_REG_SQLITE',$version_reg_sqlite);
 
 
 ";
-
 
 
 ##################################################

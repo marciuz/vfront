@@ -160,7 +160,6 @@ a.dafare:hover{
 }
 
 
-
 .grigio{
 	color:#999;
 }
@@ -253,9 +252,6 @@ h2.tit-admin{
 	float:left;
 	padding: 0px 20px 100px 0px;
 }
-
-
-
 
 
 a.asc {
@@ -360,7 +356,6 @@ div.variabile{
 ----------------------------------------------- */
 
 
-
 div.colonna-cont{
 	width:520px;
 	margin: 0;
@@ -408,10 +403,6 @@ div.handle {
 }
 
 
-
-
-
-
 #boxsql{
 
 	background-color: #EEE;
@@ -421,9 +412,6 @@ div.handle {
 	padding:0.5em;
 	font-size:1.1em;
 }
-
-
-
 
 
 #theme-table,
@@ -469,7 +457,6 @@ div.handle {
 }
 
 
-
 /* =Change user
 ----------------------------------------------- */
 
@@ -479,7 +466,6 @@ fieldset.chuser{
 	margin-right:10px;
 	margin-bottom:20px;
 }
-
 
 
 #advanced_buttons_opt{
@@ -493,7 +479,6 @@ fieldset.chuser{
 	padding:1.2em 1.2em 1.2em 5em;
 	margin:0.5em;
 }
-
 
 
 /* =MISC

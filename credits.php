@@ -74,7 +74,6 @@ License: LGPL  - http://www.everaldo.com/crystal/?action=license</p>
 \n";
 
 
-
 echo closeLayout1();
 
 

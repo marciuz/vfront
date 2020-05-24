@@ -79,7 +79,6 @@ function search_all($s, $only_visible=true, $exact=false, $views=true,  $max_res
 }
 
 
-
 $ss=(isset($_GET['s'])) ? trim($_GET['s']) : "";
 
 $exact=(isset($_GET['e']) && $_GET['e']==1) ? 1:0;
@@ -87,7 +86,6 @@ $exact=(isset($_GET['e']) && $_GET['e']==1) ? 1:0;
 $view_search=(isset($_GET['view_search']) && $_GET['view_search']==0) ? '':"checked=\"checked\"";
 
 $exact_search=(!isset($_GET['e']) || $_GET['e']==0) ? '':"checked=\"checked\"";
-
 
 
 $files=array("sty/tabelle.css","sty/admin.css","js/confirm_delete.js");	

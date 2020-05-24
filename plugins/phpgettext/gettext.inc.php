@@ -374,7 +374,6 @@ function _dcnpgettext($domain, $context, $singular, $plural, $category) {
 }
 
 
-
 // Wrappers to use if the standard gettext functions are available,
 // but the current locale is not supported by the system.
 // Use the standard impl if the current locale is supported, use the
@@ -475,7 +474,6 @@ function T_dcnpgettext($domain, $context, $singular, $plural,
         return _dcnpgettext($domain, $context, $singular,
                             $plural, $number, $category);
 }
-
 
 
 // Wrappers used as a drop in replacement for the standard gettext functions

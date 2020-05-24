@@ -8,7 +8,6 @@
 ----------------------------------------------- */
 
 
-
 /* =Heading
 ----------------------------------------------- */
 
@@ -24,10 +23,8 @@ h2.analisi{
 }
 
 
-
 /* =Lists
 ----------------------------------------------- */
-
 
 
 ul.lista-analisi li{
@@ -77,12 +74,10 @@ ul.lista-analisi li a:link{
 }
 
 
-
 .box-risultati{
 
 	margin: 15px 0 0px 15px;
 }
-
 
 
 .box-risultati a{
@@ -150,9 +145,6 @@ ul.lista-analisi li a:link{
 }
 
 
-
-
-
 /* =Breadcrums
 ----------------------------------------------- */
 
@@ -177,13 +169,6 @@ margin: 6px 0px 0px 5px;
 	line-height: 1.5em;	
 	color:#020;
 }
-
-
-
-
-
-
-
 
 
 .sx{
@@ -235,8 +220,6 @@ hr.light2{
 }
 
 
-
-
 /* =Menu
 ----------------------------------------------- */
 
@@ -263,8 +246,6 @@ hr.light2{
 	background: url(../img/link-top1.jpg) 100% 100% ;
 	color:#003;
 }
-
-
 
 
 /* =header
@@ -347,7 +328,6 @@ div#login fieldset legend{
 }
 
 
-
 .statistiche{
 	padding: 10px 20px 10px 84px; 
 	border: solid 1px #CCC;
@@ -377,7 +357,6 @@ div#login fieldset legend{
 }
 
 
-
 /* =BOX DELLA HOME PAGE 
 --------------------------------------------*/
 
@@ -404,7 +383,6 @@ div#login fieldset legend{
 	border-left: 2px solid #FFA500;
 	padding:0px 5px 5px 15px;
 }
-
 
 
 #box-forms{

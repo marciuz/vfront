@@ -43,16 +43,6 @@ function tab_ord($eti,$n){
 }
 
 
-
-
-
-
-
-
-
-
-
-
 if(isset($_POST['id_utente']) && isset($_GET['mod'])){
 	
 	$_dati=$vmreg->recursive_escape($_POST);
@@ -228,7 +218,6 @@ else if(isset($_POST['ch_data']) && isset($_POST['id_utente']) && intval($_POST[
 }
 
 
-
 // UPDATE PASSWORD
 else if(isset($_POST['ch_submit_passwd']) && isset($_POST['id_utente']) && intval($_POST['id_utente'])>0){
 	
@@ -268,11 +257,6 @@ else if(isset($_POST['ch_submit_passwd']) && isset($_POST['id_utente']) && intva
 	
 	
 }
-
-
-
-
-
 
 
 else if (isset($_GET['mod'])){
@@ -721,11 +705,7 @@ echo "<form action=\"" . Common::phpself() . "\" method=\"get\" >\n";
 	
 
 
-
 echo "</form>\n"; 
-
-
-
 
 
  $TAB= "<table class=\"tab-color\" summary=\"Tabella utenze\">\n";

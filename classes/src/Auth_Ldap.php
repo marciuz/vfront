@@ -49,7 +49,6 @@ class Auth_Ldap {
         $ds = @ldap_connect($conf_auth['ldap']['host'], $conf_auth['ldap']['port']) or die(openErrorGenerico(_("Could not connect to LDAP server") . ": " . __LINE__, true));   // must be a valid LDAP server!
 
 
-
         if ($ds) {
 
             ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
@@ -74,7 +73,6 @@ class Auth_Ldap {
                     $ldapbind = @ldap_bind($ds, $dn, $password);
                 }
             }
-
 
 
             if (!$ldapbind)

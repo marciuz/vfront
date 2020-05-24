@@ -12,7 +12,6 @@
 */
 
 
-
 class mysql_vmsql {
 
 	public $vmsqltype='mysql';
@@ -83,7 +82,6 @@ class mysql_vmsql {
 	}
 
 
-
 	/**
 	 * Esegue una query $sql  e restisce vero|falso a seconda dell'esito
 	 * il secure_mode (di default) permette l'uso di sole query SELECT.
@@ -117,7 +115,6 @@ class mysql_vmsql {
 
 		return ($res) ? 1:0;
 	}
-
 
 
 	/**
@@ -193,7 +190,6 @@ class mysql_vmsql {
 	}
 
 
-
 	public function num_rows(&$res){
 
 		if(is_resource($res)){
@@ -219,7 +215,6 @@ class mysql_vmsql {
 	}
 
 
-
 	/**
 	 * @return int
 	 * @desc Funzione affected rows
@@ -235,13 +230,11 @@ class mysql_vmsql {
 	}
 
 
-
 	public function list_tables($dbname){
 
 		return @mysql_list_tables($dbname);
 
 	}
-
 
 
 	public function num_fields($dbname){
@@ -267,10 +260,6 @@ class mysql_vmsql {
 
 		mysql_free_result($result);
 	}
-
-
-
-
 
 
 	#########################################################################################
@@ -341,8 +330,6 @@ class mysql_vmsql {
 	}
 
 
-
-
 	/**
 	 * @return  matrix
 	 * @param matrix $matrix
@@ -361,8 +348,6 @@ class mysql_vmsql {
 
 		return $rev;
 	}
-
-
 
 
 	/**
@@ -405,9 +390,6 @@ class mysql_vmsql {
 	}
 
 
-
-
-
 	/**
 	 * @return resource
 	 * @param resource $res
@@ -429,8 +411,6 @@ class mysql_vmsql {
 
 		}
 	}
-
-
 
 
 	/**
@@ -488,9 +468,6 @@ class mysql_vmsql {
 			return ($this->num_rows($q)>0) ? true:false;
 		}
 	}
-
-
-
 
 
 	/**
@@ -564,8 +541,6 @@ class mysql_vmsql {
 	}
 
 
-
-
 	/**
 	 * Recursive escape. Work on strings, numbers, array, objects
 	 *
@@ -629,7 +604,6 @@ class mysql_vmsql {
 
 		return $str;
 	}
-
 
 
 	public function db_version(){

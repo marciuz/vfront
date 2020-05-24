@@ -114,8 +114,6 @@ $FORM.= "<form action=\"" . Common::phpself() . "\" method=\"post\" id=\"singlef
 $FORM_0 = $Scheda->field_iterator();
 
 
-
-
 # Hidden per le chiavi primarie
 for($k=0;$k<count($Scheda->info_pk);$k++){
     
@@ -126,13 +124,6 @@ for($k=0;$k<count($Scheda->info_pk);$k++){
 $FORM.="<div>$FORM_0</div>\n";
 
 $FORM.="</form>";
-
-
-
-
-
-
-
 
 
     // GET SUBMASKS
@@ -150,7 +141,6 @@ $FORM.="</form>";
 #   INIZIA L'APERTURA DEL LAYOUT
 #
 #############################################################################################################
-
 
 
     $files=array(
@@ -633,7 +623,6 @@ for($i=0;$i<count($array_id_submask);$i++){
     echo "</div>\n";
     
  }
-
 
 
  if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1 && $_SESSION['VF_VARS']['shortcut_tastiera_popup']){ 

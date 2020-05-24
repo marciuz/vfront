@@ -47,16 +47,4 @@ if(isset($_REQUEST['campo']) && isset($_REQUEST['tabella'])){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

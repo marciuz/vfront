@@ -429,7 +429,6 @@ class XMLizer {
         $sql = "SELECT " . implode(",", $cols[0]) . " FROM " . $cols[1][0] . " $ORDER_BY  $LIMIT";
 
 
-
         $q = $vmsql->query($sql, $this->dblink);
 
         if ($vmsql->num_rows($q) == 0) {

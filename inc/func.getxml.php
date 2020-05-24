@@ -27,7 +27,6 @@ function get_vfront_xml($_INFO) {
     $QB = (isset($_INFO['querybased']) && $_INFO['querybased'] == '@') ? 1 : 0;
 
 
-
     if ($QB) {
 
         $nome_report = preg_replace("'[^a-z0-9_-]'i", "", $_INFO['action']);
@@ -35,7 +34,6 @@ function get_vfront_xml($_INFO) {
     else {
         $tabella = preg_replace("'[^a-z0-9_]'i", "", $_INFO['action']);
     }
-
 
 
     // 
@@ -89,9 +87,6 @@ function get_vfront_xml($_INFO) {
     }
 
 
-
-
-
     if ($QB) {
         
     }
@@ -117,11 +112,9 @@ function get_vfront_xml($_INFO) {
         $operatore_orderby = preg_match('| DESC|i', $orderby) ? " > " : " < ";
 
 
-
         // CASO RISULTATO DI RICERCA-------------------------------------------------------
         // SE c'� l'id in GET prendi calcola a che punto dell'elenco si � arrivati
         if (isset($_INFO['id']) && intval($_INFO['id']) > 0) {
-
 
 
             // Prendi il moe del campo orderby ed il vaolre relativo all'id

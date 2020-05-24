@@ -11,7 +11,6 @@ function add_tendina_fl(){
 }
 
 
-
 function del_tendina_fl(obj){
 
 //	  obj.parentNode.parentNode.removeChild(obj.parentNode.getElementsByTagName('li')[0]);

@@ -163,7 +163,6 @@ if(!isset($_GET['lang'])){
 }
 
 
-
 function adminer_object() {
 
     class AdminerSoftware extends Adminer {

@@ -67,7 +67,6 @@ class mysqli_vmsql {
 	}
 
 
-
 	/**
 	 * @desc Esegue una query $sql
 	 * @param string $sql
@@ -89,8 +88,6 @@ class mysqli_vmsql {
 		return $obj;
 
 	}
-
-
 
 
 	/**
@@ -199,7 +196,6 @@ class mysqli_vmsql {
 	}
 
 
-
 	/**
 	 * @desc Funzione di fetch_assoc
 	 * @return array
@@ -285,7 +281,6 @@ class mysqli_vmsql {
 	}
 
 
-
 	/**
 	 * @desc Funzione di affected_rows
 	 * @return int
@@ -300,8 +295,6 @@ class mysqli_vmsql {
 		}
 
 	}
-
-
 
 
 	/**
@@ -327,19 +320,11 @@ class mysqli_vmsql {
 	}
 
 
-
-
-
-
 	#########################################################################################
 	#
 	#
 	#	FUNZIONI DI ELABORAZIONE
 	#
-
-
-
-
 
 
 	/**
@@ -367,8 +352,6 @@ class mysqli_vmsql {
 	}
 
 
-
-
 	/**
 	 * @return array (matrice)
 	 * @param resource $res
@@ -386,8 +369,6 @@ class mysqli_vmsql {
         
         return $matrice;
 	}
-
-
 
 
 	/**
@@ -528,11 +509,6 @@ class mysqli_vmsql {
 	}
 
 
-
-
-
-
-
 	// FUNZIONI DI TRANSAZIONE
 
 
@@ -570,9 +546,6 @@ class mysqli_vmsql {
 			$this->transaction_is_open=false;
 		}
 	}
-
-
-
 
 
 	/**
@@ -629,8 +602,6 @@ class mysqli_vmsql {
 	}
 
 
-
-
 	/**
 	 * Recursive escape. Work on strings, numbers, array, objects
 	 *
@@ -681,7 +652,6 @@ class mysqli_vmsql {
 
 		return $str;
 	}
-
 
 
 	/**
@@ -776,7 +746,6 @@ class mysqli_vmsql {
     }
 
 }
-
 
 
 ?>

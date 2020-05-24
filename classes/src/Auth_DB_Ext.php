@@ -12,12 +12,12 @@
 class Auth_DB_Ext {
 
     /**
-     * Funzione di autenticazione mediante un database esterno, presente su un server remoto o locale
-     * Viene richiamata dalla classe {@link auth}
+     * Authentication function via an external database on a remote or local server
+     * Is called by the class {@link Auth} 
      *
      * @param string $user
      * @param string $passw
-     * @see auth
+     * @see Auth
      * @return array
      */
     public static function auth($user, $passw) {
@@ -32,8 +32,6 @@ class Auth_DB_Ext {
 
 
         if ($conf_auth['db_ext']['dbtype'] == 'mysql') {
-
-
 
 
             if (function_exists('mysqli_connect')) {

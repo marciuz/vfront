@@ -33,7 +33,6 @@ echo "
 		";
 
 
-
 // Block n.2 with personal icon in your_vfront_root/usr/img/myimage2.png
 echo "
 	<div id=\"box-personal2\" class=\"box-home\" style=\"background: url(usr/img/myimage2.png) no-repeat;\">
@@ -57,8 +56,6 @@ echo "<br style=\"clear:left;\" />";
  *
  *
  */
-
-
 
 
 ?>

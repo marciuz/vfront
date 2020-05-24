@@ -15,14 +15,12 @@ $frontend_schema=(isset($db1['frontend'])) ? $db1['frontend']:'frontend';
 $db1['sep']=(isset($db1['sep'])) ? $db1['sep']:'.';
 
 
-
 $SQL_DEFINITION[]=<<<TAG
 
 CREATE SCHEMA "{$frontend_schema}" AUTHORIZATION "postgres";
 
 COMMENT ON SCHEMA "{$frontend_schema}"
 IS 'Schema dedicato alla gestione del frontend web VFront.';
-
 
 
 CREATE TABLE {$frontend_schema}{$db1['sep']}gruppo
@@ -67,8 +65,6 @@ CREATE TABLE {$frontend_schema}{$db1['sep']}log
 WITHOUT OIDS;
 
 ";
-
-
 
 
 $SQL_DEFINITION[]="
@@ -132,7 +128,6 @@ $SQL_DEFINITION[]="CREATE INDEX i_table_name ON {$frontend_schema}{$db1['sep']}r
 $SQL_DEFINITION[]="CREATE INDEX i_gid ON {$frontend_schema}{$db1['sep']}registro_tab USING btree (gid);";
 
 
-
 $SQL_DEFINITION[]="
 
 
@@ -172,7 +167,6 @@ $SQL_DEFINITION[]="CREATE INDEX i_registro_col_gid ON {$frontend_schema}{$db1['s
 $SQL_DEFINITION[]="CREATE INDEX i_id_table ON {$frontend_schema}{$db1['sep']}registro_col USING btree (id_table);";
 
 
-
 $SQL_DEFINITION[]="
 
 
@@ -201,7 +195,6 @@ CREATE TABLE {$frontend_schema}{$db1['sep']}registro_submask (
   CONSTRAINT fk_registro_submask FOREIGN KEY (id_table) REFERENCES {$frontend_schema}{$db1['sep']}registro_tab (id_table) ON DELETE CASCADE
 ) WITHOUT OIDS;
 ";
-
 
 
 $SQL_DEFINITION[]="
@@ -286,7 +279,6 @@ CREATE TABLE {$frontend_schema}{$db1['sep']}variabili (
 $SQL_DEFINITION[]="CREATE INDEX i_variabile ON {$frontend_schema}{$db1['sep']}variabili USING btree (variabile);";
 
 
-
 $SQL_DEFINITION[]="
 
 
@@ -352,7 +344,6 @@ CREATE TABLE {$frontend_schema}{$db1['sep']}stat (
 $SQL_DEFINITION[]="CREATE INDEX i_autore_stat ON {$frontend_schema}{$db1['sep']}stat USING btree (autore);";
 
 
-
 $SQL_DEFINITION[]="
 
 --
@@ -376,9 +367,6 @@ CREATE TABLE {$frontend_schema}{$db1['sep']}xml_rules
 ) 
 WITHOUT OIDS;
 ";
-
-
-
 
 
 $SQL_DEFINITION[]="

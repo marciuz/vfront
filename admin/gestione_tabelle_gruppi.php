@@ -13,7 +13,6 @@
  */
 
 
-
 include("../inc/conn.php");
 include("../inc/layouts.php");
 include("../inc/func.tratta_campo.php");
@@ -26,17 +25,12 @@ if(isset($_GET['conf_sub'])){
 }
 
 
-
-
 ###############################################################################################
 #
 #		Da qui mostra le impostazioni della tabella
 #		Con richiamo di funzione esterna per ogna campo.
 #
 ###############################################################################################
-
-
-
 
 
 /**
@@ -200,12 +194,6 @@ function tab_menu($gid=0,$order='table_name'){
 	echo closeLayout1();
 
 }
-
-
-
-
-
-
 
 
 /**
@@ -976,40 +964,10 @@ function tab_dett($oid,$gid=0){
 }
 
 
-
-
 // ----------------------------------  FINE FUNZIONI  -----------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // --------------------------------- AZIONI ---------------------------------------------------
-
-
-
-
-
-
-
-
-
-
 
 
 ###################################################################################################
@@ -1085,7 +1043,6 @@ if(isset($_POST['invia_gen']) || isset($_POST['trasversale_gen'])){
 }
 
 
-
 ###################################################################################################
 #
 ## COPIA IMPOSTAZIONI DEI CAMPI DA UN GUPPO AD UN ALTRO
@@ -1103,8 +1060,6 @@ else if(isset($_POST['copia_campi'])){
 	exit;
 	
 }
-
-
 
 
 ###################################################################################################
@@ -1125,9 +1080,6 @@ else if(isset($_POST['copia_sottomaschere'])){
 }
 
 
-
-
-
 ###################################################################################################
 #
 ## CLONAZIONE IMPOSTAZIONI SOTTOMASCHERE DA TABELLA A VISTA AD ESSA RELATIVA
@@ -1143,7 +1095,6 @@ else if(isset($_POST['clona_sottomaschere_vista'])){
 	exit;
 	
 }
-
 
 
 ###################################################################################################
@@ -1444,7 +1395,6 @@ else if(isset($_GET['mod_sub_campi']) && isset($_POST['campo_sub'])){
 }
 
 
-
 # Funzioni di modifica di massa
 else if(isset($_GET['mass']) && intval($_GET['gid']) > 0){
 	
@@ -1513,7 +1463,6 @@ else if(isset($_POST['id_del_submask'])){
 	header("Location: ".$_SERVER['PHP_SELF']."?det=".intval($_POST['oid'])."&gid=".intval($_POST['gid'])."&a=3");
 	exit;
 }
-
 
 
 ###################################################
@@ -1620,13 +1569,6 @@ else if(isset($_GET['delbutton'])){
 		header("Location: ".$_SERVER['PHP_SELF']."?det=".$_GET['det']."&gid=".$_GET['gid']."&a=5&feeddel=ko");
 	}
 }
-
-
-
-
-
-
-
 
 
 if(isset($_GET['det']) && (int) $_GET['det']>0){

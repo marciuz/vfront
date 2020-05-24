@@ -668,7 +668,6 @@ function get_pk(){
 }
 
 
-
 /**
  * Ex sndReqBlocca
  * Prova a bloccare un record in caso di modifica
@@ -696,9 +695,6 @@ function lock_record(){
 }
 
 
-
-
-
 /**
  * Ex sndReqSblocca
  * @returns {undefined}
@@ -719,7 +715,6 @@ function unlock(){
 }
 
 
-
 /**
  * Ex sndReqGetone
  * @param {type} field
@@ -738,14 +733,6 @@ function get_one(field,id_record){
         }
     });
 }
-
-
-
-
-
-
-
-
 
 
 function stato_p(){
@@ -1093,12 +1080,10 @@ function load_record_response_json(json){
 }
 
 
-
 function xmlError(e) {
 	//there was an error, show the user
 	alert(e);
 } //end function xmlError
-
 
 
 /* FUNZIONI PER L'INIZIALIZZAZIONE */
@@ -1234,11 +1219,6 @@ function inizializza_scheda(){
 		
 
 }
-
-
-
-
-
 
 
 function attiva_campi(classe){
@@ -1549,7 +1529,6 @@ function nuovo_record(){
 }
 
 
-
 function cerca(){
 	
 	if(VF.ricerca){
@@ -1634,7 +1613,6 @@ function isSearchFromSub(){
 	return false;
     }
 }
-
 
 
 function invia_ricerca(){
@@ -1791,7 +1769,6 @@ function goto1(){
 }
 
 
-
 function noNumbers(e)
 {
 	var keynum;
@@ -1910,7 +1887,6 @@ function switch_vista(){
 	}
 		
 }
-
 
 
 // FUNZIONI DI HISTORY
@@ -2119,7 +2095,6 @@ function hotKeys(event) {
 } //-- fine funzione
 
 
-
 function chfield(obj,cl){
 	
 	if(obj.hasClassName('off')) obj.removeClassName('off');
@@ -2207,7 +2182,6 @@ function exit_table_search(){
 // -------------------------------------------------------
 
 
-
 /**
  * @TODO
  * @returns void
@@ -2259,7 +2233,6 @@ function richiediAL(){
         }
     });
 }
-
 
 
 function richiediSUB(){
@@ -2316,8 +2289,6 @@ function richiediEMBED(sm_embed_id){
 }
 
 
-
-
 function doOnRowSelected(idRiga){
 
     setStatus(_('Loading...'),3500,'risposta-verdino');
@@ -2330,7 +2301,6 @@ function doOnRowSelected(idRiga){
  }
 
 
-
 function caricaGrid(){
     if(VF.htmltable == 'datatables'){
         loadDataTables();
@@ -2340,7 +2310,6 @@ function caricaGrid(){
         loadDHTMLXGrid();
     }
 }
-
 
 
 function loadDHTMLXGrid(){
@@ -2479,8 +2448,6 @@ function doAfterRefresh(){
         }
     });
  }
-
-
 
 
 function isset(varname){

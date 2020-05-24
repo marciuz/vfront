@@ -103,8 +103,6 @@ class Scheda {
     }
 
 
-
-
     /**
      * Creazione del pulsante per le sottomaschere
      *
@@ -217,7 +215,6 @@ class Scheda {
                               mod:        "ALT"     };
 
 JS;
-
 
 
         // contatore per l'array JS keyActions 

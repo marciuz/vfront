@@ -16,7 +16,6 @@ function RTrim() {
 }
 
 
-
    
 String.prototype.Trim=Trim;   
 String.prototype.RTrim=RTrim;   
@@ -46,7 +45,6 @@ Ajax.Autocompleter.extract_value =
 
     return result;
   };
-
 
 
 function clona_attach_mail(){
@@ -121,7 +119,6 @@ function invia_mail(o){
 	$('form1').submit();
 
 }
-
 
 
 function switch_tipo_txt(){

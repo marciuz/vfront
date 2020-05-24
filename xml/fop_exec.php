@@ -17,15 +17,10 @@ require_once("../inc/func.xmlize.php");
 require_once("../inc/func.getxml.php");
 
 
-
-
-
 	
 $tabella = preg_replace("'[^a-z0-9_]'i","",$_GET['action']);
 
 // SICUREZZA ---------------------------------------------
-
-
 
 
 	//Cerca le regole in DB// cerca i diritti

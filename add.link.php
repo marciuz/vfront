@@ -18,10 +18,7 @@ include("./inc/conn.php");
 include("./inc/layouts.php");
 
 
-
 proteggi(1);
-
-
 
 
 /**
@@ -37,8 +34,6 @@ function parse_link($user_link){
 	
 	return $user_link;
 }
-
-
 
 
 ######################################################################
@@ -74,7 +69,6 @@ if(isset($_GET['del'])){
 #
 #
 ######################################################################
-
 
 
 #######################################################################
@@ -116,23 +110,10 @@ if(count($_POST['links'])>0){
 ########################################################################
 
 
-
-
-
-
-
-
-
-
-
-
-
 ########################################################################
 #
 #	VISTA PAGINA - QUERY DI RICERCA LINK
 #
-
-
 
 
 # CASO SPECIALE NEW:
@@ -168,8 +149,6 @@ if(!RegTools::is_tabella($tabella) || $id==''){
 }
 
 
-
-
 // CERCA ALLEGATI PER QUESTA TABELLA
 $qa=$vmsql->query("SELECT * FROM "._TABELLA_LINK."
 				WHERE tipoentita='$tabella'
@@ -179,17 +158,6 @@ $qa=$vmsql->query("SELECT * FROM "._TABELLA_LINK."
 $num_link=$vmsql->num_rows($qa);
 
 $matrice_info_link=$vmsql->fetch_assoc_all($qa);
-
-
-
-
-
-
-
-
-
-
-
 
 
 $files = array('sty/linguette.css','sty/admin.css','js/clona_link.js','sty/attach.css');
@@ -203,7 +171,6 @@ echo "<img src=\"./img/network.gif\" style=\"float: left;\" alt=\""._('link mana
 echo "<h1 style=\"font-size:1.6em;\">"._('Link for record')." <span class=\"var\">".$_GET['id']."</span> "._('of table')." <span class=\"var\">".$_GET['t']."</span></h1>";
 
 echo "<br style=\"clear:left;\" />";
-
 
 
 $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.richiediAL();' : "";
@@ -336,8 +303,6 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 	
 	
 echo "</div><!-- fine contenitore -->\n\n";
-
-
 
 
 echo closeLayout1();

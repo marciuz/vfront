@@ -41,10 +41,6 @@ if(isset($_POST['theme']) && in_array($_POST['theme'],$themes)){
 }
 
 
-
-
-
-
 echo openLayout1(_("Select themes"), array("sty/admin.css"));
 
 echo breadcrumbs(array("HOME","ADMIN",strtolower(_("Select themes"))));

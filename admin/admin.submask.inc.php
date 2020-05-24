@@ -141,11 +141,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 }
 
 
-
-
-
-
-
 	
 	$sottomaschere = RegTools::prendi_sottomaschere($oid,true);
 	

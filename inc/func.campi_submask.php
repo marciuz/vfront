@@ -54,7 +54,6 @@ function tipo_campo_submask($n, $valore, $info, $tipo_vista = 'tabella') {
     }
 
 
-
     // INTEGER O DOUBLE
     elseif ($FType->is_numeric($data_type)) {
 
@@ -64,7 +63,6 @@ function tipo_campo_submask($n, $valore, $info, $tipo_vista = 'tabella') {
         $input = "<input onkeypress=\"mod(this.id);\" class=\"off ty-int\" name=\"dati[$n][" . $column_name . "]\" " .
                 "id=\"dati__{$n}__{$column_name}\" value=\"$valore\" size=\"$size\" readonly=\"readonly\" type=\"text\" />";
     }
-
 
 
     // TESTO
@@ -107,8 +105,6 @@ function tipo_campo_submask($n, $valore, $info, $tipo_vista = 'tabella') {
         $input = "<input onkeypress=\"mod(this.id);\" class=\"off ty-passwd\" name=\"dati[$n][" . $column_name . "]\" " .
                 "id=\"dati__{$n}__{$column_name}\" value=\"$valore\" size=\"59\" readonly=\"readonly\" type=\"password\" />";
     }
-
-
 
 
     // tipo speciale hidden

@@ -371,7 +371,6 @@ class Auth {
             $q_up = $vmreg->query($sql_up);
 
 
-
             return array('response' => true, $RS);
         }
 

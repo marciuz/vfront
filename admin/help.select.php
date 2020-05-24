@@ -18,7 +18,6 @@ include("../inc/layouts.php");
 proteggi(3);
 
 
-
 echo openLayout1(_("Options for field selection"),array('sty/lista.css'),'popup');
 
 echo "<h1 style=\"margin-top:50px;\">"._("Options for drop down menu fields")."</h1>";

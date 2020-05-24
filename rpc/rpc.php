@@ -44,7 +44,6 @@ $res = new stdClass();
 $Log = new Log();
 
 
-
 if(count($_POST)>0){
 
 	require_once("../inc/func.rpc_query.php");

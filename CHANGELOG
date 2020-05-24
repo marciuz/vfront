@@ -160,7 +160,6 @@ CHANGE IN 0.94rc5 2008-12-27
 Now in grid (table) view the data are formatted like in the form view.
 
 
-
 CHANGE IN 0.94r4 2008-12-27
 
 Fix little important bug in IE (6-7)
@@ -180,8 +179,6 @@ Removed the "in_search" field and search option for fields: the fields is alway 
 Added language strings
 
 
-
-
 CHANGE IN 0.94r1 2008-10-12
 
 New Installer
@@ -189,8 +186,6 @@ Updated language settings
 New system for date in filds and application pages
 Data importer (alpha!)
 Fixed a lot of bug
-
-
 
 
 CHANGE IN 0.92 2007-12-09

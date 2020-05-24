@@ -14,13 +14,6 @@
 */
 
 
-
-
-
-
-
-
-
 /**
  * Ricerca mediante la maschera di VFront 
  * La funzione � richimata via chiamata esterna Javascript
@@ -236,7 +229,6 @@ function rpc_query_search_from_sub($_dati,$tabella,$oid_sub){
 }
 
 
-
 /**
  * Funzione RPC per la duplicazione di un record
  *
@@ -333,7 +325,6 @@ function rpc_query_insert_duplicato($_pk,$tabella="",$oid_sub="",$duplica_allega
 }
 
 
-
 /**
  * Funzione di duplicazione record
  *
@@ -365,7 +356,6 @@ function duplica_record_sottomaschera($tabella_sub,$elenco_campi,$campo_fk,$valo
 	
 	return $test;
 }
-
 
 
 /**
@@ -482,8 +472,6 @@ function duplica_link($tabella,$id_old,$id_new){
 		return $ok;
 	}
 }
-
-
 
 
 ###############################################################################################
@@ -737,7 +725,6 @@ function rpc_sub_query_delete($tabella,$hash){
 }
 
 
-
 /**
  * Funzione di cancellazione di un allegato di un record.
  *
@@ -774,7 +761,6 @@ function rpc_delete_attach($tabella,$id){
 	
 	 return ($test_del_fs && $test_del) ? true:false;
 }
-
 
 
 /**

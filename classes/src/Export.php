@@ -11,7 +11,6 @@
 */
 
 
-
 class Export {
 
 	
@@ -115,15 +114,6 @@ class Export {
 	}
 
 
-
-
-
-
-
-
-
-
-
 	/**
 	 * Funzione di esportazione generica tabella in formato CSV
 	 *
@@ -200,7 +190,6 @@ class Export {
 	}
 
 
-
 	/**
 	 * Funzione interna di generazione della tabella HTML. 
 	 * Viene poi utilizzata da altre funzioni di questa libreria per generare l'output.
@@ -222,7 +211,6 @@ class Export {
 		else{
 			$q=$this->__tabella_elaborata();
 		}
-
 
 
 		$HTML="<!DOCTYPE html>"
@@ -255,8 +243,6 @@ class Export {
 			fwrite($fp,$TR_TD);
 
 
-
-
 			$i++;
 		}
 
@@ -271,12 +257,6 @@ $TR_TH
 </body>
 </html>";
 	}
-
-
-
-
-
-
 
 
 	/**
@@ -313,7 +293,6 @@ $TR_TH
 		else{
 			$q=$this->__tabella_elaborata();
 		}
-
 
 
 		// larghezza cols default:
@@ -400,14 +379,6 @@ $TR_TH
 	}
 
 
-
-
-
-
-
-
-
-
 	#################################################################
 	#
 	#	EXCEL (html letto da excel)
@@ -455,7 +426,6 @@ $TR_TH
 	}
 
 
-
 	/**
 	 * Genera una tabella nello standard Open Document Spreadsheet (ad es. openOffice)
 	 *
@@ -481,9 +451,6 @@ $TR_TH
 		}
 
 
-
-
-
 		// Cancella se esiste già il file
 		@unlink(_PATH_TMP.'/content.xml');
 
@@ -493,7 +460,6 @@ $TR_TH
 
 		// array contenuto;
 		$ar_cont=explode('<!-- contenuto -->',$cont);
-
 
 
 		$XML_INT='';
@@ -674,9 +640,6 @@ $TR_TH
 	}
 
 
-
-
-
 	/**
 	 * Funzione interna usata nella generazione di foglio di calcolo OpenDocument.
 	 * Questa funzione � richiamata dalla funzione {@see tabella_ods}
@@ -701,14 +664,12 @@ $TR_TH
 				break;
 
 
-
 			case 'date' :
 				return '
 					<table:table-cell office:value-type="date" office:date-value="'.$value.'">
 						<text:p>'.VFDate::date_encode($value,false).'</text:p>
 					</table:table-cell>';
 				break;
-
 
 
 			case 'timestamp':

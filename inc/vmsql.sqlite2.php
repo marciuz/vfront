@@ -148,7 +148,6 @@ class sqlite2_vmsql {
 	}
 
 
-
 	/**
 	 * Esegue una query $sql e restisce vero|falso a seconda dell'esito
 	 * il secure_mode (di default) permette l'uso di sole query SELECT
@@ -293,7 +292,6 @@ class sqlite2_vmsql {
 	}
 
 
-
 	/**
 	 * @return int
 	 * @desc Funzione affected rows
@@ -306,8 +304,6 @@ class sqlite2_vmsql {
 		}
 
 	}
-
-
 
 
 	/**
@@ -323,23 +319,11 @@ class sqlite2_vmsql {
 	}
 
 
-
-
-
-
-
-
-
-
 	#########################################################################################
 	#
 	#
 	#	FUNZIONI DI ELABORAZIONE
 	#
-
-
-
-
 
 
 	/**
@@ -378,9 +362,6 @@ class sqlite2_vmsql {
 		}
         return $matrice;
 	}
-
-
-
 
 
 	/**
@@ -513,11 +494,6 @@ class sqlite2_vmsql {
 	}
 
 
-
-
-
-
-
 	// FUNZIONI DI TRANSAZIONE
 
 	/**
@@ -555,9 +531,6 @@ class sqlite2_vmsql {
 		}
 
 	}
-
-
-
 
 
 	/**
@@ -602,7 +575,6 @@ class sqlite2_vmsql {
 		return sqlite_escape_string(stripslashes($string));
 
 	}
-
 
 
 	/**
@@ -665,7 +637,6 @@ class sqlite2_vmsql {
 
 		return $str;
 	}
-
 
 
 	/**

@@ -54,8 +54,6 @@ class RegTools {
     }
 
 
-
-
     /**
      * Da l'oid di tabella restituisce il nome della stessa
      * 
@@ -95,7 +93,6 @@ class RegTools {
             return 0;	
         }
     }
-
 
 
     /**
@@ -214,8 +211,6 @@ class RegTools {
     }
 
 
-
-
     /**
      * Prendi info della tabella/vista presente nel registro
      *
@@ -315,10 +310,6 @@ class RegTools {
     }
 
 
-
-
-
-
     /**
      * Funzione di test per verificare l'esistenza di una tabella 
      *
@@ -333,7 +324,6 @@ class RegTools {
 
         return ($vmreg->num_rows($q)>0) ? true:false;
     }
-
 
 
     /**
@@ -387,7 +377,6 @@ class RegTools {
     }
 
 
-
     /**
      * Prende le FK 
      * Individua i campi coinvolti in una relazione esterna e tabella.campo a cui � legato
@@ -433,7 +422,6 @@ class RegTools {
     }
 
 
-
     /**
      * Sostituisce lato server alcune variabili specificate nell'impostazione dei campi da parte dell'amministratore 
      * e che possono essere inserite ad esempio nei campi hidden e restituisce il valore
@@ -473,7 +461,6 @@ class RegTools {
         return ($out!=false && $out!='') ? $out : false;
 
     }
-
 
 
     /**
@@ -529,7 +516,6 @@ class RegTools {
     }
 
 
-
     /**
      * Funzione che recupera tutte le chiavi primarie di una tabella.
      * Funziona come prendi_PK() ma restituisce una o più chiavi sotto forma di array
@@ -557,7 +543,6 @@ class RegTools {
         list($tipo_tab)=$vmreg->fetch_row($q_tipo);
 
 
-
         if($tipo_tab=='VIEW'){
 
             // Chiave primaria esplicita delle viste
@@ -581,7 +566,6 @@ class RegTools {
 
         return $campoPK;
     }
-
 
 
     static public function prendi_all_PK_submask_oid($id_submask,$gid='session'){
@@ -668,8 +652,6 @@ class RegTools {
     }
 
 
-
-
     /**
      * Restituisce unamatrice bidimensionale (gid=>nome_gruppo) dei gruppi presenti in DB VFront
      * Utile per (ad esempio) mostrare una tendina
@@ -714,8 +696,6 @@ class RegTools {
     }
 
 
-
-
     /**
      * Recupera i file allegati associati ad un dato record di una data tabella
      * presenti nella tabella "allegato" sotto forma di matrice
@@ -741,7 +721,6 @@ class RegTools {
         }
 
     }
-
 
 
     /**
@@ -795,7 +774,6 @@ class RegTools {
     }
 
 
-
     /**
      * Funzione per la determinazione del tipo di campo
      * Utile soprattutto per PostgreSQL
@@ -833,7 +811,6 @@ class RegTools {
         }
         else return false;
     }
-
 
 
     /**
@@ -921,7 +898,6 @@ class RegTools {
     }
 
 
-
     /**
      * Funzione per recuperare le impostazioni del gruppo attuale per la tabella in oggetto
      * Restituisce SQL con eventuali subquery
@@ -982,7 +958,6 @@ class RegTools {
     }
 
 
-
     /**
      * Funzione che recupera l'ordinamento impostato in una tabella data
      *
@@ -1005,7 +980,6 @@ class RegTools {
 
             $orderby= self::prendi_PK($tabella);
         }
-
 
 
         // orderby e orderby_sort possono essere valori oppure liste separate da virgola

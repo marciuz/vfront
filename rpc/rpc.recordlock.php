@@ -120,7 +120,6 @@ function sblocca_record($tabella,$colonna,$id){
 }
 
 
-
 ####################################
 
 	$tabella = $vmreg->escape($_GET['tab']);
@@ -144,11 +143,6 @@ else if(isset($_GET['sblocca'])){
 	
 	echo sblocca_record($tabella,$colonna,$id);
 }
-
-
-
-
-
 
 
 ?>

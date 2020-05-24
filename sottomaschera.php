@@ -17,8 +17,6 @@ require_once("./inc/func.campi_submask.php");
 proteggi(1);
 
 
-
-
 ###############################################################
 #
 #	INFO GENERALI SOTTOMASCHERA
@@ -85,11 +83,6 @@ for($i=0;$i<count($info_campi_sub);$i++){
 $nome_sub = (trim($info_sub['nome_frontend'])!="") ? $info_sub['nome_frontend'] : $info_sub['nome_tabella'];
 
 
-
-
-
-
-
  
 ###############################################################
 #
@@ -133,21 +126,6 @@ $nome_sub = (trim($info_sub['nome_frontend'])!="") ? $info_sub['nome_frontend'] 
 	
 	// resta (su 2 assunte) la PK dipendente
 	list($PK_tab_dipendente)=array_values($array_PK_dipendente);*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Campi da prendere
@@ -198,22 +176,6 @@ $sql_ETICHETTA = "SELECT parent.$CAMPO_REF_PARENT
 	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ###############################################################
@@ -272,7 +234,6 @@ if($vmsql->query_try($sql_chiavi)){
 }*/
 
 
-
 // SPERIMENTALE.
 
 // PRENDO TUTTI i dati per tutti i record per metterli in un campo nascosto, magari serializzati?
@@ -299,9 +260,6 @@ $sql_all_data ="SELECT * FROM ".$info_sub['nome_tabella']."
 	openErrorGenerico("Errore nella impostazione della sottomaschera: Numero di campi attesi per la chiave primaria incongruente (attesi 2 campi)",false);
 	exit;
 }*/
-
-
-
 
 
 #############################################################################################################
@@ -545,7 +503,6 @@ $OUT.= "
 		$TABLE.="</tbody></table>\n\n";
 
 
-
 	}	
 
 	######################################################################################################################
@@ -622,7 +579,6 @@ $OUT.= "
 			$TABLE.= $RIGA;
 
 			$TABLE.="</tbody></table>\n\n";
-
 
 
 		}

@@ -67,7 +67,6 @@ foreach($tabs as $k=>$RS){
 $OUT="";
 
 
-
 // GRAFICO E TABELLA PER LE TABELLE
 
 if(count($tabella)>0){
@@ -106,9 +105,6 @@ if(count($tabella)>0){
 
 
 }
-
-
-
 
 
 // GRAFICO E TABELLA PER LE VISTE
@@ -154,7 +150,6 @@ echo $OUT;
 
 
 echo closeLayout1();
-
 
 
 ?>

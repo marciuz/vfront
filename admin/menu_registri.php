@@ -125,8 +125,6 @@ require_once("../inc/layouts.php");
 	}
 
 
-
-
 	$files = array("sty/admin.css","sty/tabelle.css");
 
 	$OUT = openLayout1(_("Group Administration"),$files);

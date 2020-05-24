@@ -56,7 +56,6 @@ function cron_clean_html($gg=0){
 }
 
 
-
 function cron_clean_tmp($gg=0){
 	
 	$dir=_PATH_TMP."/";
@@ -64,8 +63,6 @@ function cron_clean_tmp($gg=0){
 	cron_clean_dir($dir,$gg);	
 
 }
-
-
 
 
 function cron_clean_files_tmp($gg=0){

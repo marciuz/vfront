@@ -38,7 +38,6 @@ function cerca_allegati($tabella,$valore_id){
 }
 
 
-
 /**
  * Ricerca di link di un record. 
  * Data tabella e valore della Primary Key viene restituito il numero di link trovati.
@@ -59,7 +58,6 @@ function cerca_link($tabella,$valore_id){
 	return (int) $n_link;
 	
 }
-
 
 
 $allegati_trovati = cerca_allegati($_GET['action'],$_GET['id']);

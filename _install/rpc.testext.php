@@ -16,7 +16,6 @@ $_data=Common::pulisci_dom($_POST['var']);
 require_once("../inc/vmsql.".$_data['dbtype'].".php");
 
 
-
 ##########################################
 #
 #	TEST CONNECTION
@@ -89,8 +88,6 @@ if($_data['authtype']=='db'){
 	else echo '0@<span class="ko">'._('Please set the database type').'</span>';
 }
 // fine test DB
-
-
 
 
 elseif($_data['authtype']=='db_ext'){

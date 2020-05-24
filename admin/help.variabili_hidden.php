@@ -18,7 +18,6 @@ include("../inc/layouts.php");
 proteggi(3);
 
 
-
 echo openLayout1(_("Variables for hidden fields"),array('sty/lista.css'),'popup');
 
 echo "<h1 style=\"margin-top:50px;\">"._("Variables for hidden fields")."</h1>";

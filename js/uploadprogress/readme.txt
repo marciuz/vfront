@@ -23,12 +23,11 @@ How to use this demostration
 	speed limit should be enought to view uploaded bytes.
 
 
-
 [ITALIANO]
 Come usare questo dimostrativo
 
 	Aprire il file whileuploading.php e cambiare, se necessario, la cartella temporanea.
-	Se non sai dov'è la tua cartella temporanea, prova ad usare foldertest.php
+	Se non sai dov'ï¿½ la tua cartella temporanea, prova ad usare foldertest.php
 	upoadando un file molto piccolo.
 
 	Se stai testando questa demo nel tuo localhost, cambia queste impostazioni
@@ -42,10 +41,10 @@ Come usare questo dimostrativo
 
 	quindi riavvia il tuo webserver (Apache, PAMPA o quello che preferisci).
 
-	Queste impostanzioni sono necessarie perchè nel tuo localhost i files
+	Queste impostanzioni sono necessarie perchï¿½ nel tuo localhost i files
 	vengono uploadati velocemente, quindi quando scegli un file, scegline uno di grande dimensioni
-	(80 Mb o più).
+	(80 Mb o piï¿½).
 
-	Questo non è necessario se vuoi testare questo demo on-line, dove la velocità
+	Questo non ï¿½ necessario se vuoi testare questo demo on-line, dove la velocitï¿½
 	limitata di upload dovrebbe essere abbastanza per poter vedere i bytes uploadati.
 	

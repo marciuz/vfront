@@ -45,7 +45,6 @@ function check_privileges($priv){
 }
 
 
-
 ##################################################
 #
 #	VERSION 0.95
@@ -100,7 +99,6 @@ function update_exec_090(){
 }
 
 
-
 // TEST VERSION 0.95
 function update_test_095(){
 	
@@ -124,13 +122,6 @@ function update_exec_095(){
 
 	return _update_exec('0.95',$sql_up);
 }
-
-
-
-
-
-
-
 
 
 ##################################################
@@ -206,8 +197,6 @@ function update_exec_095a(){
 }
 
 
-
-
 ###########################################
 #
 #	VERSION 0.95b
@@ -215,16 +204,10 @@ function update_exec_095a(){
 #
 
 
-
-
 ###########################################
 #
 #	VERSION 0.95c
 #
-
-
-
-
 
 
 // TEST VERSION 0.95c
@@ -245,7 +228,6 @@ function update_test_095c(){
 	}
 	else return false;
 }
-
 
 
 // EXEC VERSION 0.95a
@@ -271,27 +253,16 @@ function update_exec_095c(){
 }
 
 
-
-
-
-
-
 ###########################################
 #
 #	VERSION 0.95d -- no changes in DB
 #
 
 
-
-
-
-
 ###########################################
 #
 #	VERSION 0.95e
 #
-
-
 
 
 // TEST VERSION 0.95c
@@ -314,11 +285,6 @@ function update_test_095e(){
 }
 
 
-
-
-
-
-
 // EXEC VERSION 0.95e
 function update_exec_095e(){
 	
@@ -332,14 +298,10 @@ function update_exec_095e(){
 }
 
 
-
-
 ###########################################
 #
 #	VERSION 0.95f
 #
-
-
 
 
 // TEST VERSION 0.95f
@@ -359,11 +321,6 @@ function update_test_095f(){
 	}
 	else return false;
 }
-
-
-
-
-
 
 
 // EXEC VERSION 0.95f
@@ -393,8 +350,6 @@ function update_exec_095f(){
 #
 
 
-
-
 // TEST VERSION 0.95g
 function update_test_095g(){
 	
@@ -412,11 +367,6 @@ function update_test_095g(){
 	}
 	else return false;
 }
-
-
-
-
-
 
 
 // EXEC VERSION 0.95g
@@ -485,13 +435,10 @@ function update_exec_095g(){
 }
 
 
-
 ###########################################
 #
 #	VERSION 0.95h
 #
-
-
 
 
 // TEST VERSION 0.95h
@@ -513,8 +460,6 @@ function update_test_095h(){
 }
 
 
-
-
 // EXEC VERSION 0.95h
 function update_exec_095h(){
 	
@@ -527,7 +472,6 @@ function update_exec_095h(){
 	return _update_exec('0.95h',$sql_up);
 	
 }
-
 
 
 // VERSION 0.95i
@@ -547,7 +491,6 @@ function update_test_095i(){
 }
 
 
-
 // EXEC VERSION 0.95i
 function update_exec_095i(){
 	
@@ -557,9 +500,6 @@ function update_exec_095i(){
 		
 	return _update_exec('0.95h',$sql_up);
 }
-
-
-
 
 
 // VERSION 0.95i
@@ -580,7 +520,6 @@ function update_test_095l(){
 }
 
 
-
 // EXEC VERSION 0.95i
 function update_exec_095l(){
 	
@@ -590,10 +529,6 @@ function update_exec_095l(){
 		
 	return _update_exec('0.95l',$sql_up);
 }
-
-
-
-
 
 
 // VERSION 0.95m
@@ -615,7 +550,6 @@ function update_test_095m(){
 }
 
 
-
 // EXEC VERSION 0.95m
 function update_exec_095m(){
 	
@@ -625,9 +559,6 @@ function update_exec_095m(){
 		
 	return _update_exec('0.95m',$sql_up);
 }
-
-
-
 
 
 function update_test_096(){
@@ -655,7 +586,6 @@ function update_exec_096(){
 
 	return _update_exec('0.96',$sql_up);
 }
-
 
 
 function update_test_097(){
@@ -764,7 +694,6 @@ function update_exec_097a(){
 	    $sql_up[]="ALTER TABLE registro_submask RENAME TO registro_submask_old;";
 	    $sql_up[]="ALTER TABLE registro_submask_temp RENAME TO registro_submask;";
 	    $sql_up[]="DROP TABLE registro_submask_old;";
-
 
 
 	    $sql_up[]="CREATE TABLE allegato_temp (
@@ -919,7 +848,6 @@ function update_exec_098a(){
 }
 
 
-
 // VERSION 0.99
 
 function update_test_099(){
@@ -1030,9 +958,6 @@ function update_exec_099a(){
 #######################################################################################à
 
 
-
-
-
 function _update_exec($version,$sql_array){
 	
 	global  $vmsql, $vmreg, $db1;
@@ -1084,7 +1009,6 @@ function _update_exec($version,$sql_array){
 	
 	return array($string_out,$TEST_OK,$TEST_KO);
 }
-
 
 
 if(USE_REG_SQLITE){
@@ -1152,7 +1076,6 @@ else{
 }
 
 
-
 echo openLayout1(_("VFront Update"),array("sty/admin.css"));
 
 echo breadcrumbs(array("HOME","ADMIN",strtolower(_("VFront Update"))));
@@ -1206,6 +1129,5 @@ if($OUT!=''){
 
 
 echo closeLayout1();
-
 
 

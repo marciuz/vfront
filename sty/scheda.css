@@ -185,7 +185,6 @@ input.longchar{
 }
 
 
-
 #feedback{
     position: relative;
 	z-index:0;
@@ -409,7 +408,6 @@ table.switch-vista tr td {
 }
 
 
-
 #gridbox{
 	width: 97%;
 }
@@ -493,8 +491,6 @@ table.switch-vista tr td {
 	background-color:#FFFFE0;
 	border-color:#FFFFE0;
 }
-
-
 
 
 .table-submask tr.riga-modifica td{

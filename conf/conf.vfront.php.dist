@@ -86,14 +86,6 @@ $db1['sep']='';
 */
 
 
-
-
-
-
-
-
-
-
 // PARAMETRI PER LA MODALITA' DI AUTENTICAZIONE ESTERNA  --------------------------------------------------------------------
 
 
@@ -113,13 +105,11 @@ $conf_auth['campo_cognome']='cognome'; // opzionale
 $conf_auth['password_crypt']='md5'; // md5 | sha1 | null  // impostare se le password dovessero essere criptate o si dovesse usare un hash 
 
 
-
 /*  SECTION DB */
 // qualora si sia scelta l'autenticazione esterna mediante DB diverso da VFront, impostare i seguenti parametri 
 // per leggere nome utente e password dal database e tabella scelti per l'autenticazione esterna
 $conf_auth['db']['database']=$db1['dbname']; // deve risiedere sullo stesso server (Solo Mysql) -- per altri server utilizzare DB_EXT, SOAP o altri metodi
 $conf_auth['db']['tabella']='test_utente';
-
 
 
 /*  SECTION DB_EXT (DB EXTERNAL) */
@@ -147,8 +137,6 @@ $conf_auth['ldap']['bind_user']='someuser';
 $conf_auth['ldap']['bind_passw']='somepassword';
 
 
-
-
 /*  SECTION SOAP  */
 // qualora si sia scelta l'autenticazione esterna mediante SOAP impostare i seguenti parametri 
 // per leggere nome utente e password dal server 
@@ -158,19 +146,6 @@ $conf_auth['soap']['function_get_user_results']='';
 
 
 //--------------   Fine autenticazione esterna  --------------  //
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // SECTION SMTP E MAIL  
@@ -195,9 +170,6 @@ define('_SYS_ADMIN_MAIL','admin@vfront.org');
 define('_DEV_MAIL','dev@vfront.org');
 
 
-
-
-
 /* SECTION DEBUG */
 
 /**
@@ -220,17 +192,12 @@ $RPC_DEBUG=true;
 $DEBUG_SQL_SHOW_QUERY=false;
 
 
-
 /* SECTION LOG */
 
 /**
  * scrive un log delle chiamate SQL di inserimento, modifica e cancellazione - default: TRUE
  */
 $RPC_LOG=true;
-
-
-
-
 
 
 /*  SECTION LANGUAGE AND ENCODING  */
@@ -241,12 +208,10 @@ $RPC_LOG=true;
 define('FRONT_LANG','it_IT');
 
 
-
 /**
  * Encoding: UTF-8, ISO-8859-1
  */
 define('FRONT_ENCODING','UTF-8');
-
 
 
 /*  SEZIONE DATE */
@@ -255,7 +220,6 @@ define('FRONT_ENCODING','UTF-8');
  * Date format: (iso,eng,ita)
  */
 define('FRONT_DATE_FORMAT','iso');
-
 
 
 /*  FILESYSTEM PATHS  */
@@ -269,8 +233,6 @@ define('FRONT_ROOT','/var/www/vfront');
  * path reale
  */
 define('FRONT_REALPATH','/var/www/vfront');
-
-
 
 
 /*  OTHER PATHS  */
@@ -331,9 +293,6 @@ define('_PATH_WEB_XSL',FRONT_DOCROOT."/files/xsl_custom");
 define('FRONT_ERROR_LOG',FRONT_REALPATH.'/files/error_log.txt');
 
 
-
-
-
 /*  SECTION FOP  */
 /* Utilizza l'applicazione Apache FOP http://xmlgraphics.apache.org/fop/ 
 per generare la versione PDF dei file XML */
@@ -349,10 +308,6 @@ define('_FOP_ENABLED',true);
 define('_PATH_FOP','/usr/bin/fop');
 
 
-
-
-
-
 /*  SECTION ATTACHEMENTS AND LINKS  */
 
 /**
@@ -364,10 +319,6 @@ define('_TABELLA_ALLEGATO',"{$db1['frontend']}{$db1['sep']}allegato");
  * definizione della tabella link
  */
 define('_TABELLA_LINK',"{$db1['frontend']}{$db1['sep']}link");
-
-
-
-
 
 
 /*   SECTION MISC  */
@@ -389,11 +340,6 @@ define('_BASE64_PASSFRASE',"passfrase");
 define('_NOME_PROJ','VFront');
 
 
-
-
-
-
-
 /* SECTION REGISTRY SQLITE */
 
 define('USE_REG_SQLITE',false);
@@ -401,7 +347,6 @@ define('VERSION_REG_SQLITE',3); // 3 or 2
 
 // SQLite Reg
 $db1['filename_reg']=FRONT_ROOT."/files/db/vfront.sqlite"; // path of sqlite database
-
 
 
 ?>

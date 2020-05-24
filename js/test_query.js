@@ -60,7 +60,6 @@ function handleResponse(){
 }
 
 
-
 function try_query_all(SQL) {
 	
 	s = new String(SQL);

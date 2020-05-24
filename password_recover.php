@@ -41,7 +41,6 @@ function genera_password(){
 }
 
 
-
 if(isset($_POST['email'])){
 	
 	$_dati=$vmreg->recursive_escape($_POST);

@@ -148,7 +148,6 @@ class Scheda_View {
         }
 
 
-
         $input="
         $str_hidden_default
         <input name=\"dati[".$data_col_value."]\" ".

@@ -224,7 +224,6 @@ class LogAnalysis {
 		  $k=1;
 
 
-
 		  foreach($this->possible_k as $operation){
 
 				$DataSet->addPoints(array_values($obj->{$operation}),"Serie$k");
@@ -267,7 +266,6 @@ class LogAnalysis {
 		//$Cache->GetFromCache("Graph1",$DataSet->GetData());
 
 
-
 		  // Draw the line graph
 		  $Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
 		  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);
@@ -277,7 +275,6 @@ class LogAnalysis {
 		  $Test->drawLegend(605,30,$DataSet->GetDataDescription(),255,255,255);
 		  $Test->setFontProperties($this->dir_pchart."/fonts/tahoma.ttf",10);
 		  $Test->drawTitle(60,22,"DB activities",50,50,50,585);
-
 
 
 		  $name="activities_".md5(microtime(true)).".png";
@@ -312,12 +309,10 @@ class LogAnalysis {
 		  }
 
 
-
 		  // Dataset definition
 		  $MyData = new pData();
 
 		  $k=1;
-
 
 
 		  foreach($this->possible_k as $operation){

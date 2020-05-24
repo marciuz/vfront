@@ -64,7 +64,6 @@ else{
 }
 
 
-
 $OUT= "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"it\">
 <head>
@@ -73,9 +72,6 @@ $OUT= "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http:/
 <link rel=\"shortcut icon\" href=\"".FRONT_DOCROOT."/themes/$THEME/favicon.png\" type=\"image/x-icon\" />
 <style type=\"text/css\" media=\"all\">
 ";
-
-
-
 
 
 	# CSS
@@ -121,7 +117,6 @@ $OUT= "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http:/
 	
 $OUT.= "</style>\n";
 $OUT.="<link media=\"only screen and (max-device-width: 480px)\" href=\"".FRONT_DOCROOT."/sty/mobile.css\" type=\"text/css\" rel=\"stylesheet\" />\n";
-
 
 
 	// JS LANG
@@ -190,11 +185,8 @@ $OUT.="<link media=\"only screen and (max-device-width: 480px)\" href=\"".FRONT_
 	}
 
 
-
 $OUT.= "
 </head>";
-
-
 
 
 		
@@ -240,9 +232,6 @@ $OUT.= "<div id=\"contenuto\">
 
 	return $OUT;
 }
-
-
-
 
 
 /**
@@ -354,7 +343,6 @@ function menu($livello=0){
 }
 
 
-
 /**
  * Funzione di gestione a video degli errori. 
  * Se lo script in azione va in errore � possibile interrompere lo script e generare l'apertura
@@ -413,7 +401,6 @@ function openError($err){
 }
 
 
-
 /**
  * Funzione che richiama un errore esplicitamante
  * Pu� essere richiamata nel codice dove si voglia.
@@ -464,8 +451,6 @@ function openErrorGenerico($messaggio,$email=true, $testo_custom=""){
 }
 
 
-
-
 function file_cat($array_files,$type='css'){
 	
 	$file_cat[$type]='';
@@ -489,9 +474,6 @@ function file_cat($array_files,$type='css'){
 	
 	return $hash.".".$type;
 }
-
-
-
 
 
 function breadcrumbs($array,$separator=" &raquo; "){
@@ -532,8 +514,6 @@ function breadcrumbs($array,$separator=" &raquo; "){
 	return $OUT;
 	
 }
-
-
 
 
 ?>

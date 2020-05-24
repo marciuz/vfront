@@ -20,8 +20,6 @@ proteggi();
 $max_kb=(int) ini_get('post_max_size') *1024 *1024;
 
 
-
-
 /**
  * Dato un nome di file restituisce il mime/type dall'estensione utilizzata
  *
@@ -78,10 +76,6 @@ function mime_content_type_image($filename)
 }
 
 
-
-
-
-
 // Se c'� inserisce il file
 if(isset($_GET['add']) && count($_FILES)>0 && $_SESSION['user']['livello']>1){
 	
@@ -116,10 +110,6 @@ if(isset($_GET['add']) && count($_FILES)>0 && $_SESSION['user']['livello']>1){
 	
 	
 }
-
-
-
-
 
 
 // CANCELLAZIONE DEL FILE:
@@ -227,11 +217,6 @@ else if(isset($_GET['doc'])){
   exit;
 	
 }
-
-
-
-
-
 
 
 $files=array("sty/tabelle.css","sty/admin.css","js/confirm_delete.js");	

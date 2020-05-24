@@ -265,7 +265,6 @@ class postgres_vmsql {
 	}
 
 
-
 	/**
 	 * @return int
 	 * @desc Funzione affected rows
@@ -281,8 +280,6 @@ class postgres_vmsql {
 	}
 
 
-
-
 	/**
 	 * @desc Funzione di num_fields
 	 * @return int
@@ -295,23 +292,11 @@ class postgres_vmsql {
 	}
 
 
-
-
-
-
-
-
-
-
 	#########################################################################################
 	#
 	#
 	#	FUNZIONI DI ELABORAZIONE
 	#
-
-
-
-
 
 
 	/**
@@ -349,8 +334,6 @@ class postgres_vmsql {
 		}
         return $matrice;
 	}
-
-
 
 
 	/**
@@ -484,11 +467,6 @@ class postgres_vmsql {
 	}
 
 
-
-
-
-
-
 	// FUNZIONI DI TRANSAZIONE
 
 	/**
@@ -525,9 +503,6 @@ class postgres_vmsql {
 		}
 		$this->transaction_is_open=false;
 	}
-
-
-
 
 
 	/**
@@ -582,8 +557,6 @@ class postgres_vmsql {
 
 		return str_replace(pg_escape_string($this->link_db,"'"),"'",$string);
 	}
-
-
 
 
 	/**
@@ -654,7 +627,6 @@ class postgres_vmsql {
 
 		return $str;
 	}
-
 
 
 	public function db_version(){

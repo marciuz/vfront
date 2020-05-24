@@ -11,7 +11,6 @@
 */
 
 
-
 /**
  * Get information from MySQL schema without query on information_schema
  *
@@ -381,6 +380,5 @@ class iSchema_mysql {
         }
 
 } // end of class
-
 
 

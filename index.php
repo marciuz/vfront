@@ -31,14 +31,11 @@
 */
 
 
-
 require_once("./inc/conn.php");
 require_once("./inc/layouts.php");
 
 
-
 $INPUTS="";
-
 
 
 if(isset($_GET['login'])){
@@ -81,21 +78,7 @@ else{
 }
 
 
-
-
 ##########################################################################################################
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -173,10 +156,6 @@ function mostra_login(){
 	
 	exit;
 }
-
-
-
-
 
 
 /**
@@ -414,7 +393,6 @@ function mostra_loggato(){
 	
 	
 }
-
 
 
 ?>

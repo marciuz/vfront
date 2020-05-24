@@ -22,8 +22,6 @@ require_once("./stat.graph2.php");
 proteggi(1);
 
 
-
-
 ############################################
 #
 #	REGISTRA NUOVA
@@ -70,12 +68,6 @@ if(isset($_GET['crea']) && count($_POST)>0){
 }
 
 
-
-
-
-
-
-
 ############################################
 #
 #	APPLICA MODIFICA 
@@ -120,13 +112,6 @@ if(isset($_GET['applica_mod']) && count($_POST)>0){
 }
 
 
-
-
-
-
-
-
-
 ############################################
 #
 #	APPLICA ELIMINA
@@ -157,19 +142,6 @@ if(isset($_POST['elimina_stat']) && intval($_POST['elimina_stat'])>0){
 	exit;
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ####################################################
@@ -324,20 +296,11 @@ if(isset($_GET['new']) || isset($_GET['modifica'])){
 }
 
 
-
-
-
-
-
-
-
-
 #####################################################
 #
 #	MOSTRA UNA STATISTICA DA ID
 #
 #####################################################
-
 
 
 if(isset($_GET['id_s'])){

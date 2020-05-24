@@ -15,9 +15,6 @@ COMMENT ON SCHEMA "frontend"
 IS 'Schema dedicato alla gestione del frontend web.';
 
 
-
-
-
 --
 --	Crea la tabella gruppo
 --
@@ -34,9 +31,6 @@ CREATE TABLE frontend.gruppo
 WITHOUT OIDS;
 COMMENT ON COLUMN frontend.gruppo.gid IS 'ID del gruppo';
 COMMENT ON COLUMN frontend.gruppo.nome_gruppo IS 'Nome del gruppo';
-
-
-
 
 
 --
@@ -61,9 +55,6 @@ CREATE TABLE frontend.log
 WITHOUT OIDS;
 
 
-
-
-
 --
 --	Crea la tabella recordlock per il multiaccesso ai record
 --
@@ -75,8 +66,6 @@ CREATE TABLE frontend.recordlock (
   tempo int4 NOT NULL,
   CONSTRAINT pk_recordlock PRIMARY KEY  (tabella,colonna,id)
 ) WITHOUT OIDS;
-
-
 
 
 --
@@ -119,7 +108,6 @@ CREATE INDEX i_table_name ON frontend.registro_tab USING btree (table_name);
 CREATE INDEX i_gid ON frontend.registro_tab USING btree (gid);
 
 
-
 --
 --	Crea la tabella registro colonne, il registro di regole che vfront utilizzer? per gestire le colonne delle tabelle
 --
@@ -155,7 +143,6 @@ CREATE INDEX i_registro_col_gid ON frontend.registro_col USING btree (gid);
 CREATE INDEX i_id_table ON frontend.registro_col USING btree (id_table);
 
 
-
 --
 --	Crea la tabella registro sottomaschere, il registro di regole che vfront utilizzer? per gestire le sottomaschere
 --
@@ -180,8 +167,6 @@ CREATE TABLE frontend.registro_submask (
   -- CONSTRAINT u_registro_submask_nome_gruppo UNIQUE (id_table,nome_tabella),
   CONSTRAINT fk_registro_submask FOREIGN KEY (id_table) REFERENCES frontend.registro_tab (id_table) ON DELETE CASCADE
 ) WITHOUT OIDS;
-
-
 
 
 --
@@ -212,7 +197,6 @@ CREATE TABLE frontend.registro_submask_col (
 ) WITHOUT OIDS;
 
 CREATE INDEX i_id_submask ON frontend.registro_submask_col USING btree (id_submask);
-
 
 
 --
@@ -257,7 +241,6 @@ CREATE TABLE frontend.variabili (
 CREATE INDEX i_variabile ON frontend.variabili USING btree (variabile);
 
 
-
 --
 --	Crea la tabella allegato, dove vengono archiviate le informazioni dei file associati ai record
 --
@@ -276,7 +259,6 @@ CREATE TABLE frontend.allegato (
 ) WITHOUT OIDS;
 
 
-
 --
 --	Crea la tabella link, dove vengono archiviati i link associati ai record
 --
@@ -290,7 +272,6 @@ CREATE TABLE frontend.link (
   lastdata timestamp NOT NULL default CURRENT_TIMESTAMP , --  'campo automaticamente valorizzato dal DBMS al primo inserimento o quando il record viene modificato',
   CONSTRAINT pk_link PRIMARY KEY  (codicelink)
 ) WITHOUT OIDS;
-
 
 
 --
@@ -342,8 +323,6 @@ COMMENT ON COLUMN frontend.xml_rules.tipo_report IS 'Report basato su tabella (t
 COMMENT ON COLUMN frontend.xml_rules.def_query IS 'Query di definizione per i report di tipo "query"';
 
 
-
-
 --
 --	Crea la tabella button
 --
@@ -387,7 +366,6 @@ CREATE TABLE frontend.widget (
 )
 WITHOUT OIDS;
 CREATE INDEX i_widget_id_table ON frontend.widget USING btree (id_table);
-
 
 
 -- api_console
@@ -454,14 +432,12 @@ INSERT INTO frontend.gruppo (gid, nome_gruppo, descrizione_gruppo) VALUES
   (-1,'temp','gruppo di installazione, viene eliminato nella inizializzazione');
 
 
-
 --
 --	Inserisce il gruppo di default
 --
 
 INSERT INTO frontend.gruppo (gid, nome_gruppo, descrizione_gruppo) VALUES 
   (0,'default','gruppo di default');
-
 
 
 --

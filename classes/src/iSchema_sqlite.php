@@ -11,7 +11,6 @@
 */
 
 
-
 class iSchema_sqlite {
 	
 
@@ -50,7 +49,6 @@ class iSchema_sqlite {
 		
 		return $FK;
 	}
-
 
 
 	/**

@@ -228,7 +228,6 @@ else {
 }
 
 
-
 $output= openLayout1(
             _("VFront API administration"),
             array(

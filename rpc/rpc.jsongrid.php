@@ -16,8 +16,6 @@ require_once("../inc/conn.php");
 proteggi(1);
 
 
-
-
 /**
  * Da una query SQL viene restituito l'XML generato per la griglia dxhtmlGrid 
  *

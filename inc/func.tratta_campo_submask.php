@@ -14,8 +14,6 @@
 */
 
 
-
-
 /**
  * Funzione che determina i possibili tipi di input per un campo di una sottomaschera
  *

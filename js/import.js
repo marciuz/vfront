@@ -37,13 +37,11 @@ function colora_prima_riga(){
 }
 
 
-
 /*
 
 PASSO 3
 
 */
-
 
 
 var id_mod=0;
@@ -97,7 +95,6 @@ function unset_costante(id){
 	$('costante_'+id).hide();
 	$('costante_'+id+'_trigger').hide();
 }
-
 
 
 /* 

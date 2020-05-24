@@ -80,18 +80,10 @@ else{
 }
 
 
-
-
-
-
 if(!isset($_GET['p'])){
 
 	$_GET['p']='0';
 }
-
-
-
-
 
 
 ######################################################################
@@ -132,29 +124,6 @@ switch($_GET['p']){
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -240,9 +209,6 @@ function step0(){
 }
 
 
-
-
-
 /**
  * @desc Test del sistema
  * @return string HTML
@@ -281,7 +247,6 @@ function step1(){
 	}
 
 
-
 	// controllo PHP
 	$php_version = (substr(phpversion(),0,1)>='5') ? 1:0;
 
@@ -296,7 +261,6 @@ function step1(){
 
 	echo "<p class=\"$classe_php\">"._("PHP Version").": <strong>".phpversion()."</strong><br />\n";
 	echo "<small>"._("VFront requires PHP version &gt;= 5.x")."</small></p>\n";
-
 
 
 	// ESTENSIONI PHP
@@ -353,7 +317,6 @@ function step1(){
 	}
 
 
-
 	// Check SQLite
 	if($l_sqlite2 || $l_sqlite3){
 
@@ -388,8 +351,6 @@ function step1(){
 
 		$fatal=true;
 	}
-
-
 
 
 	echo "<p class=\"$classe_mysqli\">"._("MySQL extension (MySQL Improved):")."<br />\n";
@@ -427,9 +388,7 @@ function step1(){
 	*/
 
 
-
 // FOLDERS, WRITEABLE OR NOT -------------------------------------
-
 
 
 	###########################################
@@ -460,14 +419,7 @@ function step1(){
 	echo "<small>"._("The files folder and its subfolders must be writable by the Apache user.")."</small></p>\n";
 
 
-
 	if(in_array('install-alert',$class_alert)) $notice=true;
-
-
-
-
-
-
 
 
 	// PRINT FEEDBACK
@@ -498,13 +450,8 @@ function step1(){
 	}
 
 
-
 	echo "</body>\n</html>\n";
 }
-
-
-
-
 
 
 /**
@@ -512,7 +459,6 @@ function step1(){
  * @return string HTML
  */
 function step2(){
-
 
 
 	echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -524,7 +470,6 @@ function step2(){
 	<script type=\"text/javascript\" src=\"../js/scriptaculous/lib/prototype.js\" ></script>
 	<script type=\"text/javascript\" src=\"./install.js\" ></script>
 	<script type=\"text/javascript\" >
-
 
 
 	function ut(n){
@@ -567,7 +512,6 @@ function step2(){
 	// SQLite test
 	$option_sqlite_dis=(class_exists('SQLite3') || class_exists('SQLiteDatabase'))
 						? '':'disabled="disabled"';
-
 
 
 	?>
@@ -657,7 +601,6 @@ function step2(){
 				<img class="help-image" src="../img/info_small.gif" alt="help" onclick="$(this).next(0).toggle()" />
 				<span class="desc" style="display:none"><?php echo _('Password to connect to database');?></span>
 			</p>
-
 
 
 		</div>
@@ -759,7 +702,6 @@ function step2(){
 		</div>
 
 
-
 		<div id="conn_sqlite" style="display:none">
 			<p>
 				<label for="dbfilename4">SQLite file (*.db or *.sqlite) </label>
@@ -777,8 +719,6 @@ function step2(){
 
 	</div>  <!-- END idb -->
 	<hr />
-
-
 
 
 	<a name="Authentication"></a>
@@ -804,7 +744,6 @@ function step2(){
 			</p>
 
 		</div>
-
 
 
 		<div id="auth_ext_common" class="auth-box" style="display:none;">
@@ -922,7 +861,6 @@ function step2(){
 				</p>
 
 
-
 			</div>
 
 			<!--<div id="auth_soap" class="auth-box" style="display:none;">
@@ -979,9 +917,6 @@ function step2(){
 			</p>
 
 		</div>
-
-
-
 
 
 	</div> <!-- END iauth -->
@@ -1069,7 +1004,6 @@ function step2(){
 
 
 	</div> <!-- END idebug -->
-
 
 
 	<hr />
@@ -1228,9 +1162,6 @@ function step2(){
 	</p>
 
 
-
-
-
 </form>
 
 	<?php
@@ -1241,7 +1172,6 @@ function step2(){
 	exit;
 
 }
-
 
 
 function step2s(){
@@ -1271,11 +1201,6 @@ function step2s(){
 }
 
 
-
-
-
-
-
 /**
  * @desc Definisci la connessione per generare il DB ed eventualmente crea il DB nel prossimo passo
  * @return string HTML
@@ -1285,7 +1210,6 @@ function step3(){
 	include_once("../conf/conf.vfront.php");
 	include_once("./vfront.{$db1['dbtype']}.sql.php");
 	include_once("../plugins/highlight/highlight_sql.php");
-
 
 
 	echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -1325,9 +1249,6 @@ function step3(){
 			break;
 		}
 	}
-
-
-
 
 
 	echo "<div id=\"createdb\" >\n";
@@ -1376,10 +1297,6 @@ function step3(){
 			// manda un segnale per usare i dati della connessione
 			echo "<input type=\"hidden\" name=\"user\" id=\"user\" value=\"USER_DEFAULT_CONF\" />\n";
 		}
-
-
-
-
 
 
 		if($UT_DEFAULT!=$db1['user']){
@@ -1436,9 +1353,6 @@ function step3(){
 	echo "</div>\n";
 
 
-
-
-
 	echo "
 	</div>
 
@@ -1447,8 +1361,6 @@ function step3(){
 
 
 }
-
-
 
 
 /**
@@ -1473,7 +1385,6 @@ function step3s(){
 		$feed_op=crea_db_rules();
 		$ty='dbrules';
 	}
-
 
 
 	if($feed_op)
@@ -1501,7 +1412,6 @@ function copy_sqlite(){
 
 	return $test_copy;
 }
-
 
 
 /**
@@ -1624,10 +1534,6 @@ function crea_db_rules(){
 }
 
 
-
-
-
-
 /**
  * @desc Funzione per la generazione della pagina di creazione primo utente
  *
@@ -1661,7 +1567,6 @@ function step4(){
 	<body>\n";
 
 	echo "<h1>"._("VFront installation")." - "._("Step 3 of 3")."</h1>\n";
-
 
 
 	// analizza se il login richiesto anche esternamente
@@ -1726,11 +1631,6 @@ function step4(){
 	exit;
 
 }
-
-
-
-
-
 
 
 /**
@@ -1817,25 +1717,6 @@ function step4s(){
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -1936,7 +1817,6 @@ function step5($esito=true){
 			";
 
 
-
 		echo "<div id=\"support_form\" >".ppal()."</div>";
 
 		echo "
@@ -1960,14 +1840,6 @@ function step5($esito=true){
 
 	echo "</body>\n</html>\n";
 }
-
-
-
-
-
-
-
-
 
 
 /**
@@ -2078,7 +1950,6 @@ function panic_page(){
 	$OUT.=$msg;
 
 
-
 	$OUT.=  "
 	</body>
 	</html>";
@@ -2087,28 +1958,6 @@ function panic_page(){
 
 	exit;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function require_vmsql($dbtype,$dbsqlite_version=''){
@@ -2150,7 +1999,6 @@ function require_vmsql($dbtype,$dbsqlite_version=''){
 }
 
 
-
 /**
  * Funzione di test per la generazione di una tabella.
  * Serve a testare il diritto CREATE, mediante la creazione di una tabella di nome pseudocasuale
@@ -2178,9 +2026,6 @@ function test_crea_tabella(){
 	}
 
 }
-
-
-
 
 
 /**
@@ -2270,9 +2115,6 @@ function grant($return_only_sql, $vmsql, $db1){
 
 	return $aff_rows;
 }
-
-
-
 
 
 function get_sqlite_file_version($path_sqlite){

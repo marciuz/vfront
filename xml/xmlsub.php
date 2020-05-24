@@ -17,8 +17,6 @@ require("../inc/conn.php");
 require("../inc/func.xmlize.php");
 
 
-
-
 /**
  * Funzione che genera l'XML con anche i record delle sottomaschere. 
  * Partendo da una tabella prestabilita con anche la gestione 

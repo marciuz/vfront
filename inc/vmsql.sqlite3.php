@@ -12,7 +12,6 @@
 */
 
 
-
 class sqlite3_vmsql {
 
 	public $vmsqltype='sqlite3';
@@ -33,8 +32,6 @@ class sqlite3_vmsql {
 	protected $error_handler=null;
 
 	protected $last_error=null;
-
-
 
 
 	
@@ -86,7 +83,6 @@ class sqlite3_vmsql {
 			//$this->link_db->exec("PRAGMA foreign_keys=ON");
 
 		}
-
 
 
 		return $this->link_db;
@@ -330,7 +326,6 @@ class sqlite3_vmsql {
 	}
 
 
-
 	/**
 	 * @return int
 	 * @desc Funzione affected rows
@@ -343,8 +338,6 @@ class sqlite3_vmsql {
 		}
 
 	}
-
-
 
 
 	/**
@@ -360,23 +353,11 @@ class sqlite3_vmsql {
 	}
 
 
-
-
-
-
-
-
-
-
 	#########################################################################################
 	#
 	#
 	#	FUNZIONI DI ELABORAZIONE
 	#
-
-
-
-
 
 
 	/**
@@ -415,11 +396,6 @@ class sqlite3_vmsql {
 		}
         return $matrice;
 	}
-
-
-
-
-
 
 
 	/**
@@ -520,7 +496,6 @@ class sqlite3_vmsql {
 		$this->last_error=$ee;
 
 
-
 		if(isset($GLOBALS['DEBUG_SQL']) && $GLOBALS['DEBUG_SQL']){
 
 			$this->error_debug();
@@ -537,7 +512,6 @@ class sqlite3_vmsql {
 	}
 
 
-
 	/**
 	 * Questa funzione viene eseguita da {@link $this->query} qualora il debug sia attivato
 	 * @desc Funzione che restituisce a video l'SQL che ha generato l'errore
@@ -550,11 +524,6 @@ class sqlite3_vmsql {
 			var_dump($this->last_error);
 		}
 	}
-
-
-
-
-
 
 
 	// FUNZIONI DI TRANSAZIONE
@@ -595,9 +564,6 @@ class sqlite3_vmsql {
 		}
 		
 	}
-
-
-
 
 
 	/**
@@ -659,7 +625,6 @@ class sqlite3_vmsql {
 	}
 
 
-
 	/**
 	 * Recursive escape. Work on strings, numbers, array, objects
 	 *
@@ -697,7 +662,6 @@ class sqlite3_vmsql {
 	}
 
 
-
 	
 	/**
 	 * Concat DB sintax
@@ -714,7 +678,6 @@ class sqlite3_vmsql {
 
 		return $str;
 	}
-
 
 
 	/**

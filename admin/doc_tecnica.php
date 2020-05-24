@@ -17,8 +17,6 @@ proteggi(2);
 $max_kb=(int) ini_get('post_max_size') *1024 *1024;
 
 
-
-
 /**
  * @desc Rileva il content-type dall'estensione
  * @todo Ipotizzare un metodo alternativo e più sicuro
@@ -73,10 +71,6 @@ function mime_content_type_image($filename)
 }
 
 
-
-
-
-
 // Se c'è inserisce il file
 if(isset($_GET['add']) && count($_FILES)>0 && $_SESSION['user']['livello']>1){
 	
@@ -111,10 +105,6 @@ if(isset($_GET['add']) && count($_FILES)>0 && $_SESSION['user']['livello']>1){
 	
 	
 }
-
-
-
-
 
 
 // CANCELLAZIONE DEL FILE:

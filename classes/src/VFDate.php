@@ -84,8 +84,6 @@ class VFDate {
     }
 
 
-
-
     /**
      * Funzione di trasformazione di data da formato internazionale a formato italiano o con data e la T. 
      * Richiama a sua volta la funzione dataISO2ITA()
@@ -116,8 +114,6 @@ class VFDate {
     }
 
 
-
-
     /**
      * Estrae le parti di una data in formato internazionale e restituisce le parti della stessa in un array.
      * Fornisce inoltre un valore di chiave "eng" pronto con la data in formato english.
@@ -144,8 +140,6 @@ class VFDate {
 
         return $dataENG;
     }
-
-
 
 
     /**

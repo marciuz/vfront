@@ -8,7 +8,6 @@ include_once("../plugins/pchart/class/pImage.class");
 define('FRONT_FONT_LIB',FRONT_ROOT."/plugins/pchart/fonts");
 
 
-
 /**
  * Funzione per la generazione dei grafici a barre
  * Utilizza PEAR ed il pacchetto Image/Graph
@@ -71,13 +70,11 @@ function barre_pchart($data,$labels,$scala=5,$testo="",$nome_file="image",
 	$myPicture->Render(_PATH_TMP."/$nome_file.png");
 
 
-
 		if(is_file(_PATH_TMP."/$nome_file.png"))
 			return true;
 		else
 			return false;
 	}
-
 
 
 function torta_pchart($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
@@ -132,7 +129,6 @@ function torta_pchart($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 	$myPicture->setShadow(TRUE,array("X"=>3,"Y"=>3,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
 
 
-
 	$legend=array("R"=>255,"G"=>255,"B"=>254);
 	$legend['BorderR']=220;
 	$legend['BorderG']=220;
@@ -155,16 +151,6 @@ function torta_pchart($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 }
 
 
-
-
-
-
-
-
-
-
-
-
 function get_graph_color_array($name='orange'){
 
 	switch($name){
@@ -177,11 +163,6 @@ function get_graph_color_array($name='orange'){
 
 	return $a;
 }
-
-
-
-
-
 
 
 function get_time($label=''){

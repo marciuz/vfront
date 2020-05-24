@@ -48,9 +48,6 @@ function verifica_tipo_file($nomefile,$header_file){
 }
 
 
-
-
-
 /**
  * @desc Mostra un'immagine a seconda dell'estensione del file
  * @param string $nomefile Il nome del file
@@ -69,7 +66,6 @@ function img_filetype($nomefile){
 	
 	return "<img src=\"img/mime/$mime\" alt=\"$alt\" />";
 }
-
 
 
 ######################################################################
@@ -108,9 +104,6 @@ if(isset($_GET['del'])){
 #
 #
 ######################################################################
-
-
-
 
 
 #######################################################################
@@ -192,22 +185,10 @@ if(count($_FILES)>0){
 ########################################################################
 
 
-
-
-
-
-
-
-
-
-
-
-
 ########################################################################
 #
 #	VISTA PAGINA - QUERY DI RICERCA ALLEGATI
 #
-
 
 
 $d = dir(_PATH_ATTACHMENT."/docs");
@@ -219,14 +200,6 @@ while (false !== ($entry = $d->read())) {
 $d->close();
 
 
-
-
-
-
-
-
-
-
 $files = array('sty/linguette.css','js/uploadprogress/BytesUploaded.js','js/uploadprogress/LoadVars.js','js/clona_attach.js','sty/attach.css');
 
 $INIZIO_LAYOUT= openLayout1("Allegati",$files);
@@ -236,8 +209,6 @@ echo str_replace("<body>","<body onload=\"self.focus();\">",$INIZIO_LAYOUT);
 echo "<h1 style=\"font-size:1.6em;\">".sprintf(_('Attachments for record %s in table'),"<span style=\"color:#666;\">".$_GET['id']."</span>")." <span class=\"var\">".$_GET['t']."</span></h1>";
 
 echo "<img src=\"./img/flussi.gif\" class=\"img-float\" alt=\""._('Manage attachments ')."\" />\n";
-
-
 
 
 	echo "	
@@ -371,8 +342,6 @@ echo "<img src=\"./img/flussi.gif\" class=\"img-float\" alt=\""._('Manage attach
 	} // -- fine clausola nuovi inserimenti
 	
 echo "</div><!-- fine contenitore -->\n\n";
-
-
 
 
 echo closeLayout1();

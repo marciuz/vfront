@@ -674,20 +674,7 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
 	 echo "</table>\n";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 echo closeLayout1();
-
 
 
 ?>

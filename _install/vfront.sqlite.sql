@@ -11,10 +11,6 @@ CREATE TABLE gruppo
 );
 
 
-
-
-
-
 CREATE TABLE log
 (
   id_log integer,
@@ -38,8 +34,6 @@ CREATE INDEX i_log_tabella ON log (tabella);
 CREATE INDEX i_log_id_record ON log (id_record);
 
 
-
-
 CREATE TABLE recordlock (
   tabella varchar(50) NOT NULL,
   colonna varchar(50) NOT NULL,
@@ -49,8 +43,6 @@ CREATE TABLE recordlock (
 );
 
 CREATE INDEX i_recordlock ON recordlock (id);
-
-
 
 
 CREATE TABLE registro_tab (
@@ -90,8 +82,6 @@ CREATE INDEX i_registro_tab_gid ON registro_tab (gid);
 CREATE INDEX i_registro_tab_visibile ON registro_tab (visibile);
 
 
-
-
 CREATE TABLE registro_col (
   id_reg integer,
   id_table integer default NULL,
@@ -124,8 +114,6 @@ CREATE INDEX i_registro_col_id_table ON registro_col (id_table);
 CREATE INDEX i_registro_col_column_name ON registro_col (column_name);
 
 
-
-
 CREATE TABLE registro_submask (
   id_submask integer,
   id_table integer NOT NULL , -- Tabella parent per la sottomaschera
@@ -148,8 +136,6 @@ CREATE TABLE registro_submask (
 );
 
 CREATE INDEX i_registro_submask_id_table ON registro_submask (id_table);
-
-
 
 
 CREATE TABLE registro_submask_col (
@@ -176,9 +162,6 @@ CREATE TABLE registro_submask_col (
 CREATE INDEX i_id_submask ON registro_submask_col (id_submask);
 
 
-
-
-
 CREATE TABLE utente (
   id_utente integer,
   nick varchar(80) default NULL,
@@ -199,7 +182,6 @@ CREATE TABLE utente (
 CREATE INDEX i_utente_gid ON utente (gid);
 
 
-
 CREATE TABLE variabili (
   variabile varchar(32) NOT NULL,
   gid integer NOT NULL default 0,
@@ -211,9 +193,6 @@ CREATE TABLE variabili (
 );
 
 CREATE INDEX i_variabile ON variabili (variabile);
-
-
-
 
 
 CREATE TABLE allegato (
@@ -246,9 +225,6 @@ CREATE INDEX link_index_codiceentita ON link (codiceentita);
 CREATE INDEX link_index_tipoentita ON link (tipoentita);
 
 
-
-
-
 CREATE TABLE stat (
   id_stat integer,
   nome_stat varchar(250) NOT NULL , --  'Nome nella statistica',
@@ -267,7 +243,6 @@ CREATE TABLE stat (
 CREATE INDEX i_autore_stat ON stat (autore);
 
 
-
 CREATE TABLE xml_rules
 (
   id_xml_rules integer,
@@ -283,12 +258,6 @@ CREATE TABLE xml_rules
   nome_report varchar(255),
   CONSTRAINT pk_xml_rules PRIMARY KEY (id_xml_rules)
 );
-
-
-
-
-
-
 
 
 CREATE TABLE button
@@ -310,7 +279,6 @@ CREATE TABLE button
 );
 
 CREATE INDEX i_button_id_table ON button (id_table);
-
 
 
 CREATE TABLE widget (
@@ -372,8 +340,6 @@ FOR EACH ROW BEGIN
 END;
 
 
-
-
 -- registro_col
 
 CREATE TRIGGER fki_registro_col_registro_tab
@@ -389,7 +355,6 @@ FOR EACH ROW BEGIN
    SELECT RAISE(ROLLBACK, 'update on table "registro_col" violates foreign key constraint "fku_registro_col_registro_tab"')
    WHERE (SELECT  id_table FROM registro_tab WHERE id_table = NEW.id_table) IS NULL;
 END;
-
 
 
 -- registro_submask_col
@@ -451,7 +416,6 @@ FOR EACH ROW BEGIN
 END;
 
 
-
 -- widget
 
 CREATE TRIGGER fki_widget_registro_tab
@@ -469,7 +433,6 @@ FOR EACH ROW BEGIN
 END;
 
 
-
 -- registro_gruppo
 
 CREATE TRIGGER fkdc_registro_tab_gruppo
@@ -478,10 +441,6 @@ FOR EACH ROW BEGIN
     DELETE FROM registro_tab WHERE registro_tab.gid = OLD.gid;
     UPDATE utente SET gid=0 WHERE utente.gid=OLD.gid;
 END;
-
-
-
-
 
 
 INSERT INTO variabili (variabile, gid, valore, descrizione, tipo_var) VALUES   ('alert_login_default',0,'1','Mostra agli utenti l''avviso se sono presenti nel gruppo di default','bool');
@@ -515,8 +474,6 @@ INSERT INTO variabili (variabile, gid, valore, descrizione, tipo_var) VALUES   (
 
 INSERT INTO gruppo (gid, nome_gruppo, descrizione_gruppo) VALUES 
   (-1,'temp','gruppo di installazione, viene eliminato nella inizializzazione');
-
-
 
 
 INSERT INTO gruppo (gid, nome_gruppo, descrizione_gruppo) VALUES 

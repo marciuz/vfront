@@ -13,23 +13,12 @@
 */
 
 
-
-
-
 ####################################################
 #
 #	Link to FILE CONF
 #
 
 $CONF_FILE='conf.vfront.php';
-
-
-
-
-
-
-
-
 
 
 ############################################################################
@@ -47,8 +36,6 @@ $dir_vfront= (substr(realpath(__FILE__),0,1)=='/')
 $VFRONT_CONFIGURATION_FILE=$dir_vfront.'/conf/'.$CONF_FILE;
 
 
-
-
 if(!is_file($VFRONT_CONFIGURATION_FILE)){
 	
 	header("Location: ./_install/");
@@ -62,7 +49,6 @@ if(!@include_once($VFRONT_CONFIGURATION_FILE)){
 
 // Load PSR-4 autoloader.
 require_once $dir_vfront.'/vendor/autoload.php';
-
 
 
 // DB connection
@@ -117,7 +103,6 @@ if (!function_exists('class_alias')) {
 }
 
 
-
 // encoding
 $enc_connection= (FRONT_ENCODING=='UTF-8') ? 'utf8' : '';
 
@@ -133,11 +118,6 @@ if(!defined('USE_REG_SQLITE')) define('USE_REG_SQLITE', false);
  * DATABASE (data) Connection
  */
 $vmsql->connect($db1, $enc_connection);
-
-
-
-
-
 
 
 // Alias Class for VFront Registry DB connection
@@ -172,16 +152,9 @@ else{
 }
 
 
-
-
-
-
 // Avvia la sessione
 session_name("VFRONT_".preg_replace("|[\W]+|","_",_NOME_PROJ."_"._BASE64_PASSFRASE));
 session_start();
-
-
-
 
 
 // include VARS
@@ -189,12 +162,6 @@ include_once(FRONT_ROOT."/inc/func.var_frontend.php");
 if(!isset($_SESSION['VF_VARS'])){
 	$_SESSION['VF_VARS']=var_frontend('session','session');
 }
-
-
-
-
-
-
 
 
 // Impostazione della lingua 

@@ -16,7 +16,6 @@ function annulla_colori(){
 }
 
 
-
 function date_encode(mydate){
 	
 	if(dateEncode=='iso') return mydate;
@@ -39,7 +38,6 @@ function date_encode(mydate){
 	}
 	
 }
-
 
 
 function date_decode(mydate){
@@ -129,7 +127,6 @@ function abilita_campi(id_riga){
 }
 
 
-
 function disabilita_campi(id_riga){
 	
 	tr = document.getElementById('riga_'+id_riga);
@@ -194,7 +191,6 @@ function annulla(){
 	
 	window.location=window.location;
 }
-
 
 
 function carica_valore(id,valore){
@@ -338,12 +334,8 @@ function createRequestObject() {
 }
 
 
-
-
-
 var http = createRequestObject();
 var http2 = createRequestObject();
-
 
 
 function sndReqSubUpdate(action) {
@@ -486,7 +478,6 @@ function elimina(n_riga_del){
 }
 
 
-
 function sndReqSubDelete(action,valori_pk_dip_del) {
 		
 	
@@ -558,7 +549,6 @@ function catcalc(cal) {
 
 		mod(cal.params.inputField.id);
 }
-
 
 
 function duplica_riga(){

@@ -14,7 +14,6 @@
  */
 
 
-
 require_once("../inc/conn.php");
 require_once("../inc/layouts.php");
 
@@ -27,22 +26,8 @@ $OUT.=breadcrumbs(array("HOME","ADMIN",strtolower(_("Vfront settings")) ));
 $OUT.="<h1>"._("VFront settings")."</h1>";
 
 
-
-
 $flog="# VFront Log: ".$_SERVER['SERVER_NAME']." - ".date("Y-m-d H:i:s")."\n";
 $flog.="--------------------------------------------------------------------\n";
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 $OUT.="<h2 class=\"title-vfrontinfo\">"._("VFront Version")."</h2>";
@@ -103,13 +88,11 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("VFront Version")."</h2>";
 	$OUT.="<div class=\"piccolo\">"._('Database data currently in use')."</div><br />\n";
 
 
-
 	// info dal conf
 	$DB_RULES_TYPE=(USE_REG_SQLITE) ? "SQLite": $db1['dbtype']." internal";
 	$OUT.="<span class=\"grigio\">"._("DB Rules method:")."</span> ".
 		 "<strong><span class=\"$classe\">".$DB_RULES_TYPE."</span></strong>\n";
 	$OUT.="<div class=\"piccolo\">"._('Method used for VFront database rules')."</div><br />\n";
-
 
 
 	// info dal conf
@@ -153,8 +136,6 @@ $OUT.="<span class=\"grigio\">"._("PHP version").":</span> <strong><span class=\
 $OUT.="<div class=\"piccolo\">"._("VFront requires PHP version &gt;= 5.x")."</div><br />\n";
 
 
-
-
 // VERSIONE DATABASE ---------------------------------------------------------------------------------------------------
 
 $db_version=$vmsql->db_version();
@@ -194,7 +175,6 @@ $flog.="DB Version: ".$db_version."\n";
 // VFRONT CONFIG
 
 
-
 // COMPATIBILITY CHECK ---------------------------------------------------------------------------------------------------
 
 
@@ -209,15 +189,6 @@ $problems_found=($checkdb['n']==0) ? "<strong><span class=\"verde\">0</span></st
 
 $OUT.="<span class=\"grigio\">"._("Problems found").":</span> $problems_found";
 $OUT.="<div class=\"piccolo\">"._("Check compatibility between VFront and your DB")."</div><br />\n";
-
-
-
-
-
-
-
-
-
 
 
 // SECURITY SETTINGS ---------------------------------------------------------------------------------------------------
@@ -243,9 +214,6 @@ $OUT.="<div class=\"piccolo\">"._("The file conf.vfront.php.dist should be remov
 $presenza_dir_install=(!$dir_install) ? "<span class=\"verde\">"._("NO")."</span>" : "<span class=\"rosso\">"._("YES")."</span>";
 $OUT.="<span class=\"grigio\">"._("Installation directory present:")."</span> <strong>$presenza_dir_install</strong>\n";
 $OUT.="<div class=\"piccolo\">"._("The install directory <em>_install</em> should be removed")."</div><br />\n";
-
-
-
 
 
 // ESTENSIONI IMPORTANTI ---------------------------------------------------------------------------------------------------
@@ -280,16 +248,12 @@ $OUT.="<div class=\"piccolo\">".sprintf(_("If the module is not loaded, go to th
 								."</div><br />\n";
 
 
-
 // IMPOSTAZIONI IMPORTANTI ---------------------------------------------------------------------------------------------------
 $OUT.="<h2 class=\"title-vfrontinfo\">"._("PHP variables")."</h2>";
 
 $php_ini_rg=(ini_get('register_globals')==0) ? "<span class=\"verde\">"._("OFF")."</span>" : "<span class=\"rosso\">"._("ON")."</span>";
 $OUT.="<span class=\"grigio\">"._("register_globals:")."</span> <strong>$php_ini_rg</strong>\n";
 $OUT.="<div class=\"piccolo\">"._("VFront requires register_globals to be disabled. You can turn this variable off in php.ini or httpd.conf")."</div><br />\n";
-
-
-
 
 
 // IMPOSTAZIONI IMPORTANTI ---------------------------------------------------------------------------------------------------
@@ -302,8 +266,6 @@ $flog.="ApacheLoadedModules: ".implode(",",$modules_apache)."\n";
 $apache_mod_rewrite=(in_array("mod_rewrite", $modules_apache)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 $OUT.="<span class=\"grigio\">"._("Mod_rewrite:")."</span> <strong>$apache_mod_rewrite</strong>\n";
 $OUT.="<div class=\"piccolo\">"._("VFront requires the use of mod_rewrite for different functions, such as generating reports")."</div><br />\n";
-
-
 
 
 // USO DI PEAR ---------------------------------------------------------------------------------------------------
@@ -360,7 +322,6 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("Writable folders settings")."</h2>";
 	$OUT.="<div class=\"piccolo\">$is_html_write_txt</div><br />\n";
 
 
-
 	
 
 
@@ -405,8 +366,6 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("Writable folders settings")."</h2>";
 	
 	$OUT.="<span class=\"grigio\">"._("Folder for XSL stylesheets writable:")."</span> <strong>$is_xsl_write</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_xsl_write_txt</div><br />\n";
-
-
 
 
 // FOP ---------------------------------------------------------------------------------------------------

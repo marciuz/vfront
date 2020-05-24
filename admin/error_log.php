@@ -10,7 +10,6 @@ require_once("../inc/layouts.php");
 proteggi(3);
 
 
-
 if(file_exists(FRONT_ERROR_LOG)){
 	$ERRFILE=file_get_contents(FRONT_ERROR_LOG);
 }

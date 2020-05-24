@@ -37,7 +37,6 @@ body{ font-family:Arial, Sans; font-size:0.8em;}
 XLS;
 
 
-
 $OUT.=$_data['tab'];
 
 $OUT.=<<<XLS

@@ -342,8 +342,6 @@ CREATE TABLE {$db1['frontend']}{$db1['sep']}stat (
 ";
 
 
-
-
 $SQL_DEFINITION[]="
 
 --
@@ -411,8 +409,6 @@ CREATE TABLE {$db1['frontend']}{$db1['sep']}xml_rules (
   PRIMARY KEY  (`id_xml_rules`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Regole per la definizione dei report XML based';
 ";
-
-
 
 
 $SQL_DEFINITION[]="

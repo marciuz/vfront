@@ -11,7 +11,6 @@
 */
 
 
-
 class iSchema_postgres {
 
 
@@ -169,8 +168,6 @@ class iSchema_postgres {
 	}
 
 
-
-
 	/**
 	 * Get the columns info of $table
 	 * if the $column_name is specified get only the definition of $column_name
@@ -298,7 +295,6 @@ class iSchema_postgres {
 	}
 
 
-
 	/**
 	 * Get tables and column referenced to $table
 	 *
@@ -388,7 +384,6 @@ class iSchema_postgres {
 
 	}
 }
-
 
 
 ?>

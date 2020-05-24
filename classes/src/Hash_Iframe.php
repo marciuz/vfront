@@ -138,14 +138,7 @@ class Hash_Iframe{
 		}
 
 
-
 		$this->HTML_IFRAME = $this->hash_iframe_cont($valori,$nome_campo);
-
-
-
-
-
-
 
 
 		// Imposto il nome del file html per l'iframe
@@ -212,9 +205,6 @@ class Hash_Iframe{
 							$HTML_IFRAME .= "<option value=\"$k\">".Common::vf_utf8_encode($val_parsed)."</option>";
 						}
 					}
-
-
-
 
 
 					$HTML_IFRAME.="</select></div>
@@ -312,7 +302,6 @@ class Hash_Iframe{
         }
 
     }
-
 
 
 }

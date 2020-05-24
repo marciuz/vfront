@@ -11,8 +11,6 @@
 */
 
 
-
-
 // Imposto l'esecuzione massima in 10 minuti
 ini_set('max_execution_time',600);
 	
@@ -67,9 +65,6 @@ function verifica_tipo_file($nomefile,$header_file){
 }
 
 
-
-
-
 /**
  * Funzione per la determinazione del tipo di file immagine mediante il nome e l'estensione
  * Restituisce una icona con il tipo (se presente nei casi descritti)
@@ -94,8 +89,6 @@ function img_filetype($nomefile){
 	return "<img src=\"img/mime/$mime\" alt=\"$alt\" />";
 	
 }
-
-
 
 
 ######################################################################
@@ -134,9 +127,6 @@ if(isset($_GET['del'])){
 #
 #
 ######################################################################
-
-
-
 
 
 #######################################################################
@@ -218,24 +208,10 @@ if(count($_FILES)>0){
 ########################################################################
 
 
-
-
-
-
-
-
-
-
-
-
-
 ########################################################################
 #
 #	VISTA PAGINA - QUERY DI RICERCA ALLEGATI
 #
-
-
-
 
 
 # CASO SPECIALE NEW:
@@ -259,7 +235,6 @@ $tabella = preg_replace("'[\W]+'","",trim($_GET['t']));
 $id = preg_replace("'[\W]+'","",trim($_GET['id']));
 
 
-
 // PRENDI IMPOSTAZIONI ALLEGATI PER TABELLA/REGISTO
 $info_tab=RegTools::prendi_info_tabella($tabella, "permetti_allegati_ins, permetti_allegati_del");
 
@@ -267,14 +242,11 @@ $allegati_ins=$info_tab['permetti_allegati_ins'];
 $allegati_del=$info_tab['permetti_allegati_del'];
 
 
-
 if(!RegTools::is_tabella($tabella) || $id==''){
 	
 	openErrorGenerico(_('Request error'),false);
 	exit;
 }
-
-
 
 
 // CERCA ALLEGATI PER QUESTA TABELLA
@@ -288,19 +260,11 @@ $num_allegati=$vmreg->num_rows($qa);
 $matrice_info_allegati=$vmreg->fetch_assoc_all($qa);
 
 
-
-
-
-
-
-
-
 $files = array('sty/linguette.css','js/uploadprogress/BytesUploaded.js','js/uploadprogress/LoadVars.js','js/clona_attach.js','sty/attach.css');
 
 $INIZIO_LAYOUT= openLayout1("Allegati",$files,'popup');
 
 echo str_replace("<body>","<body onload=\"window.focus();\">",$INIZIO_LAYOUT);
-
 
 
 echo "<img src=\"./img/flussi.gif\" style=\"float: left;\" alt=\""._('Manage attachments ')."\" />\n";
@@ -454,8 +418,6 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 	} // -- fine clausola nuovi inserimenti
 	
 echo "</div><!-- fine contenitore -->\n\n";
-
-
 
 
 echo closeLayout1();

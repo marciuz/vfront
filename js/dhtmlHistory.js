@@ -436,16 +436,6 @@ window.dhtmlHistory = {
 };
 
 
-
-
-
-
-
-
-
-
-
-
 /** An object that uses a hidden form to store history state 
     across page loads. The chief mechanism for doing so is using
     the fact that browser's save the text in form data for the
@@ -610,14 +600,6 @@ window.historyStorage = {
       this.storageField.value = serializedHashTable;
    }   
 };
-
-
-
-
-
-
-
-
 
 
 /** The JSON class is copyright 2005 JSON.org. */
@@ -911,7 +893,6 @@ outer:          while (next()) {
         return val();
     }
 };
-
 
 
 /** Initialize all of our objects now. */

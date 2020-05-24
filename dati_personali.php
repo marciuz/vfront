@@ -60,12 +60,7 @@ echo "<table summary=\"dati utente\" class=\"tab-color\">
 ";
 
 
-
-
-
 echo closeLayout1();
-
-
 
 
 ?>

@@ -38,8 +38,6 @@ FROM pg_attribute a, (
 WHERE (((ss.oid = a.attrelid) AND (a.attnum = (ss.x).x)) AND (NOT a.attisdropped));
 
 
-
-
 --
 -- Vista information_schema.table_constraints con diritti corretti
 --

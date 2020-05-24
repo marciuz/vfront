@@ -11,7 +11,6 @@
 */
 
 
-
 function SnowCheckMail($Email,$Debug=false) 
 { 
     global $HTTP_HOST; 

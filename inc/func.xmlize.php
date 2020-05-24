@@ -13,9 +13,6 @@
 */
 
 
-
-
-
 /**
  * Funzione che genera l'XML da una data query. 
  * La funzione e' utilizzata in molte occasioni da VFront.

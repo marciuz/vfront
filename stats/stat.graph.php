@@ -13,11 +13,6 @@
 putenv('GDFONTPATH=' . realpath('..') . '/plugins/ttf');
 
 
-
-
-
-
-
 /**
  * Funzione per la generazione dei grafici a barre
  * Utilizza PEAR ed il pacchetto Image/Graph
@@ -207,7 +202,6 @@ function torta($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 }
 
 
-
 /**
  * @desc Genera un seed per i numeri pseudocasuali
  * @return float
@@ -217,8 +211,6 @@ function make_seed()
     list($usec, $sec) = explode(' ', microtime());
     return (float) $sec + ((float) $usec * 100000);
 }
-
-
 
 
 /**

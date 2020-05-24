@@ -21,9 +21,6 @@ include("../inc/layouts.php");
 $Log = new Log();
 
 
-
-
-
 if(isset($_POST['id_log']) && isset($_GET['ripristino'])){
 	
 	$id_log = (int)$_POST['id_log'];
@@ -48,7 +45,5 @@ else{
 	
 	$Log->mostra_log();
 }
-
-
 
 

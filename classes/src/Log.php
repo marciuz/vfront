@@ -243,7 +243,6 @@ class Log {
         switch ($RS['op']) {
 
 
-
             case 'update':
 
                 $storico_pre = is_array(unserialize($RS['storico_pre']));
@@ -265,8 +264,6 @@ class Log {
                     $is_reversibile = false;
                 }
                 break;
-
-
 
 
             case 'insert':
@@ -439,7 +436,6 @@ class Log {
                 $OUT.="</table>\n";
 
 
-
                 // PROCEDURA DI RIPRISTINO IN CASO UPDATE
                 if ($info_op['rev']) {
 
@@ -549,7 +545,6 @@ class Log {
             $OUT.="</table>\n";
 
 
-
             // PROCEDURA DI RIPRISTINO IN CASO DELETE
             if ($info_op['rev']) {
 
@@ -595,8 +590,6 @@ class Log {
         echo "<h1>" . _("Log details") . "</h1>\n";
 
 
-
-
         echo $OUT;
 
 
@@ -629,12 +622,9 @@ class Log {
         $SORT = isset($_GET['s']) ? $_GET['or'] : "DESC";
 
 
-
         $PASSO = 100;
 
         $colore_tab = " class=\"arancio\"";
-
-
 
 
         $QS = "";
@@ -691,7 +681,6 @@ class Log {
         }
 
 
-
         if (isset($_GET['tabella']) && $_GET['tabella'] != '') {
             $clausola_tabella = "AND log.tabella='" . $vmreg->escape($_GET['tabella']) . "'";
             $class_tabella = $colore_tab;
@@ -708,8 +697,6 @@ class Log {
                 "display:none" : "display:";
 
 
-
-
         $clausola_istituto = '';
 
         $LIMIT = isset($_GET['l']) ? (int) $_GET['l'] : $PASSO;
@@ -717,7 +704,6 @@ class Log {
 
         if ($OFFSET < 0)
             $OFFSET = 0;
-
 
 
         // Query Log
@@ -784,10 +770,7 @@ class Log {
         $PAG = "<div id=\"paginazione\">\n";
 
 
-
-
         if ($OFFSET - $PASSO >= 0) {
-
 
 
             $PAG.= "<a href=\"" . Common::phpself() . "?of=" . ($OFFSET - $PASSO) . $QS . "\">&lt; &lt; " . _("previous") . "</a>\n | ";
@@ -828,11 +811,6 @@ class Log {
         $PAG.= "</div><br />\n";
 
 
-
-
-
-
-
         // FILTRI
         // PRENDI LE TABELLE ESISTENTI SUL LOG
         $q_tab_log = $vmreg->query("SELECT DISTINCT tabella FROM {$db1['frontend']}{$db1['sep']}log ORDER BY tabella");
@@ -851,9 +829,6 @@ class Log {
 
         $FILTRI = "<p><span class=\"fakelink\" onclick=\"mostra_nascondi('filtri_log');\"><strong>" . 
                 _("Log filters") . "</strong></span></p>\n";
-
-
-
 
 
         $FILTRI.= "
@@ -957,15 +932,6 @@ class Log {
 	 	</div>\n";
 
 
-
-
-
-
-
-
-
-
-
         #########################################################################
         #
 	 #	CONTINUA A STAMPARE
@@ -1057,7 +1023,6 @@ class Log {
             $array_pre = unserialize($storico_pre);
 
 
-
             if (is_array($array_pre)) {
 
                 $sql_update = "UPDATE $tabella SET ";
@@ -1070,8 +1035,6 @@ class Log {
                 for ($i = 0; $i < count($info_data_type); $i++) {
                     $info_cols[$info_column_name[$i]] = $info_data_type[$i];
                 }
-
-
 
 
                 // ciclo sui valori
@@ -1192,7 +1155,6 @@ class Log {
             }
 
 
-
             $sql_campi = substr($sql_campi, 0, -1);
             $sql_valori = substr($sql_valori, 0, -1);
 
@@ -1253,7 +1215,6 @@ class Log {
             switch($op){
 
                 case 'ripristino': 
-
 
 
                         $id_record = $info_pk;

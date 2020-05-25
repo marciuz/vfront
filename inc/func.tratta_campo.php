@@ -185,7 +185,8 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
             break;
         
         case 'json': $options = "\t\t\t<option value=\"text\" " . selected_def('text', $in_tipo) . ">" . _("free long text") . "</option>\n";
-
+            break;
+        
         default: $options = "";
     }
 

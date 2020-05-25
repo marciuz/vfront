@@ -14,8 +14,15 @@ class Scheda_View {
 
     static public function type_int($data_col_value){
 
-        $input="<input class=\"off int\" name=\"dati[".$data_col_value."]\" ".
-               "id=\"dati_".$data_col_value."\" value=\"\" size=\"".self::INT_DEFAULT_SIZE."\" readonly=\"readonly\" type=\"text\" />";
+        $input="<input "
+                . "class=\"off int\" "
+                . "name=\"dati[".$data_col_value."]\" "
+                . "id=\"dati_".$data_col_value."\" "
+                . "value=\"\" "
+                . "size=\"".self::INT_DEFAULT_SIZE."\" "
+                . "readonly=\"readonly\" "
+                . "type=\"text\" "
+                . "/>";
 
         return $input;
     }
@@ -41,8 +48,15 @@ class Scheda_View {
 
         $class_ac = ($in_suggest=="1") ? ' autocomp':'';
 
-        $input="<input class=\"off {$class_width}{$class_ac}\" name=\"dati[".$data_col_value."]\" ".
-               "id=\"dati_".$data_col_value."\" value=\"\" size=\"$size\" readonly=\"readonly\" type=\"text\" />";
+        $input="<input "
+                . "class=\"off {$class_width}{$class_ac}\" "
+                . "name=\"dati[".$data_col_value."]\" "
+                . "id=\"dati_".$data_col_value."\" "
+                . "value=\"\" "
+                . "size=\"$size\" "
+                . "readonly=\"readonly\" "
+                . "type=\"text\" "
+                . "/>";
 
 
         // IMPOSTAZIONI SUGGEST PER LA RICERCA -----------------------
@@ -71,8 +85,14 @@ class Scheda_View {
 
         $class_width= (intval($in_line)===1) ? 'halftextarea':'fulltextarea';
 
-        $input="<textarea class=\"off $class_width\" name=\"dati[".$data_col_value."]\" ".
-               "id=\"dati_".$data_col_value."\" cols=\"".self::TEXT_DOUBLE_DEFAULT_SIZE."\" rows=\"9\" readonly=\"readonly\" ></textarea>";
+        $input="<textarea "
+                . "class=\"off $class_width\" "
+                . "name=\"dati[".$data_col_value."]\" "
+                . "id=\"dati_".$data_col_value."\" "
+                . "cols=\"".self::TEXT_DOUBLE_DEFAULT_SIZE."\" "
+                . "rows=\"9\" "
+                . "readonly=\"readonly\" "
+                . "></textarea>";
 
         return $input;
     }
@@ -80,12 +100,29 @@ class Scheda_View {
     static public function type_bool($data_col_value, $db_type){
 
         if($db_type == 'postgres'){
-            $input="<input type=\"checkbox\" onclick=\"this.value=(this.value=='f' || this.value=='')?'t':'f'; mod(this.id);\" class=\"off\" name=\"dati[".$data_col_value."]\" ".
-               "id=\"dati_".$data_col_value."\" disabled=\"disabled\" style=\"margin-left:0;\" value=\"0\" />";
+            
+            $input="<input "
+                    . "type=\"checkbox\" "
+                    . "onclick=\"this.value=(this.value=='f' || this.value=='')?'t':'f'; mod(this.id);\" "
+                    . "class=\"off\" "
+                    . "name=\"dati[".$data_col_value."]\" "
+                    . "id=\"dati_".$data_col_value."\" "
+                    . "disabled=\"disabled\" "
+                    . "style=\"margin-left:0;\" "
+                    . "value=\"0\" "
+                    . "/>";
         }
         else{
-            $input="<input type=\"checkbox\" onclick=\"this.value=(this.value==0 || this.value=='')?1:0; mod(this.id);\" class=\"off\" name=\"dati[".$data_col_value."]\" ".
-               "id=\"dati_".$data_col_value."\" disabled=\"disabled\" style=\"margin-left:0;\" value=\"0\" />";
+            $input="<input "
+                    . "type=\"checkbox\" "
+                    . "onclick=\"this.value=(this.value==0 || this.value=='')?1:0; mod(this.id);\" "
+                    . "class=\"off\" "
+                    . "name=\"dati[".$data_col_value."]\" "
+                    . "id=\"dati_".$data_col_value."\" "
+                    . "disabled=\"disabled\" "
+                    . "style=\"margin-left:0;\" "
+                    . "value=\"0\" "
+                    . "/>";
         }
 
         return $input;
@@ -93,8 +130,16 @@ class Scheda_View {
 
     static public function type_password($data_col_value, $in_default){
 
-        $input="<input class=\"off\" name=\"dati[".$data_col_value."]\" ".
-               "id=\"dati_".$data_col_value."\" value=\"\" size=\"".self::TEXT_DEFAULT_SIZE."\" readonly=\"readonly\" type=\"password\" title=\"$in_default\" />";
+        $input="<input "
+                . "class=\"off\" "
+                . "name=\"dati[".$data_col_value."]\" "
+                . "id=\"dati_".$data_col_value."\" "
+                . "value=\"\" "
+                . "size=\"".self::TEXT_DEFAULT_SIZE."\" "
+                . "readonly=\"readonly\" "
+                . "type=\"password\" "
+                . "title=\"$in_default\" "
+                . "/>";
 
         return $input;
     }
@@ -117,8 +162,12 @@ class Scheda_View {
         $CKEditor1->returnOutput=true;
 
         $input=$CKEditor1->editor('dati_'.$data_col_value, "", $config);
-        $input.="<input type=\"hidden\" id=\"dati_".$data_col_value."\" 
-            name=\"dati[".$data_col_value."]\" value=\"\" />\n";
+        $input.="<input "
+                . 'type="hidden" '
+                . "id=\"dati_".$data_col_value."\" "
+                . "name=\"dati[".$data_col_value."]\" "
+                . "value=\"\" "
+                . "/>\n";
 
         return $input;
 

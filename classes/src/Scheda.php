@@ -394,7 +394,7 @@ JS;
             }
 
             // SE IMPOSTATO, sovrascrivo il tipo sovraimposto a quello di default
-
+            $data_type = $C->data_type;
             $C->data_type = ($C->in_tipo=='' || $C->in_tipo==null) ? $C->data_type : $C->in_tipo;
 
 
@@ -557,13 +557,16 @@ JS;
                     .htmlentities($C->commento,ENT_QUOTES, FRONT_ENCODING)."\">"
                     .$showed_name . $obbligatorio . $span_feed . $href_nuovo_record . $filter. "</label>" : "";
 
+            $class_type = 'datatype--'.str_replace(' ', '-',$C->data_type);
+            $class_type.= ($C->data_type == $data_type) ? '' : ' datatype--'.$data_type;
+
 
             if($riga_singola_override){
 
                 if($C->in_line==0){
 
                     $FORM_0.="
-                        <div class=\"row-s\">
+                        <div class=\"row-s {$class_type}\">
                         {$str_label}{$input}
                         </div>
                         ";
@@ -576,7 +579,7 @@ JS;
                     if($riga_aperta){
 
                         $FORM_0.="
-                        <div class=\"row-d2\">
+                        <div class=\"row-d2 {$class_type}\">
                             {$str_label}{$input}
                         </div><br class=\"sep\" />
                         ";
@@ -585,7 +588,7 @@ JS;
                     else{
 
                         $FORM_0.="
-                        <div class=\"row-d1\">
+                        <div class=\"row-d1 {$class_type}\">
                             {$str_label}{$input}
                         </div>
                         ";
@@ -601,7 +604,7 @@ JS;
                 if($riga_singola){
 
                     $FORM_0.="
-                        <div class=\"row-s\">
+                        <div class=\"row-s {$class_type}\">
                         {$str_label}{$input}
                         </div>
                         ";
@@ -613,7 +616,7 @@ JS;
                     if($riga_aperta){
 
                         $FORM_0.="
-                        <div class=\"row-d2\">
+                        <div class=\"row-d2 {$class_type}\">
                             {$str_label}{$input}
                         </div><br class=\"sep\" />
                         ";
@@ -622,7 +625,7 @@ JS;
                     else{
 
                         $FORM_0.="
-                        <div class=\"row-d1\">
+                        <div class=\"row-d1 {$class_type}\">
                             {$str_label}{$input}
                         </div>
                         ";

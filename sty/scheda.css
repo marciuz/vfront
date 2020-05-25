@@ -56,11 +56,11 @@ form{
 }
 
 .row-d2{
-	
+
 	float:left;
 	width:370px;
 	margin:0;
-	
+
 }
 
 
@@ -173,7 +173,7 @@ input.longchar{
 .off[disabled], .on[disabled]{
 	color:#333;
 }
-	
+
 .on{
 	color:#000;
 	background-color:#FFE;
@@ -193,8 +193,8 @@ input.longchar{
 	margin:auto;
 	text-align:center;
 	font-weight:bold;
-	
-	
+
+
 }
 
 #risposta{
@@ -202,7 +202,7 @@ input.longchar{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	padding:4px;
-	
+
 }
 
 .risposta-giallo{
@@ -247,22 +247,22 @@ input.longchar{
     margin:0;
     padding:0;
   }
-  
+
   /* fine suggest */
-  
-  
-  
+
+
+
   .inalto{
-  
-  	
+
+
   }
-  
+
   .feed-tendina{
-  	
+
   	color:#990;
-  
+
   }
-  
+
 #tipo-vista1 , #tipo-vista2{
 
 	position:absolute;
@@ -347,7 +347,7 @@ table.switch-vista tr td {
 	vertical-align: middle;
 	font-size: 1.4em;
 	padding:30px;
-	
+
 }
 
 #numeri{
@@ -433,7 +433,7 @@ table.switch-vista tr td {
 	padding:2px;
 	border: 1px solid #999;
 	border-collapse:collapse;
-        
+
 }
 
 .table-submask tr td input,
@@ -453,7 +453,7 @@ table.switch-vista tr td {
 	border: 1px solid #999;
 	border-collapse:collapse;
 	background-color:#FC0;
-	
+
 }
 
 .table-submask tr th.sm-update, 
@@ -563,7 +563,7 @@ table.switch-vista tr td {
 }
 
 #popup-hotkeys{
-    
+
     position:absolute;
     width:26px;
     height:164px;

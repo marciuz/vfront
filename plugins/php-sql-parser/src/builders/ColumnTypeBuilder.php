@@ -68,7 +68,7 @@ class ColumnTypeBuilder {
         $builder = new DataTypeBuilder();
         return $builder->build($parsed);
     }
-    
+
     public function build($parsed) {
         if ($parsed['expr_type'] !== ExpressionType::COLUMN_TYPE) {
             return "";
@@ -79,15 +79,15 @@ class ColumnTypeBuilder {
             $sql .= $this->buildDataType($v);
             $sql .= $this->buildColumnTypeBracketExpression($v);
             $sql .= $this->buildReserved($v);
-            
+
             if ($len == strlen($sql)) {
                 throw new UnableToCreateSQLException('CREATE TABLE column-type subtree', $k, $v, 'expr_type');
             }
-    
+
             $sql .= " ";
         }
-    
+
         return substr($sql, 0, -1);
     }
-    
+
 }

@@ -6,22 +6,22 @@
  * @author Marcello Verona
  */
 class Scheda {
-    
+
     private $data_tab;
-    
+
     protected $gid, $oid;
-    
+
     /*private $data_type, $is_nullable, $in_richiesto,
             $in_suggest, $in_tipo, $in_default, $commento, $jstest, $alias_frontend, 
             $in_line, $id_reg;
     */
-    
+
     public $MAX;
-    
+
     public $info_pk;
-    
+
     public $load_calendar=false;
-    
+
     public $carica_md5 = false;
     public $carica_sha1 = false;
     public $fields_autocompleter_from=array();
@@ -30,39 +30,39 @@ class Scheda {
     public $campi_req= array();
     public $campi_suggest= array();
     public $CKEditors= array();
-    
+
     public $outputType = 'JSON';
-    
+
     public $rules=array();
-    
+
     public $Reg;
-    
+
     public $js_select=array();
-    
+
     public function __construct($oid, $gid=null) {
-        
+
         $this->oid = (int) $oid;
         //$this->data_tab = $this->get_data_table($oid);
         $this->gid = ($gid === null) ? $_SESSION['gid'] : $gid;
-        
+
         $this->load_calendar = ($_SESSION['VF_VARS']['usa_calendari']==1) ? true:false;
-        
+
         $this->Reg = new Registry();
         $this->Reg->load_registry($this->oid, $this->gid);
         $this->PT = $this->Reg->public_table();
         $this->info_pk = $this->Reg->PK;
     }
-    
+
     protected function get_data_table(){
-        
+
         return RegTools::prendi_info_tabella($this->oid);
     }
-    
+
     public function table_name(){
         return isset($this->PT->table_name) ? $this->PT->table_name : '';
     }
-    
-    
+
+
     public function set_max(Rpc $RPC){
         $this->MAX = $RPC->tot_records();
     }
@@ -309,14 +309,14 @@ JS;
         return array($js_manuale, $contatore_key);
     }
 
-    
+
     /**
      * Js counter
      */
     public function get_counter(){
-      
+
         global $vmsql;
-        
+
         // SE c'è l'id in GET prendi calcola a che punto dell'elenco si è arrivati
         if(isset($_GET['id']) && $_GET['id']!=0){
 
@@ -367,20 +367,20 @@ JS;
         else{
             $counter=0;
         }
-        
+
         return $counter;
     }
-    
+
     public function field_iterator(){
-        
+
         global $db1;
-        
+
         $riga_aperta=false;
-        
+
         $FORM_0 = '';
-        
+
         foreach($this->Reg->get_column_schedaview() as $i=>$C){
-        
+
             // variabili da impostare dentro il ciclo.  
 
             $label=true;
@@ -389,7 +389,7 @@ JS;
             $href_nuovo_record="";
 
             if($_SESSION['VF_VARS']['js_test']){
-                
+
                 if(!empty($C->jstest)) $this->rules[]=trim($C->jstest);
             }
 
@@ -410,7 +410,7 @@ JS;
 
             // VARCHAR ---------------------------------------------------------
             else if(in_array(strtolower($C->data_type), array('varchar','char'))){
-            
+
                 $riga_singola=true;
                 $input=Scheda_View::type_char($C->column_name, $C->character_maximum_length, $C->in_suggest, $this->table_name(), $C->in_line);
             }
@@ -428,7 +428,7 @@ JS;
             // BOOL ------------------------------------------------------------
 
             else if($C->data_type=='bool'){
-                
+
                 $riga_singola=false;
                 $input = Scheda_View::type_bool($C->column_name, $db1['dbtype']);
             }
@@ -440,7 +440,7 @@ JS;
                 // se c'è almeno una codifica MD5 carica il file JS
                 if($C->in_default=='md5') $this->carica_md5=true;
                 if($C->in_default=='sha1') $this->carica_sha1=true;
-                
+
                 $input = Scheda_View::type_password($C->column_name, $C->in_default);
             }
 
@@ -463,7 +463,7 @@ JS;
 
             // tipo speciale SELECT --------------------------------------------
             else if($C->data_type=='select' || $C->data_type=='select_enum' ){
-                
+
                 $input = Scheda_View::type_select($C->column_name, $C->in_default);
             }
 
@@ -516,7 +516,7 @@ JS;
                 $label=true;
                 $input = Scheda_View::type_unknow($C->column_name);
             }
-            
+
 
 
             // Impostazioni di campi obbligatori
@@ -530,14 +530,14 @@ JS;
 
 
             // Se è tendina dinamica metti un span di feedback
-            
-            
+
+
             // Filter by field
             if(isset($this->PT->allow_filters) && 
                     $this->PT->allow_filters == 1){
-                
+
                 $desaturate = (isset($_GET['w']) && isset($_GET['w'][$C->column_name])) ? '':'desaturate';
-                
+
                 $filter="<span class=\"filter_by_field\" data-k=\"".$C->column_name."\">"
                         ."<img class=\"$desaturate\" src=\"img/filter_add_16x16.gif\" title=\""._('Filter by this field/value')."\" alt=\"filter\" width=\"10\" height=\"10\" />"
                         ."</span>";
@@ -557,7 +557,7 @@ JS;
             $str_label = ($label) ? "<label for=\"dati_".$C->column_name."\" title=\""
                     .htmlentities($C->commento,ENT_QUOTES, FRONT_ENCODING)."\">"
                     .$showed_name . $obbligatorio . $span_feed . $href_nuovo_record . $filter. "</label>" : "";
-            
+
 
             if($riga_singola_override){
 
@@ -635,17 +635,17 @@ JS;
 
 
         } // -- fine ciclo sui campi
-        
+
         return $FORM_0;
     }
-    
-    
+
+
 
     /**
      * Impostazioni per xgrid
      */
     public function xgrid_settings(){
-        
+
         $maxlen = array();
         $xg_campi='';
         $xg_misure='';
@@ -653,13 +653,13 @@ JS;
         $xg_sort='';
         $xg_align='';
         $xg_alias='';
-        
+
         $tfields = $this->Reg->get_column_tableview();
-        
+
         $FType= new FieldType();
-        
+
         for($i=0;$i<count($tfields);$i++){
-            
+
             if($tfields[$i]->in_table != 1) continue;
 
             $lentxt=Scheda::campo_len($tfields[$i]->column_name, $tfields[$i]->data_type);
@@ -669,7 +669,7 @@ JS;
                     ? str_replace(",", '', $tfields[$i]->column_name) 
                     : str_replace(",", '', $tfields[$i]->alias_frontend);
             $xg_alias.=", ";
-            
+
             // replacement of comma, prevention of error
             $xg_campi.= str_replace(",",'',$tfields[$i]->column_name) . ", ";
 
@@ -699,14 +699,14 @@ JS;
         $xg['sort']= substr($xg_sort,0,-1);
         $xg['align']= substr($xg_align,0,-1);
         $xg['maxlen'] = $maxlen;
-        
+
         return $xg;
 
     }
-    
-    
+
+
     public function action_buttons(){
-        
+
         $buttons='';
 
         // BUTTON SEARCH RESULTS
@@ -771,10 +771,10 @@ JS;
         return $buttons;
 
     }
-    
-    
+
+
     public function print_attach_and_links(){
-        
+
         $allegati_tab = ($this->PT->permetti_allegati=='1') ? 1:0;
         $link_tab     = ($this->PT->permetti_link=='1') ? 1:0;
 
@@ -793,17 +793,17 @@ JS;
             return '';
         }
     }
-    
-    
-    
+
+
+
     public function print_hotkeys_pop(){
-        
+
         $scorciatoie = (file_exists("img/scorciatoie_".substr(FRONT_LANG,0,2).".gif")) ? substr(FRONT_LANG,0,2) : 'en';
 
         $html= "<div id=\"popup-hotkeys\"><img src=\"img/scorciatoie_{$scorciatoie}.gif\" alt=\""._('Keyboard shortcuts')."\" "
             ." width=\"24\" height=\"152\" onclick=\"mostra_nascondi('box-scorciatoie');\" />
          </div>\n";
-        
+
         $html.= "
             <div id=\"box-scorciatoie\" 
                  style=\"display:none;\">
@@ -812,19 +812,19 @@ JS;
                 <dl>
                     <dt>"._('CTRL + right arrow')."</dt>
                     <dd>"._('Go forward one record')."</dd>
-                    
+
                     <dt>"._('CTRL + left arrow')."</dt>
                     <dd>"._('Go back one record')."</dd>
-                    
+
                     <dt>"._('CTRL + SHIFT + right arrow')."</dt>
                     <dd>".sprintf(_('Go forward %s records'),$_SESSION['VF_VARS']['passo_avanzamento_veloce'])."</dd>
-                    
+
                     <dt>"._('CRTL + SHIFT + left arrow')."</dt>
                     <dd>".sprintf(_('Go back %s records'),$_SESSION['VF_VARS']['passo_avanzamento_veloce'])."</dd>
-                    
+
                     <dt>"._('CRTL + down arrow')."</dt>
                     <dd>"._("Last record")."</dd>
-                    
+
                     <dt>"._('CRTL + up arrow')."</dt>
                     <dd>"._('First record')."</dd>
                 </dl>
@@ -833,42 +833,42 @@ JS;
                 <dl>
                     <dt>"._('CTRL + ALT + N')."</dt>
                     <dd>"._('New record')."</dd>
-                    
+
                     <dt>"._('CTRL + ALT + M')."</dt>
                     <dd>"._('Modify')."</dd>
-                    
+
                     <dt>"._('CTRL + ALT + S')."</dt>
                     <dd>"._('Save')."</dd>
-                    
+
                     <dt>"._('CTRL + ALT + A')."</dt>
                     <dd>"._('Cancel')."</dd>
-                    
+
                     <dt>"._('CTRL + ALT + E')."</dt>
                     <dd>"._('Delete record')."</dd>
-                    
+
                     <dt>"._('CTRL + ALT + D')."</dt>
                     <dd>"._('Duplicate record')."</dd>
-                    
+
                     <dt>"._('CTRL + ALT + R')."</dt>
                     <dd>"._('Search')."</dd>
-                    
+
                     <dt>"._('CTRL + ENTER (in search mode)')."</dt>
                     <dd>"._('Start search')."</dd>
-                    
+
                 </dl>
                 <hr />
                 <p><strong><em>"._('Attachments and link')."</em></strong></p>
                 <dl>
                     <dt>"._('CTRL + ALT + G')."</dt>
                     <dd>"._('Open attachments (if present in form)')."</dd>
-                    
+
                     <dt>"._('CTRL + ALT + L')."</dt>
                     <dd>"._('Open link (if present in form)')."</dd>
                 </dl>
-                
+
             </div>
             ";
-        
+
         return $html;
     }
 }

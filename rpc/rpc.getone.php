@@ -31,19 +31,19 @@ $q0=$vmreg->query($sql);
 $o = new stdClass();
 
 if($vmreg->num_rows($q0)==1){
-    
+
     list($sql_1)=$vmreg->fetch_row($q0);
-    
+
     // campo id
     preg_match("|SELECT *([^,]+),|i",$sql_1,$ff);
-    
+
     if(strpos($sql_1, "WHERE")===false){
         $sql_1.=" WHERE ".$ff[1]."='".$vmsql->escape($id_record)."'";
     }
     else{
         $sql_1.=" AND ".$ff[1]."='".$vmsql->escape($id_record)."'";
     }
-    
+
     if($vmsql->query_try($sql_1)){
         $q2=$vmsql->query($sql_1);
         $RS=$vmsql->fetch_row($q2);

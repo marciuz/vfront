@@ -11,7 +11,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License
  */
 class RegTools {
-    
+
 
     /**
      * Da l'oid di tabella restituisce il nome della stessa
@@ -165,15 +165,15 @@ class RegTools {
                 return array();
             }
     }
-    
+
     static public function index_group($gid){
-        
+
         global $vmreg, $db1;
-        
+
         $sql="SELECT id_table FROM {$db1['frontend']}{$db1['sep']}registro_tab WHERE gid=".intval($gid);
         $q=$vmreg->query($sql);
         list($ids_table) = $vmreg->fetch_row_all($q, true);
-        
+
         return $ids_table;
     }
 
@@ -684,7 +684,7 @@ class RegTools {
         $sql="SELECT campo_pk_parent, campo_fk_sub , nome_tabella, id_submask 
             FROM {$db1['frontend']}{$db1['sep']}registro_submask 
             WHERE id_table=".intval($id_table);
-            
+
         $q=$vmreg->query($sql);
 
         if($result_type == 'row'){
@@ -908,11 +908,11 @@ class RegTools {
      * @return string (sql)
      */
     static public function campi_elaborati($nome_tabella,$only_visibile=true){
-        
+
         require_once(FRONT_ROOT."/plugins/php-sql-parser/src/PHPSQLParser.php");
-        
+
         $Parser = new PHPSQLParser();
-        
+
         $fields ="c.column_name, c.data_type, "
                 ."c.in_tipo, c.in_default, t.orderby, t.orderby_sort";
 
@@ -928,12 +928,12 @@ class RegTools {
             }
 
             if($info['in_tipo']=="select_from" && trim($info['in_default'])!='' ){
-                
+
                 $prsql = $Parser->parse($info['in_default']);
 
                 //$reg_exp = "|SELECT ([\w.]+) ?, ?([\w.() ,' -]+) +FROM +([\w]+).*?|i";
                 //preg_match($reg_exp,$info['in_default'],$campo_k);
-                
+
                 if(count($prsql['SELECT']) == 1){
                     $f1 = $f2 = $prsql['SELECT'][0]['base_expr'];
                 }
@@ -944,7 +944,7 @@ class RegTools {
 
                 //$campi.=" (SELECT {$campo_k[2]} FROM {$campo_k[3]} t$k WHERE t$k.{$campo_k[1]}=t.{$info['column_name']}) ".$info['column_name'].",";
                 $campi.=" (SELECT $f2 FROM {$prsql['FROM'][0]['table']} t$k WHERE t$k.$f1=t.{$info['column_name']}) ".$info['column_name'].",";
-                
+
             }
             else{
 

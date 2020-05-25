@@ -15,13 +15,13 @@ require_once("../inc/conn.php");
  proteggi(2);
 
 if(isset($_GET['sql'])){
-	
+
 	$sql = stripslashes($_GET['sql']);
-	
+
 	echo $res=$vmsql->query_try($sql,true);
 }
 else{
 	# nessuna chiamata
 	echo "-2";
-	
+
 }

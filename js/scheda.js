@@ -15,45 +15,45 @@ function createRequestObject() {
 }
 
 function date_encode(mydate){
-	
+
 	if(VF.dateEncode==='iso') return mydate;
-	
+
 	var tk0=mydate.split(' ');
 	var d0=tk0[0].split('-');
 	if(d0.length!=3) return mydate;
-	
+
 	var ora0=(tk0.length==2) ? ' '+tk0[1] : '';
-	
+
 	switch(VF.dateEncode){
-		
+
 		case 'ita':return d0[2]+"/"+d0[1]+"/"+d0[0]+ora0;
 		break;
-			
+
 		case 'eng':return d0[1]+"/"+d0[2]+"/"+d0[0]+ora0;
 		break;
 	}
-	
+
 }
 
 function date_decode(mydate){
-	
+
 	if(VF.dateEncode==='iso') return mydate;
-    
+
 	var tk0=mydate.split(' ');
 	var d0=tk0[0].split('/');
 	if(d0.length!=3) return mydate;
-	
+
 	var ora0=(tk0.length==2) ? ' '+tk0[1] : '';
-	
+
 	switch(VF.dateEncode){
-		
+
 		case 'ita':return d0[2]+"-"+d0[1]+"-"+d0[0]+ora0;
 		break;
-			
+
 		case 'eng':return d0[2]+"-"+d0[0]+"-"+d0[1]+ora0;
 		break;
 	}
-	
+
 }
 
 
@@ -65,12 +65,12 @@ function date_decode(mydate){
  * @returns {Boolean}
  */
 function sndReq(action, offset, verifica_modifica){
-    
+
     jQuery('#refresh').show();
-    
+
     // test se si è in fase di modifica
 	if(verifica_modifica && VF.record_bloccato){
-        
+
 		// se non sono state operate modifiche sui campi sblocca senza chiedere nulla
 		if(VF.campi_mod.length==0){
 			unlock();
@@ -79,7 +79,7 @@ function sndReq(action, offset, verifica_modifica){
 		else{
 			// Mostra il CONFIRM
 			var tralascia_modifiche = confirm(_("Warning")+"\n"+_('The record was not saved.')+"\n"+_('Discard changes?'));
-			
+
 			// sblocca e vai dove vuoi
 			if(tralascia_modifiche){
 				unlock();
@@ -89,11 +89,11 @@ function sndReq(action, offset, verifica_modifica){
 				return false;
 			}
 		}
-		
+
 	}
      // PRENDI LA CHIAVE PRIMARIA DEL RECORD
     inputs=jQuery('input');
-          		
+
 	if(VF.max==0){
 		document.forms.singleform.reset();
 		return false;
@@ -118,7 +118,7 @@ function sndReq(action, offset, verifica_modifica){
 		VF.counter=(VF.max-1);
 	}
 	else if(offset=='manual'){
-		
+
 		VF.counter=$('campo_goto').value - 1;
 		if(VF.counter > ( VF.max -1)){
 			VF.counter = (VF.max - 1);
@@ -132,26 +132,26 @@ function sndReq(action, offset, verifica_modifica){
 			VF.idRecord = VF.localIDRecord;
 		}
 	}
-    
+
     stato_p();
-	
+
 	// disattiva la ricerca
 	if(VF.ricerca){
 		annulla_ricerca();
 	}
-	
+
 	// disattiva le modifiche
 	annulla_campi(false);
-	
+
 	var url_string_rpc=VF.pathRelativo+'/rpc.php?action='+action+'&c='+VF.counter+'&id='+VF.idRecord+'&hash=' + Math.random();
 	url_string_rpc+='&'+window.location.search.substr(1);
-    
+
     var data_type='xml';
-    
+
     if(typeof(VF['outputType']) == 'string' &&  VF['outputType'] == 'JSON'){
         var data_type = 'json';
     }
-    
+
     jQuery.ajax({
         url: url_string_rpc,
         dataType: data_type,
@@ -171,7 +171,7 @@ function sndReq(action, offset, verifica_modifica){
 
 
 function pulisci_SUB(){
-    
+
 	jQuery('.table-submask-vis').hide();
 	for(i=0;i<VF.sottomaschere.length;i++){
 		jQuery('#sm_'+VF.sottomaschere[i]).css('font-weight', 'normal');
@@ -185,28 +185,28 @@ function pulisci_SUB(){
  * @returns void
  */
 function sndReqUpdate(action) {
-    
+
     inputs = jQuery('input');
-	
+
     var post_string='';
-    
+
 	for(j=0;j<inputs.length;j++){
-		
+
 		// PK
 		if(inputs[j].id.substring(0,3)=="pk_"){
 			post_string += inputs[j].name + "=";
 			post_string += inputs[j].value + "&";
 		}
-		
+
 		// aggiungi gli hidden
 		if(inputs[j].id.substring(0,5)=="dati_" && inputs[j].type=='hidden'){
-            
+
             if(jQuery(inputs[j]).hasClass('autocomp_from_hidden') && (jQuery(inputs[j]).val()=='' || jQuery(inputs[j]).val() == null)){
                 continue;
             }
-            
+
 			VF.campi_mod[VF.campi_mod.length]=inputs[j].id;
-			
+
 			if(inputs[j].className=='nomodify'){
 				// Impostazioni per gli hidden DEFAULT
 				var span_hidden='hd_'+inputs[j].id;
@@ -214,36 +214,36 @@ function sndReqUpdate(action) {
 				inputs[j].value=variabile_hidden;
 			}
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	// AGGIUNGI GLI EVENTUALI FCK
 	if(VF.fck_attivo){
 			for(i=0;i<VF.fck_vars.length;i++){
-				
+
 				editorfck = CKEDITOR.instances['dati_'+ VF.fck_vars[i]];
 
 				// attribuisco all'hidden che si chiama come il fckeditor il valore assunto dallo stesso
 				$('dati_'+ VF.fck_vars[i]).value=editorfck.getData();
 			}
 	}
-	
-	
+
+
 	for(g=0;g<VF.campi_mod.length;g++){
-		
+
 		valore_post=null;
-		
+
 			// opzioni per i campi password
 			if($(VF.campi_mod[g]).type=='password'){
-				
+
 				if($(VF.campi_mod[g]).type=='password' 
 					&& $(VF.campi_mod[g]).title=='md5' 
 					&& $(VF.campi_mod[g]).value.length!=32
 					&& $(VF.campi_mod[g]).value.length>0
 					) {
-					
+
 					$(VF.campi_mod[g]).value = hex_md5($F(VF.campi_mod[g]));
 				}
 				else if($(VF.campi_mod[g]).type=='password' 
@@ -251,13 +251,13 @@ function sndReqUpdate(action) {
 					&& $(VF.campi_mod[g]).value.length!=40
 					&& $(VF.campi_mod[g]).value.length>0
 					) {
-					
+
 					$(VF.campi_mod[g]).value = hex_sha1($F(VF.campi_mod[g]));
 				}
-				
+
 				valore_post=$(VF.campi_mod[g]).value;
 			}
-			
+
 			// opzioni per le date
 			else if($(VF.campi_mod[g]).hasClassName('data')){
 				valore_post=date_decode($F(VF.campi_mod[g]));
@@ -265,17 +265,17 @@ function sndReqUpdate(action) {
 			else{
 				valore_post=$(VF.campi_mod[g]).value;
 			}
-			
+
 			post_string += $(VF.campi_mod[g]).name + "=";
-			
+
 			if (encodeURIComponent) {
 			    post_string += encodeURIComponent(valore_post) + "&";
 			} else {
 				post_string += escape(valore_post) + "&";
 			}
 		}
-	
-    
+
+
     var urlString = VF.pathRelativo+'/rpc.php?post=update&action='+action+'&c='+VF.counter;
     jQuery.ajax({
         url: urlString,
@@ -299,7 +299,7 @@ function sndReqUpdate(action) {
             }
         }
     });
-    
+
 }
 
 /**
@@ -308,28 +308,28 @@ function sndReqUpdate(action) {
  * @returns void
  */
 function sndReqPostNew(action) {
-    
+
     var urlString = VF.pathRelativo+'/rpc.php?post=new&action='+action;
-    
+
     inputs = jQuery('input');
-	
+
     var post_string='';
-  
+
 	for(j=0;j<inputs.length;j++){
-		
+
 		// PK
 		if(inputs[j].id.substring(0,3)=="pk_"){
 			post_string += inputs[j].name + "=";
 			post_string += inputs[j].value + "&";
 		}
-    
+
 		// aggiungi gli hidden
 		if(inputs[j].id.substring(0,5)=="dati_" && inputs[j].type=='hidden'){
-            
+
             if(jQuery(inputs[j]).hasClass('autocomp_from_hidden') && (jQuery(inputs[j]).val()=='' || jQuery(inputs[j]).val() == null)){
                 continue;
             }
-            
+
 			VF.campi_mod[VF.campi_mod.length]=inputs[j].id;
 
 			// Impostazioni per gli hidden DEFAULT
@@ -339,11 +339,11 @@ function sndReqPostNew(action) {
                 inputs[j].value=variabile_hidden;
 			}
 			catch(e){
-                
+
             }
 		}
 	}
-	
+
 	// AGGIUNGI GLI EVENTUALI FCK
 	if(VF.fck_attivo){
         for(i=0;i< VF.fck_vars.length;i++){
@@ -354,59 +354,59 @@ function sndReqPostNew(action) {
             $('dati_'+ VF.fck_vars[i]).value=editorfck.getData();
         }
 	}
-	
+
 	for(g=0; g < VF.campi_mod.length; g++){
-		
+
 		valore_post='';
-		
+
 			// opzioni per i campi password
 			if($(VF.campi_mod[g]).type=='password'){
-				
+
 				if($(VF.campi_mod[g]).type=='password' 
 					&& $(VF.campi_mod[g]).title=='md5' 
 					&& $(VF.campi_mod[g]).value.length!=32
 					&& $(VF.campi_mod[g]).value.length>0
 					) {
-					
+
 					$(VF.campi_mod[g]).value = hex_md5($F(VF.campi_mod[g]));
-					
+
 				}
 				else if($(VF.campi_mod[g]).type=='password' 
 					&& $(VF.campi_mod[g]).title=='sha1' 
 					&& $(VF.campi_mod[g]).value.length!=40
 					&& $(VF.campi_mod[g]).value.length>0
 					) {
-					
+
 					$(VF.campi_mod[g]).value = hex_sha1($F(VF.campi_mod[g]));
 				}
 				valore_post=$(VF.campi_mod[g]).value;
 			}
 			else if($(VF.campi_mod[g]).hasClassName('data')){
-				
+
 				valore_post=date_decode($F(VF.campi_mod[g]));
 			}
 			else{
-				
+
 				valore_post=$(VF.campi_mod[g]).value;
 			}
-		
+
 			post_string += $(VF.campi_mod[g]).name + "=";
-			
+
 			if (encodeURIComponent) {
 			    post_string += encodeURIComponent(valore_post) + "&";
 			} else {
 				post_string += escape(valore_post) + "&";
 			}
-			
+
 		}
-    
+
     jQuery.ajax({
         url: urlString,
         type: 'POST',
         data: post_string,
         dataType: 'json',
         success: function(res){
-	 	
+
             if(res.error!=false){
                 setStatus(_('Unable to insert record')+': '+res.error_code.code+' '+res.error_code.msg ,6000,'risposta-arancio');
             }
@@ -414,7 +414,7 @@ function sndReqPostNew(action) {
 
                 // cambia il valore di max
                 VF.max = VF.max+1;
-                
+
                 // aggiorna i contatori ed i pulsanti
                 stato_p();
 
@@ -424,13 +424,13 @@ function sndReqPostNew(action) {
 
                 // se è una scheda "nuovo valore"
                 if(haveParent){
-                    
+
                     jQuery.ajax({
                         url: VF.pathRelativo+'/rpc.refresh_iframe.php',
                         type: 'POST',
                         data: 'tabella='+ VF.parentTable+'&campo='+ VF.parentField,
                         success: function (hash_aggiornato){
-	 	
+
                             window.opener.document.getElementById('i_id_'+ VF.parentField).src='files/html/'+hash_aggiornato+'.html';
                             window.opener.document.getElementById('i_id_'+ VF.parentField).className='on';
                             window.opener.document.getElementById('i_id_'+ VF.parentField).disabled='';
@@ -439,9 +439,9 @@ function sndReqPostNew(action) {
                             setTimeout( "self.close()",800);
                             window.opener.focus();
                         }
-                        
+
                     });
-                    
+
                     window.opener.document.getElementById('i_id_'+VF.parentField).className='on';
                     window.opener.document.getElementById('i_id_'+VF.parentField).disabled='';
                 }
@@ -460,22 +460,22 @@ function sndReqPostNew(action) {
  * @returns {undefined}
  */
 function sndReqPostCerca(action) {
-    
+
 	if(VF.campi_mod.length>0){
 
 	    var post_string='';
 	    var fromsub='';
-	    
+
 		for(var g=0;g<VF.campi_mod.length;g++){
-		    
+
 		    if(VF.campi_mod[g]=='undefined'){
                 continue;
 		    }
-		    
+
 		    if(isSearchFromSub(VF.campi_mod[g])){
                 fromsub='&fromsub='+smoid_search;
 		    }
-			
+
 		    if(jQuery('#'+VF.campi_mod[g]).attr('type')=='checkbox'){
 			    valore_ricerca=jQuery('#'+VF.campi_mod[g]+':checked') ? 1 : 0;
 		    }
@@ -492,7 +492,7 @@ function sndReqPostCerca(action) {
                 post_string += escape(valore_ricerca) + "&";
 		    }
 		}
-		
+
         var urlString = VF.pathRelativo+'/rpc.php?post=cerca&action='+action+fromsub;
 		jQuery.ajax({
             url: urlString,
@@ -541,7 +541,7 @@ function search_response(risposta_sql){
 }
 
 function sndReqPostCercaFromGET(action,qs) {
-    
+
     jQuery.ajax({
         url: VF.pathRelativo+'/rpc.php?post=cerca&action='+action,
         type: 'POST',
@@ -554,18 +554,18 @@ function sndReqPostCercaFromGET(action,qs) {
 
 function sndReqPostDelete(action) {
     var urlString= VF.pathRelativo+'/rpc.php?post=delete&action='+action;
-    
+
     inputs = jQuery('input');
     var post_string='';
-    
+
 	for(j=0;j<inputs.length;j++){
-		
+
 		if(inputs[j].id.substring(0,3)=="pk_"){
 			post_string += inputs[j].name + "=";
 			post_string += inputs[j].value + "&";
 		}
 	}
-    
+
     jQuery.ajax({
         url: urlString,
         type: 'POST',
@@ -584,7 +584,7 @@ function sndReqPostDelete(action) {
                     // aggiorna i contatori ed i pulsanti
                     stato_p();
                 }
-                
+
                 sndReq(VF.tabella,'prev',false);
 
                 setStatus(_('Record deleted correctly'),3500,'risposta-giallo');
@@ -598,7 +598,7 @@ function sndReqPostDelete(action) {
             }
         }
     });
-    
+
 }
 
 
@@ -611,25 +611,25 @@ function sndReqPostDelete(action) {
  * @returns void
  */
 function duplicate_record(action, oid_sub, duplica_allegati, duplica_link){
-    
+
     var urlString = VF.pathRelativo+'/rpc.php?post=duplica&action='+action+"&oid_sub="+oid_sub+"&da="+duplica_allegati+"&dl="+duplica_link;
-    
+
     inputs = jQuery('input');
     var post_string='';
-    
+
 	for(j=0;j<inputs.length;j++){
 		if(inputs[j].id.substring(0,3)=="pk_"){
 			post_string += inputs[j].name + "=";
 			post_string += inputs[j].value + "&";
 		}
 	}
-    
+
     jQuery.ajax({
         url: urlString,
         type: 'POST',
         data: post_string,
         success: function(risposta_sql){
-            
+
             var array_ris_duplica=risposta_sql.split("|");
 
             if(array_ris_duplica[0]==1){
@@ -657,7 +657,7 @@ function duplicate_record(action, oid_sub, duplica_allegati, duplica_link){
  * @returns {get_pk.Anonym$1|get_pk.Anonym$2}
  */
 function get_pk(){
-    
+
      var pkf = jQuery('input[id^="pk_"]');
      if(pkf.length > 0){
         return {'key':pkf[0].id.substr(3), 'value': pkf[0].value};
@@ -674,15 +674,15 @@ function get_pk(){
  * @returns void
  */
 function lock_record(){
-   
+
     var PK = get_pk();
-    
+
     var urlString = VF.pathRelativo+'/rpc.recordlock.php?tab='+VF.tabella+'&col='+PK.key+'&id='+PK.value+'&blocca=1&hash=' + Math.random();
-    
+
     jQuery.ajax({
         url: urlString,
         success: function(esito_sql){
-           
+
             if(esito_sql==1){
                 attiva_campi('modifica');
                 VF.tipo_salva="modifica";
@@ -700,10 +700,10 @@ function lock_record(){
  * @returns {undefined}
  */
 function unlock(){
-    
+
     var PK = get_pk();
     var urlString= VF.pathRelativo+'/rpc.recordlock.php?tab='+VF.tabella+'&col='+ PK.key +'&id='+ PK.value +'&sblocca=1&hash=' + Math.random();
-    
+
     jQuery.ajax({
         url: urlString,
         success: function(esito_sql){
@@ -722,9 +722,9 @@ function unlock(){
  * @returns {undefined}
  */
 function get_one(field,id_record){
-    
+
     var urlString = VF.pathRelativo+'/rpc.getone.php?oid='+oid+'&id_record='+id_record+'&field='+field+'&hash=' + Math.random();
-    
+
     jQuery.ajax({
         url: urlString, 
         dataType: 'json',
@@ -736,14 +736,14 @@ function get_one(field,id_record){
 
 
 function stato_p(){
-	
+
 	var p_primo=    jQuery('#p_primo')[0];
 	var p_prev=     jQuery('#p_prev')[0];
 	var p_prev10=   jQuery('#p_prev10')[0];
 	var p_next=     jQuery('#p_next')[0];
 	var p_next10=   jQuery('#p_next10')[0];
 	var p_max=      jQuery('#p_ultimo')[0];
-	
+
 	if(VF.counter===0){
 		p_primo.disabled=true;
 		p_prev.disabled=true;
@@ -753,15 +753,15 @@ function stato_p(){
 		p_primo.disabled=false;
 		p_prev.disabled=false;
 	}
-	
+
 	if(VF.counter - VF.passoVeloce < 0){
 		p_prev10.disabled=true;
 	}
 	else{
 		p_prev10.disabled=false;
 	}
-	
-	
+
+
 	// next
 	if(VF.counter + VF.passoVeloce >= VF.max){
 		p_next10.disabled=true;
@@ -769,7 +769,7 @@ function stato_p(){
 	else{
 		p_next10.disabled=false;
 	}
-	
+
 	if(VF.counter >= (VF.max-1)){
 		p_max.disabled=true;
 		p_next.disabled=true;
@@ -779,12 +779,12 @@ function stato_p(){
 		p_max.disabled=false;
 		p_next.disabled=false;
 	}
-	
+
 	VF.modifiche_attive=false;
 	jQuery('#p_save')[0].disabled=true;
 	jQuery('#p_annulla')[0].disabled=true;
-	
-    
+
+
     if(VF.max > 0){
         var html_w = _('Record')+' <span id="goto" ondblclick="goto1();">'+(VF.counter + 1)+'</span> '+_('of')+' '+ VF.max;
         jQuery('#numeri').html(html_w);
@@ -806,28 +806,28 @@ function stato_p(){
  * @returns void
  */
 function load_record_response_xml(xml) {
-    	
+
     // OPERAZIONI DI RESET	 ----------------------------------------------------------
-    	
+
     	// Resetto i campi normali
     	document.forms.singleform.reset();
-    	
-    	
+
+
     	// Resetto gli evbentuali FCK editor
     	if(VF.fck_attivo && VF.fck_vars.length>0){
-    		
+
     		for(var f=0;f< VF.fck_vars.length;f++){
                 CKEDITOR.instances["dati_"+ VF.fck_vars[f]].setData('',blocca_ck);
     		}
     	}
-    	
+
     //---------------------------------------------------------------------------------
-    	
+
     	var tag0 = xml.getElementsByTagName("recordset").item(0);
     	var max = Number(tag0.attributes[0].value); // tot
-    	
+
     	var tag1= xml.getElementsByTagName("row").item(0);
-    	
+
     	if(Number(VF.idRecord)>0){
 
     		// prendo l'attributo 'offset' del tag row
@@ -836,14 +836,14 @@ function load_record_response_xml(xml) {
 
                 annulla();
     	}
-    	
+
         // cancel all autocompleter_from
         jQuery('.autocomp_from_hidden').val('');
-    	
+
     	var n_nodi_provvisorio = tag1.childNodes.length;
     	var n_nodi=0;
     	var nomi_nodi=new Array();
-		
+
 		for(i=0;i<n_nodi_provvisorio;i++){
 
 			// la condizione per Mozilla
@@ -852,36 +852,36 @@ function load_record_response_xml(xml) {
 				nomi_nodi[nomi_nodi.length]=tag1.childNodes[i].nodeName;
 			}
 		}
-		
+
 			Scheda=new Array();
-			
+
 			for(i=0;i<n_nodi;i++){
-			
+
 				try{
 					valore='';
 					nome_nodo = nomi_nodi[i];
 					var puntatore = xml.getElementsByTagName(nome_nodo).item(0);
 					valore=(puntatore.firstChild.data) ? puntatore.firstChild.data : '';
-					
+
 					Scheda[i]= new Array(nome_nodo,valore);
-					
-					
+
+
 					// IMPOSTA LA CHIAVE PRIMARIA DEL RECORD
 					if($("pk_"+nome_nodo)){
-						
+
 						$("pk_"+nome_nodo).value=valore;
 						VF.localIDRecord=valore;
 					}
-					
+
 					// campi sola lettura
 					if($("dati_"+nome_nodo).className=='onlyread-field'){
-						
+
 						$("dati_"+nome_nodo).innerHTML=valore+' ';
 					}
-					
+
 					// Esclusione per i campi hidden
 					else if($("dati_"+nome_nodo) && $("dati_"+nome_nodo).className!='nomodify') {
-					
+
 						// Attribuzione DATA o DATETIME
 						if($("dati_"+nome_nodo).hasClassName('data')){
 
@@ -891,18 +891,18 @@ function load_record_response_xml(xml) {
 						else{
 							$("dati_"+nome_nodo).value=valore;
 						}
-						
-						
+
+
 						// CONDIZIONE PER I CHECKBOX
 						if($("dati_"+nome_nodo).type=='checkbox'){
-							
+
 							if($("dati_"+nome_nodo).value=='1' || (VF.PGdb==true && $("dati_"+nome_nodo).value=='t')){
 								$("dati_"+nome_nodo).checked=true;
 							}
 							else{
 								$("dati_"+nome_nodo).checked=false;
 							}
-							
+
 						}
 
 						if(VF.fck_attivo && VF.fck_vars.inArray(nome_nodo)){
@@ -914,30 +914,30 @@ function load_record_response_xml(xml) {
 //					xmlError(e);
 				}
 			}
-    	
+
 		VF.idRecord=0;
-		
+
 		// prendi le sottomaschere
 		if( VF.sottomaschere.length>0){
 			richiediSUB();
 		}
-		
+
 		// richiama gli allegati e i link se impostati
 		if(VF.permettiAllegati!=0 || VF.permettiLink!=0){
 			richiediAL();
 		}
-		
+
 		// call the embedded subforms
                 if(VF.sm_embed.length>0){
-                    
+
                     for(var l=0;l<VF.sm_embed.length;l++){
-                        
+
                         richiediEMBED(VF.sm_embed[l]);
                     }
                 }
-		
+
 		for(var a=0;a< VF.campiAutocompleterFrom.length;a++){
-		    
+
 		    if(VF.campiAutocompleterFrom[a]!=''){
                 tmp_var1=VF.campiAutocompleterFrom[a].substr(5);
                 tmp_val1=$(VF.campiAutocompleterFrom[a]).value;
@@ -1089,7 +1089,7 @@ function xmlError(e) {
 /* FUNZIONI PER L'INIZIALIZZAZIONE */
 
 function inizializza_pulsanti_modifica(){
-	
+
 		if((VF.tendineAttese - VF.nTendine)==0 && (!VF.fck_attivo || VF.fck_pronti==VF.fck_vars.length)){
 			inizializza_scheda();
 		}
@@ -1097,7 +1097,7 @@ function inizializza_pulsanti_modifica(){
 }
 
 function triggerLoadTendina(){
-		
+
 		VF.nTendine++;
 		if((VF.tendineAttese - VF.nTendine)==0 && (!VF.fck_attivo || VF.fck_pronti==VF.fck_vars.length)){
 			inizializza_scheda();
@@ -1106,15 +1106,15 @@ function triggerLoadTendina(){
 
 
 function FCKeditor_OnComplete( editorInstance ){
-	  
+
 	if(editorInstance.Name){
     	VF.fck_pronti++;
     }
-    
+
     if(VF.fck_pronti==VF.fck_vars.length && (VF.tendineAttese - VF.nTendine)==0 ){		
     	inizializza_scheda();	
     }
-    
+
 }
 
 function CKeditor_OnComplete(){
@@ -1156,10 +1156,10 @@ function CKeditor_OnComplete(){
 
     VF.fck_pronti=VF.fck_vars.length;
 
-	
-	
+
+
 	for(i=0;i<VF.fck_vars.length;i++){
-		
+
 		CKEDITOR.instances['dati_'+VF.fck_vars[i]].on('key', function(ee) { 
 			if(VF.modificaRecord || VF.nuovoRecord || VF.ricerca){
 				mod(ee.sender.name);
@@ -1179,8 +1179,8 @@ function CKeditor_OnComplete(){
 }
 
 function triggerFCK(){
-	
-	
+
+
 }
 
 
@@ -1189,14 +1189,14 @@ function inizializza_scheda(){
 		// nascondi i div preloader
 		//jQuery('#pop-loader-contenitore').remove();
 		jQuery('#loader-scheda0').remove();
-	
+
 		if(VF.max==0){
 			jQuery('#p_update')[0].disabled=true;
 			jQuery('#numeri').html(_('There are no records in this table'));
             jQuery('#refresh').hide();
             stato_p();
 		}
-		
+
 		else{
 			if(VF.counter==0){
 				sndReq(VF.tabella,'min',false);	
@@ -1204,52 +1204,52 @@ function inizializza_scheda(){
 			else{
 				sndReq(VF.tabella,'id',false);	
 			}
-			
+
 		}
-		
+
 		$('p_save').disabled=true;
 		$('p_annulla').disabled=true;
-		
+
 		VF.initScheda=true;
-		
+
 		// manda l'eventuale ricerca di GET
 		if(VF.GETqs!=''){
 			sndReqPostCercaFromGET(VF.tabella, VF.GETqs);
 		}
-		
+
 
 }
 
 
 function attiva_campi(classe){
-	
+
 	if(classe=='ricerca'){
 		cn='s';
 	}
 	else {
 		cn='on';
 	}
-	
+
 	inputs = jQuery('input');
 	textareas = jQuery('textarea');
 	selects = jQuery('select');
-	
+
 	for(j=0;j<inputs.length;j++){
-	    
+
 		if(cn=='s' && inputs[j].hasClassName('hh_field')){
-		    
+
 		    inputs[j].readOnly=false;
 		    chfield(inputs[j],cn);
-		    
+
 		}
 		else if(inputs[j].id.substring(0,5)=="dati_" 
 		  && inputs[j].type!='hidden' 
 		  && inputs[j].type!='checkbox'
 		  && !inputs[j].hasClassName('hh_field')) {
-		  
+
 			inputs[j].readOnly=false;
 			chfield(inputs[j],cn);
-			
+
 		}
 		else if(inputs[j].id.substring(0,5)=="dati_" && inputs[j].type=='checkbox'){
 			inputs[j].disabled=false;
@@ -1262,21 +1262,21 @@ function attiva_campi(classe){
 			}
 		}
 	}
-	
+
 	for(j=0;j<textareas.length;j++){
 		if(textareas[j].id.substring(0,5)=="dati_"){
 			textareas[j].readOnly=false;
 			chfield(textareas[j],cn);
 		}
 	}
-	
+
 	for(j=0;j<selects.length;j++){
 		if(selects[j].id.substring(0,5)=="dati_"){
 			selects[j].disabled=false;
 			chfield(selects[j],cn);
 		}
 	}
-	
+
 	// FCK
 	if(VF.fck_attivo){
 
@@ -1287,12 +1287,12 @@ function attiva_campi(classe){
 		}
 		attiva_ck();
 	}
-	
-	
+
+
 	$('p_update').disabled=true;
 	$('p_annulla').disabled=false;
-	
-	
+
+
 }
 
 function disattiva_campi(){
@@ -1300,17 +1300,17 @@ function disattiva_campi(){
 	inputs=jQuery('input');
 	textareas = jQuery('textarea');
 	selects = jQuery('select');
-	
+
 	for(j=0;j<inputs.length;j++){
 		if(inputs[j].id.substring(0,5)=="dati_"){
-			
+
 			if(inputs[j].type=='checkbox'){
 				inputs[j].disabled=true;
 			}
 			else{
 				inputs[j].readOnly=true; 
 			}
-			
+
 			// eccezione per gli hidden
 			if(inputs[j].className!='nomodify'){
 				if(inputs[j].hasClassName('data')){
@@ -1319,21 +1319,21 @@ function disattiva_campi(){
 				else {
 					chfield(inputs[j],'off');
 				}
-					
+
 			}
-			
+
 		}
 	}
-	
-	
+
+
 	for(j=0;j<textareas.length;j++){
 		if(textareas[j].id.substring(0,5)=="dati_"){
 			textareas[j].readOnly=true;
 			chfield(textareas[j],'off');
 		}
 	}
-	
-	
+
+
 	for(j=0;j<selects.length;j++){
 		if(selects[j].id.substring(0,5)=="dati_"){
 			selects[j].disabled=true;
@@ -1349,7 +1349,7 @@ function disattiva_campi(){
 
 
 function modifica(){
-	
+
 	VF.record_bloccato=true;
 	VF.modificaRecord=true;
 	lock_record();
@@ -1360,15 +1360,15 @@ function modifica(){
 function annulla_ricerca(){
 
 		VF.ricerca=false;
-		
+
 		$('p_cerca').value=" "+_(' Search ')+" ";
 		$('p_cerca').className='';
 		$('p_cerca').onClick='cerca();';
-				
+
 		$('p_annulla').disabled=true;
 		$('p_insert').disabled=false;
 		$('p_delete').disabled=false;
-		
+
 		jQuery('.pulsante-submask').each(function (i, e){
             e.enable();
         });
@@ -1376,38 +1376,38 @@ function annulla_ricerca(){
 
 
 function annulla(){
-	
-	
+
+
 	if(VF.ricerca){
 		annulla_ricerca();
 	}
 	else{
 		unlock();	
 	}
-	
+
 	VF.campi_mod= new Array();
 	annulla_campi(true);
 }
 
 function annulla_campi(manda){
-	
+
 	if(manda){
 		sndReq(VF.tabella, VF.counter, false);
 	}
-	
-	
-	
+
+
+
 	disattiva_campi();
-	
+
 	VF.modifiche_attive=false;
-	
+
 	VF.nuovoRecord=false;
 	VF.modificaRecord=false;
-	
+
 	$('p_save').disabled=true;
 	$('p_annulla').disabled=true;
 	$('p_update').disabled=false;
-	
+
 }
 
 
@@ -1426,24 +1426,24 @@ function mod(id){
 			}
 		}
 	}
-	
+
 	$('p_annulla').disabled=false;
-	
+
 	trovato=false;
-	
+
 	// search on autocompleter_from
 	if(id.substr(0,8)=='dati_ac_'){
 	    id='dati_'+id.substr(8);
 	}
-	
-	
+
+
 	// se non c'� gia'
 	for(t=0;t<VF.campi_mod.length;t++){
 		if(VF.campi_mod[t]==id){
 			trovato=true;
 		}
 	}
-	
+
 	if(!trovato){
 		VF.campi_mod[VF.campi_mod.length]=id;
 	}
@@ -1456,22 +1456,22 @@ function modfck(ofck){
 }
 
 function salva(){
-	
+
 	msg = controlla_dati();
-		
+
 	if(msg!=''){
 		alert (_("Warning!")+"\n"+msg);
 		return false;
 	}
-	
+
 	else{
-		
+
 		// Controllo sui campi YAV 
 		if(VF.jstest){
 			test_yav= performCheck('singleform', rules, 'classic');
 			if(!test_yav) return false;
 		}
-	
+
 		if(VF.tipo_salva=='modifica'){
 			unlock();
 			sndReqUpdate(VF.tabella);
@@ -1484,38 +1484,38 @@ function salva(){
 		VF.modifiche_attive=true;
 		$('p_save').disabled=true;
 		$('p_annulla').disabled=true;
-		
+
 		annulla_campi(false);
 	}
 }
 
 
 function nuovo_record(){
-	
+
 	$('p_save').disabled=false;
 	$('p_annulla').disabled=false;
 	$('p_update').disabled=true;
-	
+
 	f=document.forms.singleform;
-	
+
 	f.reset();
-	
+
 	attiva_campi('nuovo');	
-		
+
 	VF.tipo_salva="nuovo";
-	
+
 	VF.nuovoRecord=true;
-	
+
 	pulisci_SUB();
-	
-	
-	
-	
+
+
+
+
 	// Metti una variabile 'new' su localIDRecord utile per allegati e link
 	VF.localIDRecord = 'new';
 	richiediAL();
-	
-	
+
+
 	if(VF.fck_attivo){
 		for(i=0;i<VF.fck_vars.length;i++){
 			CKEDITOR.instances["dati_"+VF.fck_vars[i]].setData('',attiva_ck);
@@ -1525,98 +1525,98 @@ function nuovo_record(){
 	// READONLY fields
 	jQuery('.hh_field').each( function (){jQuery(this).val('');});
 	jQuery('.autocomp_from_hidden').each( function (){jQuery(this).val('');});
-    
+
 }
 
 
 function cerca(){
-	
+
 	if(VF.ricerca){
 		invia_ricerca();
 	}
-	
-	
+
+
 	$('p_save').disabled=true;
 	$('p_annulla').disabled=false;
 	$('p_update').disabled=true;
 	$('p_insert').disabled=true;
 	$('p_delete').disabled=true;
-	
+
 	inputs = jQuery('input');
 	textareas = jQuery('textarea');
-	
+
 	// eventually embedded subforms
 	jQuery('.embed-nodata').hide();
 	jQuery('.sub-search').show();
-	
 
-	
+
+
 	jQuery('.table-submask-vis').each( function(){
-	   
+
 	   table_on_search(jQuery(this));
 	});
-	
-	
-	
+
+
+
 	f=document.forms.singleform;
 	f.reset();
-	
+
 	attiva_campi('ricerca');
-	
+
 	// Metti una variabile 'new' su localIDRecord utile per allegati e link
 	VF.localIDRecord = 'ric';
 	richiediAL();
-	
+
 	VF.ricerca =true;
-	
+
 	$('p_cerca').value=_('Start search');
 	$('p_cerca').className='var';
-	
+
 	jQuery('.pulsante-submask').each(function (i, e){
         e.disable();
     });
 }
 
 function table_on_search(obj){
-    
+
     var trs=jQuery(obj).find('tr');
-    
+
     for(var i=2;i<trs.length;i++){
         jQuery(trs[i]).remove();
     }
-    
+
     jQuery(trs[1]).find('input,checkbox,select,textarea').each( function(){jQuery(this).val('');});
 }
 
 
 function isSearchFromSub(){
-    
+
     smoid_search=null;
-    
+
     if(VF.campi_mod.length==0){
-	
+
 	return false;
     }
     else{
-	
+
 	var pattern=/^dati__[0-9]+__.*/g;
-	
+
 	for(g=0;g<VF.campi_mod.length;g++){
-	    
+
 	    if(VF.campi_mod[g].match(pattern)){
-		
+
 		smoid_search=jQuery("#"+VF.campi_mod[g]).parents().find('table.table-submask').attr('id').substr(7);
 		return true;
 	    }
 	}
-	
+
 	return false;
     }
 }
 
 
 function invia_ricerca(){
-	
+
 	sndReqPostCerca(VF.tabella);
 }
 
@@ -1635,47 +1635,47 @@ function duplica(){
 }
 
 function prepara_duplica(){
-		
+
 		var mydiv=$('popup-duplica');
-		
+
 		var arg_sub='';
 		var DA=0;
 		var DL=0;
-		
-		
+
+
 		ii=mydiv.getElementsByTagName('input');
-		
+
 		for(i=0;i<ii.length;i++){
-			
+
 			if(ii[i].name.substr(0,7)=='sotto__' && ii[i].checked==true){
 				arg_sub+=ii[i].name.substr(7)+'_';
 			}
-			
+
 			else if(ii[i].name=='duplica_allegati' && ii[i].checked==true){
-				
+
 				DA=1;
 			}
 			else if(ii[i].name=='duplica_link' && ii[i].checked==true){
-				
+
 				DL=1;
 			}
-			
+
 		}
-		
+
 	duplicate_record(VF.tabella,arg_sub,DA,DL);
-		
+
 }
 
 
 function controlla_dati(){
-	
+
 	var msg_controllo='';
 	var errore = false;
-	
+
 	for(var i=0;i<VF.campiReq.length;i++){
-		
+
 		nome_campo = "dati_"+ VF.campiReq[i];
-		
+
 		if($(nome_campo).className=='onlyread-field'){
 			// skip
 		}
@@ -1684,13 +1684,13 @@ function controlla_dati(){
 			errore=true;
 		}
 	}
-	
+
 	return msg_controllo;
-	
+
 }
 
 function debug_var(){
-    
+
     var str='';
     var val ='';
     for(i in VF){
@@ -1701,23 +1701,23 @@ function debug_var(){
     return str;
 }
 
- 		
- 		
+
+
 function setStatus(messaggio,tempo,classe) {
    $('feedback').style.visibility = "visible";
    $('risposta').innerHTML = messaggio;
    $('risposta').className = classe;
    setTimeout( "$('feedback').style.visibility = 'hidden'; ", tempo );
 }
-   
+
 
 function erroreDBNum(n){
-	
+
 	n=n-0;
-	
+
 	// Codici Errori di Postgres
 	if(VF.PGdb){
-		
+
 		if(n==1451){
 			return _('Can not delete the record <br/> there are related records');
 		}
@@ -1736,7 +1736,7 @@ function erroreDBNum(n){
 	}
 	// Codici Errori di MYSQL
 	else{
-		
+
 		if(n==1451){
 			return _('Can not delete the record <br/> there are related records');
 		}
@@ -1753,19 +1753,19 @@ function erroreDBNum(n){
 			return _('Can not do this <br/> (Error Code:')+n+')';
 		}
 	}
-	
+
 }
 
 
 function goto1(){
-	
+
 	attuale_numero = $('goto').innerHTML;
 	if(!isNaN(attuale_numero-0)){
 		$('goto').innerHTML='<input type="text" class="micro" size="5" name="campo_goto" id="campo_goto" value="'+attuale_numero+'" onkeypress="return noNumbers(event)"/></form>';
 	}
 
 	$('campo_goto').focus;
-	
+
 }
 
 
@@ -1774,19 +1774,19 @@ function noNumbers(e)
 	var keynum;
 	var keychar;
 	var numcheck;
-	
+
 	if(window.event){ // IE
-	
+
 		keynum = e.keyCode
 	}
 	else if(e.which){ // Netscape/Firefox/Opera
-	
+
 		keynum = e.which
 	}
-	
+
 //	alert(keynum);
 	if(keynum==13){
-		
+
 		if($('campo_goto').value.substring(0,3)=='id:'){
 			// apre il record di id:
 			VF.idRecord=$('campo_goto').value.substring(3);
@@ -1807,19 +1807,19 @@ function catturaInvio(e)
 	var keynum
 	var keychar
 	var numcheck
-	
+
 	if(window.event){ // IE
-	
+
 		keynum = e.keyCode
 	}
 	else if(e.which){ // Netscape/Firefox/Opera
-	
+
 		keynum = e.which
 	}
-	
+
 //	alert(keynum);
 	if(keynum==13){
-		
+
 		invia_ricerca();
 	}
 
@@ -1828,29 +1828,29 @@ function catturaInvio(e)
 
 
 function switch_vista(){
-		
+
 		if(VF.focusScheda){
-	
+
 			// Switch:
 			$('scheda1').style.display='none';
 			$('scheda-tabella').style.display='';
-		
+
 			$('p_prev').style.display='none';
 			$('p_next').style.display='none';
 
 			if($('popup-hotkeys') != undefined){
 				$('popup-hotkeys').style.display='none';
 			}
-			
+
 			// Inizializza la tabella
 			VF.focusScheda=false;
-			
+
 			if(!VF.ricerca && VF.max>0){
 	 			caricaGrid();
 			}
-			
+
 			if(VF.usaHistory){
-			
+
 				var segnalibro = new Object();
 	      		segnalibro.pos = "tab";
 				segnalibro.counterHist=VF.counter;            
@@ -1859,41 +1859,41 @@ function switch_vista(){
 			}
 		}
 		else{
-		
+
 		// Switch:
 			$('scheda1').style.display='';
 			$('scheda-tabella').style.display='none';
-		
+
 			$('p_prev').style.display='';
 			$('p_next').style.display='';
 
 			$('popup-hotkeys').style.display='';
-			
+
 			VF.focusScheda=true;
-			
+
 			if(VF.usaHistory){
-				
+
 				var segnalibro = new Object();
 	      		segnalibro.pos = "scheda";
 				segnalibro.counterHist=VF.counter;            
 				segnalibro.idRecordHist= VF.idRecord;            
 	      		dhtmlHistory.add("scheda",segnalibro);
 			}
-			
+
 			if(VF.ricerca){
-				
+
 				$('p_annulla').enable();
 			}
 	}
-		
+
 }
 
 
 // FUNZIONI DI HISTORY
 
-    
+
 	function history_initialize() {
-	
+
 		window.dhtmlHistory.create({
 			toJSON: function(o) {
 				return Object.toJSON(o);
@@ -1901,22 +1901,22 @@ function switch_vista(){
 				return s.evalJSON();
 			}
 		});
-		
+
 		// initialize the DHTML History framework
 		dhtmlHistory.initialize();
-		  
+
 		// subscribe to DHTML history change events
 		dhtmlHistory.addListener(historyChange);
-		  
+
 		var segnalibro = new Object();
 		segnalibro.pos = 'scheda';
 		segnalibro.counterHist=VF.counter;            
 		segnalibro.idRecordHist=VF.idRecord;            
 		dhtmlHistory.add('scheda',segnalibro);
 	}
-	
+
 	function historyChange(newLocation, historyData) {
-		       			     
+
 	         if(newLocation=='scheda' && VF.focusScheda==false){
 	         	switch_vista();
 	         }
@@ -1924,9 +1924,9 @@ function switch_vista(){
 	         	switch_vista();
 	         }
 	}
-	
-	
-	
+
+
+
 // ------------------------------ fine history	
 
 
@@ -1936,26 +1936,26 @@ function switch_vista(){
 	        w = window.screen.availWidth * percent / 100;
 	        h = window.screen.availHeight * percent / 100;
 	    }
-	
+
 	    window.open(url,name,'width='+w+',height='+h+' ,toolbar=yes, location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes');
 	}
 
-    
-    
+
+
 	function apri_submask(id_table_parent,id_submask, on_shadowbox){
-		
+
 		inputs=jQuery('input');
-		
+
 			for(i=0;i<inputs.length;i++){
 				if(inputs[i].id.substring(0,3)=="pk_"){
 					var pk = inputs[i].value;
 					var var_pk_id =inputs[i].id.substring(3);
 				}
 			}
-			
+
 		// se la chiave da passare è la PK
 		if(var_pk_id==VF.fkparent[id_submask]){
-			
+
             var link_submask='sottomaschera.php?oid_parent='+id_table_parent+'&id_submask='+id_submask+'&pk='+pk;
 
             if(on_shadowbox==true){
@@ -1968,7 +1968,7 @@ function switch_vista(){
 		else{
 			campo_fk_sub=$('dati_' + VF.fkparent[id_submask]);
 			val_fk_sub=$(campo_fk_sub).value;
-                        
+
             var link_submask='sottomaschera.php?oid_parent='+id_table_parent+'&id_submask='+id_submask+'&pk='+val_fk_sub;
 
             if(on_shadowbox==true){
@@ -1979,8 +1979,8 @@ function switch_vista(){
             }
 		}
 	}
-	
-	
+
+
 	Array.prototype.inArray = function (value)
 	// Returns true if the passed value is found in the
 	// array.  Returns false if it is not.
@@ -1994,8 +1994,8 @@ function switch_vista(){
 	    }
 	    return false;
 	};
-	
-	
+
+
 function attiva_modifica_fck(editorInstance,nome_campo){
   	  //editorInstance.Events.AttachEvent( 'OnSelectionChange', modfck ) ;
 }
@@ -2029,26 +2029,26 @@ function hotKeys(event) {
 
 	  // Get details of the event dependent upon browser
 	  event = (event) ? event : ((window.event) ? event : null);
-	  
+
 	  // We have found the event.
 	  if (event) {   
-	    
+
 	    // Hotkeys require that either the control key or the alt key is being held down
 	    if (event.ctrlKey || event.altKey || event.metaKey) {
-	    
+
 	      // Pick up the Unicode value of the character of the depressed key.
 	      var charCode = (event.charCode) ? event.charCode : ((event.which) ? event.which : event.keyCode);
-	      
+
 	      // Convert Unicode character to its lowercase ASCII equivalent
 	//      var myChar = String.fromCharCode (charCode).toLowerCase();
 			var myChar = charCode;
-	      
+
 	      // Convert it back into uppercase if the shift key is being held down
 //	      if (event.shiftKey) {myChar = myChar.toUpperCase();}
-	          
+
 	      // Now scan through the user-defined array to see if character has been defined.
 	      for (var i = 0; i < keyActions.length; i++) {
-	         
+
 	        // See if the next array element contains the Hotkey character
 	        if (keyActions[i].character == myChar 
 	        	&& (
@@ -2063,29 +2063,29 @@ function hotKeys(event) {
 	        		(keyActions[i].mod=='' &&  event.metaKey)
 	        		)
         		){ 
-	      
+
 	          // Yes - pick up the action from the table
 	          var action;
-	            
+
 	          // If the action is a hyperlink, create JavaScript instruction in an anonymous function
 	          if (keyActions[i].actionType.toLowerCase() == "link") {
 	            action = new Function ('location.href  ="' + keyActions[i].param + '"');
 	          }
-	            
+
 	          // If the action is JavaScript, embed it in an anonymous function
 	          else if (keyActions[i].actionType.toLowerCase()  == "code") {
 	            action = new Function (keyActions[i].param);
 	          }
-	            
+
 	          // Error - unrecognised action.
 	          else {
 	            alert (_('Hotkey Function Error: Action should be "link" or "code"'));
 	            break;
 	          }
-	           
+
 	          // At last perform the required action from within an anonymous function.
 	          action ();
-	         
+
 	          // Hotkey actioned - exit from the for loop.
 	          break;
 	        }
@@ -2096,35 +2096,35 @@ function hotKeys(event) {
 
 
 function chfield(obj,cl){
-	
+
 	if(obj.hasClassName('off')) obj.removeClassName('off');
 	if(obj.hasClassName('on')) obj.removeClassName('on');
 	if(obj.hasClassName('s')) obj.removeClassName('s');
-	
+
 	obj.addClassName(cl);
 }
 
 
 function get_autocompleter_from_id(text, li){
-    
+
 	// [1]=filed name
 	// [2]=val
 	var tkk=li.id.split('___');
-	
+
 	$('dati_'+tkk[1]).value=tkk[2];
 }
 
 
 function get_scheda_val(campo){
-	
+
 	var parsed_campo = campo.split(':');
-	
+
 	for(i=0;i<Scheda.length;i++){
 		if(undefined!=Scheda[i] && parsed_campo[0]==Scheda[i][0]){
-			
+
 			// options: nome_campo, nome_campo:value
 			if(parsed_campo[1]=='label'){
-                
+
                 // Case autocompleter_from
                 if(jQuery('#dati_'+parsed_campo[0]).prop("tagName") == 'INPUT'){
                     v = jQuery('#dati_ac_'+parsed_campo[0]).val();
@@ -2133,7 +2133,7 @@ function get_scheda_val(campo){
                 else{
                     v = jQuery('#dati_'+parsed_campo[0]+'>option:selected').text();
                 }
-                
+
 				return (undefined!=v) ? v:'';
 			}
 			else{
@@ -2141,23 +2141,23 @@ function get_scheda_val(campo){
 			}
 		}
 	}
-	
+
 	// fake else
 	return '';
 }
 
 
 function entry_table_search(){
-	
+
 	switch_vista();
 	table_search_mode(1);
 }
 
 
 function table_search_mode(mode){
-	
+
 	if(mode==0){
-		
+
 		$('buttons_on_research').hide();
 		$('pulsanti').show();
 		$('counter_container').show();
@@ -2171,7 +2171,7 @@ function table_search_mode(mode){
 
 
 function exit_table_search(){
-	
+
 	table_search_mode(0);
 	switch_vista();
 	setStatus('');
@@ -2188,11 +2188,11 @@ function exit_table_search(){
  */
 function check_perm(){
     var urlString = VF.pathRelativo+'/rpc.perm.php?action='+ VF.tabella_alias +'&id='+VF.localIDRecord+'&hash=' + Math.random();
-    
+
     jQuery.ajax({
         url: urlString,
         success: function(Perm){
-            
+
         }
     });
 }
@@ -2203,12 +2203,12 @@ function check_perm(){
  */
 
 function richiediAL(){
-	
+
 	var urlString = VF.pathRelativo+'/rpc.allegati_link.php?action='+ VF.tabella_alias +'&id='+VF.localIDRecord+'&hash=' + Math.random()  
 	jQuery.ajax({
         url: urlString,
         success: function(AL){
-	    	
+
 	    	// aggiorna i campi
 	    	var arrayAL= AL.split(",");
 		   	// allegati
@@ -2220,7 +2220,7 @@ function richiediAL(){
 		    		$('href_tab_allegati').innerHTML=_('attachments')+' (0)';
 		    	}
 	    	}    	
-	    	
+
 	    	// Link
 	    	if(VF.permettiLink==1){
 		    	if(arrayAL[1]>0){
@@ -2236,17 +2236,17 @@ function richiediAL(){
 
 
 function richiediSUB(){
-    
+
     var stringaSUB = VF.pathRelativo+'/rpc.subcount.php?action='+ VF.tabella +'&id='+VF.localIDRecord+'&subs=' + VF.sottomaschere.join('|') + '&hash=' + Math.random();
     jQuery.ajax({
         url: stringaSUB,
         success: function(SUB){
-            
+
 	    	// aggiorna i campi
 	    	var arraySUB= SUB.split(",");
-	    	
+
 	    	for(i=0;i<VF.sottomaschere.length;i++){
-	    	
+
 	    		var val_sub = ((arraySUB[i]-0)>0) ? " ("+arraySUB[i]+")" : "";
 	    		$('sm_'+VF.sottomaschere[i]).style.fontWeight= ((arraySUB[i]-0)>0) ? 'bold' : 'normal';
 	    		$('sm_'+VF.sottomaschere[i]).value = VF.sottomaschere_alias[i] + val_sub;
@@ -2313,11 +2313,11 @@ function caricaGrid(){
 
 
 function loadDHTMLXGrid(){
-    
+
      if(!VF.initGrid){
-         
+
         var FIELD_NAME_COL = VF.xg_alias;
-         
+
         mygrid = new dhtmlXGridObject('gridbox'); 
         mygrid.imgURL = "js/dhtmlxgrid4/codebase/imgs/"; 
         mygrid.setHeader("#," + FIELD_NAME_COL); 
@@ -2328,7 +2328,7 @@ function loadDHTMLXGrid(){
         mygrid.setSkin("dhx_"+VF.skin); 
         mygrid.attachEvent("onRowDblClicked",doOnRowSelected);  
         mygrid.enableMultiline(false);
-        
+
         togli=(VF.counter % VF.xg_pages);
         nextData= VF.counter - togli;
 
@@ -2338,21 +2338,21 @@ function loadDHTMLXGrid(){
         jQuery.each(w_obj, function(k,v){
            w_string+='&w['+k+']='+v;
         });
-        
+
         var stringUrl = VF.pathRelativo+"/rpc.xmlgrid.php?ty=dhtmlxgrid_json&t="+VF.tabella+"&gid="+VF.gid+"&of="+nextData+"&hash="+Math.random()+w_string;
-        
+
         // Attach event for sort
         mygrid.attachEvent("onBeforeSorting",function(ind,type,direction){
-            
+
             var col_name = FIELD_NAME_COL.split(',')[ind-1];
             var stringUrlSort=stringUrl+"&ord="+jQuery.trim(col_name)+'&sort='+direction;
-            
+
             this.clearAndLoad(stringUrlSort , dhtmlxgrid_resize, 'json'); 
             this.setSortImgState(true,ind,direction); //sets a correct sorting image
             return false;   
-            
+
         });
-        
+
         // Initialize
         mygrid.init();
 
@@ -2367,11 +2367,11 @@ function loadDHTMLXGrid(){
 
         reloadGrid();
     }
-    
+
 }
 
 function doAfterRefresh(){
-   
+
 }
 
 
@@ -2464,14 +2464,14 @@ function isset(varname){
  * @returns void
  */
 function dhtmlxgrid_resize(loadtype){
-    
+
     var goffset = Math.ceil(jQuery('#gridbox').offset().top);
     var wh = jQuery(window).outerHeight(true);
     var new_h = wh - goffset - 8;
-    
+
     var gtable = jQuery('#gridbox .objbox table').outerHeight(true);
     var gcont =jQuery('#gridbox .objbox').outerHeight(true);
-    
+
     var h;
     if(loadtype === 'reload'){
         var maxgcont = (gtable > gcont) ? gtable:gcont;
@@ -2484,9 +2484,9 @@ function dhtmlxgrid_resize(loadtype){
     else{
          h = new_h ;
     }
-    
+
     jQuery('#gridbox').height(h);
-    
+
     if(loadtype === true){
         reloadGrid();
     }
@@ -2500,7 +2500,7 @@ var decodeHtmlEntity = function(str) {
 
 
 function show_map_geojson(field, data){
-  
+
     if(typeof window['map'] == 'object'){
         map.removeLayer( myGeoJSON2 );
     }
@@ -2524,9 +2524,9 @@ function clear_map_geojson(){
 }
 
 function load_geojson(){
-    
+
     var url=VF.pathRelativo+"/rpc.geojson.php";
-    
+
     jQuery.ajax({
             url: url,
             dataType: 'json',
@@ -2543,19 +2543,19 @@ function load_geojson(){
 }
 
 jQuery(document).ready( function(){
-    
+
     if(window.location.hash=='#tab'){
         switch_vista();
     }
-    
+
     jQuery('[name^="dati["]').on('change keypress keyup', function (){
          if(!jQuery(this).attr('readonly'))
          mod(jQuery(this).attr('id'));
      });
-     
-     
+
+
     jQuery('#refresh').html('<img src="./img/refresh1.gif" width="12" heigth="12" alt="caricamento..." /> ' + _('Updating ...'));
-    
+
     // Ajax setup
     jQuery.ajaxSetup({
         beforeSend: function() {
@@ -2571,7 +2571,7 @@ jQuery(document).ready( function(){
         new_url=jQuery.query.REMOVE('w['+filter_to_canc+']');
         window.location.search=new_url;
      });
-     
+
      jQuery('#p_duplica').on('click', function (){ jQuery('#popup-duplica').toggle(); });
 
      jQuery('.cancel_all_filter').on('click', function(){
@@ -2579,7 +2579,7 @@ jQuery(document).ready( function(){
         new_url=jQuery.query.REMOVE('w');
         window.location.search=new_url;
      });
-     
+
     if(VF.fck_attivo){
 		var cccc=0;
 		CKEDITOR.on( 'instanceReady', function( ev ){
@@ -2589,23 +2589,23 @@ jQuery(document).ready( function(){
 			}
 		});
 	}
-    
+
     // filter on field content
     jQuery('.filter_by_field').on('click', function(){
         var fld=jQuery(this).data('k');
         var qs = window.location.search + "&w["+ fld + "]=" + jQuery('#dati_'+fld).val();
         window.location = qs;
       });
-      
+
     jQuery('.select_values').each(function(i, el){
         var hash_js = jQuery(el).data('require');
         var target = jQuery(el).data('target');
         jQuery.getJSON( VF.basePath+'/files/html/'+hash_js+'.json', function (RS){
-            
+
             // Blank value
             jQuery('#dati_'+target).append(jQuery('<option>', { value: '', text : '' }));
             for(var i=0; i<RS.length; i++){
-                
+
                 jQuery('#dati_'+target).append(jQuery('<option>', { 
                     value: RS[i][0],
                     text : RS[i][1]
@@ -2616,22 +2616,22 @@ jQuery(document).ready( function(){
             triggerLoadTendina();
         });
     });
-    
+
     dhtmlxgrid_resize();
-    
+
     jQuery('.geometry-button').on('click', function(){
         var field = jQuery(this).data('trigger');
         VF.autoload_geom = true;
         VF.geom_field = field;
         load_geojson();
     });
-    
+
  });
- 
- 
+
+
  jQuery(window).on('resize', function(){
      dhtmlxgrid_resize('reload');
  });
- 
+
 
 

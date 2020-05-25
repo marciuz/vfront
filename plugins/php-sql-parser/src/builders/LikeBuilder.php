@@ -56,7 +56,7 @@ class LikeBuilder {
         $builder = new TableBuilder();
         return $builder->build($parsed, $index);
     }
-    
+
     public function build($parsed) {
         $sql = $this->buildTable($parsed, 0);
         if (strlen($sql) === 0) {

@@ -24,7 +24,7 @@ class mysql_vmsql {
 
 	protected $last_error=null;
 
-	
+
 
 	/**
 	 * @desc DB Connection
@@ -301,7 +301,7 @@ class mysql_vmsql {
 
 		$this->last_error=$ee;
 
-		
+
 		if(isset($GLOBALS['DEBUG_SQL']) && $GLOBALS['DEBUG_SQL']){
 
 			$this->error_debug();
@@ -381,7 +381,7 @@ class mysql_vmsql {
 	 * @desc Funzione utility di fetch_object che restituisce tutta la matrice dei risultati
 	*/
 	public function fetch_object_all(&$res, $class_name=null){
-        
+
         $matrice=array();
 		if(is_object($res)){
 			while($o= $this->fetch_object($res, $class_name)) $matrice[]=$o;
@@ -572,7 +572,7 @@ class mysql_vmsql {
 	}
 
 
-	
+
 	/**
 	 * Concat DB sintax
 	 *
@@ -614,7 +614,7 @@ class mysql_vmsql {
 		return $db_version;
 	}
 
-	
+
 
 	public function close(){
 
@@ -638,8 +638,8 @@ class mysql_vmsql {
 
 		$this->close();
 	}
-    
-    
+
+
     public function db_error_log($obj){
 
         $fp=fopen(FRONT_ERROR_LOG,"a");

@@ -2,7 +2,7 @@
 
 
 class RegColumn {
-    
+
     public $id_reg;
     public $id_table;
     public $gid;
@@ -25,5 +25,5 @@ class RegColumn {
     public $jstest;
     public $commento;
     public $alias_frontend;
-    
+
 }

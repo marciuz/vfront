@@ -4,7 +4,7 @@
  * Structure of table registry 
  */
 class RegTable {
-    
+
     public $id_table;
 	public $gid;
 	public $visibile  = 0;
@@ -32,9 +32,9 @@ class RegTable {
 	public $allow_filters = 0;
 	public $default_filters; 
 	public $default_view = 'form'; 
-    
+
     public $columns = array();
     public $submasks = array();
     public $buttons = array();
-    
+
 }

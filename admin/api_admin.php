@@ -21,69 +21,69 @@ $OUT='';
 
 
 if(isset($_POST['newkey'])){
-    
+
     $data = $vmreg->recursive_escape($_POST);
-    
+
     // Verify IP
     if(strpos($data['ip_address'], '/')!==false){
-        
+
         list($ip, $classes) = explode('/',$data['ip_address'],2);
     }
     else{
         $ip=$data['ip_address'];
         $classes='';
     }
-    
+
     if(filter_var($ip,FILTER_VALIDATE_IP)){
-        
+
         $ip.= ($classes!='') ? '/'.intval($classes) : '';
-        
+
         $api_key=  API::gen_key();
-    
+
         $sql="INSERT INTO {$db1['frontend']}{$db1['sep']}api_console
             (ip_address, rw, api_key, last_update)
             VALUES 
             ('$ip',".intval($data['rw']).", '$api_key', '".date('c')."')";
-        
+
         $q=$vmreg->query($sql);
-        
+
         $res=$vmreg->affected_rows($q);
     }
     else{
-        
+
         $res=-2;
     }
-    
+
     header("Location: ".$_SERVER['PHP_SELF']."?feed=".$res."&opt=insert");
     exit;
-    
+
 }
 else if(isset($_POST['deletekey'])){
-    
+
     $data = $vmreg->recursive_escape($_POST);
-    
-    
+
+
     if(isset($data['id']) && intval($data['id'])>0){
-    
+
         $q=$vmreg->query("DELETE FROM {$db1['frontend']}{$db1['sep']}api_console WHERE id=".intval($data['id']));
         $res=$vmreg->affected_rows($q);
-        
-        
+
+
     }
     else{
         $res=-2;
     }
-    
+
     header("Location: ".$_SERVER['PHP_SELF']."?feed=".$res."&opt=delete");
     exit;
 }
 
 else if(isset($_POST['changekey'])){
-    
+
     $data = $vmreg->recursive_escape($_POST);
-    
+
     if(isset($data['id']) && intval($data['id'])>0){
-        
+
         $sql=sprintf("UPDATE {$db1['frontend']}{$db1['sep']}api_console
             SET ip_address='%s',
                 rw=%d,
@@ -94,23 +94,23 @@ else if(isset($_POST['changekey'])){
             date('c'),
             $data['id']
         );
-        
+
         $q=$vmreg->query($sql);
-        
+
         $res=$vmreg->affected_rows($q);
     }
     else{
-        
+
         $res=-2;
     }
-    
+
     header("Location: ".$_SERVER['PHP_SELF']."?feed=".$res."&opt=update");
     exit;
-    
+
 }
 
 else if(isset($_GET['update']) || isset($_GET['new_key'])){
-    
+
     if(isset($_GET['update'])){
         $q=$vmreg->query("SELECT * FROM {$db1['frontend']}{$db1['sep']}api_console WHERE id=".intval($_GET['update']));
         $RS=$vmreg->fetch_assoc($q);
@@ -124,9 +124,9 @@ else if(isset($_GET['update']) || isset($_GET['new_key'])){
         $opt='newkey';
         $msg_btn=_('Create new key');
     }
-    
+
     $RW_sel = ($RS['rw']==1) ? 'selected="selected"' : '';
-    
+
     $OUT.="<form action=\"" . Common::phpself() . "\" method=\"post\">";
     $OUT.="
         <fieldset style=\"width:70%; padding:20px;\">
@@ -150,22 +150,22 @@ else if(isset($_GET['update']) || isset($_GET['new_key'])){
             <input type=\"text\" readonly=\"readonly\" value=\"".$RS['api_key']."\" size=\"80\" />
             <div class=\"info-campo\">"._('VFront generated authorization key')."</div>
         </div>
-        
+
         <div class=\"column-form\">
             <input type=\"hidden\" name=\"$opt\" value=\"1\" />
             <input type=\"hidden\" name=\"id\" value=\"".intval($RS['id'])."\" />
             <input type=\"submit\" value=\"".$msg_btn."\" />
         </div>
-        
+
         ";
-    
+
     $OUT.="</fieldset>\n</form>\n";
 }
 else if(isset($_GET['delete'])){
-    
+
     $OUT.="<p>"._('You will delete the api key. This operation is not recoverable')
             ."<br />"._('Are you sure?')."</p>\n";
-    
+
     $OUT.="<form action=\"" . Common::phpself() . "\" method=\"post\" >
             <input type=\"hidden\" name=\"deletekey\" value=\"1\" />
             <input type=\"hidden\" name=\"id\" value=\"".intval($_GET['delete'])."\" />
@@ -177,23 +177,23 @@ else if(isset($_GET['delete'])){
 
 // Mostra chiavi disponibili
 else {
-    
+
     $OUT='';
-    
+
     $q=$vmreg->query("SELECT * FROM {$db1['frontend']}{$db1['sep']}api_console ORDER BY id");
-    
+
     $OUT.="<p><a href=\"?new_key=1\">"._('Create new API KEY')."</a></p>";
-    
+
     if($vmreg->num_rows($q)==0){
-        
+
         $OUT.="<p>"._('No key set')."</p>\n";
     }
     else{
-        
-        
-        
+
+
+
         $table="<table class=\"tab-color\" summary=\"api table\" >\n";
-        
+
         $table.="
         <tr>
             <th>ID</th>
@@ -204,11 +204,11 @@ else {
             <th>"._('update')."</th>
             <th>"._('delete')."</th>
         </tr>";
-        
+
         $table."</tr>\n";
-        
+
         while($RS=$vmreg->fetch_assoc($q)){
-            
+
             $table.="<tr>
                 <td>".$RS['id']."</td>
                 <td>".$RS['ip_address']."</td>
@@ -219,12 +219,12 @@ else {
                 <td><a href=\"?delete=".$RS['id']."\">Delete key</a></td>
                 </tr>\n";
         }
-        
+
         $table.="</table>\n";
-        
+
         $OUT.=$table;
     }
-    
+
 }
 
 

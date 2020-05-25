@@ -19,7 +19,7 @@ h1{
 h2.analisi{
 	font-size:1.2em;
 	margin-left:20px;
-		
+
 }
 
 
@@ -50,9 +50,9 @@ ul.lista-tabelle li{
 }
 
 ul.lista-analisi li a:link{
-	
+
 }
- 
+
 
 
 /* =BOX
@@ -255,7 +255,7 @@ hr.light2{
 	padding: 0;
 	margin: 0;
 	list-style: none;
-	
+
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -282,7 +282,7 @@ hr.light2{
 	voice-family: "\"}\"";
 	voice-family: inherit;
 	height: 15px;
-	
+
 } #ignored {}
 
 #header ul li a:hover {
@@ -295,7 +295,7 @@ hr.light2{
 */
 
 #subtestata{
-	
+
 	clear: left;
 	margin-bottom:0px;
 }
@@ -305,12 +305,12 @@ hr.light2{
 
 div#login{
 	margin:10% auto 0 auto;
-	
+
 }
 
 div#nolog{
 	margin:10% auto 0 auto;
-	
+
 }
 
 
@@ -319,7 +319,7 @@ div#login form fieldset{
 	text-align:left;
 	border:1px solid #CCC;
 	padding: 15px;
-	
+
 }
 
 
@@ -487,18 +487,18 @@ div#login fieldset legend{
 }
 
 #faq dt{
-	
+
 	font-weight: bold;
 	margin:23px 20px 3px 20px;
 }
 
 #faq dd{
-	
+
 	margin:5px 20px 40px 20px;
 }
 
 #faq ol li{
-	
+
 	margin-bottom:5px;
 }
 
@@ -515,7 +515,7 @@ legend{
 
 
 .tabella-record{
-	
+
 	border:1px solid #000;
 	border-collapse:collapse;
 	width: 97%;
@@ -554,7 +554,7 @@ legend{
 .result-table{
 	border-collapse: collapse;
 	border: 1px solid #666;	
-	
+
 }
 
 .result-table tr th{

@@ -31,7 +31,7 @@ class sqlite2_vmsql {
 
 	protected $last_error=null;
 
-	
+
 	/**
 	 * @desc DB Connection
 	 * @param string $filepath Path of sqlite DB
@@ -355,7 +355,7 @@ class sqlite2_vmsql {
 	 * @desc Funzione utility di fetch_object che restituisce tutta la matrice dei risultati
 	*/
 	public function fetch_object_all(&$res, $class_name=null){
-        
+
         $matrice=array();
 		if(is_object($res)){
 			while($o= $this->fetch_object($res, $class_name)) $matrice[]=$o;
@@ -621,7 +621,7 @@ class sqlite2_vmsql {
 	}
 
 
-	
+
 	/**
 	 * Concat DB sintax
 	 *
@@ -694,8 +694,8 @@ class sqlite2_vmsql {
 
 		$this->close();
 	}
-    
-    
+
+
     public function db_error_log($obj){
 
         $fp=fopen(FRONT_ERROR_LOG,"a");

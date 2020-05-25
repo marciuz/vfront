@@ -64,12 +64,12 @@ class TableBuilder {
         $builder = new JoinBuilder();
         return $builder->build($parsed);
     }
-    
+
     protected function buildRefType($parsed) {
         $builder = new RefTypeBuilder();
         return $builder->build($parsed);
     }
-    
+
     protected function buildRefClause($parsed) {
         $builder = new RefClauseBuilder();
         return $builder->build($parsed);

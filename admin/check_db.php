@@ -15,21 +15,21 @@ require_once("../inc/func.checkdb.php");
 
 
 function color_res($res){
-	
+
 	if($res==0){
-		
+
 		return "<strong class=\"verde\">0</strong>\n";
 	}
 	else{
-		
+
 		return "<strong class=\"var\">$res</strong>\n";
 	}
 }
 
 if(isset($_GET['json'])){
-	
+
 	$check=check_db('json');
-	
+
 	exit;
 }
 
@@ -43,7 +43,7 @@ $check=check_db();
 $check_html=array();
 
 foreach($check as  $ty=>$arr){
-	
+
 	if($check['n']>0){
 
 		if(is_array($arr) && count($arr)>0){
@@ -86,33 +86,33 @@ $OUT.="<table summary=\"check\" border=\"1\" id=\"theme-table\">
 		<td>"._('Errors in table names')."</td>
 		<td>".color_res(count($check['tables']))."</td>".$check_html['tables']."
 	</tr>
-	
+
 	<tr>
 		<td>"._('Errors in table\'s columns names')."</td>
 		<td>".color_res(count($check['cols']))."</td>".$check_html['cols']."
 	</tr>
-	
+
 	<tr>
 		<td>"._('Errors in view names')."</td>
 		<td>".color_res(count($check['views']))."</td>".$check_html['views']."
 	</tr>
-	
+
 	<tr>
 		<td>"._('Errors in view\'s columns names')."</td>
 		<td>".color_res(count($check['colsv']))."</td>".$check_html['colsv']."
 	</tr>
-	
+
 	<tr>
 		<td>"._('Missing primary keys')."</td>
 		<td>".color_res(count($check['pk']))."</td>".$check_html['pk']."
 	</tr>
-	
-	
+
+
 	<tr>
 		<td><strong>"._('Total errors')."</strong></td>
 		<td colspan=\"2\">".color_res($check['n'])."</td>
 	</tr>
-	
+
 </table>\n";	
 
 

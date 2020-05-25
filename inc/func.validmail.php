@@ -68,7 +68,7 @@ function SnowCheckMail($Email,$Debug=false)
         // Judgment is that service is preparing though begin by 220 getting string after connection . 
         // fgets function reference : http://www.php.net/manual/en/function.fgets.php 
         if ( ereg ( "^220", $Out = fgets ( $Connect, 1024 ) ) ) { 
-             
+
             // Inform client's reaching to server who connect. 
             fputs ( $Connect, "HELO $HTTP_HOST\r\n" ); 
                 if ($Debug) echo "Run : HELO $HTTP_HOST<br>"; 
@@ -126,7 +126,7 @@ function SnowCheckMail($Email,$Debug=false)
 function valid_mail($email,$controllo_destinatario=false){
 
 	if($controllo_destinatario){
-		
+
 		$check=SnowCheckMail($email);
 		return $check[0];
 	}
@@ -144,9 +144,9 @@ function valid_mail($email,$controllo_destinatario=false){
  * @return array
  */
 function estrai_mail_valide($testo){
-	
-	
+
+
 	preg_match_all('"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})"iu',$testo,$mails);
-	
+
 	return (array) $mails[0];
 }

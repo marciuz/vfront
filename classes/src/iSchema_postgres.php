@@ -179,7 +179,7 @@ class iSchema_postgres {
 	public function get_columns($table,$column_name='', $get_comments=true){
 
 		global $vmsql, $db1;
-        
+
         if(is_array($column_name)){
             $column_name = $column_name[0];
         }
@@ -190,7 +190,7 @@ class iSchema_postgres {
 		else{
 			$sql_add='';
 		}
-                
+
         if($get_comments){
             $sql_comments = "(
                         SELECT
@@ -203,8 +203,8 @@ class iSchema_postgres {
         else{
             $sql_comments = "'' as column_comment";
         }
-        
-        
+
+
         $sql=" SELECT
                 cols.column_name,
                 cols.ordinal_position,
@@ -223,13 +223,13 @@ class iSchema_postgres {
                 AND cols.table_schema  = '{$db1['dbname']}'
                 $sql_add
                 ORDER BY table_name ASC, ordinal_position ASC ";
-                        
+
 		$q=$vmsql->query($sql);
 
 		return $vmsql->fetch_assoc_all($q);
 	}
 
-	
+
 	/**
 	 * Get the columns type from $table
 	 *
@@ -261,12 +261,12 @@ class iSchema_postgres {
 		$q=$vmsql->query($sql);
 
 		$res=array();
-		
+
 		while($RS=$vmsql->fetch_row($q)){
-		    
+
 		    $res[$RS[0]]=$RS[1];
 		}
-		
+
 		return $res;
 	}
 

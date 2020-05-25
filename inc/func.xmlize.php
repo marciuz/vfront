@@ -27,30 +27,30 @@
  * @return string XML risultato della query
  */
 function xmlize($sql,$filename=null,$header=false,$offset=0,$tot=0,$xsl='',$dtd=''){
-	
+
 	global  $vmsql, $vmreg, $db1;
-	
+
 	$q = $vmsql->query($sql);
-	
+
 	$n_rows=$vmsql->num_rows($q);
-	
+
 	if($n_rows==0){
-		
+
 		return null;	
 	}
-	
+
 	// Inizia a fare l'xml
-	
-	
-	
+
+
+
 	$XML="";
-	
+
 	$XML.= ($header) ? "<?xml version='1.0' encoding='utf-8'?>\n" : "";
-	
+
 	$XML.= ($dtd) ? "<!DOCTYPE vfront SYSTEM \"$dtd\">\n" : "";
-	
+
 	$XML.= ($xsl!='') ? "<?xml-stylesheet type=\"text/xsl\" href=\"$xsl\" ?>\n" : "";
-	
+
 	if($offset===false){
 		$auto_offset=true;
 		$offset =1;
@@ -58,62 +58,62 @@ function xmlize($sql,$filename=null,$header=false,$offset=0,$tot=0,$xsl='',$dtd=
 		$auto_offset=false;
 		$offset++;
 	}
-	
+
 	if(preg_match("/FROM +([a-z0-9_]+)/si",$sql,$finded)){
-		
+
 		$tablename=$finded[1];
 	}
 	else{
 		$tablename='';
 	}
-	
+
 	$XML.="<recordset tot=\"$tot\" minoffset=\"$offset\" maxoffset=\"". ($offset+($n_rows-1))."\" tablename=\"$tablename\">\n";
-	
-	
-	
+
+
+
 	while($RS=$vmsql->fetch_assoc($q)){
-		
+
 		$XML.="\t".xmlize_campo('row',array("offset"=>$offset))."\n";
-		
+
 		foreach($RS as $k=>$val){
 
             if($db1['dbtype']=='oracle'){
                 $k=strtoupper($k);
             }
-			
+
 			//$val = Common::vf_utf8_encode(trim($val));
-			
+
 			$val = trim($val);
-			
+
 			if($val!="" && !is_numeric($val)){
 				$val="<![CDATA[".$val."]]>";
 			}
-			
+
 			$XML.="\t\t".xmlize_campo($k,array());
 			$XML.=$val;
 			$XML.="</$k>\n";
 		}
-		
+
 		$XML.="\t</row>\n";
-		
+
 		$offset++;
-		
+
 	}
-	
+
 	$XML.="</recordset>";
-	
-	
-	
-	
+
+
+
+
 	if(is_null($filename)) return $XML;
 	else{
-		
+
 		$fp =fopen($filename,"w");
 		fwrite($fp,$XML);
 		fclose($fp);
 		return true;
 	}
-	
+
 }
 
 
@@ -125,14 +125,14 @@ function xmlize($sql,$filename=null,$header=false,$offset=0,$tot=0,$xsl='',$dtd=
  * @return string XML
  */
 function xmlize_campo($tag,$attr){
-	
+
 		$attributi="";
-	
+
 		foreach($attr as $k=>$val){
-			
+
 			$attributi .=" $k=\"$val\"";
 		}
-	
+
 		return "<".$tag.$attributi.">";
-	
+
 }

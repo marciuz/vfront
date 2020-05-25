@@ -15,7 +15,7 @@ if($test_include!==true) exit;
 
 
 foreach ($_POST['var'] as $k=>$v){
-	
+
 	$var[$k]=trim(addslashes(stripslashes($v)));
 }
 
@@ -55,18 +55,18 @@ $WR.="
  * @version 0.99.52 \$Id: create_conf.php 1076 2014-06-13 13:03:44Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
- 
- 
+
+
 ";
 
 
 if($var['dbtype']=='mysql'){
-	
+
 	if($var['regmethod']=='sqlite'){
-		
+
 		$var['dbfrontend1']='';
 		$var['sep']='';
-		
+
 	}
 	else{
 		$var['sep']='.';
@@ -142,7 +142,7 @@ PHPW;
 }
 
 else if($var['dbtype']=='sqlite'){
-	
+
 	$sql_file_version=get_sqlite_file_version($var['dbfilename4']);
 
 $WR.=<<<PHPW
@@ -165,7 +165,7 @@ PHPW;
 $WR.=<<<PHPW
 
 define('VFRONT_DBTYPE', \$db1['dbtype']);
-    
+
 PHPW;
 
 
@@ -189,7 +189,7 @@ PHPW;
 if($authtype!=''){
 
 $WR.=<<<PHPW
-	
+
 // Names of the fields where to find email, password (if any), first and last name of the user from DB, external DB, LDAP or SOAP
 // these variables must be set in case of external authentication
 \$conf_auth['campo_nick']='{$var['authext_nick']}';
@@ -241,12 +241,12 @@ PHPW;
 }
 
 else if($authtype=='ldap'){
-	
+
 	$var['ldap_anonymus_bind']= (int) $var['ldap_anonymus_bind'];
 
 $WR.=<<<PHPW
 
-	
+
 /*  LDAP Section (or Active Directory)  */
 // if you have chosen external authentication via LDAP (or Active Directory) set the following parameters 
 // to read user name and password from the server 
@@ -494,18 +494,18 @@ define('VERSION_REG_SQLITE',$version_reg_sqlite);
 $file_conf_target="../conf/conf.target_install";
 $file_conf_dest="../conf/conf.vfront.php";
 
-	
-		
+
+
 	if($fp=@fopen($file_conf_target,"w")){
 		$fpw=@fwrite($fp,$WR);
 		@fclose($fp);
-		
+
 		rename($file_conf_target,$file_conf_dest);
-		
+
 		$_SESSION['file_connessione']=realpath($file_conf_dest);
 	}
 	else{
-		
+
 		$_SESSION['cont_file_connessione']=$WR;
 	}
 

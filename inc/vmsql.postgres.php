@@ -49,7 +49,7 @@ class postgres_vmsql {
 
 			$this->connected=true;
 			pg_set_client_encoding($this->link_db, $charset);
-            
+
             // Set the search path
             pg_query($this->link_db, "SET search_path TO ".$array_db['dbname']);
 		}
@@ -63,7 +63,7 @@ class postgres_vmsql {
         $this->query_type_asynch = (bool) $bool;
     }
 
-	
+
 	public function get_error($last=true){
 
 	    if($last){
@@ -159,7 +159,7 @@ class postgres_vmsql {
 
 			$test = @pg_query($this->link_db, $sql);
 			$err = pg_last_error($this->link_db);
-            
+
 		}
 
 		return (is_resource($test) && empty($err)) ? 1:0;
@@ -226,7 +226,7 @@ class postgres_vmsql {
 	 * @param resource $res
 	*/
 	public function fetch_object(&$res,$class_name=null){
-        
+
 		if(is_resource($res)){
 			$obj= ($class_name==null) ? @pg_fetch_object($res) :  @pg_fetch_object($res, null, $class_name);
 			return (is_object($obj)) ? $obj : false;
@@ -320,14 +320,14 @@ class postgres_vmsql {
 
 		}
 	}
-    
+
     /**
 	 * @return array (matrice)
 	 * @param resource $res
 	 * @desc Funzione utility di fetch_object che restituisce tutta la matrice dei risultati
 	*/
 	public function fetch_object_all(&$res, $class_name=null){
-        
+
         $matrice=array();
 		if(is_resource($res)){
 			while($o= $this->fetch_object($res, $class_name)) $matrice[]=$o;
@@ -594,7 +594,7 @@ class postgres_vmsql {
 	}
 
 
-	
+
 	/**
 	 * Concat DB sintax
 	 *
@@ -662,8 +662,8 @@ class postgres_vmsql {
 
 		$this->close();
 	}
-    
-    
+
+
     public function db_error_log($obj){
 
         $fp=fopen(FRONT_ERROR_LOG,"a");

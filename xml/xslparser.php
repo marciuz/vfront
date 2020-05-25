@@ -14,8 +14,8 @@
 
 
 if (PHP_VERSION < 5) {
-	
-		
+
+
 	/**
 	 * Funzione di parser XSLT. 
 	 * Richiede l'apertura di file remoti (allor_fopen_url = TRUE )
@@ -26,12 +26,12 @@ if (PHP_VERSION < 5) {
 	 * @return string HTML output
 	 */
 	function xslparser($file_xml,$file_xsl){
-	
+
 		$arguments = array(
 		    '/_xml' => file_get_contents($file_xml),
 		    '/_xsl' => file_get_contents($file_xsl)
 		);
-		
+
 		$xsltproc = xslt_create();
 		$html = xslt_process(
 		    $xsltproc,
@@ -40,31 +40,31 @@ if (PHP_VERSION < 5) {
 		    null,
 		    $arguments
 		);
-	
+
 		xslt_free($xsltproc);
-		
+
 		return $html;
-	
+
 	}
 
 }
 
 // PHP 5
 else{
-	
+
 	function xslparser($file_xml,$file_xsl){
-		
+
 	   $xslDoc = new DOMDocument();
 	   $xslDoc->load($file_xsl);
-	
+
 	   $xmlDoc = new DOMDocument();
 	   $xmlDoc->load($file_xml);
-	
+
 	   $proc = new XSLTProcessor();
 	   $proc->importStylesheet($xslDoc);
-	   
+
 	   return $proc->transformToXML($xmlDoc);
-	
+
 	}
 }
 

@@ -60,5 +60,5 @@ Translate.fr['updated']='Plus d\'ordre';
 function _(str){
 	if(typeof(Translate.fr[str])!=='undefined'){ return Translate.fr[str]; }
 	else{ return str; }
-	
+
 }

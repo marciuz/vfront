@@ -367,7 +367,7 @@ CREATE TABLE {$db1['frontend']}{$db1['sep']}button (
 ";
 
 $SQL_DEFINITION[]="
-  
+
 
 --
 -- Table widget

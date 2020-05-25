@@ -30,15 +30,15 @@ foreach($_K as $kk){
 $out_num='';
 
 for($i=0;$i<count($sottomaschere);$i++){
-	
+
 	if(RegTools::is_tabella($sottomaschere[$i])){
-		
+
 		$PK=RegTools::prendi_PK($_GET['action']);
-		
+
 		$sql="SELECT count(*) FROM ".$sottomaschere[$i]." sub, ".$_GET['action']." t
 			WHERE t.{$_FK[$sottomaschere[$i]]['campo_pk_parent']} = sub.{$_FK[$sottomaschere[$i]]['campo_fk_sub']}
 			AND t.$PK='".$vmsql->escape($_GET['id'])."'";
-		
+
 		$q=$vmsql->query($sql);
 		list($out)= $vmsql->fetch_row($q);
 		$out_num.= (int) $out.",";

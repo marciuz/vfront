@@ -81,7 +81,7 @@ class mysqli_vmsql {
 				or $this->error($sql);
 
 		if($GLOBALS['DEBUG_SQL']){
-			
+
 			$GLOBALS['DEBUG_SQL_STRING'][] = round((microtime(true) - $getmicro),4) . " --- ". $sql;
 		}
 
@@ -124,7 +124,7 @@ class mysqli_vmsql {
 	public function query_try($sql,$secure_mode=true){
 
 		$getmicro=microtime(true);
-		
+
 		$sql=trim(str_replace(array("\n","\r")," ",$sql));
 
 		if($secure_mode){
@@ -144,7 +144,7 @@ class mysqli_vmsql {
 				$GLOBALS['DEBUG_SQL_STRING'][] = round((microtime(true) - $getmicro),3) . " --- ". $sql;
 			}
 		}
-		
+
 		return ($res) ? 1:0;
 	}
 
@@ -358,7 +358,7 @@ class mysqli_vmsql {
 	 * @desc Funzione utility di fetch_assoc che restituisce tutta la matrice dei risultati
 	*/
 	public function fetch_object_all(&$res, $class_name=null){
-        
+
         $matrice=array();
 		if(is_object($res)){
 
@@ -366,7 +366,7 @@ class mysqli_vmsql {
 
 			$this->free_result($res);
 		}
-        
+
         return $matrice;
 	}
 
@@ -490,7 +490,7 @@ class mysqli_vmsql {
 		}
 
 
-		
+
 
 	}
 
@@ -540,7 +540,7 @@ class mysqli_vmsql {
 	 * @param resource $this->link_db
 	 */
 	public function commit(){
-		
+
 		if($this->transaction_is_open){
 			mysqli_commit($this->link_db);
 			$this->transaction_is_open=false;
@@ -636,7 +636,7 @@ class mysqli_vmsql {
 	}
 
 
-	
+
 	/**
 	 * Concat DB sintax
 	 *
@@ -678,7 +678,7 @@ class mysqli_vmsql {
 		return $db_version;
 	}
 
-	
+
 
 	public function close(){
 
@@ -709,8 +709,8 @@ class mysqli_vmsql {
 
 		$this->close();
 	}
-    
-    
+
+
 
     public function db_error_log($obj){
 

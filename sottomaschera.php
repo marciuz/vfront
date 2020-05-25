@@ -39,13 +39,13 @@ $info_sub = $vmreg->fetch_assoc($q_info_sub);
  $SM_TIPO_VISTA = $info_sub['tipo_vista'];
 
 
- 
- 
- 
-	
- 
 
- 
+
+
+
+
+
+
 
 
 ###############################################################
@@ -71,9 +71,9 @@ $CAMPI_TENDINE=array();
 
 // CERCA LE TENDINE:
 for($i=0;$i<count($info_campi_sub);$i++){
-	
+
 	if($info_campi_sub[$i]['in_tipo']=='select_from'){
-		
+
 		$CAMPI_TENDINE[]= 	$info_campi_sub[$i]['column_name'];
 	}
 }
@@ -83,7 +83,7 @@ for($i=0;$i<count($info_campi_sub);$i++){
 $nome_sub = (trim($info_sub['nome_frontend'])!="") ? $info_sub['nome_frontend'] : $info_sub['nome_tabella'];
 
 
- 
+
 ###############################################################
 #
 #	CHIAVI PRIMARIE SOTTOMASCHERA
@@ -97,21 +97,21 @@ $nome_sub = (trim($info_sub['nome_frontend'])!="") ? $info_sub['nome_frontend'] 
 */
 	/*// cerca la chiave riferita alla tabella indipendente
 	$K_PK_tab_indipendente = array_search($info_sub['campo_pk_parent'],$array_PK_dipendente);
-	
+
 	$PK_tab_indipendente=$array_PK_dipendente[$K_PK_tab_indipendente];*/
-	
+
 	// Cerca in tutti i campi quello definito come "parent_ref"
-	
-	
+
+
 	$CAMPO_PARENT_REF='';
 	for($k=0;$k<count($info_campi_sub);$k++){
-		
+
 		if($info_campi_sub[$k]['in_tipo']=='parent_ref'){
 			$CAMPO_PARENT_REF=$info_campi_sub[$k]['column_name'];
 		}
-		
+
 	}
-	
+
 	if($CAMPO_PARENT_REF==''){
 		openErrorGenerico(_('Settings error for subform')." :".__LINE__,false,_('Invalid reference to foreign key. Check the settings'));
 	}
@@ -119,11 +119,11 @@ $nome_sub = (trim($info_sub['nome_frontend'])!="") ? $info_sub['nome_frontend'] 
 		$PK_tab_indipendente=$CAMPO_PARENT_REF;
 	}
 
-	
+
 	/*
 	// togli la variabile indipendente
 	unset($array_PK_dipendente[$K_PK_tab_indipendente]);
-	
+
 	// resta (su 2 assunte) la PK dipendente
 	list($PK_tab_dipendente)=array_values($array_PK_dipendente);*/
 
@@ -131,20 +131,20 @@ $nome_sub = (trim($info_sub['nome_frontend'])!="") ? $info_sub['nome_frontend'] 
 // Campi da prendere
 
 for($i=0;$i<count($info_campi_sub);$i++){
-	
+
 	if($info_campi_sub[$i]['in_visibile']=='1' && $info_campi_sub[$i]['column_name']!=$info_sub['campo_fk_sub']){
 
-		
+
 		$campi[] = $info_campi_sub[$i]['column_name'];
 		$campi_alias_frontend[] = $info_campi_sub[$i]['alias_frontend'];
 		$info_campo_mostrare[] = $info_campi_sub[$i];
-	
+
 	}
 	elseif($info_campi_sub[$i]['in_tipo']=='parent_ref'){
-		
+
 		$CAMPO_REF_PARENT = $info_campi_sub[$i]['in_default'];
-		
-		
+
+
 	}
 }
 
@@ -166,14 +166,14 @@ $sql_ETICHETTA = "SELECT parent.$CAMPO_REF_PARENT
 		  LIMIT 1";
 
 	$q_ETICHETTA = $vmsql->query($sql_ETICHETTA);
-	
+
 	if($vmsql->num_rows($q_ETICHETTA)==1){
-		
+
 		list($ETICHETTA) = $vmsql->fetch_row($q_ETICHETTA);
 	}
 	else $ETICHETTA = "<em>"._('Data not available')."</em>";
-	
-	
+
+
 
 }
 
@@ -187,7 +187,7 @@ $sql_ETICHETTA = "SELECT parent.$CAMPO_REF_PARENT
 $n_campi = count($campi);
 
 if($n_campi==0){
-	
+
 	openErrorGenerico(_("Error in subform definition")." l:".__LINE__,false);
 	exit;
 }
@@ -196,41 +196,41 @@ if($n_campi==0){
 		  WHERE ".$info_sub['campo_fk_sub']."='".$vmsql->escape($_GET['pk'])."'
 		  ORDER BY ".$info_sub['orderby_sub']." ".$info_sub['orderby_sub_sort'];
 
- 
+
 if($vmsql->query_try($sql_dati,true,true)){
-	
+
 	// PRENDO I DATI
-	
+
 	$q_dati = $vmsql->query($sql_dati);
-	
+
 	$n_dati = $vmsql->num_rows($q_dati);
-	
+
 	if($n_dati>0){
-		
+
 		$dati_sub = $vmsql->fetch_row_all($q_dati);	
 	}
-	
+
 }
 else{
-	
+
 	openErrorGenerico(_("Error in subform definition")." :".__LINE__,false);
 	exit;
 }	
 
 /*
 if($vmsql->query_try($sql_chiavi)){
-	
+
 	// PRENDO I VALORI DELLE CHIAVI primaerie dipendenti
-	
+
 	$q_chiavi = $vmsql->query($sql_chiavi);
-	
+
 	$n_chiavi = $vmsql->num_rows($q_chiavi);
-	
+
 	if($n_dati>0){
-		
+
 		list($dati_chiavi_sub) = $vmsql->fetch_row_all($q_chiavi,true);	
 	}
-	
+
 }*/
 
 
@@ -245,18 +245,18 @@ $sql_all_data ="SELECT * FROM ".$info_sub['nome_tabella']."
 
 
 // PRENDO TUTTI I DATI
-	
+
 	$q_all_dati = $vmsql->query($sql_all_data);
-	
+
 	$n_all_dati = $vmsql->num_rows($q_all_dati);
-	
+
 	if($n_all_dati>0){
-		
+
 		$dati_all_sub = $vmsql->fetch_assoc_all($q_all_dati);	
 	}
-	
+
 /*else{
-	
+
 	openErrorGenerico("Errore nella impostazione della sottomaschera: Numero di campi attesi per la chiave primaria incongruente (attesi 2 campi)",false);
 	exit;
 }*/
@@ -285,9 +285,9 @@ $DATE_FORMAT = (isset($_SESSION['VF_VARS']['force_isodate_on_mask'])
 					  && ($_SESSION['VF_VARS']['force_isodate_on_mask']==1))
 				 ? 'iso'
 				 : FRONT_DATE_FORMAT;
-	
-	
-	
+
+
+
 $INIZIO_LAYOUT = openLayout1(_("Subform")." ".$nome_sub,$files,'sottomaschera');
 
 $OUT= str_replace("<body>","<body onload=\"self.focus();\">",$INIZIO_LAYOUT);   unset($INIZIO_LAYOUT);
@@ -312,18 +312,18 @@ $js_manuale = "
 		var campi_iframe= new Array('".implode("','",$CAMPI_TENDINE)."');
 		var dateEncode='".$DATE_FORMAT."';
         var basePath='".$pathRelativo."';
-		
-		
+
+
 		";
 
  $sotto_array_js="";
- 
+
  for($i=0;$i<$MAX_RECORD_SUB;$i++){
- 	
+
  	$js_manuale.="var a$i = new Array(); ";
- 	
+
  	$sotto_array_js.= "a$i,";
- 	
+
 }
 
 $sotto_array_js=substr($sotto_array_js,0,-1);
@@ -332,9 +332,9 @@ $js_manuale.="
 
 	var campi_mod= new Array();
 	var valori_del = new Array();
-	
-	
-	
+
+
+
 	</script>\n";
 
 $OUT.= $js_manuale;
@@ -350,7 +350,7 @@ $OUT.= "
 ";
 
 	if($SM_INSERT || $SM_UPDATE){
-		
+
 		$OUT.="<div id=\"pulsanti-azioni\">\n";
 	}
 
@@ -362,44 +362,44 @@ $OUT.= "
 	else {
             $OUT.="<input type=\"hidden\" id=\"p_insert\" />\n"; 
         }
-        
+
 	if($SM_INSERT || $SM_UPDATE){ 
 	 	$OUT.="<input disabled=\"disabled\" title=\""._('Cancel')."\" type=\"button\" id=\"p_annulla\" name=\"annulla\" value=\" "._('Cancel')." \" onclick=\"annulla();\" accesskey=\"a\" />\n";
 	} 
 	else {
             $OUT.="<input type=\"hidden\" id=\"p_annulla\" />\n";
         }
-        
+
 	if($SM_INSERT || $SM_UPDATE){ 
 		$OUT.="<input disabled=\"disabled\"  title=\""._('Save records')."\" type=\"button\" id=\"p_save\" name=\"save\" value=\" "._('Save')." \" onclick=\"salva(nome_tabella);\" accesskey=\"s\" />\n";
 	} 
 	else $OUT.="<input type=\"hidden\" id=\"p_save\" />\n";
-	
-	
+
+
 	$OUT.=" <input type=\"button\" title=\""._('Close window')
             ."\" name=\"Chiudi\" value=\" "._('Close')
             ." \" onclick=\"if(modifiche_attive || eliminazione_attiva){if(confirm('"
             ._('There are pending operations: do you want to close the window anyway without saving the modifications?')."'))"
             ."{self.close(); PARENT_WINDOW.Shadowbox.close(); }}else{self.close(); PARENT_WINDOW.Shadowbox.close();}\" />\n";
-	
+
 
 	if($SM_INSERT || $SM_UPDATE){
-		
+
 		$OUT.="</div>\n";
 	}
-		
 
-	
-	
-	
+
+
+
+
 	$OUT.="<div class=\"etichetta-record\">".Common::vf_utf8_encode($ETICHETTA)
             ." <span style=\"color:#000\">(<span id=\"numero_record\">$n_dati</span> "
             ._('record').")</span></div>\n";
-	
-	
 
-	
-	
+
+
+
+
 	$TRIGGER_ASSEGNAZIONE="";
 
 
@@ -435,9 +435,9 @@ $OUT.= "
 						elseif($SM_UPDATE && $j==0) $TR_TH.="<th class=\"nocolor\">&nbsp;</th>";
 						if($SM_DELETE && $j==0) $TR_TH.="<th class=\"nocolor\">&nbsp;</th>";
 
-						
+
 						$nome_campo = (trim($campi_alias_frontend[$j])=='') ? $campi[$j] : $campi_alias_frontend[$j];
-						
+
 						$TR_TH.="<th>".$nome_campo."</th>";
 					}
 
@@ -472,10 +472,10 @@ $OUT.= "
 			$RIGA.="\t\t<tr id=\"riga_x\" style=\"display:none;\">\n";
 
 			for($j=0;$j<$n_campi;$j++){
-				
+
 				// impostazione eventuale alias
 				$nome_campo = (trim($campi_alias_frontend[$j])=='') ? $campi[$j] : $campi_alias_frontend[$j];
-						
+
 				$TR_TH.="\t\t\t<th>".$nome_campo."</th>\n";
 
 				$chiave_record = "x";
@@ -537,9 +537,9 @@ $OUT.= "
 						// elseif($SM_UPDATE && $j==0) $TR_TH.="<th class=\"nocolor\">&nbsp;</th>";
 						// if($SM_DELETE && $j==0) $TR_TH.="<th class=\"nocolor\">&nbsp;</th>";
 
-						
+
 						$nome_campo = (trim($campi_alias_frontend[$j])=='') ? $campi[$j] : $campi_alias_frontend[$j];
-						
+
 						$TR_TH.="<th>".$nome_campo."</th>";
 					}
 
@@ -586,7 +586,7 @@ $OUT.= "
 		else{
 
 		    $i=0;
-		    
+
 		    $RIGA.="<tr id=\"riga_$i\" >";
 
 			for($j=0;$j<$n_campi;$j++){
@@ -616,14 +616,14 @@ $OUT.= "
 			$TABLE.= $RIGA;
 
 			$TABLE.="</tbody></table>\n\n";
-			
+
 			$TABLE.="<div class=\"embed-nodata\">".sprintf(_('No data available for the subform "%s"'), $nome_sub)."</div>\n";
 		}
 
-		
-               
+
+
 	}	
-	
+
 	######################################################################################################################
 	#
 	#
@@ -631,10 +631,10 @@ $OUT.= "
 	#
 	#
 	else{
-		
-		
+
+
 		$DIVR="";
-		
+
 		if($n_dati>0){
 
 
@@ -643,34 +643,34 @@ $OUT.= "
 
 
 				$DIVR.="<div id=\"riga_$i\" style=\"display:none;\" class=\"entry-record\">";
-				
+
 				$chiave_record = ($n_all_dati>=$i) ? $i : "n".$i;
 
 				$controlli="";
-				
+
 					if($SM_UPDATE)	$controlli.="<a href=\"javascript:;\" onclick=\"modifica($i);\">"._('modify')."</a>";
 					if($SM_UPDATE && $SM_DELETE) $controlli.=" - ";
 					if($SM_DELETE)	$controlli.="<a href=\"javascript:;\" onclick=\"elimina($i);\">"._('delete')."</a>";
 
 					if($SM_UPDATE || $SM_DELETE) $DIVR.="<span class=\"controlli\">$controlli</span>\n";
-				
+
 				$DIVR.="<table summary=\"tabella di formattazione record\" border=\"0\" class=\"tab-format\">";
 
 				for($j=0;$j<$n_campi;$j++){
 
-					
+
 					$dato_ins = (isset($dati_sub[$i][$j])) ? $dati_sub[$i][$j] : "";
 
 					$DIVR.="<tr>";
 					$DIVR.= ($j==0) ? "<td class=\"numerone\" rowspan=\"$n_campi\">". ($i+1) ."</td>" : "";
-					
+
 					// impostazioni per l'alias
 					$nome_campo = (trim($campi_alias_frontend[$j])=='') ? $campi[$j] : $campi_alias_frontend[$j];
-					
+
 					$DIVR.= ($info_campo_mostrare[$j]['in_tipo']=='hidden') ? "" : "<td class=\"label\">".$nome_campo."</td>";
-					
+
 					$DIVR.= tipo_campo_submask($chiave_record,$dato_ins,$info_campo_mostrare[$j]);
-					
+
 					$DIVR.="</tr>";
 
 					// TRIGGER ASSEGNAZIONE VALORI
@@ -681,7 +681,7 @@ $OUT.= "
 
 				$DIVR.="<span id=\"value_riga_$i\" style=\"display:none;\">".$dati_serializzati."</span>";
 
-			
+
 				$DIVR.="</table>";
 				$DIVR.="</div>";
 
@@ -700,7 +700,7 @@ $OUT.= "
 				$chiave_record = "x";
 
 				$dato_ins = (isset($dati_sub[$i][$j])) ? $dati_sub[$i][$j] : "";
-				
+
 				// impostazioni per l'alias
 				$nome_campo = (trim($campi_alias_frontend[$j])=='') ? $campi[$j] : $campi_alias_frontend[$j];
 
@@ -715,45 +715,45 @@ $OUT.= "
 			$DIVR.="</div>\n";
 
 		}
-		
-		
-		
-		
+
+
+
+
 	}
 
 
 $JS="";
-	
+
 $OUT.= ($SM_TIPO_VISTA=='scheda' || $SM_TIPO_VISTA=='schedash') ? $DIVR:$TABLE;
 
 $JS.="
 <script type=\"text/javascript\">
-		
+
 		/* <![CDATA[ */
 
 		for(j=0;j<$MAX_RECORD_SUB;j++){
-		
+
 			if(j<n_righe){
 				id_riga_considerata = 'riga_'+j;
 				document.getElementById(id_riga_considerata).style.display='';
 			}
 		}
-		
+
 		/* ]]> */
-		
+
 </script>\n";
 
 
 if($SM_TIPO_VISTA=='embed'){
-    
+
     print $TABLE;
     print $JS;
-    
+
 }
 else{ 
     $OUT.=$JS;
     $OUT.=closeLayout1();
-    
+
     print $OUT;
 }
 

@@ -64,7 +64,7 @@ class FunctionBuilder {
         $builder = new DirectionBuilder();
         return $builder->build($parsed);
     }
-    
+
     protected function buildAlias($parsed) {
         $builder = new AliasBuilder();
         return $builder->build($parsed);
@@ -89,7 +89,7 @@ class FunctionBuilder {
         $builder = new ReservedBuilder();
         return $builder->isReserved($parsed);
     }
-    
+
     protected function buildSelectExpression($parsed) {
         $builder = new SelectExpressionBuilder();
         return $builder->build($parsed);

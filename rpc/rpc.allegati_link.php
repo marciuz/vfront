@@ -26,15 +26,15 @@ proteggi(1);
  * @return int Numero di allegati trovati per ID e Tabella considerati
  */
 function cerca_allegati($tabella,$valore_id){
-	
+
 	global  $vmsql, $vmreg, $db1;
-	
+
 	$sql="SELECT count(*) FROM "._TABELLA_ALLEGATO." WHERE tipoentita='$tabella' AND codiceentita='$valore_id'";
 	$q=$vmreg->query($sql);
 	list($n_allegati)=$vmreg->fetch_row($q);
-	
+
 	return (int) $n_allegati;
-	
+
 }
 
 
@@ -47,16 +47,16 @@ function cerca_allegati($tabella,$valore_id){
  * @return int Numero di link trovati per ID e Tabella considerati
  */
 function cerca_link($tabella,$valore_id){
-	
+
 	global  $vmsql, $vmreg, $db1;
-	
+
 	$sql="SELECT count(*) FROM "._TABELLA_LINK." WHERE tipoentita='$tabella' AND codiceentita='$valore_id'";
 //	Common::rpc_debug($sql);
 	$q=$vmreg->query($sql);
 	list($n_link)=$vmreg->fetch_row($q);
-	
+
 	return (int) $n_link;
-	
+
 }
 
 

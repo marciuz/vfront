@@ -56,12 +56,12 @@ class ShowStatementBuilder {
         $builder = new WhereBuilder();
         return $builder->build($parsed);
     }
-    
+
     protected function buildSHOW($parsed) {
         $builder = new ShowBuilder();
         return $builder->build($parsed);
     }
-    
+
    public function build($parsed) {
         $sql = $this->buildSHOW($parsed);
         if (isset($parsed['WHERE'])) {

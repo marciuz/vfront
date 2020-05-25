@@ -83,6 +83,6 @@ class InsertBuilder {
         $sql .= $columns;
         return $sql;
     }
-    
+
 }
 

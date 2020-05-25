@@ -4,6 +4,6 @@
 	$fp=fopen("./files/tmp/$h.stop","w");
 	fwrite($fp,'');
 	fclose($fp);
-	
+
 	echo 1;
-	
+

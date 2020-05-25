@@ -45,12 +45,12 @@ echo "<table summary=\"dati utente\" class=\"tab-color\">
 		<th>"._("last modified date")."</th>
 		<td>".VFDate::date_encode($_SESSION['user']['data_ins'],false)."</td>
 	</tr>
-	
+
 	<tr>
 		<th>"._("group")."</th>
 		<td>".$_SESSION['user']['gid']." - ". Common::gid2group_name($_SESSION['user']['gid'])."</td>
 	</tr>
-	
+
 	<tr>
 		<th>"._("level")."</th>
 		<td>".$_SESSION['user']['livello']."</td>

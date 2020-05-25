@@ -131,16 +131,16 @@ switch($_GET['p']){
  * @return string HTML
  */
 function step0(){
-    
+
     if(isset($_GET['esci'])){
-	
+
 	$old_conf_file="../conf/conf.vfront.php";
-	
+
 	if(file_exists($old_conf_file)){
-	    
+
 	    unlink($old_conf_file);
 	}
-	
+
     }
 
 	echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -710,7 +710,7 @@ function step2(){
 				<span class="desc" style="display:none"><?php echo _('SQlite database');?></span>
 			</p>
 
-			
+
 		</div>
 
 		<p>
@@ -1375,7 +1375,7 @@ function step3s(){
 		header("Location: ".$_SERVER['PHP_SELF']."?p=panic&errty=copy_$ty");
 
 	exit;
-	
+
 }
 
 
@@ -1638,7 +1638,7 @@ function step4s(){
 			$vmreg = new sqlite2_vmsql();
 		}
 
-		
+
 		$test_conn =$vmreg->connect($db1['filename_reg']);
 
 		if(!$test_conn){
@@ -1861,7 +1861,7 @@ function panic_page(){
 		$ERROR_LOG_HTML='';
 	}
 
-	
+
 
 	if(!isset($_GET['errty'])) $_GET['errty']='';
 
@@ -1905,7 +1905,7 @@ function panic_page(){
 										"<a href=\"?p=1\">","</a>");
 							$msg.="</p>";
 		break;
-	
+
 		case 'no_create_table':$msg="<p>";
 							$msg.=_('There is a problem creating the VFront tables.');
 							$msg.="</p>\n<p>\n";

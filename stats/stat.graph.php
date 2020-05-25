@@ -33,9 +33,9 @@ putenv('GDFONTPATH=' . realpath('..') . '/plugins/ttf');
  */
 function barre($data,$labels,$scala=5,$testo="",$nome_file="image",
 				$x=490,$y=280,$colore='orange',$left=160,$format='%.2f', $colore_sfondo='ivory'){
-		
+
 	include_once 'Image/Graph.php';     
-	
+
 	$Graph =& Image_Graph::factory('graph', array($x, $y)); 
 
 	// create the plotarea
@@ -52,9 +52,9 @@ function barre($data,$labels,$scala=5,$testo="",$nome_file="image",
 	); 
 	$Grid =& $Plotarea->addNew('line_grid', array(), IMAGE_GRAPH_AXIS_Y);
 	$Grid->setLineColor('black@0.1');   
-	
+
 	$Dataset =& Image_Graph::factory('dataset'); 
-	
+
 	for($i=(count($data)-1);$i>=0;$i--){
 
 		$Dataset->addPoint($labels[$i], $data[$i]); 
@@ -62,20 +62,20 @@ function barre($data,$labels,$scala=5,$testo="",$nome_file="image",
 
 	$Font =& $Graph->addNew('font', 'verdana');
 	$Font->setSize(8);
-	
+
 	$Graph->setFont($Font); 
-	
-	
+
+
 	$Graph->setBackgroundColor($colore_sfondo.'@0.2'); 
 	$Graph->setPadding(10); 
-		
+
 	$Fill =& Image_Graph::factory('Image_Graph_Fill_Array'); 
 	$Fill->addColor('white'); 
 	$Plotarea->setFillStyle($Fill);
-	
+
 	$Plot =& $Plotarea->addNew('bar', &$Dataset); 
-	
-	
+
+
 	if(is_array($colore)){
 		$Fill =& Image_Graph::factory('gradient', array(IMAGE_GRAPH_GRAD_VERTICAL, $colore[0], $colore[1]));
 		$Plot->setFillStyle($Fill); 
@@ -86,21 +86,21 @@ function barre($data,$labels,$scala=5,$testo="",$nome_file="image",
 		$Plot->setFillStyle($Fill);
 	}
 
-	
-	
-	
+
+
+
 	$Graph->done( array('filename' => _PATH_TMP."/$nome_file.png") ); 
-    
-    
-		
+
+
+
 		if(is_file(_PATH_TMP."/$nome_file.png"))
 			return true;
 		else 
 			return false;
 	}
-	
-	
-	
+
+
+
 /**
  * Funzione per la generazione dei grafici a torta
  * Utilizza PEAR ed il pacchetto Image/Graph
@@ -118,15 +118,15 @@ function barre($data,$labels,$scala=5,$testo="",$nome_file="image",
  */
 function torta($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 
-	
+
 	include_once 'Image/Graph.php';
 	// create the graph
 	$Graph =& Image_Graph::factory('graph', array($x, $y));
-	
 
-	
-	
-	    
+
+
+
+
 	// create the plotarea
 	$Graph->add(
 	    Image_Graph::vertical(
@@ -140,34 +140,34 @@ function torta($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 	    )
 	);
    	$Legend->setPlotarea($Plotarea);
-		
+
 	$Dataset =& Image_Graph::factory('dataset'); 
-	
+
 	for($i=(count($data)-1);$i>=0;$i--){
 
 		$Dataset->addPoint($labels[$i], $data[$i],$labels[$i]); 
 	}
-	
+
 	$Plot =& $Plotarea->addNew('pie', array(&$Dataset));
 	$Plotarea->hideAxis(); 
-	
-	
+
+
 	$Font =& $Graph->addNew('font', 'verdana');
 	$Font->setSize(6.5);
-	
+
 	$Graph->setFont($Font); 
-	
-	
+
+
 	$Graph->setBackgroundColor('white'); 
 	$Graph->setPadding(10); 
-	
-  
-	
-	
-	
-	
-	
-		
+
+
+
+
+
+
+
+
 	// create a Y data value marker
 	$Marker =& $Plot->addNew('Image_Graph_Marker_Value', IMAGE_GRAPH_PCT_Y_TOTAL);
 	// create a pin-point marker type
@@ -176,21 +176,21 @@ function torta($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 	$Plot->setMarker($PointingMarker);    
 	// format value marker labels as percentage values
 	$Marker->setDataPreprocessor(Image_Graph::factory('Image_Graph_DataPreprocessor_Formatted', '%0.1f%%'));
-	
+
 	$Plot->Radius = 2;
-	
+
 	$FillArray =& Image_Graph::factory('Image_Graph_Fill_Array');
 	$Plot->setFillStyle($FillArray);
-	
+
 	for($i=0;$i<count($labels);$i++){
-	
+
 		$FillArray->addColor(generate_rand_hex_color(),$labels[$i]);
-		
+
 	}
-	
+
 	$Plot->explode(5);
 
-	
+
 	// Mando l'output
 	$Graph->done( array('filename' => _PATH_TMP."/$nome_file.png") ); 
 
@@ -198,7 +198,7 @@ function torta($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 		return true;
 	else 
 		return false;
-		
+
 }
 
 

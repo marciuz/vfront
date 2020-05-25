@@ -10,64 +10,64 @@
  */
 class Hash_Iframe{
 
-	
+
 	/**
 	 * HTML generato come output dalla classe
 	 *
 	 * @var string HTML
 	 */
 	public	$HTML_IFRAME="";
-	
+
 	/**
 	 * Hash md5 che riassume il contenuto di HTML_IFRAME, identificandolo univocamente
 	 *
 	 * @var string md5
 	 */
 	public	$hash_html;
-	
+
 	/**
 	 * Path della cartella dove salvare e leggere i file per gli iframe
 	 *
 	 * @var string Path per gli iframe
 	 */
 	public	$path_html;
-	
+
 	/**
 	 * Variabile presa dal DB che identifica se la tabella padre è scrivibile (INSERT)
 	 *
 	 * @var bool
 	 */
 	public $in_insert_tab;
-	
+
 	/**
 	 * Variabile presa dal DB che identifica se la tabella padre è visibile (SELECT)
 	 *
 	 * @var bool
 	 */
 	public $in_visibile;
-	
+
 	/**
 	 * ID (oid) della tabella nella tabella di regole 
 	 *
 	 * @var int
 	 */
 	public $id_table_ref;
-	
+
 	/**
 	 * Variabile che identifica se la tabella considerata è persa da VFront come sottomaschera o maschera
 	 *
 	 * @var bool
 	 */
 	public $is_submask;
-	
+
 	/**
 	 * Numero di record presenti attualmente nella tabella considerata
 	 *
 	 * @var int
 	 */
 	public $n=0;
-	
-	
+
+
 	/**
 	 * Funzione che scive sul filesystem il nuovo iframe
 	 * nominandolo con un hash md5 corrispondente al suo contenuto con il suffisso .html
@@ -82,18 +82,18 @@ class Hash_Iframe{
 	function  __construct($nome_campo,$sql_tendina,$is_submask=false,$n=0){
 
 		global $db1, $vmsql, $vmreg;
-		
+
 		$this->is_submask=$is_submask;
 		$this->n=$n;
-		
-		
+
+
 
 		// CASO SPECIALE SELECT FROM
 
 
 		$campi = $this->analisi_select_from($sql_tendina);
 
-		
+
 		if(is_array($campi)){
 			if(preg_match('!ORDER BY!i',$sql_tendina)){
 				$sql = $sql_tendina;
@@ -110,7 +110,7 @@ class Hash_Iframe{
 			$sql ="";
 		}
 
-		
+
 		$test_tabella = preg_match("'FROM ([a-zA-Z0-9_]+)'i",$sql_tendina,$arr_tabella);
 
 		if(is_array($arr_tabella) && count($arr_tabella)==2){
@@ -172,17 +172,17 @@ class Hash_Iframe{
 
 		// Se � sottomaschera 
 		if($this->is_submask){
-			
+
 			$id_campo = "dati__{$this->n}__{$campo}";
 			$nome_campo = "dati[$this->n][$campo]";
-			
+
 		}
 		else{
-			
+
 			$id_campo = "dati_".$campo;
 			$nome_campo = "dati[".$campo."]";
 		}
-		
+
 		$HTML_IFRAME="
 				<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 				<html>
@@ -201,75 +201,75 @@ class Hash_Iframe{
 					if(count($valori)>0){
 						foreach($valori as $k=>$val){
 							$val_parsed = str_replace(array("\n","\r")," ",addslashes($val));
-							
+
 							$HTML_IFRAME .= "<option value=\"$k\">".Common::vf_utf8_encode($val_parsed)."</option>";
 						}
 					}
 
 
 					$HTML_IFRAME.="</select></div>
-			
+
 		<script type=\"text/javascript\">
-		
+
 			function carica(){
 				//T1 = new Date().getTime();
-				
+
 			";
-						
+
 			if(!$this->is_submask){
-				
+
 					$HTML_IFRAME.="
 				top.document.getElementById('target_".$campo."').innerHTML=document.getElementById('i_target').innerHTML;
 				top.document.getElementById('feed_".$campo."').innerHTML='';
-				
+
 				";
 			}	
 			else{	
-			
+
 					$HTML_IFRAME.="
 				top.document.getElementById('target_{$this->n}_".$campo."').innerHTML=document.getElementById('i_target').innerHTML;
-				
+
 				";	
 			}
-			
+
 				if($this->is_submask){	
 					$HTML_IFRAME.="	
-					
+
 				top.trigger_assegnazione();
-				
+
 				";
 				}
 				else{$HTML_IFRAME.="	
-				
+
 				top.triggerLoadTendina();
 				";
-					
+
 				}
-			
-				
-				
+
+
+
 				$HTML_IFRAME.="
-				
+
 				//T2 = new Date().getTime(); alert((T2-T1)/1000);
 			}
-			
+
 			setTimeout(\"carica()\",120);
-			
+
 			";
-					
-			
-				
-				
+
+
+
+
 			$HTML_IFRAME.="
 		</script>
-		
+
 		</body></html>";
 
 					return $HTML_IFRAME;
 
 	}
-    
-    
+
+
 
     /**
      * Funzione interna per la determinazione dei campi coinvolti da una data query SQL

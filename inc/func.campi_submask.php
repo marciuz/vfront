@@ -213,11 +213,11 @@ function tipo_campo_submask($n, $valore, $info, $tipo_vista = 'tabella') {
 		     onmouseout=\"this.style.background=''\" />";
 
             $input .= <<<CAL
-				
+
 		   <script type="text/javascript">
-		   
+
 		   /* <![CDATA[ */
-		    
+
 		   Calendar.setup({
 		        inputField     :    "dati__{$n}__{$column_name}",   // id of the input field
 		        button	       :    "trigger__{$n}__{$column_name}",   // id of the img field
@@ -228,11 +228,11 @@ function tipo_campo_submask($n, $valore, $info, $tipo_vista = 'tabella') {
 		        disableFunc    :    caldis,
 		        onUpdate       :    catcalc
 		    });    
-		    
+
 		    /* ]]> */
-		
+
 		    </script>
-  
+
 CAL;
         }
     }
@@ -273,11 +273,11 @@ CAL;
 
 
             $input .= <<<CAL
-				
+
 		   <script type="text/javascript">
-		    
+
 		   /* <![CDATA[ */
-		   
+
 		   Calendar.setup({
 		        inputField     :    "dati__{$n}__{$column_name}",   // id of the input field
 		        button	       :    "trigger__{$n}__{$column_name}",   // id of the img field
@@ -288,11 +288,11 @@ CAL;
 		        disableFunc    :    caldis,
 		        onUpdate       :    catcalc
 		    });    
-		    
+
 		    /* ]]> */
-		
+
 		   </script>
-			  
+
 CAL;
         }
     }

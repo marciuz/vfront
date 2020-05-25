@@ -47,6 +47,5 @@ class Auth_Soap {
             return array('response' => false, $parametri);
         }
     }
-    
+
 }
-    

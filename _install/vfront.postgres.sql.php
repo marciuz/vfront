@@ -223,7 +223,7 @@ CREATE TABLE {$frontend_schema}{$db1['sep']}registro_submask_col (
   commento varchar(255) default NULL,
   alias_frontend varchar(100) default NULL,
   CONSTRAINT pk_registro_submask_col PRIMARY KEY  (id_reg_sub),
-  
+
   CONSTRAINT fk_registro_submask_col FOREIGN KEY (id_submask) REFERENCES {$frontend_schema}{$db1['sep']}registro_submask (id_submask) ON DELETE CASCADE
 ) WITHOUT OIDS;
 ";
@@ -338,7 +338,7 @@ CREATE TABLE {$frontend_schema}{$db1['sep']}stat (
   settings text, --  'Impostazioni avanzate del grafico',
   published smallint NOT NULL DEFAULT 0, -- published on home page
   CONSTRAINT pk_stat PRIMARY KEY  (id_stat)
-  
+
 ) WITHOUT OIDS;
 ";
 $SQL_DEFINITION[]="CREATE INDEX i_autore_stat ON {$frontend_schema}{$db1['sep']}stat USING btree (autore);";
@@ -395,7 +395,7 @@ $SQL_DEFINITION[]="
 CREATE INDEX i_button_id_table ON {$frontend_schema}{$db1['sep']}button USING btree (id_table); ";
 
 $SQL_DEFINITION[]="
-  
+
 --
 --  Table widget
 --
@@ -417,13 +417,13 @@ WITHOUT OIDS;
 ";
 
 $SQL_DEFINITION[]="
-    
+
 CREATE INDEX i_widget_id_table ON {$frontend_schema}{$db1['sep']}widget USING btree (id_table);
 ";
 
 
 $SQL_DEFINITION[]="
-    
+
 -- api_console
 
 CREATE TABLE frontend.api_console (

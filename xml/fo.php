@@ -16,28 +16,28 @@
 require_once("../inc/conn.php");
 
 /*function genera_xsl_base($rif_tabella,$solo_visibili=0){
-	
+
 	global  $vmsql, $vmreg, $db1;*/
 
 $rif_tabella=$_GET['action'];
-	
+
 	if(RegTools::is_tabella($rif_tabella)){
-		
+
 		// PRENDE LE CARATTERISTICHE DELLA TABELLA
 		$tabella = $rif_tabella;
 	}
 	else{
-		
+
 		// prende il nome della tabella
 		$tabella = RegTools::oid2name($rif_tabella);
-		
+
 	}
-	
+
 list($cols,$alias)= RegTools::prendi_colonne_frontend($tabella,'column_name, alias_frontend',$solo_visibili,intval($_SESSION['gid']));
 
 $str_tabella = ucfirst($tabella);
-	
-	
+
+
 $XSL=<<<XSLFO
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:xdt="http://www.w3.org/2005/xpath-datatypes" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -89,12 +89,12 @@ XSLFO;
 
 
 for($i=0;$i<count($cols);$i++){
-	
+
 	$display_name = ($alias[$i]=='') ? $cols[$i] : $alias[$i];
-	
-	
+
+
 	/*if($cols[$i]=='email'){
-		
+
 		$XSL.="						<fo:block>
 										<fo:leader leader-pattern=\"space\"/>
 									</fo:block>
@@ -113,7 +113,7 @@ for($i=0;$i<count($cols);$i++){
 									</xsl:if>\n";
 	}
 	else{*/
-		
+
 		$XSL.="						<fo:block font-size=\"1pt\">
 										<fo:leader leader-pattern=\"space\"/>
 									</fo:block>
@@ -131,7 +131,7 @@ for($i=0;$i<count($cols);$i++){
 
 
 $XSL.=<<<XMLFO2
-									
+
 									<fo:block text-align="center" space-before.optimum="-8pt">
 										<fo:leader leader-pattern="space"/>
 										<fo:leader leader-length="100%" leader-pattern="rule" rule-thickness="1pt"/>

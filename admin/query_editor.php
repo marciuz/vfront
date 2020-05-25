@@ -40,21 +40,21 @@ echo openLayout1(_("Query Editor"),array(),'popup');
 $JS="<script type=\"text/javascript\">
 
 	var campi = new Array();
-	
-	
+
+
 \n";
 
 
 foreach($tabelle as $k=>$val){
-	
+
 	$campi[$val['id_table']]=RegTools::prendi_colonne_frontend($val['table_name'],'column_name',false);
 
 	if(is_array($campi[$val['id_table']][0])){
 		$JS.="campi['".$val['table_name']."']=new Array('".implode("','",$campi[$val['id_table']][0])."');\n";
 	}
-	
+
 //	$t.="nome_tab['{$val['id_table']} = '{$campi[$val['id_table']][0]}';\n";
-	
+
 }
 
 $JS.="
@@ -64,38 +64,38 @@ function q_tendina(id){
 
 	var t_id = document.getElementById('tendina_id');
 	var t_val = document.getElementById('tendina_val');
-	
+
 	t_id.options.length=0;
 	t_val.options.length=0;
-	
-	
+
+
 	var opzioni = campi[id];
-	
+
 	for(i in opzioni){
-	
+
 		t_id.options[i]=new Option(campi[id][i],campi[id][i]);
 		t_val.options[i]=new Option(campi[id][i],campi[id][i]);
 	}
-	
+
 
 }
 
 function genera(){
 
 	val_tabella = document.getElementById('q_tabella').value;
-	
+
 	val_c_id = document.getElementById('tendina_id').value;
-	
+
 	val_c_val = document.getElementById('tendina_val').value;
 
-	
+
 	sql = 'SELECT ' + val_c_id +',' + val_c_val + ' FROM ' + val_tabella ;
-	
+
 	if(confirm('La tua query:\\n'+sql+'\\n\\nConfermi?')){
-	
+
 		window.opener.document.getElementById('tipo_altro_".$_GET['id_campo']."').value=sql;
 		window.opener.document.getElementById('tipo_altro_".$_GET['id_campo']."').focus();
-		
+
 		self.close();
 	}
 }

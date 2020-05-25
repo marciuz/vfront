@@ -8,4 +8,3 @@ $api = new API();
 // Load the information schema
 $out=$api->dispacher();
 
-            

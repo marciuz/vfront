@@ -22,7 +22,7 @@ $Log = new Log();
 
 
 if(isset($_POST['id_log']) && isset($_GET['ripristino'])){
-	
+
 	$id_log = (int)$_POST['id_log'];
 	if($id_log>0){
 		$Log->ripristina($id_log);
@@ -32,17 +32,17 @@ if(isset($_POST['id_log']) && isset($_GET['ripristino'])){
 		exit;
 	}
 }
- 
+
 else if(isset($_GET['dettaglio']) && (intval($_GET['dettaglio'])>0)){
-	
+
 	$Log->mostra_dettaglio_log($_GET['dettaglio']);
 }
 else if(isset($_GET['id_record']) && (intval($_GET['id_record'])>0)){
-	
+
 	$Log->show_history($_GET['id_record'], $_GET['table_name']);
 }
 else{
-	
+
 	$Log->mostra_log();
 }
 

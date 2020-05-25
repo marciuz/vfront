@@ -16,14 +16,14 @@ require("../inc/conn.php");
 proteggi(1);
 
 if(isset($_POST['q'])){
-    
+
     $ids= $_POST['q'];
     $hash=md5($_POST['q']);
-    
+
     if(isset($_SESSION['search'])) unset($_SESSION['search']);
     $_SESSION['search'][$hash]=$ids;
-    
-    
+
+
 }
 else{
     $ids=array();

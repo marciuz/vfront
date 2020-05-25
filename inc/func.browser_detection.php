@@ -173,7 +173,7 @@ function browser_detection( $which_test, $test_excludes='' )
 	script_time(); // set script timer to start timing
 
 	static $a_full_assoc_data, $a_mobile_data, $a_moz_data, $a_webkit_data, $b_dom_browser, $b_repeat, $b_safe_browser, $browser_name, $browser_number, $browser_math_number, $browser_user_agent, $browser_working, $ie_version, $mobile_test, $moz_number, $moz_rv, $moz_rv_full, $moz_release_date, $moz_type, $os_number, $os_type, $true_ie_number, $ua_type, $webkit_type, $webkit_type_number;
-	
+
 	/*
 	this makes the test only run once no matter how many times you call it since 
 	all the variables are filled on the first run through, it's only a matter of 
@@ -286,7 +286,7 @@ function browser_detection( $which_test, $test_excludes='' )
 			array( 'ibrowse', false, 'ibrowse', 'bbro' ),// amiga browser
 			array( 'icab', false, 'icab', 'bro' ),// mac browser
 			array( 'crazy browser', true, 'ie', 'bro' ),// uses ie rendering engine
-	
+
 			// search engine spider bots:
 			array( 'googlebot', false, 'google', 'bot' ),// google
 			array( 'mediapartners-google', false, 'adsense', 'bot' ),// google adsense
@@ -314,24 +314,24 @@ function browser_detection( $which_test, $test_excludes='' )
 			array( 'answerbus', false, 'answerbus', 'bot' ),// http://www.answerbus.com/, web questions
 			array( 'sohu-search', false, 'sohu', 'bot' ),// chinese media company, search component
 			array( 'iltrovatore-setaccio', false, 'il-set', 'bot' ),
-	
+
 			// various http utility libaries
 			array( 'w3c_validator', false, 'w3c', 'lib' ), // uses libperl, make first
 			array( 'wdg_validator', false, 'wdg', 'lib' ), //
 			array( 'libwww-perl', false, 'libwww-perl', 'lib' ),
 			array( 'jakarta commons-httpclient', false, 'jakarta', 'lib' ),
 			array( 'python-urllib', false, 'python-urllib', 'lib' ),
-	
+
 			// download apps
 			array( 'getright', false, 'getright', 'dow' ),
 			array( 'wget', false, 'wget', 'dow' ),// open source downloader, obeys robots.txt
-	
+
 			// netscape 4 and earlier tests, put last so spiders don't get caught
 			array( 'mozilla/4.', false, 'ns', 'bbro' ),
 			array( 'mozilla/3.', false, 'ns', 'bbro' ),
 			array( 'mozilla/2.', false, 'ns', 'bbro' )
 		);
-	
+
 		//array( '', false ); // browser array template
 
 		/*
@@ -495,7 +495,7 @@ function browser_detection( $which_test, $test_excludes='' )
 							get_set_count( 'set', 0 );
 							$browser_number = get_item_version( $browser_user_agent, 'version/' );
 						}
-						
+
 						if ( $browser_number < 5 )// opera 4 wasn't very useable.
 						{
 							$b_safe_browser = false;
@@ -546,7 +546,7 @@ function browser_detection( $which_test, $test_excludes='' )
 				break;
 			}
 		}
-		
+
 		//assigns defaults if the browser was not found in the loop test
 		if ( !$b_success )
 		{
@@ -565,7 +565,7 @@ function browser_detection( $which_test, $test_excludes='' )
 			if ( $browser_name && preg_match( '/[^0-9][a-z]*-*\ *[a-z]*\ *[a-z]*/', $browser_name, $a_unhandled_browser ) )
 			{
 				$browser_name = $a_unhandled_browser[0];
-				
+
 				if ( $browser_name == 'blackberry' )
 				{
 					get_set_count( 'set', 0 );
@@ -617,7 +617,7 @@ function browser_detection( $which_test, $test_excludes='' )
 	This is where you return values based on what parameter you used to call the function
 	$which_test is the passed parameter in the initial browser_detection('os') for example returns
 	the os version only.
-	
+
 	Update deprecated parameter names to new names
 	*/
 	switch ( $which_test )
@@ -741,7 +741,7 @@ function get_os_data ( $pv_browser_string, $pv_browser_name, $pv_version_number 
 	$a_linux_process = array ( 'i386', 'i586', 'i686' );// not use currently
 	// note, order of os very important in os array, you will get failed ids if changed
 	$a_os_types = array( 'android', 'blackberry', 'iphone', 'palmos', 'palmsource', 'symbian', 'beos', 'os2', 'amiga', 'webtv', 'mac', 'nt', 'win', $a_unix_types, $a_linux_distros );
-	
+
 	//os tester
 	$i_count = count( $a_os_types );
 	for ( $i = 0; $i < $i_count; $i++ )
@@ -755,7 +755,7 @@ function get_os_data ( $pv_browser_string, $pv_browser_name, $pv_version_number 
 		if ( !is_array( $os_working_data ) && strstr( $pv_browser_string, $os_working_data ) && !strstr( $pv_browser_string, "linux" ) )
 		{
 			$os_working_type = $os_working_data;
-			
+
 			switch ( $os_working_type )
 			{
 				// most windows now uses: NT X.Y syntax
@@ -1032,7 +1032,7 @@ function check_is_mobile( $pv_browser_user_agent )
 			break;
 		}
 	}
-	
+
 	return $mobile_working_test;
 }
 
@@ -1050,7 +1050,7 @@ function get_mobile_data( $pv_browser_user_agent )
 	$mobile_os_number = '';
 	$mobile_server = '';
 	$mobile_server_number = '';
-	
+
 	// browsers, show it as a handheld, but is not the os
 	$a_mobile_browser = array( 'avantgo', 'blazer', 'elaine', 'eudoraweb', 'iemobile',  'minimo', 'mobile safari', 'mobileexplorer', 'opera mobi', 'opera mini', 'netfront', 'opwv', 'polaris', 'semc-browser', 'up.browser', 'webpro', 'wms pie', 'xiino' );
 	/*
@@ -1061,7 +1061,7 @@ function get_mobile_data( $pv_browser_user_agent )
 	$a_mobile_device = array( 'benq', 'blackberry', 'danger hiptop', 'ddipocket', ' droid', 'htc_dream', 'htc hero', 'ipod', 'iphone', 'kindle', 'lge-cx', 'lge-lx', 'lge-mx', 'lge vx', 'lg;lx', 'nintendo wii', 'nokia', 'palm', 'pdxgw', 'playstation', 'sagem', 'samsung', 'sec-sgh', 'sharp', 'sonyericsson', 'sprint', 'j-phone', 'milestone', 'n410', 'mot 24', 'mot-', 'htc-', 'htc_',  'lge ', 'lge-', 'sec-', 'sie-m', 'sie-s', 'spv ', 'smartphone', 'armv', 'midp', 'mobilephone' );
 	// note: linux alone can't be searched for, and almost all linux devices are armv types
 	$a_mobile_os = array( 'android', 'epoc', 'iphone os', 'palmos', 'palmsource', 'windows ce', 'symbianos', 'symbian os', 'symbian', 'webos', 'linux armv'  );
-	
+
 	// sometimes there is just no other id for the unit that the CTS type service/server
 	$a_mobile_server = array( 'astel', 'docomo', 'novarra-vision', 'portalmmm', 'reqwirelessweb', 'vodafone' );
 

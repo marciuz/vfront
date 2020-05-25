@@ -11,7 +11,7 @@
  * @version             0.1 stable 
  */
 class UploadProgressManager {
-	
+
 	/**
 	 * 'Private' variables
          *      __personalFile:String		User temporary file name that is uploading
@@ -19,7 +19,7 @@ class UploadProgressManager {
 	 */
 	var $__personalFile = '';
 	var $__sentinell = '/.__php__upm_sentinell__';
-	
+
 	/**
 	 * Public constructor:
 	 *	Creates filename for sentinell temporary file then checks if file was found or
@@ -38,7 +38,7 @@ class UploadProgressManager {
 			if($this->__personalFile !== false)
 				$_SESSION['tempfile'] = $this->__personalFile;
 	}
-	
+
 	/**
 	 * Public method:
 	 *	Returns size of temporary file or false
@@ -48,7 +48,7 @@ class UploadProgressManager {
 	function getTemporaryFileSize() {
 		return ($this->__personalFile === false ? false : filesize($this->__personalFile));
 	}
-	
+
 	// PRIVATE METHODS [ UNCOMMENTED ]
 	function __checkSentinell(&$phptempfiles) {
 		$found = false;

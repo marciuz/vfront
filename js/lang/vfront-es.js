@@ -60,5 +60,5 @@ Translate.es['updated']='actualizado';
 function _(str){
 	if(Translate.es[str]!=='undefined'){ return Translate.es[str]; }
 	else{ return str; }
-	
+
 }

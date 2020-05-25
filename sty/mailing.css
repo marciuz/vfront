@@ -1,15 +1,15 @@
 /* $Id: mailing.css 285 2009-04-25 12:47:32Z marciuz $ */
 
 table.mailinglist{
-	
+
 	border-collapse:collapse;
 	border:1px solid #999;
 	border-left:0;
 	border-right:0;
-	
-	
+
+
 	margin: 20px 0px 20px 3px;
-	
+
 }
 
 table.mailinglist tr td{

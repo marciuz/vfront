@@ -23,10 +23,10 @@ require_once("../inc/conn.php");
 proteggi(1);
 
 if(isset($_REQUEST['campo']) && isset($_REQUEST['tabella'])){
-	
+
 	if(RegTools::is_campo($_REQUEST['campo']) && RegTools::is_tabella($_REQUEST['tabella'])){
-	
-		
+
+
 		$sql="SELECT c.in_default 
 			FROM ".$db1['frontend'].$db1['sep']."registro_col c, ".$db1['frontend'].$db1['sep']."registro_tab t 
 			WHERE c.column_name='".$_REQUEST['campo']."'
@@ -35,13 +35,13 @@ if(isset($_REQUEST['campo']) && isset($_REQUEST['tabella'])){
 			AND c.id_table=t.id_table
 			";
 		$q=$vmsql->query($sql);
-		
+
 		list($sql_campo)=$vmsql->fetch_row($q);
-		
-		
+
+
 		$NEW_IFRAME = new Hash_Iframe($_REQUEST['campo'],$sql_campo);
-		
+
 		echo $NEW_IFRAME->hash_html;
-	
+
 	}
 }

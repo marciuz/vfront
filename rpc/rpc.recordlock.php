@@ -30,33 +30,33 @@ proteggi(1);
  * @return bool
  */
 function verifica_recordlock($tabella,$colonna,$id){
-	
+
 	global  $vmreg, $db1;
-	
-	
+
+
 	$sql= "SELECT tempo FROM {$db1['frontend']}{$db1['sep']}recordlock 
 			WHERE tabella='$tabella'
 			AND colonna='$colonna'
 			AND id='$id'
 			";
-	
+
 	$q=$vmreg->query($sql);
 	$num = $vmreg->num_rows($q);
-	
+
 	/*if(!isset($GLOBALS['_VARIABILI'])){
-		
+
 		var_frontend();
 	}*/
-	
+
 	// e' bloccato, verifica da quando
 	if($num>0){
-		
+
 		list($tempo_blocco)=$vmreg->fetch_row($q);
-		
+
 		$tempo_edit = (time()-$tempo_blocco);
-		
+
 		if($tempo_edit > $_SESSION['VF_VARS']['max_tempo_edit']){
-			
+
 			// e' bloccato ormai da tanto, sbloccalo e consideralo libero
 			sblocca_record($tabella,$colonna,$id);
 			return true;
@@ -65,13 +65,13 @@ function verifica_recordlock($tabella,$colonna,$id){
 			// � bloccato
 			return false;
 		}
-		
+
 	}
 	// e' libero (non esiste in tabella)
 	else return true;
-	
-	
-	
+
+
+
 }
 
 
@@ -84,16 +84,16 @@ function verifica_recordlock($tabella,$colonna,$id){
  * @return bool
  */
 function blocca_record($tabella,$colonna,$id){
-	
+
 	global  $vmreg, $db1;
-	
+
 	$sql= "INSERT INTO {$db1['frontend']}{$db1['sep']}recordlock (tabella,colonna,id,tempo)
 			VALUES	('$tabella','$colonna','$id',".time().")
 			";
-	
+
 	return $vmreg->query_try($sql,false);
-	
-	
+
+
 }
 
 
@@ -106,17 +106,17 @@ function blocca_record($tabella,$colonna,$id){
  * @return bool
  */
 function sblocca_record($tabella,$colonna,$id){
-	
+
 	global  $vmreg, $db1;
-	
+
 	$sql= "DELETE FROM {$db1['frontend']}{$db1['sep']}recordlock 
 			WHERE tabella='$tabella'
 			AND colonna='$colonna'
 			AND id='$id'
 			";
-	
+
 	return $vmreg->query_try($sql,false);
-	
+
 }
 
 
@@ -128,9 +128,9 @@ function sblocca_record($tabella,$colonna,$id){
 
 
 if(isset($_GET['blocca'])){
-	
+
 	$libero = verifica_recordlock($tabella,$colonna,$id);
-	
+
 	// se il record � libero
 	if($libero){
 		echo blocca_record($tabella,$colonna,$id);
@@ -140,6 +140,6 @@ if(isset($_GET['blocca'])){
 	}
 }
 else if(isset($_GET['sblocca'])){
-	
+
 	echo sblocca_record($tabella,$colonna,$id);
 }

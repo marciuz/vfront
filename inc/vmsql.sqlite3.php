@@ -34,7 +34,7 @@ class sqlite3_vmsql {
 	protected $last_error=null;
 
 
-	
+
 
 	/**
 	 * @desc DB Connection
@@ -159,12 +159,12 @@ class sqlite3_vmsql {
 
 		if(is_object($this->link_db)){
 
-		    
+
 		    if($is_try) $resource = @$this->link_db->exec($sql);
 		    else{
 			$resource = @$this->link_db->exec($sql) or $this->error($sql);
 		    }
-								
+
 
 			if(isset($GLOBALS['DEBUG_SQL']) && $GLOBALS['DEBUG_SQL']){
 				$GLOBALS['DEBUG_SQL_STRING'][] = round((microtime(true) - $getmicro),4) . " --- ". $sql;
@@ -279,7 +279,7 @@ class sqlite3_vmsql {
             else{
                 $c=new stdClass();
             }
-            
+
 			$RS= @$res->fetchArray(SQLITE3_ASSOC);
 
 			if($RS!==false){
@@ -381,15 +381,15 @@ class sqlite3_vmsql {
 
 		}
 	}
-    
-    
+
+
     /**
 	 * @return array (matrice)
 	 * @param resource $res
 	 * @desc Funzione utility di fetch_object che restituisce tutta la matrice dei risultati
 	*/
 	public function fetch_object_all(&$res, $class_name=null){
-        
+
         $matrice=array();
 		if(is_object($res)){
 			while($o= $this->fetch_object($res, $class_name)) $matrice[]=$o;
@@ -537,7 +537,7 @@ class sqlite3_vmsql {
 			$q=$this->query("BEGIN TRANSACTION");
 			$this->transaction_is_open=true;
 		}
-		
+
 	}
 
 
@@ -562,7 +562,7 @@ class sqlite3_vmsql {
 			$q=$this->query("COMMIT");
 			$this->transaction_is_open=false;
 		}
-		
+
 	}
 
 
@@ -655,14 +655,14 @@ class sqlite3_vmsql {
 			foreach ($mixed as $k=>$val)
 				$escaped->{$k}=$this->recursive_escape($val);
 		}
-		
-		
+
+
 
 		return $escaped;
 	}
 
 
-	
+
 	/**
 	 * Concat DB sintax
 	 *
@@ -704,7 +704,7 @@ class sqlite3_vmsql {
 		return "SQLite ".$v['versionString'];
 	}
 
-	
+
 
 	/**
 	 * Close the connection
@@ -714,7 +714,7 @@ class sqlite3_vmsql {
 	public function close(){
 
 		if($this->error_handler!==null) $this->db_error_log($this->error_handler);
-		
+
 		return ($this->connected) ? $this->link_db->close() : null;
 	}
 
@@ -728,7 +728,7 @@ class sqlite3_vmsql {
 
 		return true;
 	}
-	
+
 
 	/**
 	 * Closing connection in destructor
@@ -737,8 +737,8 @@ class sqlite3_vmsql {
 
 		$this->close();
 	}
-    
-    
+
+
     public function db_error_log($obj){
 
         $fp=fopen(FRONT_ERROR_LOG,"a");

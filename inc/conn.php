@@ -37,7 +37,7 @@ $VFRONT_CONFIGURATION_FILE=$dir_vfront.'/conf/'.$CONF_FILE;
 
 
 if(!is_file($VFRONT_CONFIGURATION_FILE)){
-	
+
 	header("Location: ./_install/");
 	exit;
 }
@@ -54,7 +54,7 @@ require_once $dir_vfront.'/vendor/autoload.php';
 // DB connection
 
 if($db1['dbtype']=='mysql'){
-	
+
     if(function_exists('mysqli_connect')){
             require_once(FRONT_REALPATH."/inc/vmsql.mysqli.php");
             $vmsql = new mysqli_vmsql();
@@ -65,7 +65,7 @@ if($db1['dbtype']=='mysql'){
     }
 }
 elseif($db1['dbtype']=='postgres'){
-	
+
 	require_once(FRONT_REALPATH."/inc/vmsql.postgres.php");
 	$vmsql = new postgres_vmsql();
 }
@@ -89,7 +89,7 @@ elseif($db1['dbtype']=='sqlite'){
 	else die(_('The SQLite database seems to be incompatible with the installed libraries'));
 }
 else{
-	
+
 	die(_("Could not connect to database: select a database type!"));
 }
 
@@ -127,7 +127,7 @@ if(USE_REG_SQLITE){
 	$db1['frontend']="";
 	$db1['sep']="";
 
-	
+
 	$cname_sqlite= (VERSION_REG_SQLITE==3) ? 'sqlite3_vmsql':'sqlite2_vmsql';
 	$required_file=(VERSION_REG_SQLITE==3) ? 'vmsql.sqlite3.php':'vmsql.sqlite2.php';
 
@@ -168,7 +168,7 @@ if(!isset($_SESSION['VF_VARS'])){
 $locale = (defined('FRONT_LANG')) ? FRONT_LANG : 'en_US';
 
 if(isset($_SESSION['VF_VARS']['lang']) && $_SESSION['VF_VARS']['lang']!=''){
-	
+
 	$locale = $_SESSION['VF_VARS']['lang'];
 }
 
@@ -182,17 +182,17 @@ $domain = 'messages';
 
 // sezione gettext
 if(!function_exists('_')){
-	
+
 	require_once(FRONT_REALPATH.'/plugins/phpgettext/gettext.inc.php');
-	
-	
+
+
 	// gettext setup
 	if(!defined('LC_MESSAGES')){
-		
+
 		@putenv("LC_ALL=$locale");
 		@putenv("LC_MESSAGES=$locale");
 	}
-	
+
 	// gettext setup
 	T_setlocale(LC_MESSAGES, $locale);
 	// Set the text domain as 'messages'
@@ -200,11 +200,11 @@ if(!function_exists('_')){
 	// bind_textdomain_codeset is supported only in PHP 4.2.0+
 	if (function_exists('bind_textdomain_codeset')) 
 	  bind_textdomain_codeset($domain, $encoding);
-	
+
 	textdomain($domain);
 }
 else{
-	
+
 	putenv("LANGUAGE=$locale");
 	putenv("LC_ALL=$locale");
 	setlocale(LC_ALL, $locale, "$locale.utf8");

@@ -22,7 +22,7 @@ Event.simulateMouse = function(element, eventName) {
   oEvent.initMouseEvent(eventName, true, true, document.defaultView, 
     options.buttons, options.pointerX, options.pointerY, options.pointerX, options.pointerY, 
     options.ctrlKey, options.altKey, options.shiftKey, options.metaKey, 0, $(element));
-  
+
   if(this.mark) Element.remove(this.mark);
   this.mark = document.createElement('div');
   this.mark.appendChild(document.createTextNode(" "));
@@ -34,10 +34,10 @@ Event.simulateMouse = function(element, eventName) {
   this.mark.style.height = "5px;";
   this.mark.style.borderTop = "1px solid red;";
   this.mark.style.borderLeft = "1px solid red;";
-  
+
   if(this.step)
     alert('['+new Date().getTime().toString()+'] '+eventName+'/'+Test.Unit.inspect(options));
-  
+
   $(element).dispatchEvent(oEvent);
 };
 
@@ -444,7 +444,7 @@ Test.Unit.Assertions.prototype = {
     this.assertNotNull(element);
     if(element.style && Element.getStyle(element, 'display') == 'none')
       return false;
-    
+
     return this._isVisible(element.parentNode);
   },
   assertNotVisible: function(element) {
@@ -468,7 +468,7 @@ Object.extend(Object.extend(Test.Unit.Testcase.prototype, Test.Unit.Assertions.p
   initialize: function(name, test, setup, teardown) {
     Test.Unit.Assertions.prototype.initialize.bind(this)();
     this.name           = name;
-    
+
     if(typeof test == 'string') {
       test = test.gsub(/(\.should[^\(]+\()/,'#{0}this,');
       test = test.gsub(/(\.should[^\(]+)\(this,\)/,'#{1}(this)');
@@ -478,7 +478,7 @@ Object.extend(Object.extend(Test.Unit.Testcase.prototype, Test.Unit.Assertions.p
     } else {
       this.test = test || function() {};
     }
-    
+
     this.setup          = setup || function() {};
     this.teardown       = teardown || function() {};
     this.isWaiting      = false;
@@ -519,7 +519,7 @@ Test.setupBDDExtensionMethods = function(){
     shouldNotBeAn:   'assertNotOfType',
     shouldBeNull:    'assertNull',
     shouldNotBeNull: 'assertNotNull',
-    
+
     shouldBe:        'assertReturnsTrue',
     shouldNotBe:     'assertReturnsFalse',
     shouldRespondTo: 'assertRespondsTo'
@@ -527,7 +527,7 @@ Test.setupBDDExtensionMethods = function(){
   var makeAssertion = function(assertion, args, object) { 
    	this[assertion].apply(this,(args || []).concat([object]));
   };
-  
+
   Test.BDDMethods = {};   
   $H(METHODMAP).each(function(pair) { 
     Test.BDDMethods[pair.key] = function() { 
@@ -535,7 +535,7 @@ Test.setupBDDExtensionMethods = function(){
        var scope = args.shift(); 
        makeAssertion.apply(scope, [pair.value, args, this]); }; 
   });
-  
+
   [Array.prototype, String.prototype, Number.prototype, Boolean.prototype].each(
     function(p){ Object.extend(p, Test.BDDMethods) }
   );
@@ -543,7 +543,7 @@ Test.setupBDDExtensionMethods = function(){
 
 Test.context = function(name, spec, log){
   Test.setupBDDExtensionMethods();
-  
+
   var compiledSpec = {};
   var titles = {};
   for(specName in spec) {

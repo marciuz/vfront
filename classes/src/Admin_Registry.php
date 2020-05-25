@@ -28,7 +28,7 @@ class Admin_Registry
             'is_null'=>'IS NULL',
             'is_not_null'=>'IS NOT NULL',
         );
-        
+
         if ($op === null) {
             return $ops;
         } else {
@@ -64,7 +64,7 @@ class Admin_Registry
         $RT->commento = $val['comment'];
 
         $ID_TABLE = $RT->save();
-        
+
 
         #########################
         #
@@ -109,25 +109,25 @@ class Admin_Registry
     {
         $ids_tables = RegTools::index_group($gid_old);
         $t=0;
-        
+
         foreach ($ids_tables as $id_table) {
             $T0 = new RegTable_Admin();
             $T0->load($id_table);
-            
+
             $T1 = clone $T0;
             $T1->gid=$gid_new;
             $T1->save();
-            
+
             if ($T1->id_table > 0) {
                 foreach ($T0->columns as $C) {
                     $C2 = $C->clona($T1->id_table, $T1->gid);
                     $C2->save();
                 }
-                
+
                 $t++;
             }
         }
-        
+
         return (count($ids_tables) == $t) ? true: false;
     }
 
@@ -180,7 +180,7 @@ class Admin_Registry
 
         // Verifico l'esistenza del gruppo 0
         $Group = new Group();
-        
+
         if (!$Group->exists(0)) {
             $Group->inizialize();
         }
@@ -191,7 +191,7 @@ class Admin_Registry
         #
         $IS = new iSchema();
         $matrice0 = $IS->get_tables();
-        
+
         foreach ($matrice0 as $k=>$val) {
             self::inserisci_registro($val, 0);
         }

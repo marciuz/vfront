@@ -24,29 +24,29 @@
  * @return string Blocco html con form verso il file mexcel.php che genera il foglio excel.
  */
 function magic_excel($tabella,$filename,$titolo,$action='',$toglibr=false){
-	
-	
+
+
 	// toglie i link dalla tabella
 	$tabella=preg_replace("'(<a[^>]+>)|(</a>)'i","",$tabella);
 	$tabella=preg_replace("'(<img.*alt=\"([^\"]*)\"[^>]+/>)'i","$2",$tabella);
-	
+
 	if($toglibr){
-		
+
 		$tabella=str_replace(array("<br>","<br />","<br/>")," @ ",$tabella);
 	}
-	
+
 	$action = ($action=='') ? FRONT_DOCROOT."/mexcel.php" : $action;
-	
+
 	$str_arr=serialize(array('tab'=>$tabella,'tit'=>$titolo,'fn'=>$filename));
-	
+
 	$form ="<div class=\"mexcel-div\">\n";
 	$form.="<form action=\"".$action."\" method=\"post\">";
 	$form.="<input type=\"hidden\" name=\"mexcel\" value=\"".base64_encode($str_arr)."\" />";
 	$form.="<span class=\"mexcel\">"._('Download table in xls:')."</span> <input type=\"image\" src=\"".FRONT_DOCROOT."/img/xls.gif\" name=\"mexcel_gen\" value=\"1\" alt=\""._("Download table in xls")."\" title=\""._("Download table in xls")."\" />";
 	$form.="</form>\n";
 	$form.="</div>\n";
-	
+
 	return $form;
-	
+
 }
 

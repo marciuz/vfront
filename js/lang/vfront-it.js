@@ -62,5 +62,5 @@ Translate.it['Unable to insert record']='Inpossibile inserire il record';
 function _(str){
 	if(typeof(Translate.it[str])!=='undefined'){ return Translate.it[str]; }
 	else{ return str; }
-	
+
 }

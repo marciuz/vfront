@@ -15,7 +15,7 @@ function BytesUploaded(
 		phpFile, 	// Contructor needs php or server filename to read informations
 		latency 	// Milliseconds for each request during upload, default 1000, min value 50
 	) { 
-	
+
 	/**
 	 * Public method
          * 	Starts this application, set div or generic html id to write
@@ -31,7 +31,7 @@ function BytesUploaded(
 		__fileloaderInterval = setTimeout(__readFileSize, 10);
 		return true;
 	}
-	
+
 	/** LIST OF ALL PRIVATE METHODS [ uncommented ] */
 	function __fSize(size, dec) {
 		if(!dec || dec < 0)
@@ -61,10 +61,10 @@ function BytesUploaded(
 	function __readFileSize() {
 		__filemonitor.load(phpFile);
 	}
-	
+
 	/** DECLARATION OF ALL PUBLIC METHODS */
 	this.start = start;	// function to start this application
-	
+
 	/** PRIVATE VARIABLES */
 	var __fileloaderInterval = 0;
 	var __maybesomethingwrong = 0;

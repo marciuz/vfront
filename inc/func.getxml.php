@@ -88,7 +88,7 @@ function get_vfront_xml($_INFO) {
 
 
     if ($QB) {
-        
+
     }
     else {
 

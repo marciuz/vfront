@@ -13,32 +13,32 @@
 
 class Export {
 
-	
+
 	public $ids_search='';
-	
+
 	public $raw;
-	
+
 	private $oid=0;
-	
+
 	private $nome_tabella;
-	
-	
-	
+
+
+
 	function __construct($OID){
-		
+
 		$this->oid = (int) $OID;
-		
+
 		$this->nome_tabella = RegTools::oid2name($this->oid);
 	}
-	
-	
-	
+
+
+
 	private function __query_exec($sql){
-		
+
 		global  $vmsql, $vmreg, $db1;
-		
+
 		if($this->ids_search!=''){
-			
+
 			// prendi campo PK
 			$campo_pk=RegTools::prendi_PK($this->nome_tabella);
 
@@ -51,19 +51,19 @@ class Export {
 			}
 
 			$val_str=substr($val_str,0,-1);
-			
+
 			$sql=str_replace("{{{SEARCH}}}"," AND $campo_pk IN (".$val_str.") ",$sql);
 		}
 		else{
-			
+
 			$sql=str_replace("{{{SEARCH}}}",'',$sql);
 		}
-		
+
 		$q=$vmsql->query($sql);
-		
+
 		return $q;		
 	}
-	
+
 
 	/**
 	 * Funzione per l'esportazione dei dati
@@ -74,7 +74,7 @@ class Export {
 	 */
 	private function __tabella_elaborata($only_visibile=true){
 
-		
+
 		// PRENDI INFO Colonne della TABELLA
 		$fields="t.orderby, t.orderby_sort ";
 
@@ -83,29 +83,29 @@ class Export {
 		foreach($matrice_info as $k=>$info){
 
 			if($k==0){
-				
+
 				if($info['orderby']==''){
-					
+
 					$ORDERBY='';
 				}
 				else{
-					
+
 					$ORDERBY="ORDER BY ";
-					
+
 					$oby=explode(",",$info['orderby']);
 					$obysort=explode(",",$info['orderby_sort']);
-					
+
 					for($i=0;$i<count($oby);$i++){
-					
+
 						$ORDERBY.=" ".$oby[$i]." ".$obysort[$i].",";
 					}
 				}
-				
+
 				$ORDERBY = (strlen($ORDERBY)>0) ? substr($ORDERBY,0,-1) : "";
 			}
 		}
 
-		
+
 		$campi= RegTools::campi_elaborati($this->oid, $only_visibile);
 
 		$query_elab=$this->__query_exec("SELECT $campi FROM {$this->nome_tabella} t WHERE 1=1 {{{SEARCH}}} $ORDERBY");
@@ -219,7 +219,7 @@ class Export {
                 ."<style>body{ font-family: Arial, sans; font-size: 0.85em;} table { border-collapse: collapse; } table tr td,table tr th{ padding: 2px; font-size: 0.9em; }</style>\n"
                 ."</head>\n"
                 ."<body>\n";
-        
+
         $HTML.="<h1>"._('Table')." {$this->nome_tabella}</h1>\n";
 
 		$i=0;
@@ -557,32 +557,32 @@ $TR_TH
 
 		// METODO PHP
 		// CREA IL PACCHETTO
-        
+
         if(class_exists('ZipArchive')) {
-            
+
             $zip = new ZipArchive();
-            
+
             $tmp_ods=_PATH_TMP.'/'.md5(time()).".ods";
-            
+
             $zip->open($tmp_ods, ZipArchive::CREATE);
-            
+
             $zip->addFile(_PATH_TMP."/content.xml", "content.xml");
-            
+
             $zip->addEmptyDir("Configurations2");
             $zip->addEmptyDir("META-INF");
             $zip->addEmptyDir("Pictures");
             $zip->addEmptyDir("Thumbnails");
-            
+
             $zip->addFile(FRONT_REALPATH."/plugins/ods/META-INF/manifest.xml", "META-INF/manifest.xml");
             $zip->addFile(FRONT_REALPATH."/plugins/ods/meta.xml", "meta.xml");
             $zip->addFile(FRONT_REALPATH."/plugins/ods/settings.xml", "settings.xml");
             $zip->addFile(FRONT_REALPATH."/plugins/ods/styles.xml", "styles.xml");
             $zip->addFile(FRONT_REALPATH."/plugins/ods/mimetype", "mimetype");
-            
+
             $zip->close();
-            
+
         }
-        
+
         // ALternative method
         else {
 

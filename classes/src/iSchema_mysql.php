@@ -204,7 +204,7 @@ class iSchema_mysql {
 		return $tables;
 	}
 
-    
+
 
 	/**
 	 * Get the columns info of $table
@@ -373,9 +373,9 @@ class iSchema_mysql {
 		}
 
 	}
-        
+
         public function list_tables(){
-            
+
             return $this->table_list;
         }
 

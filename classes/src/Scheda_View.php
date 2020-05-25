@@ -2,13 +2,13 @@
 
 
 class Scheda_View {
-    
+
     const INT_DEFAULT_SIZE=10;
     const DATE_DEFAULT_SIZE=20;
     const TEXT_DEFAULT_SIZE=59;
     const TEXT_DOUBLE_DEFAULT_SIZE=135;
     const UNKNOW_DEFAULT_SIZE=30;
-    
+
     const CK_WIDTH=708;
     const CK_HEIGHT=220;
 
@@ -16,22 +16,22 @@ class Scheda_View {
 
         $input="<input class=\"off int\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" value=\"\" size=\"".self::INT_DEFAULT_SIZE."\" readonly=\"readonly\" type=\"text\" />";
-        
+
         return $input;
     }
-    
-    
+
+
     static public function type_char($data_col_value, $maxsize, $in_suggest, $table_name, $inline=true){
-        
+
         if($maxsize>100){
-            
+
             if($maxsize<=80){
                 $size=$maxsize[$i];
             }
             else{
                 $size=self::TEXT_DOUBLE_DEFAULT_SIZE;
             }
-            
+
             $class_width= ($inline) ? 'char':'longchar';
         }
         else {
@@ -61,23 +61,23 @@ class Scheda_View {
 
 
         }
-        
+
         return $input;
 
     }
-    
-    
-    
+
+
+
     static public function type_text($data_col_value, $in_line){
 
         $class_width= (intval($in_line)===1) ? 'halftextarea':'fulltextarea';
 
         $input="<textarea class=\"off $class_width\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" cols=\"".self::TEXT_DOUBLE_DEFAULT_SIZE."\" rows=\"9\" readonly=\"readonly\" ></textarea>";
-        
+
         return $input;
     }
-    
+
     static public function type_bool($data_col_value, $db_type){
 
         if($db_type == 'postgres'){
@@ -88,20 +88,20 @@ class Scheda_View {
             $input="<input type=\"checkbox\" onclick=\"this.value=(this.value==0 || this.value=='')?1:0; mod(this.id);\" class=\"off\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" disabled=\"disabled\" style=\"margin-left:0;\" value=\"0\" />";
         }
-        
+
         return $input;
     }
-    
+
     static public function type_password($data_col_value, $in_default){
-        
+
         $input="<input class=\"off\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" value=\"\" size=\"".self::TEXT_DEFAULT_SIZE."\" readonly=\"readonly\" type=\"password\" title=\"$in_default\" />";
-        
+
         return $input;
     }
-    
+
     static public function type_richtext($data_col_value){
-        
+
         include_once(FRONT_ROOT."/plugins/ckeditor/ckeditor.php");
 
         $CKEditor1 = new CKEditor();
@@ -120,14 +120,14 @@ class Scheda_View {
         $input=$CKEditor1->editor('dati_'.$data_col_value, "", $config);
         $input.="<input type=\"hidden\" id=\"dati_".$data_col_value."\" 
             name=\"dati[".$data_col_value."]\" value=\"\" />\n";
-        
+
         return $input;
 
     }
-    
-    
+
+
     static public function type_hidden($data_col_value, $in_default, $extra=''){
-        
+
         if(isset($in_default)){
             $valore_hidden = $in_default;
             // stringa  per il default
@@ -152,13 +152,13 @@ class Scheda_View {
         $str_hidden_default
         <input name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" $classe_hidden value=\"".Common::vf_utf8_encode($valore_hidden)."\" type=\"hidden\" />";
-        
+
         return $input;
     }
-    
-    
+
+
     static public function type_select($data_col_value, $in_default){
-        
+
         $input="<select onchange=\"mod(this.id);\" class=\"off\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" disabled=\"disabled\" >\n";
 
@@ -182,15 +182,15 @@ class Scheda_View {
 
         return $input;
     }
-    
+
     static public function type_selectfrom($data_col_value, $sql, $nome_tab){
         //return self::type_selectfrom_html($data_col_value, $sql, $nome_tab);
         return self::type_selectfrom_json($data_col_value, $sql, $nome_tab);
     }
-    
-    
+
+
     static public function type_selectfrom_html($data_col_value, $in_default, $nome_tab){
-        
+
         $IFRAME = new Hash_Iframe($data_col_value,$in_default);
         $input="<div id=\"target_".$data_col_value."\"></div>\n";
 
@@ -207,10 +207,10 @@ class Scheda_View {
 
         // cancello l'istanza
         unset($IFRAME);
-        
+
         return $input;
     }
-    
+
     static public function type_selectfrom_json($data_col_value, $sql, $nome_tab){
         $SV = new Select_Values();
         $SV->set_data($sql, $nome_tab);
@@ -219,10 +219,10 @@ class Scheda_View {
         $input.="</div>\n";
         return $input;
     }
-    
-    
+
+
     static public function type_autocomplete_from($data_col_value, $id_reg){
-        
+
         $size=self::TEXT_DEFAULT_SIZE;
         $class_width='char';
 
@@ -240,14 +240,14 @@ class Scheda_View {
                         new Ajax.Autocompleter('dati_ac_{$data_col_value}','suggest-{$data_col_value}','rpc/rpc.suggest.php?id_col={$id_reg}',{ afterUpdateElement : get_autocompleter_from_id });
                     </script>
         ";
-                        
+
          return $input;
     }
-    
+
     static public function type_date($data_col_value, $load_calendar){
-        
+
        $size=self::DATE_DEFAULT_SIZE;
-        
+
 
        $input="<input class=\"off data\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" value=\"\" size=\"$size\" readonly=\"readonly\" type=\"text\" />";
@@ -297,13 +297,13 @@ class Scheda_View {
                  </script>
                 ";
         }
-        
+
         return $input;
     }
-    
-    
+
+
     static public function type_datetime($data_col_value, $load_calendar, $i){
-        
+
         $input="<input class=\"off data\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" value=\"\" size=\"".self::DATE_DEFAULT_SIZE."\" readonly=\"readonly\" type=\"text\" />";
 
@@ -349,53 +349,53 @@ class Scheda_View {
                  ";
 
         }
-        
+
         return $input;
     }
-    
-    
+
+
     static public function type_onlyread($data_col_value){
-        
+
         $input="<div class=\"onlyread-field\" >"
             ."<input type=\"text\" "
             ."id=\"dati_".$data_col_value."\" class=\"hh_field\" "
             ."value=\"\" readonly=\"readonly\" name=\"dati[".$data_col_value."]\" />"
         ."</div>\n";
-        
+
         return $input;
     }
-    
+
     static public function type_onlyread_multi($data_col_value, $in_line){
-        
+
         $class_width= (intval($in_line)===1) ? 'halftextarea':'fulltextarea';
 
         $input="<div class=\"onlyread-field\" >"
             ."<textarea id=\"dati_".$data_col_value."\" class=\"hh_field $class_width\" "
             ."cols=\"132\" rows=\"9\" readonly=\"readonly\" name=\"dati[".$data_col_value."]\" ></textarea>"
         ."</div>\n";
-        
+
         return $input;
     }
 
     static public function type_unknow($data_col_value){
-        
+
         $size=self::UNKNOW_DEFAULT_SIZE;
-    
+
         $input="<input class=\"off\" name=\"dati[".$data_col_value."]\" ".
                "id=\"dati_".$data_col_value."\" value=\"\" size=\"$size\" readonly=\"readonly\" type=\"text\" />";
-        
+
         return $input;
     }
 
-    
+
     static public function get_date_format(){
-        
+
         $DATE_FORMAT = (isset($_SESSION['VF_VARS']['force_isodate_on_mask']) 
                               && ($_SESSION['VF_VARS']['force_isodate_on_mask']==1))
                          ? 'iso'
                          : FRONT_DATE_FORMAT;
-        
+
         return $DATE_FORMAT;
     }
-            
+
 }

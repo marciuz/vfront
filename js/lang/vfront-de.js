@@ -60,5 +60,5 @@ Translate.de['updated']='übernommen';
 function _(str){
 	if(typeof(Translate.de[str])!=='undefined'){ return Translate.de[str]; }
 	else{ return str; }
-	
+
 }

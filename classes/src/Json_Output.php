@@ -21,5 +21,5 @@ class Json_Output {
             return json_encode($obj);
         }
     }
-    
+
 }

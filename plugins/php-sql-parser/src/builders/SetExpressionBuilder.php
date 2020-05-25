@@ -65,17 +65,17 @@ class SetExpressionBuilder {
         $builder = new ConstantBuilder();
         return $builder->build($parsed);
     }
-    
+
     protected function buildOperator($parsed) {
         $builder = new OperatorBuilder();
         return $builder->build($parsed);
     }
-    
+
     protected function buildFunction($parsed) {
         $builder = new FunctionBuilder();
         return $builder->build($parsed);
     }
-    
+
     public function build($parsed) {
         if ($parsed['expr_type'] !== ExpressionType::EXPRESSION) {
             return "";

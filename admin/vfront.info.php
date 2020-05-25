@@ -36,28 +36,28 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("VFront Version")."</h2>";
 
     $classe='';
 	$xmlversion = Common::vfront_version(true);
-	
+
 	$OUT.="<span class=\"grigio\">"._("VFront Version:")."</span> ".
 		 "<strong><span class=\"$classe\">".$xmlversion->version."</span></strong>\n";
 	$OUT.="<div class=\"piccolo\">"._('Update information not yet available')."</div><br />\n";
 
 	exec('svnversion -c '. FRONT_ROOT,$output,$ret);
 	$output_svn=implode("\n",$output);
-    
+
 	if(preg_match('|([0-9]+)M|',$output_svn,$revision)){
-		
+
 //		preg_match('|Last Changed Date:(.*)|',$output_svn,$last_changed_date);
-		
+
 		$OUT.="<span class=\"grigio\">"._("VFront Subversion:")."</span> ".
 			 "<strong><span class=\"$classe\">".$revision[1]."</span></strong>\n"; // - ".$last_changed_date[1]."\n";
 		$OUT.="<div class=\"piccolo\">"._("VFront is using SVN")."</div><br />\n";
-	
+
 	}
 	else{
-		
+
 		preg_match('|\$Date:(.*)\$|', $output_svn, $date);
 		preg_match('|\$Revision:(.*)\$|', $output_svn, $revision);
-		
+
         if(count($date)>0 && count($revision)>0){
             $OUT.="<span class=\"grigio\">"._("VFront Subversion:")."</span> ".
                  "<strong><span class=\"$classe\">".$revision[1]."</span></strong> - ".$date[1]."\n";
@@ -67,11 +67,11 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("VFront Version")."</h2>";
 
 
 	// info dal conf
-	
+
 	switch($db1['dbtype']){
 		case 'mysql': $nome_db=$db1['dbname'];
 		break;
-	
+
 		case 'postgres': $nome_db=$db1['postgres_dbname'];
 		break;
 
@@ -82,7 +82,7 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("VFront Version")."</h2>";
 		break;
 
 	}
-	
+
 	$OUT.="<span class=\"grigio\">"._("DB:")."</span> ".
 		 "<strong><span class=\"$classe\">".$nome_db."</span></strong>\n";
 	$OUT.="<div class=\"piccolo\">"._('Database data currently in use')."</div><br />\n";
@@ -101,17 +101,17 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("VFront Version")."</h2>";
 	$OUT.="<span class=\"grigio\">"._("DB Rules:")."</span> ".
 		 "<strong><span class=\"$classe\">".$DB_RULES."</span></strong>\n";
 	$OUT.="<div class=\"piccolo\">"._('Database rules currently in use')."</div><br />\n";
-	
+
 
 	// info dal conf
 	$tipo_auth = ($conf_auth['tipo_external_auth']=='') ? "Interna" : $conf_auth['tipo_external_auth'];
-	
+
 	$OUT.="<span class=\"grigio\">"._("Authentication type:")."</span> ".
 		 "<strong><span class=\"$classe\">".$tipo_auth."</span></strong>\n";
 	$OUT.="<div class=\"piccolo\">"._('Authentication type:')."</div><br />\n";
 
 
-	
+
 
 $OUT.="<h2 class=\"title-vfrontinfo\">"._("Software version")."</h2>";
 
@@ -161,15 +161,15 @@ else if($db1['dbtype']=='postgres'){
         $OUT.="<div class=\"piccolo\">"._("VFront requires Postgres version &gt;= 8.x")."</div><br />\n";
 }
 else if($db1['dbtype']=='sqlite'){
-	
+
 
         $classe = (preg_match("!3\.*!",$db_version)) ? "verde" : "arancio";
         $OUT.="<span class=\"grigio\">"._("Database version:")."</span> <strong><span class=\"$classe\">".$db_version."</span></strong>\n";
         $OUT.="<div class=\"piccolo\">"._("VFront run better with SQLite version &gt;= 3.x")."</div><br />\n";
-	
+
 }
 
-	
+
 $flog.="DB Version: ".$db_version."\n";
 
 // VFRONT CONFIG
@@ -304,66 +304,66 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("Writable folders settings")."</h2>";
 	$is_tmp_write = (is_writable(_PATH_TMP)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 	$is_tmp_write_txt = (is_writable(_PATH_TMP)) ? _("Temporary folder")." ( "._PATH_TMP." ) "._("is writable from VFront.") 
 						: _("Temporary folder")." ( "._PATH_TMP." ) "._("is not writable by VFront. <br /> Modify the rights of the folder") ;
-	
-	
+
+
 	$OUT.="<span class=\"grigio\">"._("Temp folder writable:")."</span> <strong>$is_tmp_write</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_tmp_write_txt</div><br />\n";
 
-	
+
 	// HTML
 
 
 	$is_html_write = (is_writable(FRONT_ROOT."/files/html")) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 	$is_html_write_txt = (is_writable(FRONT_ROOT."/files/html")) ? _("Work folder set")." ( ".FRONT_ROOT."/files/html"." ) "._("is writable from VFront")
 						: _("Work folder set")." ( ".FRONT_ROOT."/files/html"." ) "._("is not writable by VFront. <br /> Modify the rights of the folder") ;
-	
-	
+
+
 	$OUT.="<span class=\"grigio\">"._("Folder HTML writable:")."</span> <strong>$is_html_write</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_html_write_txt</div><br />\n";
 
 
-	
+
 
 
 	// ATTACH
-	
+
 	$is_attach_write = (is_writable(_PATH_ATTACHMENT)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 	$is_attach_write_txt = (is_writable(_PATH_ATTACHMENT)) ? _("The folder set for attachements:")." ( "._PATH_ATTACHMENT." ) "._("is writable from VFront.") 
 						: _("The folder set for attachements:")." ( "._PATH_ATTACHMENT." ) "._("is not writable by VFront. <br /> Modify the rights of the folder");
-	
-	
+
+
 	$OUT.="<span class=\"grigio\">"._("Attachments folder writable:")."</span> <strong>$is_attach_write</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_attach_write_txt</div><br />\n";
 
-	
+
 	// TMP ATTACH
-	
+
 	$is_attach_tmp_write = (is_writable(_PATH_ATTACHMENT_TMP)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 	$is_attach_tmp_write_txt = (is_writable(_PATH_ATTACHMENT_TMP)) ? _("The temp folderset  for attachments")." ( "._PATH_ATTACHMENT_TMP." ) "._("is writable from VFront.") 
 						: _("The temp folderset  for attachments")." ( "._PATH_ATTACHMENT_TMP." ) "._("is not writable by VFront. <br /> Modify the rights of the folder") ;
-	
-	
+
+
 	$OUT.="<span class=\"grigio\">"._("Temp folder for attachments writable:")."</span> <strong>$is_attach_tmp_write</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_attach_tmp_write_txt</div><br />\n";
-	
-	
+
+
 	// DOCS
-	
+
 	$is_helpdocs_write = (is_writable(_PATH_HELPDOCS)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 	$is_helpdocs_write_txt = (is_writable(_PATH_HELPDOCS)) ? _("The folder set for documents")." ( "._PATH_HELPDOCS." ) "._("is writable from VFront.") 
 						: _("The folder set for documents")." ( "._PATH_HELPDOCS." ) "._("is not writable by VFront. <br /> Modify the rights of the folder") ;
-	
-	
+
+
 	$OUT.="<span class=\"grigio\">"._("Folder for documents writable:")."</span> <strong>$is_helpdocs_write</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_helpdocs_write_txt</div><br />\n";
-	
+
 	// XSL
-	
+
 	$is_xsl_write = (is_writable(_PATH_XSL)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 	$is_xsl_write_txt = (is_writable(_PATH_HELPDOCS)) ? _("The folder set for XSL stylesheets")." ( "._PATH_XSL." ) "._("is writable from VFront.")
 						: _("The folder set for XSL stylesheets")." ( "._PATH_XSL." ) "._("is not writable by VFront. <br /> Modify the rights of the folder");
-	
-	
+
+
 	$OUT.="<span class=\"grigio\">"._("Folder for XSL stylesheets writable:")."</span> <strong>$is_xsl_write</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_xsl_write_txt</div><br />\n";
 
@@ -378,25 +378,25 @@ $OUT.="<div class=\"piccolo\">"._("Apache FOP is used by VFront transformation (
 if(_FOP_ENABLED){
 
 	// EXEC FOP?
-	
+
 	$is_fop_exec = (is_executable(_PATH_FOP)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
 	$is_fop_exec_txt = (is_executable(_PATH_FOP)) ? _("FOP executable set in the configuration file")." ( "._PATH_FOP." ) "._("is executable by VFront.")
 						: _("FOP executable set in the configuration file")." ( "._PATH_FOP." ) "._("is not executable from VFront.<br />Modify the file settings");
-	
-	
+
+
 	$OUT.="<span class=\"grigio\">FOP "._("is executable?")." </span> <strong>$is_fop_exec</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_fop_exec_txt</div><br />\n";
-	
-	
-	
-	
+
+
+
+
 	// VERSIONE
-	
+
 	exec(_PATH_FOP." -v" ,$output,$ret);
 	$output=preg_replace("'\n'"," ",implode("\n",$output));
-	
+
 	preg_match("'FOP.*?([0-9\.]+)'",$output,$found);
-	
+
 	if(isset($found[1])){
 		$OUT.="<span class=\"grigio\">"._("Version")." FOP:</span> <strong>".$found[1]."</strong>\n";
 		$OUT.="<div class=\"piccolo\">"._("Apache FOP is used by VFront for the XSLT transformation ")."</div><br />\n";

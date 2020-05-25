@@ -66,7 +66,7 @@ class EasyZIP {
 	function EasyZIP() {
 		if (!@function_exists('gzcompress')) die(FUNCTION_NOT_FOUND);
 	}
- 
+
     function addFile($filename, $pathname='') {
 		if(file_exists($pathname.$filename)) {
 
@@ -94,7 +94,7 @@ class EasyZIP {
 	 */
     function addDir($dirname, $path = false) {
     	$dirnameOpen = ($path) ? $dirname.'/'.$path : $dirname;
-    	
+
 		if ($handle = opendir($dirnameOpen)) { 
 		   while (false !== ($filename = readdir($handle))) { 
 			 if ($filename != "." && $filename != ".."){
@@ -192,7 +192,7 @@ class EasyZIP {
 			$this -> DOSFileTime($filetime);
 
 	}
- 
+
 	function setLocalFileHeader() {
 
 		$local_file_header_signature 		  = "\x50\x4b\x03\x04";//4 bytes  (0x04034b50)
@@ -203,7 +203,7 @@ class EasyZIP {
 				//compressing data
 				$c_data   = gzcompress($this -> filedata);
 				$this->compressed_filedata    = substr(substr($c_data, 0, strlen($c_data) - 4), 2); // fix crc bug
-		
+
 		$this -> compressed_size          	  = pack('V', strlen($this -> compressed_filedata));// 4 bytes
 		$this -> uncompressed_size        	  = pack('V', strlen($this -> filedata));//4 bytes
 		$this -> filename_length              = pack('v', strlen($this -> filename));// 2 bytes
@@ -222,18 +222,18 @@ class EasyZIP {
 				$this -> extra_field_length .
 				$this -> filename;
 
-		
+
 	}
 
 	function setDataDescriptor() {
-	
+
 		$this -> data_descriptor =  $this->crc_32 .   //4 bytes
 				$this -> compressed_size .           //4 bytes
 				$this -> uncompressed_size;          //4 bytes
 	}
 
 	function setDataSegment() {
-	
+
 			$this -> data_segments[] 	= 	$this -> local_file_header . 
 									$this -> compressed_filedata . 
 									$this -> data_descriptor;
@@ -247,21 +247,21 @@ class EasyZIP {
 	function setFileHeader() {
 
         $new_offset        = strlen( $this -> split_signature . $this -> data_block );
-		
+
 		$central_file_header_signature  = "\x50\x4b\x01\x02";//4 bytes  (0x02014b50)
 		$version_made_by                = pack('v', 0);  //2 bytes
-		
+
 		$file_comment_length            = pack('v', 0);  //2 bytes
 		$disk_number_start              = pack('v', $this -> disk_number - 1); //2 bytes
 		$internal_file_attributes       = pack('v', 0); //2 bytes
 		$external_file_attributes       = pack('V', 32); //4 bytes
 		$relative_offset_local_header   = pack('V', $this -> old_offset); //4 bytes
-		
+
 		if($this -> splitted) {
 			$this -> disk_number = ceil($new_offset/$this->chunk_size);
 			$this -> old_offset = $new_offset - ($this->chunk_size * ($this -> disk_number-1));
 		} else $this -> old_offset = $new_offset;
-		
+
 		$this -> file_headers[] = 	$central_file_header_signature .
 				$version_made_by .
 				$this -> version_needed_to_extract .
@@ -289,7 +289,7 @@ class EasyZIP {
 	}
 
 	function getEndCentralDirectory() {
-					
+
 		$zipfile_comment = "Compressed/Splitted by PHP EasyZIP";
 		$zipfile_comment = "";
 
@@ -308,7 +308,7 @@ class EasyZIP {
 
 		$offset_start_central         = pack('V', $this -> old_offset); //4 bytes     
 		$zipfile_comment_length       = pack('v', strlen($zipfile_comment));//2 bytes
-		
+
 		return $end_central_dir_signature .
 			$number_this_disk .
 			$number_disk_start .
@@ -336,16 +336,16 @@ class EasyZIP {
 					($timearray['mon'] << 21) | ($timearray['mday'] << 16) |
                 	($timearray['hours'] << 11) | ($timearray['minutes'] << 5) | 
 					($timearray['seconds'] >> 1);
-				
+
 		$dtime    = dechex($dostime);
         $hexdtime = '\x' . $dtime[6] . $dtime[7]
                   . '\x' . $dtime[4] . $dtime[5];
-				  
+
         $hexddate = '\x' . $dtime[2] . $dtime[3]
                   . '\x' . $dtime[0] . $dtime[1];
         eval('$hexdtime = "' . $hexdtime . '";');
 		eval('$hexddate = "' . $hexddate . '";');
-		
+
 		$this->last_mod_file_time = $hexdtime;
 		$this->last_mod_file_date = $hexddate;
     } 	

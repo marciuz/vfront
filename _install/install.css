@@ -1,5 +1,5 @@
 body{
-	
+
 	font-family: Arial, sans; 
 	font-size:0.8em;
 	background: url(../img/back-top0.jpg) repeat-x;
@@ -26,7 +26,7 @@ li{
 p, h2{
 	margin-left:75px;
 }
-	
+
 
 hr{
 	visibility:hidden;
@@ -71,7 +71,7 @@ label{
 	background-color:#F4FCFC;
 	padding:20px;
 	margin:10px;
-	
+
 	font-family: Courier, sans; 
 }*/
 
@@ -83,7 +83,7 @@ label{
 }
 
 .auth-box{
-	
+
 }
 
 .ok{
@@ -97,7 +97,7 @@ label{
 
 .help-image{
 	cursor:click;
-	
+
 }
 
 /* iBOX */
@@ -202,7 +202,7 @@ label{
 	border: 1px solid;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
-	
+
 }
 
 

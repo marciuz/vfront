@@ -14,22 +14,22 @@ include("../inc/conn.php");
 include("../inc/layouts.php");
 
 proteggi(2);
- 
+
  // prendi cartelle tema:
- 
+
 $dh  = opendir("../themes");
 $themes=array();
- 
+
 while (false !== ($dirtheme = readdir($dh))) {
     if(!in_array($dirtheme,array(".","..",".svn","_original")) && is_dir("../themes/$dirtheme")){
-    	
+
     	$themes[]=$dirtheme;
     }
 }
 
 
 if(isset($_POST['theme']) && in_array($_POST['theme'],$themes)){
-	
+
 	$sql="UPDATE ".$db1['frontend'].$db1['sep']."variabili SET valore='{$_POST['theme']}' WHERE variabile='layout'";
 	$q=$vmreg->query($sql);
 
@@ -46,7 +46,7 @@ echo openLayout1(_("Select themes"), array("sty/admin.css"));
 echo breadcrumbs(array("HOME","ADMIN",strtolower(_("Select themes"))));
 
 echo "<h1>"._("Select themes")."</h1>\n";
- 
+
 
 
 $c=0;
@@ -54,19 +54,19 @@ $c=0;
 $T="<table summary=\"theme table\" id=\"theme-table\" border=\"1\" >";
 
 foreach ($themes as $theme){
-	
+
 	$col=(($c%2)==1) ? " class=\"gr\"":"";
 	$sel=($theme==$_SESSION['VF_VARS']['layout']) ? "checked=\"checked\"" : "";
-	
+
 	$T.= "
 	<tr{$col}>
 		<td class=\"theme-thumb\"><img src=\"../themes/$theme/thumb.png\" alt=\"thumb\" /></td>
 		<td class=\"theme-name\">".$theme."</td>
 		<td class=\"theme-sel\"><input type=\"radio\" name=\"theme\" value=\"$theme\" $sel /></td>
 	</tr>\n";
-	
+
 	$c++;
-	
+
 }
 
 $T.="</table>\n";

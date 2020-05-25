@@ -15,28 +15,28 @@ require_once("../inc/conn.php");
 // proteggi(3); // level 3 users (administrator only)
 
 if(isset($_GET['yourid'])){
-    
+
     $sql="SELECT * FROM youtable WHERE yourid='".$vmsql->escape($_GET['yourid'])."'";
-    
+
     //exec the query
     $q=$vmsql->query($sql);
-    
+
     // if have results
     if($vmsql->num_rows($q) > 0){
-	
+
 	// get the recordset
 	$RS=$vmsql->fetch_assoc($q);
-	
+
 	// do what you want with results
 	var_dump($RS);
-	
+
     }
     else{
-	
-	
+
+
 	// no results case
-	
+
     }
-    
+
 }
 

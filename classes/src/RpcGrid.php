@@ -168,7 +168,7 @@ class RpcGrid extends Rpc {
         }
 
     }
-    
+
     public function is_utf8($str) {
         return (bool) preg_match('//u', $str);
     }
@@ -234,7 +234,7 @@ class RpcGrid extends Rpc {
             else { 
                 header("Content-type: text/json; charset=".FRONT_ENCODING); 
             }
-            
+
             print json_encode($o);
 
         }

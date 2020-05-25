@@ -16,20 +16,20 @@ require_once("../inc/conn.php");
  proteggi(2);
 
 if(isset($_POST['sql'])){
-	
+
 	$n=count($_POST['sql']);
 	$res=0;
-	
+
 	for($i=0;$i<$n;$i++){
 		$res+=$vmsql->query_try($_POST['sql'][$i],true);
 	}
-	
+
  	echo ($res==$n && $n>0) ? 1:0;
-		
-	
+
+
 }
 else{
 	# nessuna chiamata
 	echo "-1";
-	
+
 }

@@ -28,38 +28,38 @@ echo "<p>"._("You can use variables for hidden fields.")."<br />
 <dl>
 	<dt>%nick</dt>
 	<dd>"._("Nickname (email) of the logged-in user")."</dd>
-	
+
 	<dt>%email</dt>
 	<dd>"._("Email of the logged-in user")."</dd>
-	
+
 	<dt>%uid</dt>
 	<dd>"._("ID of logged-in user")."</dd>
-	
+
 	<dt>%nome</dt>
 	<dd>"._("Name of logged-in user")."</dd>
-	
+
 	<dt>%cognome</dt>
 	<dd>"._("Surname of logged-in user")."</dd>
-	
+
 	<dt>%nomecognome</dt>
 	<dd>"._("Name and surname of the logged-in user (separated by space)")."</dd>
-	
+
 	<dt>%cognomenome</dt>
 	<dd>"._("Surname and name of the logged-in user (separated by space)")."</dd>
-	
-	
+
+
 	<dt>%gid</dt>
 	<dd>"._("Group ID of the logged-in user")."</dd>
-	
+
 	<dt>%gruppo</dt>
 	<dd>"._("Group name of the logged-in user")."</dd>
-	
+
 	<dt>%now</dt>
 	<dd>"._("Current date in yyyy-mm-dd format")."</dd>
-	
+
 	<dt>%timestamp</dt>
 	<dd>"._("Current date and time in yyyy-mm-dd HH:mm:ss")."</dd>
-	
+
 	<!--<dt>%istitutocomp</dt>
 	<dd>"._("ID of institution of logged-in user")."</dd>-->
 </dl>

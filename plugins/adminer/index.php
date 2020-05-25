@@ -86,7 +86,7 @@ else{
             || (isset($_GET['db']) && $_GET['db']==$db1['filename_reg'])
             || (isset($_GET['db']) && $_GET['db']==$db1['frontend'])
             ){
-        
+
         $_GET['vfty']='reg';
         if(USE_REG_SQLITE){
             $_GET['db']=$db1['filename_reg'];
@@ -102,14 +102,14 @@ else{
         else{
             $TYPE_ADMINER=$db1['dbtype'];
         }
-        
+
     }
     else{
 
 		$_GET['db']= (isset($_GET['vfty']) && $_GET['vfty']=='reg') ? $db1['frontend']:$db1['dbname'];
 		$_GET['ns']= (isset($_GET['vfty']) && $_GET['vfty']=='reg') ? $db1['frontend']:$db1['dbname'];
 
-        
+
         $TYPE_ADMINER=$db1['dbtype'];
     }
 }
@@ -127,7 +127,7 @@ switch($TYPE_ADMINER){
 	case 'sqlite':
 			if( (isset($db1['dbsqlite_version']) && $db1['dbsqlite_version']==3) ||
                            (defined('USE_REG_SQLITE') && VERSION_REG_SQLITE==3)) {
-                            
+
                             $_GET['sqlite']='';
                         }
 			else {
@@ -152,7 +152,7 @@ switch($TYPE_ADMINER){
 						? $_GET['db']:$db1['dbname'];
 	break;
 
-	
+
 }
 
 $_GET['username']='';

@@ -1,15 +1,15 @@
 <?php
 
 class Registry {
-    
+
     protected $vmreg;
     protected $prefix;
     public $T;
     public $PK;
     private $use_cache=false;
     public $cache_is_used;
-    
-    
+
+
     /**
      * 
      * @global object $vmreg
@@ -17,27 +17,27 @@ class Registry {
      */
     public function __construct() {
         global $vmreg, $db1;
-        
+
         $this->vmreg = $vmreg;
         $this->db1 = $db1;
         $this->prefix = $db1['frontend'].$db1['sep'];
         $this->T= new RegTable();
     }
-    
+
     public function use_cache($use_cache){
         $this->use_cache = (bool) $use_cache;
     }
-    
+
     public function load_registry($id_or_name, $gid=0){
-        
+
         if(!is_numeric($id_or_name)){
             $id_table = RegTools::name2oid($id_or_name, $gid);
         }
         else{
             $id_table = (int) $id_or_name;
         }
-        
-        
+
+
         // Load from cache
         $cached = $this->cache_get($id_table);
         if(is_a($cached, 'RegTable')){
@@ -45,14 +45,14 @@ class Registry {
             $this->cache_is_used = true;
         }
         else{
-            
+
             $this->cache_is_used = false;
-        
+
             $this->T = $this->load_table_by_id($id_table, $gid);
 
             // load columns
             $this->T->columns=$this->load_columns($id_table);
-            
+
             // load submasks
             $this->T->submasks=$this->load_submasks();
 
@@ -61,30 +61,30 @@ class Registry {
 
             // load default filters
             $this->T->default_filters=$this->parse_default_filters();
-            
+
             if($this->use_cache){
                 $this->cache_set($id_table, $this->T);
             }
         }
-        
+
         // Load PKs
         $this->PK = $this->prendi_PK();
     }
-    
+
     /**
      * 
      * @param int $id_table
      * @return RegTable
      */
     public function load_table_by_id($id_table, $gid){
-        
+
         if(Common::is_admin()){
             $sql_security='';
         }
         else{
             $sql_security = " AND gid=".intval($gid);
         }
-        
+
         $sql="SELECT * FROM {$this->prefix}registro_tab WHERE id_table=".intval($id_table)." ".$sql_security;
         $q = $this->vmreg->query($sql);
         if($this->vmreg->num_rows($q) == 1){
@@ -94,15 +94,15 @@ class Registry {
             return new RegTable();
         }
     }
-    
+
     public function load_table_by_name($table_name, $gid=0){
-        
+
         $id_table = RegTools::name2oid($table_name, $gid);
         return $this->load_table_by_id($id_table);
     }
-    
+
     public function load_tables($gid){
-        
+
         $sql="SELECT * FROM {$this->prefix}registro_tab WHERE gid=".intval($gid);
         $q = $this->vmreg->query($sql);
         if($this->vmreg->num_rows($q)> 0){
@@ -112,41 +112,41 @@ class Registry {
             return array();
         }
     }
-    
+
     private function load_columns($id_table){
-        
+
         $sql = "SELECT * FROM {$this->prefix}registro_col 
             WHERE id_table=".intval($id_table)." 
             ORDER BY in_ordine, ordinal_position";
-        
+
         $q=$this->vmreg->query($sql);
-        
+
         return $this->vmreg->fetch_object_all($q, 'RegColumn');
     }
-    
+
     private function parse_default_filters(){
         if(is_a($this->T, 'RegTable')){
             return (array) json_decode($this->T->default_filters);
         }
     }
-    
+
     // Public methods
-    
+
     public function campo_is_numeric($campo){
-        
+
         if(is_array($this->T->columns) && count($this->T->columns)>0){
             foreach($this->T->columns as $col){
                 if($col->column_name == $campo){
-                    
+
                     return (bool) preg_match("/^(tinyint|mediumint|int|bigint|double|numeric|float|decimal)/i", $col->column_type);
                 }
             }
         }
-        
+
         return false;
     }
-    
-    
+
+
     /**
      * Funzione che, interrogando l'information_schema, recupera la chiava primaria di una tabella
      *
@@ -157,7 +157,7 @@ class Registry {
     public function prendi_PK(){
 
         if($this->T->table_type=='VIEW'){
-            
+
             $campoPK = $this->T->view_pk;
         }
         else{
@@ -167,9 +167,9 @@ class Registry {
 
         return (array) $campoPK;
     }
-    
+
     private function load_submasks(){
-        
+
        $sql = "SELECT * FROM {$this->prefix}registro_submask
                 WHERE id_table=".intval($this->T->id_table)." 
                 ORDER BY nome_tabella
@@ -182,9 +182,9 @@ class Registry {
                 $this->vmreg->fetch_object_all($q, 'RegSubmask') 
                 : array();
     }
-    
+
     private function load_buttons(){
-        
+
         $sql = "SELECT * FROM {$this->prefix}button
                 WHERE id_table=".intval($this->T->id_table)." 
                 ORDER BY id_button
@@ -197,10 +197,10 @@ class Registry {
                 $this->vmreg->fetch_object_all($q, 'RegButton') 
                 : array();
     }
-    
-    
+
+
     public function get_column_tableview(){
-        
+
         $tds = array();
         foreach($this->T->columns as $col){
             if($col->in_table == 1){
@@ -209,9 +209,9 @@ class Registry {
         }
         return $tds;
     }
-    
+
     public function get_column_schedaview(){
-        
+
         $c = array();
         foreach($this->T->columns as $col){
             if($col->in_visibile == 1){
@@ -220,9 +220,9 @@ class Registry {
         }
         return $c;
     }
-    
+
     public function public_table(){
-        
+
         if(Common::is_admin()){
             return $this->T;
         }
@@ -240,9 +240,9 @@ class Registry {
             }
         }
     }
-    
-    
-    
+
+
+
     /**
      * Funzione che recupera l'ordinamento impostato in una tabella data
      *
@@ -251,7 +251,7 @@ class Registry {
      * @return string
      */
     public function prendi_orderby(){
-        
+
         $orderby = $this->T->orderby;
         $orderby_sort = $this->T->orderby_sort;
 
@@ -274,12 +274,12 @@ class Registry {
 
         return substr($string_orderby,0,-1);
     }
-    
-    
-    
-    
+
+
+
+
     private function cache_get($id_table){
-        
+
         if($this->use_cache === false){
             return null;
         }
@@ -294,14 +294,14 @@ class Registry {
             }
         }
     }
-    
+
     private function cache_set($id_table, RegTable $object){
-        
+
         if($this->use_cache === false) {
             return null;
         }
         else{
-        
+
             $this->cache_flush($id_table);
             $serialized = serialize($object);
             $sql="INSERT INTO {$this->prefix}cache_reg (id, obj, last_update) 
@@ -310,18 +310,18 @@ class Registry {
             return $this->vmreg->affected_rows($q);
         }
     }
-    
+
     public function cache_flush($id_table='all'){
-        
+
         if($this->use_cache === false) return false;
-        
+
         if($id_table !== 'all'){
             $sql_add= " WHERE id=".intval($id_table);
         }
         else{
             $sql_add='';
         }
-        
+
         $this->vmreg->query("DELETE FROM {$this->prefix}cache_reg $sql_add");
     }
 

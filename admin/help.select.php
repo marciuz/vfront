@@ -33,28 +33,28 @@ echo "<p>"._("'defined values' lists can be set in two ways:")."</p>
 		"._("Employee for a fixed period")."<br />
 		</code>
 	</li>
-	
+
 	<br /><br />
-	
+
 	<li><strong>"._("List of values and labels")."</strong><br />
 		"._("Insert, one per line, the key and value pairs separated by an <em>=</em>.")." <br />
 		"._("In this case the values, not the labels, will be inserted in databases. For example:")."<br /><br />
-		
+
 		<code>
 		c="._("Consultant")."<br />
 		di="._("Employee for an indefinite period")."<br />
 		dd="._("Employee for a fixed period")."<br />
 		</code>
 		<br />
-		
+
 		"._("Or:")."<br /><br />
-		
+
 		<code>
 		1="._("Consultant")."<br />
 		2="._("Employee for an indefinite period")."<br />
 		3="._("Employee for a fixed period")."<br />
 		</code>
-	
+
 	</li>
 </ol>
 

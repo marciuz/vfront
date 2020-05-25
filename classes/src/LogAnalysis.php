@@ -400,7 +400,7 @@ class LogAnalysis {
 
 		// Values
 		foreach($this->possible_k as $kk){
-			
+
 			static $i=0;
 
 			$cl=($i%2==0) ? "c1":"c2";

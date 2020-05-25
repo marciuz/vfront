@@ -98,7 +98,7 @@ function torta_pchart($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 	$myPicture->setFontProperties(array("FontName"=>FRONT_FONT_LIB."/verdana.ttf","FontSize"=>10,"R"=>80,"G"=>80,"B"=>80));
 
 	$MyData->loadPalette("../plugins/pchart/vfront01.palette.txt",TRUE);
-	
+
 	/* Create the pPie object */
 	$PieChart = new pPie($myPicture,$MyData);
 
@@ -115,7 +115,7 @@ function torta_pchart($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 	$myPicture->setFontProperties(array("FontName"=>FRONT_FONT_LIB."/verdana.ttf","FontSize"=>7));
 
 	$len_testo=strlen($testo);
-	
+
 	if($len_testo>50) $fontSizeTitle=13;
 	else if($len_testo>40) $fontSizeTitle=14;
 	else  $fontSizeTitle=16;
@@ -146,7 +146,7 @@ function torta_pchart($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 		return true;
 	else
 		return false;
-		
+
 
 }
 

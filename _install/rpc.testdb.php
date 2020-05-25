@@ -17,7 +17,7 @@ foreach($_data as $k=>$v) $_data[$k]=trim(strip_tags($v));
 
 
 if($_data['dbtype']=='mysql'){
-	
+
 	if(function_exists('mysqli_connect')){
 		$mylink = @mysqli_connect($_data['dbhost1'],$_data['dbuser1'],$_data['dbpassw1'],$_data['dbname1'],$_data['dbport1']) or die(0);
 	}
@@ -28,7 +28,7 @@ if($_data['dbtype']=='mysql'){
 	echo 1;
 }
 elseif($_data['dbtype']=='postgres'){
-	
+
 	$mylink = @pg_connect("host={$_data['dbhost2']} port={$_data['dbport2']} dbname={$_data['dbname2']} user={$_data['dbuser2']} password={$_data['dbpassw2']}")  or die(0);
 	echo 1;
 }
@@ -71,7 +71,7 @@ elseif($_data['dbtype']=='sqlite'){
 			$test=(int) $test;
 		}
 		else $test=0;
-		
+
 	}
 
 	echo $test;

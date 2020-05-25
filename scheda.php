@@ -32,7 +32,7 @@ $skins=array(
             'skyblue',
             'vfront',
         );
-        
+
 $selected_skin = $skins[3];
 
 
@@ -66,8 +66,8 @@ $Scheda->set_max($RPC);
 #
 #
 ############################################################################
-    
-    
+
+
 
 
 $FORM='';
@@ -116,9 +116,9 @@ $FORM_0 = $Scheda->field_iterator();
 
 # Hidden per le chiavi primarie
 for($k=0;$k<count($Scheda->info_pk);$k++){
-    
+
     $FORM_0.="\t\t<input type=\"hidden\" name=\"pk[".$Scheda->info_pk[$k]."]\" id=\"pk_".$Scheda->info_pk[$k]."\" value=\"\" class=\"pkname\" data-pkname=\"".$Scheda->info_pk[$k]."\" />\n";
-    
+
 }
 
 $FORM.="<div>$FORM_0</div>\n";
@@ -148,13 +148,13 @@ $FORM.="</form>";
         "js/scriptaculous/src/scriptaculous.js?load=effects,controls",
         "sty/scheda.css"
      );
-    
+
     if($htmltable_type == 'dhtmlxgrid'){
-        
+
         $files[]= "js/dhtmlxgrid4/skins/{$selected_skin}/dhtmlxgrid.css";
         $files[]= "js/dhtmlxgrid4/codebase/dhtmlxgrid.js";
     }
-    
+
 //      $files[]="js/tinydhtmlHistory.js";
     $files[]="js/rsh.compressed.js";
     $files[]="js/mostra_nascondi_id.js";
@@ -163,10 +163,10 @@ $FORM.="</form>";
         $files[]="js/shadowbox/shadowbox.js";
         $files[]="js/shadowbox/shadowbox.css";
     }
-        
-                 
 
-        
+
+
+
     // SE ci sono campi data , datetime o timestamp, prendi il calendario
     if($Scheda->load_calendar){
         $files[]="js/jscalendar/calendar.js";
@@ -174,47 +174,47 @@ $FORM.="</form>";
         $files[]="js/jscalendar/calendar-setup.js";
         $files[]="sty/jscalendar/calendar-win2k-cold-1.css";
     }
-        
+
     // Leaflet
     $files[]="plugins/leaflet/leaflet.js";
     $files[]="plugins/leaflet/leaflet.css";
-    
+
     if($Scheda->carica_md5){
-        
+
         $files[]="js/md5.js";
     }
-    
+
     if($Scheda->carica_sha1){
-        
+
         $files[]="js/sha1.js";
     }
-             
-    
+
+
     if(count($Scheda->rules)>0){
-        
+
         $files[]="js/yav/yav-config-it.js";
         $files[]="js/yav/yav.js";
     }
 
     //$files[]='js/jquery/jquery.min.js';
     $files[]='js/jquery/jquery.query.js';
-    
+
     if($htmltable_type == 'datatables'){
 
         $files[] = "js/datatables/css/jquery.dataTables.css";
         $files[] = "js/datatables/jquery.dataTables.js";
     }
-    
-    
+
+
     $files[]='js/scheda.js';
-    
+
     if(file_exists(FRONT_ROOT."/usr/personal_settings.css")){
         $files[]='usr/personal_settings.css';
     }
-    
+
 
     $LAYOUT = openLayout1(_("Form")." ".$nome_tab,$files);
-    
+
     if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1)
         $LAYOUT = str_replace("<body>","<body onload=\"\" onkeydown=\"hotKeys(event);\">",$LAYOUT);
     else 
@@ -223,70 +223,70 @@ $FORM.="</form>";
     $usaHistory = (isset($_SESSION['VF_VARS']['usa_history']) 
                 && $_SESSION['VF_VARS']['usa_history']==1 
                 && $info_browser[8]!='mobile') ? "true":"false";
-    
-    
+
+
     $alias_tabella = ($Scheda->PT->table_type=='VIEW' && isset($Scheda->PT->fonte_al) && $Scheda->PT->fonte_al!='')
                     ? $Scheda->PT->fonte_al : $Scheda->PT->table_name;
-                    
+
     if(!isset($_GET['parent_field'])) $_GET['parent_field']='';
     if(!isset($_GET['parent_table'])) $_GET['parent_table']='';
-    
-    
-    
-    
+
+
+
+
     $lista_submask=array();
     $alias_submask=array();
     $lista_embed=array();
     $alias_embed=array();
-        
+
     $array_fk_parent=array();
     $array_id_submask=array();
     $div_embeds=array();
     $submasks_not_embedded=array();
 
     for($i=0;$i<count($submasks);$i++){
-            
+
             $nome_front= (trim($submasks[$i]['nome_frontend'])!="") ? $submasks[$i]['nome_frontend']:$submasks[$i]['nome_tabella'];
             $array_fk_parent[$submasks[$i]['id_submask']]=$submasks[$i]['campo_pk_parent'];
-            
+
             if($submasks[$i]['tipo_vista']=='embed'){
-                
+
                 $lista_embed[]=$submasks[$i]['id_submask'];
                 $alias_embed[]=$nome_front;
-                
+
                 $div_embeds[]="<div class=\"sm_embed\" id=\"sm_embed_".$submasks[$i]['id_submask']."\"></div>\n";
             }
             else{
-                    
+
                 $lista_submask[]= $submasks[$i]['nome_tabella'] ;
                 $alias_submask[]= $nome_front ;
                 $array_id_submask[]=$submasks[$i]['id_submask'];
 
                 $submasks_not_embedded[]=$submasks[$i];
             }
-            
+
     }
-        
-    
-    
+
+
+
     $pathRelativo = Common::dir_name();
-    
+
     $jstest_js = ($_SESSION['VF_VARS']['js_test']==1 && count($Scheda->rules)>0) ? 1:0;
-    
+
     $permetti_link = ( Common::is_true($Scheda->PT->permetti_link)) ? 1:0;
-    
+
     $permetti_allegati = ( Common::is_true($Scheda->PT->permetti_allegati)) ? 1:0;
-    
+
     // identifico il db per checkbox ed altro
     $PGdb= ($db1['dbtype']=='postgres') ? "true":"false";
-    
+
     $GET_QS = (isset($_GET['qs'])) ? $_GET['qs']:'';
-    
+
     $outputType = (isset($USE_JSON) && $USE_JSON===false) ? 'XML' : 'JSON';
-    
+
     $xg = $Scheda->xgrid_settings();
     $paginazione = (isset($_SESSION['VF_VARS']['n_record_tabella'])) ? $_SESSION['VF_VARS']['n_record_tabella']:20;
-    
+
     // VFRONT JS vars
     $VFVars =array(
        'counter'=>$counter,
@@ -345,33 +345,33 @@ $FORM.="</form>";
         'autoload_geom' => false,
         'geom_field' => '',
     );
-    
-    
+
+
     $js_manuale = "
     <script type=\"text/javascript\">
-    
+
     // <!-- 
-        
+
         var \$j=jQuery.noConflict();
         var VF = ".json_encode($VFVars).";
         var initGrid = false;
         var haveParent = (window.opener==null) ? false:true;
         ";  
-    
+
     if($shadowbox_active){
-        
+
         $js_manuale.="Shadowbox.init();\n";
     }
-        
-    
+
+
     if($Scheda->load_calendar){
-        
+
         $js_manuale.="
-        
+
          function caldis(cal){
             return (VF.nuovoRecord || VF.modificaRecord || VF.ricerca) ? false:true;
          }
-                
+
          function catcalc(cal) {
 
             if(VF.nuovoRecord || VF.modificaRecord || VF.ricerca){
@@ -380,34 +380,34 @@ $FORM.="</form>";
         }
         ";
     }
-        
-    
+
+
     if($_SESSION['VF_VARS']['js_test']){
-        
+
         $js_manuale.="\n\t\t var rules=new Array();\n";
-        
+
         for($i=0;$i<count($Scheda->rules);$i++)
-        
+
             $js_manuale.="\t\trules[$i]='".addslashes($Scheda->rules[$i])."';\n";
-        
+
     }
-    
-    
+
+
 // Scorciatoie da tastiera, condizionate dalle variabili
 if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
-    
+
      $shortcuts_pre = $Scheda->print_shortcuts($permetti_link, $permetti_allegati);
      $js_manuale.=$shortcuts_pre[0];
  }
-    
+
     $js_manuale.="
-            
+
     // -->
     </script>
     ";
-    
+
     $LAYOUT = str_replace("</head>",$js_manuale."</head>",$LAYOUT);
-    
+
     echo $LAYOUT;
 
 ?>
@@ -430,7 +430,7 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
 
 <div id="loader-scheda0">
         <div id="loader-scheda"></div>
-    
+
         <div id="pop-loader-contenitore" align="center">
             <div id="pop-loader-scheda" >
                 <?php echo _("Loading...");?><br /><br />
@@ -446,10 +446,10 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
 <?php 
 
     echo breadcrumbs(array("HOME",_("Form table")." ". $nome_tab));
-          
-          
+
+
     $classe_h1 = ($Scheda->PT->table_type=='VIEW')? "verde":"var";
-          
+
     $show_comment= (isset($_SESSION['VF_VARS']['show_comment_in_table']) 
                     && $_SESSION['VF_VARS']['show_comment_in_table']=='1'
                     && trim($Scheda->PT->commento)!='')
@@ -457,16 +457,16 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
                     "<div class=\"comment-scheda\">".$Scheda->PT->commento."</div>\n"
                     : '';
 
-                    
+
     $table_name_sh = ($Scheda->PT->table_alias=='') ? $nome_tab : $Scheda->PT->table_alias;
-                    
+
     echo "<h1>". _('Table')." <span class=\"$classe_h1\">".$table_name_sh."</span>$show_comment</h1>\n";
 
-    
+
     echo "<div id=\"counter_container\"><span id=\"numeri\"></span>&nbsp;&nbsp;<span id=\"refresh\">&nbsp;</span></div>\n";
 
 
-    
+
     // PULSANTI NAV
     echo "
 <div id=\"pulsanti\">
@@ -479,11 +479,11 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
     <input title=\"". _("last record")."\" type=\"button\" id=\"p_ultimo\" name=\"p_ultimo\" value=\"   &gt;|   \" onclick=\"sndReq('".$nome_tab."','max',true);reloadGrid();\" accesskey=\"9\" />
     ";
     // <!--<input accesskey=\"k\" type=\"button\" id=\"p_TEST\" name=\"p_TEST\" value=\" TEST XML \" onclick=\"debug_xml();\" />-->
-    
+
     if ($Scheda->PT->in_export==1) {  
         echo "<input accesskey=\"x\" type=\"button\" id=\"p_export\" name=\"p_export\" value=\" ". _("Export data") ." \" onclick=\"openWindow('admin/export_data.php?idt=". base64_encode($oid._BASE64_PASSFRASE) ."','esportazione_dati',65);\" />\n";
     } 
-    
+
     if ($Scheda->PT->in_import==1) { 
         echo "<input type=\"button\" id=\"p_import\" name=\"p_import\" value=\" "._("Import data")." \" onclick=\"openWindow('import.php?oid=". base64_encode($oid._BASE64_PASSFRASE) ."','importazione_dati',90);\" />\n";
   }
@@ -492,61 +492,61 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
     echo "</div>\n";
 
 
-    
+
     echo $Scheda->action_buttons();
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     // BUTTON SUBMASK & CUSTOM BUTTONS
-        
+
         if(count($submasks_not_embedded)>0 || count($buttons)>0){
-        
+
             echo "\t<div id=\"pulsanti-submask\">\n";
-            
+
             // SUBMASK
             for($i=0;$i<count($submasks_not_embedded);$i++){
-                
+
                 echo $Scheda->pulsante_sottomaschera($submasks_not_embedded[$i]);
             }
-            
+
             // CUSTOM BUTTONS
             for($i=0;$i<count($buttons);$i++){
-                
+
                 echo $Scheda->pulsante_custom($buttons[$i]);
             }
-            
+
             echo "\t</div>\n";
-        
+
         }
         else{
-            
+
             echo "<br />\n";
         }
-        
-    
+
+
     // DIV EMBED
         if(count($div_embeds)>0){
-            
+
             foreach($div_embeds as $div_embed){
-                
+
                 echo $div_embed;
             }
-            
+
         }
-        
-        
+
+
 
     echo $FORM;
-    
-    
-    
-    
+
+
+
+
     if($_SESSION['user']['livello']==3){
-        
+
         $amministrazione_tabella_up="
             <td class=\"comm_img\"><a href=\"admin/gestione_tabelle_gruppi.php?det=$oid&amp;gid={$Scheda->PT->gid}\"><img src=\"img/rotelle.gif\" alt=\""._('administer form')."\" class=\"noborder\" /></a></td>";
 
@@ -557,9 +557,9 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
         $amministrazione_tabella_up='';
         $amministrazione_tabella_down='';
     }
-    
-    
-    
+
+
+
     echo "<div id=\"tipo-vista2\">
         <table border=\"0\" summary=\""._('view settings')."\" class=\"switch-vista\">
             <tr> 
@@ -573,15 +573,15 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
                 <td class=\"comm_txt\"><a href=\"javascript:;\" onclick=\"switch_vista();\">". _('grid view')."</a></td>
             </tr>
         </table>
-    
+
     </div>
     ";
-    
+
     if(isset($Scheda->PT->pemetti_allegati) || isset($Scheda->PT->permetti_link)){
-        
+
         echo $Scheda->print_attach_and_links();
     }
-        
+
 
     echo "</div>\n";
 
@@ -590,38 +590,38 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
 
 
  if($Scheda->PT->in_duplica==1){
-    
-    
+
+
 ?>
 
 <div id="popup-duplica">
     <div class="chiudi-box"><span class="fakelink" onclick="jQuery('#popup-duplica').toggle();"><?php echo _('Close');?> [X]</span></div>
 
     <p><strong><?php echo _('Select the subforms to duplicate');?></strong></p>
-    
+
     <?php
-    
+
 for($i=0;$i<count($array_id_submask);$i++){
-    
+
     echo "<input type=\"checkbox\" name=\"sotto__".$array_id_submask[$i]."\" value=\"1\" /> ".str_replace("'","",$alias_submask[$i])." <br />\n";
-    
+
 }
 
 
     echo "<br /><hr />\n";
-    
+
     echo "<p><strong>"._('Duplicate other objects:')."</strong></p>\n";
-    
+
     echo "<input type=\"checkbox\" name=\"duplica_allegati\" value=\"1\" /> "._('Duplicate attachments')."<br /><br />\n";
     echo "<input type=\"checkbox\" name=\"duplica_link\" value=\"1\" /> "._('Duplicate link')."<br />\n";
 
     echo "<br /><hr />\n";
-    
+
     echo "<br /><input type=\"button\" onclick=\"prepara_duplica()\" name=\"duplicatore\" value=\" "._('Duplicate')." \" />\n";
     echo " <input type=\"button\" onclick=\"mostra_nascondi('popup-duplica')\" name=\"annulla_duplica\" value=\" "._('Cancel')." \" />\n";
 
     echo "</div>\n";
-    
+
  }
 
 
@@ -629,27 +629,27 @@ for($i=0;$i<count($array_id_submask);$i++){
 
     echo $Scheda->print_hotkeys_pop();
 }
-    
-    
-    
-    
- 
+
+
+
+
+
 
 
  ?>
-    
-    
+
+
 <div id="scheda-tabella" style="display:none;">
 
     <div id="scheda-tabella-cont">
         <?php
-        
-        $altezza_iframe_tabella=(28 * 20) + 6;
-        
-        if($htmltable_type=='dataTables'){
-            
 
-            
+        $altezza_iframe_tabella=(28 * 20) + 6;
+
+        if($htmltable_type=='dataTables'){
+
+
+
             echo '<table id="gridTableView" class="display" cellspacing="0" width="100%" style="height:'.$altezza_iframe_tabella.'px;" >
                 <thead>
                     <tr>
@@ -657,23 +657,23 @@ for($i=0;$i<count($array_id_submask);$i++){
                     foreach (explode(", ", $xg['campi']) as $colname) {
                         echo "\t\t\t\t<th>" . $colname . "</th>\n";
                     }
-                    
+
             echo '
                     </tr>
                 </thead>
             </table>';
-            
+
         }
         else{
             echo '<div id="gridbox" style="height:'.$altezza_iframe_tabella.'px;" ></div>';
         }
-        
-        
+
+
         ?>
-            
+
     </div>
 
- 
+
     <div id="tipo-vista1">
         <table border="0" summary="<?php echo _('view settings');?>" class="switch-vista">
             <tr>

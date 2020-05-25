@@ -18,17 +18,17 @@ proteggi(3);
 
 
 function check_privileges($priv){
-	
+
 	global  $vmsql, $vmreg, $db1;
-	
+
 	$GRANTEE=$vmsql->escape("'".$db1['user']."'@'".$db1['host']."'");
-	
+
 	if($db1['dbtype']=='mysql'){
 		$sql="SELECT PRIVILEGE_TYPE FROM information_schema.SCHEMA_PRIVILEGES 
 			  WHERE TABLE_SCHEMA='".$db1['frontend']."' AND GRANTEE='$GRANTEE'";
-		
+
 		$q=@$vmsql->query($sql);
-		
+
 		if(@$vmsql->num_rows($q)>0){
 			return true;
 		}
@@ -37,11 +37,11 @@ function check_privileges($priv){
 		}
 	}
 	else{
-		
+
 		// No check for Postgres
 		return false;
 	}
-	
+
 }
 
 
@@ -54,25 +54,25 @@ function check_privileges($priv){
 
 // TEST VERSION < 0.95
 function update_test_090(){
-	
+
 	global  $vmsql, $vmreg, $db1;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE){
-	    
+
 	    return false;
 	}
-	
-	
+
+
 	$q_test=$vmsql->query("SELECT CHARACTER_MAXIMUM_LENGTH 
 						FROM information_schema.COLUMNS
 						WHERE TABLE_SCHEMA = '{$db1['frontend']}'
 						AND TABLE_NAME = 'registro_tab'
 						AND COLUMN_NAME = 'orderby'");
-						
+
 	if($vmsql->num_rows($q_test)==0){
-		
+
 		list($length)=$vmsql->fetch_row($q_test);
-		
+
 		if($length<255){
 			return true;
 		}
@@ -81,31 +81,31 @@ function update_test_090(){
 		}
 	}
 	else return false;
-	
+
 }
 
 // EXEC VERSION < 0.95
 function update_exec_090(){
-	
+
 	global $db1;
-	
+
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}log CHANGE op op ENUM( 'insert', 'update', 'delete', 'select', 'sconosciuta', 'ripristino', 'duplicazione', 'import' ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ;";
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab ADD in_import TINYINT( 1 ) UNSIGNED NULL AFTER in_export ;";
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab CHANGE orderby orderby VARCHAR( 255 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ;";
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab CHANGE orderby_sort orderby_sort VARCHAR( 255 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'ASC';";
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}stat ADD settings TEXT COMMENT 'Impostazioni avanzate del grafico';";
-	
+
 	return _update_exec('0.90',$sql_up);
 }
 
 
 // TEST VERSION 0.95
 function update_test_095(){
-	
+
 	global $vmreg, $db1;
-	
+
 	$q_test=$vmreg->query("SELECT * FROM {$db1['frontend']}{$db1['sep']}variabili WHERE variabile='layout'");
-	
+
 	if($vmreg->num_rows($q_test)==0){
 		return true;
 	}
@@ -115,7 +115,7 @@ function update_test_095(){
 
 // EXEC VERSION 0.95
 function update_exec_095(){
-	
+
 	global $db1;
 
 	$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('layout',0,'default','Color theme','string');";
@@ -133,20 +133,20 @@ function update_exec_095(){
 
 // TEST VERSION 0.95a
 function update_test_095a(){
-	
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE){
-	    
+
 	    return false;
 	}
-	
+
 	$q_test=$vmsql->query("SELECT *
 						FROM information_schema.COLUMNS
 						WHERE TABLE_SCHEMA = '{$db1['frontend']}'
 						AND TABLE_NAME = 'registro_col'
 						AND COLUMN_NAME = 'in_line'");
-						
+
 	if($vmsql->num_rows($q_test)==0){
 		return true;
 	}
@@ -156,12 +156,12 @@ function update_test_095a(){
 
 // EXEC VERSION 0.95a
 function update_exec_095a(){
-	
+
 	global $db1;
 
-	
+
 	if($db1['dbtype']=='mysql'){
-	
+
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}allegato  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}gruppo  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}link  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
@@ -174,25 +174,25 @@ function update_exec_095a(){
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}utente  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}variabili  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}xml_rules  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	
+
 		$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('alert_login_default',0,'1','Mostra agli utenti l\'avviso se sono presenti nel gruppo di default','bool');";
 		$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('alert_config',0,'1','Mostra all\'admin l\'avviso in home page se è presente qualche errore nella configurazione','bool');";
 		$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']} variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('show_comment_in_table', '0', '0', 'Mostra il commento della tabella nella maschera di inserimento dati', 'bool');";
-	
+
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_col ADD in_line TINYINT(1) NULL AFTER in_table;";
-	
-		
+
+
 	}
 	else{
-		
+
 		$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('alert_login_default',0,'1','Mostra agli utenti l\'avviso se sono presenti nel gruppo di default','bool');";
 		$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('alert_config',0,'1','Mostra all\'admin l\'avviso in home page se è presente qualche errore nella configurazione','bool');";
 		$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('show_comment_in_table', 0, '0', 'Mostra il commento della tabella nella maschera di inserimento dati', 'bool');";
-	
+
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_col ADD in_line smallint NULL ;";
 	}
-	
-	
+
+
 	return _update_exec('0.95a',$sql_up);
 }
 
@@ -212,17 +212,17 @@ function update_exec_095a(){
 
 // TEST VERSION 0.95c
 function update_test_095c(){
-	
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE) return false;
-	
+
 	$q_test=$vmsql->query("SELECT *
 						FROM information_schema.COLUMNS
 						WHERE TABLE_SCHEMA = '{$db1['frontend']}'
 						AND TABLE_NAME = 'variabili'
 						AND COLUMN_NAME = 'pubvar'");
-						
+
 	if($vmsql->num_rows($q_test)==0){
 		return true;
 	}
@@ -232,24 +232,24 @@ function update_test_095c(){
 
 // EXEC VERSION 0.95a
 function update_exec_095c(){
-	
+
 	global $db1;
-	
+
 	if($db1['dbtype']=='mysql'){
-	
+
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}variabili ADD pubvar TINYINT(1) UNSIGNED NOT NULL DEFAULT '1';";
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}variabili CHANGE valore valore TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;";
 		$sql_up[]="UPDATE {$db1['frontend']}{$db1['sep']}variabili SET pubvar=0 WHERE variabile='layout';";
-		
+
 	}
 	else{
-		
+
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}variabili ADD pubvar smallint NOT NULL DEFAULT 1;";
 		$sql_up[]="UPDATE {$db1['frontend']}{$db1['sep']}variabili SET pubvar=0 WHERE variabile='layout';";
 	}
-	
+
 	return _update_exec('0.95c',$sql_up);
-	
+
 }
 
 
@@ -267,17 +267,17 @@ function update_exec_095c(){
 
 // TEST VERSION 0.95c
 function update_test_095e(){
-	
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE) return false;
-	
+
 	$q_test=$vmsql->query("SELECT *
 						FROM information_schema.COLUMNS
 						WHERE TABLE_SCHEMA = '{$db1['frontend']}'
 						AND TABLE_NAME = 'utente'
 						AND COLUMN_NAME = 'recover_passwd'");
-						
+
 	if($vmsql->num_rows($q_test)==0){
 		return true;
 	}
@@ -287,14 +287,14 @@ function update_test_095e(){
 
 // EXEC VERSION 0.95e
 function update_exec_095e(){
-	
+
 	global $db1;
-	
+
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}utente ADD recover_passwd VARCHAR( 32 ) NULL ;";
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}utente ADD UNIQUE (email) ;";
-	
+
 	return _update_exec('0.95e',$sql_up);
-	
+
 }
 
 
@@ -306,16 +306,16 @@ function update_exec_095e(){
 
 // TEST VERSION 0.95f
 function update_test_095f(){
-	
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE) return false;
-	
+
 	$q_test=$vmsql->query("SELECT * 
 						 FROM information_schema.COLUMNS 
 						 WHERE TABLE_SCHEMA='{$db1['frontend']}' AND TABLE_NAME='stat' AND COLUMN_NAME='published'");
-						
-						
+
+
 	if($vmsql->num_rows($q_test)==0){
 		return true;
 	}
@@ -325,9 +325,9 @@ function update_test_095f(){
 
 // EXEC VERSION 0.95f
 function update_exec_095f(){
-	
+
 	global $db1;
-	
+
 	if($db1['dbtype']=='mysql'){
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}utente CHANGE nick nick VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;";
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}stat ADD published TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'published on home page';";
@@ -337,10 +337,10 @@ function update_exec_095f(){
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}stat ADD COLUMN published smallint NOT NULL DEFAULT 0;";
 		$sql_up[]="COMMENT ON COLUMN {$db1['frontend']}{$db1['sep']}stat.published IS 'published on home page';";
 	}
-	
-	
+
+
 	return _update_exec('0.95f',$sql_up);
-	
+
 }
 
 
@@ -352,16 +352,16 @@ function update_exec_095f(){
 
 // TEST VERSION 0.95g
 function update_test_095g(){
-	
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE) return false;
-	
+
 	$q_test=$vmsql->query("SELECT * 
 						 FROM information_schema.TABLES 
 						 WHERE TABLE_SCHEMA='{$db1['frontend']}' AND TABLE_NAME='button' ");
-						
-						
+
+
 	if($vmsql->num_rows($q_test)==0){
 		return true;
 	}
@@ -371,14 +371,14 @@ function update_test_095g(){
 
 // EXEC VERSION 0.95g
 function update_exec_095g(){
-	
+
 	global $db1;
-	
+
 	if($db1['dbtype']=='mysql'){
-		
+
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}stat DROP INDEX `id_stat`;";
 		$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}stat ADD INDEX ( `published` ) ;";
-		
+
 		$sql_up[]="CREATE TABLE {$db1['frontend']}{$db1['sep']}button (
 		  id_button INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 		  id_table INT(10) NOT NULL,
@@ -396,17 +396,17 @@ function update_exec_095g(){
 		  ON DELETE CASCADE ON UPDATE CASCADE
 		) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 		";
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 	}
 	else if($db1['dbtype']=='postgres'){
-		
+
 		$sql_up[]="CREATE INDEX i_stat_published ON {$db1['frontend']}{$db1['sep']}stat USING btree (published);";
-		
+
 		$sql_up[]="CREATE TABLE {$db1['frontend']}{$db1['sep']}button
 		(
 		  id_button serial NOT NULL,
@@ -424,14 +424,14 @@ function update_exec_095g(){
 		      ON UPDATE CASCADE ON DELETE CASCADE
 		)
 		WITHOUT OIDS;";
-		
+
 		$sql_up[]="CREATE INDEX i_button_id_table ON {$db1['frontend']}{$db1['sep']}button USING btree (id_table);";
-		
+
 	}
-	
-	
+
+
 	return _update_exec('0.95g',$sql_up);
-	
+
 }
 
 
@@ -443,16 +443,16 @@ function update_exec_095g(){
 
 // TEST VERSION 0.95h
 function update_test_095h(){
-	
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE) return false;
-	
+
 	$q_test=$vmsql->query("SELECT * 
 						 FROM information_schema.COLUMNS 
 						 WHERE TABLE_SCHEMA='{$db1['frontend']}' AND TABLE_NAME='button' AND COLUMN_NAME='settings'");
-						
-						
+
+
 	if($vmsql->num_rows($q_test)==0){
 		return true;
 	}
@@ -462,28 +462,28 @@ function update_test_095h(){
 
 // EXEC VERSION 0.95h
 function update_exec_095h(){
-	
+
 	global $db1;
 
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}button ADD settings TEXT NULL ;";
-	
+
 	$sql_up[]="INSERT INTO ${db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('search_limit_results',0,'1000','Max records in search results','int');";
-		
+
 	return _update_exec('0.95h',$sql_up);
-	
+
 }
 
 
 // VERSION 0.95i
 function update_test_095i(){
-	
+
 	global $db1, $vmreg;
-	
+
 	$q_test=$vmreg->query("SELECT * 
 				FROM {$db1['frontend']}{$db1['sep']}variabili 
 				WHERE variabile='lang' ");
-						
-						
+
+
 	if($vmreg->num_rows($q_test)==0){
 		return true;
 	}
@@ -493,26 +493,26 @@ function update_test_095i(){
 
 // EXEC VERSION 0.95i
 function update_exec_095i(){
-	
+
 	global $db1;
-	
+
 	$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('lang',0,'','Overwrite the default language','string');";
-		
+
 	return _update_exec('0.95h',$sql_up);
 }
 
 
 // VERSION 0.95i
 function update_test_095l(){
-	
-	
+
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	$q_test=$vmreg->query("SELECT * 
 						 FROM {$db1['frontend']}{$db1['sep']}variabili 
 						 WHERE variabile='show_updates' ");
-						
-						
+
+
 	if($vmreg->num_rows($q_test)==0){
 		return true;
 	}
@@ -522,27 +522,27 @@ function update_test_095l(){
 
 // EXEC VERSION 0.95i
 function update_exec_095l(){
-	
+
 	global $db1;
-	
+
 	$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile, gid, valore, descrizione, tipo_var) VALUES ('show_updates',0,1,'Cerca update per VFront','bool');";
-		
+
 	return _update_exec('0.95l',$sql_up);
 }
 
 
 // VERSION 0.95m
 function update_test_095m(){
-	
+
 	global $db1, $vmsql, $vmreg;
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE) return false;
-	
+
 	$q_test=$vmsql->query("SELECT * 
 						 FROM information_schema.COLUMNS 
 						 WHERE TABLE_SCHEMA='{$db1['frontend']}' AND TABLE_NAME='registro_tab' AND COLUMN_NAME='table_alias'");
-						
-						
+
+
 	if($vmsql->num_rows($q_test)==0){
 		return true;
 	}
@@ -552,11 +552,11 @@ function update_test_095m(){
 
 // EXEC VERSION 0.95m
 function update_exec_095m(){
-	
+
 	global $db1;
-	
+
 	$sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab ADD table_alias varchar(100) DEFAULT NULL ;";
-		
+
 	return _update_exec('0.95m',$sql_up);
 }
 
@@ -574,14 +574,14 @@ function update_test_096(){
 		return true;
 	}
 	else return false;
-	
+
 }
 
 // EXEC VERSION 0.96
 function update_exec_096(){
 
 	global $db1;
-	
+
 	$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile,gid,valore,descrizione,tipo_var,pubvar) VALUES ( 'enable_adminer','0','0','Enable Adminer schema administrator','bool','1')";
 
 	return _update_exec('0.96',$sql_up);
@@ -601,14 +601,14 @@ function update_test_097(){
 		return true;
 	}
 	else return false;
-	
+
 }
 
 // EXEC VERSION 0.97
 function update_exec_097(){
 
 	global $db1;
-	
+
 	$sql_up[]="INSERT INTO {$db1['frontend']}{$db1['sep']}variabili (variabile,gid,valore,descrizione,tipo_var) VALUES ( 'home_redirect',0,'','After login redirect to custom page/table','string')";
 
 	return _update_exec('0.97',$sql_up);
@@ -618,23 +618,23 @@ function update_exec_097(){
 function update_test_097a(){
 
 	global $db1, $vmsql, $vmreg;
-	   
+
 	$q_test=$vmreg->query_try("SELECT 1 FROM {$db1['frontend']}{$db1['sep']}widget");
 
 	if($q_test==0){
 		return true;
 	}
 	else return false;
-	
+
 }
 
 // EXEC VERSION 0.97a
 function update_exec_097a(){
 
 	global $db1;
-        
+
         $sql_up=array();
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE){
 
 	    $sql_up[]="CREATE TABLE IF NOT EXISTS widget (
@@ -667,9 +667,9 @@ function update_exec_097a(){
 		END;";
 
 	     //$sql_up[]="ALTER TABLE registro_submask DROP CONSTRAINT u_registro_submask_nome_gruppo; ";
-	    
+
 	    // Modifica tabelle
-	    
+
 	    $sql_up[]="CREATE TABLE registro_submask_temp (
 		  id_submask integer,
 		  id_table integer NOT NULL , 
@@ -712,12 +712,12 @@ function update_exec_097a(){
 	    $sql_up[]="ALTER TABLE allegato RENAME TO allegato_old;";
 	    $sql_up[]="ALTER TABLE allegato_temp RENAME TO allegato;";
 	    $sql_up[]="DROP TABLE allegato_old;";
-	    
+
 	}
-	
-	
+
+
         else if($db1['dbtype']=='mysql'){
-	
+
             $sql_up[]="CREATE TABLE {$db1['frontend']}{$db1['sep']}widget (
                 id_widget int(10) unsigned NOT NULL AUTO_INCREMENT,
                 id_table int(10) NOT NULL,
@@ -729,15 +729,15 @@ function update_exec_097a(){
                 KEY i_widget_id_table (id_table),
                 CONSTRAINT fk_widget_id_table FOREIGN KEY (id_table) REFERENCES registro_tab (id_table) ON DELETE CASCADE ON UPDATE CASCADE
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Widget table';";
-            
-            
+
+
             $sql_up[]="ALTER TABLE  {$db1['frontend']}{$db1['sep']}registro_submask CHANGE  `tipo_vista`  `tipo_vista` ENUM(  'tabella',  'scheda',  'embed', 'schedash') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'scheda'";
             $sql_up[]="ALTER TABLE  {$db1['frontend']}{$db1['sep']}allegato CHANGE  `codiceentita`  `codiceentita` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL";
-            
+
             //$sql_up[]="DROP INDEX u_idtable_nometabella ON {$db1['frontend']}{$db1['sep']}registro_submask";
         }
         else if($db1['dbtype']=='postgres'){
-            
+
              $sql_up[]="CREATE TABLE {$db1['frontend']}{$db1['sep']}widget (
                 id_widget serial,
                 id_table integer NOT NULL,
@@ -751,30 +751,30 @@ function update_exec_097a(){
 		      ON UPDATE CASCADE ON DELETE CASCADE
 		)
 		WITHOUT OIDS;";
-                      
-             
+
+
             $sql_up[]="CREATE INDEX i_widget_id_table ON {$db1['frontend']}{$db1['sep']}widget USING btree (id_table);";
-            
+
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_submask DROP CONSTRAINT u_registro_submask_nome_gruppo; ";
 
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_submask ALTER COLUMN tipo_vista type varchar(8) using rtrim(tipo_vista);";
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}allegato ALTER COLUMN codiceentita type varchar(255) using rtrim(codiceentita);";
         }
-	
-        
+
+
 	return _update_exec('0.97a',$sql_up);
 }
 
 
 function update_test_097b(){
-    
-    
+
+
 }
 
 
 function update_exec_097b(){
-    
-    
+
+
 }
 
 
@@ -783,24 +783,24 @@ function update_exec_097b(){
 function update_test_098a(){
 
 	global $db1,$vmreg;
-	   
+
 	$q_test=$vmreg->query_try("SELECT 1 FROM {$db1['frontend']}{$db1['sep']}api_console");
 
 	if($q_test==0){
 		return true;
 	}
 	else return false;
-	
+
 }
 
 function update_exec_098a(){
-    
+
 	global $db1;
-        
+
         $sql_up=array();
-	
+
 	if(defined('USE_REG_SQLITE') && USE_REG_SQLITE){
-            
+
             $sql_up[]="CREATE TABLE api_console (
                 id integer NOT NULL,
                 ip_address varchar(20) NOT NULL DEFAULT '',
@@ -811,10 +811,10 @@ function update_exec_098a(){
                 CONSTRAINT u_apy_key UNIQUE (api_key)
               );
               ";
-            
+
         }
         else if($db1['dbtype']=='mysql'){
-            
+
             $sql_up[]="CREATE TABLE {$db1['frontend']}{$db1['sep']}api_console (
               `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
               `ip_address` varchar(20) NOT NULL DEFAULT '',
@@ -824,7 +824,7 @@ function update_exec_098a(){
               PRIMARY KEY (`id`),
               UNIQUE KEY `api_key` (`api_key`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-            
+
         }
         else if($db1['dbtype']=='postgres'){
 
@@ -843,7 +843,7 @@ function update_exec_098a(){
             ";
 
         }
-        
+
         return _update_exec('0.98a',$sql_up);
 }
 
@@ -853,26 +853,26 @@ function update_exec_098a(){
 function update_test_099(){
 
 	global $db1,$vmreg;
-	   
+
 	$q_test=$vmreg->query_try("SELECT 1 FROM {$db1['frontend']}{$db1['sep']}cache_reg");
-    
+
     $q_test2=$vmreg->query_try("SELECT default_view FROM {$db1['frontend']}{$db1['sep']}registro_tab");
 
 	if($q_test==0 || $q_test2==0){
 		return true;
 	}
 	else return false;
-	
+
 }
 
 function update_exec_099(){
-    
+
     global $db1;
-    
+
     $sql_up=array();
-    
+
     if(defined('USE_REG_SQLITE') && USE_REG_SQLITE){
-            
+
             $sql_up[]="CREATE TABLE cache_reg (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
                 obj BLOB, 
@@ -881,10 +881,10 @@ function update_exec_099(){
               ";
             $sql_up[]="ALTER TABLE registro_tab ADD COLUMN default_view varchar(5) DEFAULT 'form';";
             $sql_up[]="ALTER TABLE registro_tab ADD COLUMN default_filters TEXT DEFAULT NULL;";
-            
+
         }
         else if($db1['dbtype']=='mysql'){
-            
+
             $sql_up[]="CREATE TABLE {$db1['frontend']}{$db1['sep']}cache_reg (
                 id int(11) unsigned NOT NULL AUTO_INCREMENT,
                 obj blob,
@@ -894,7 +894,7 @@ function update_exec_099(){
               ";
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab ADD default_view varchar(5) DEFAULT 'form';";
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab ADD default_filters TEXT DEFAULT NULL;";
-            
+
         }
         else if($db1['dbtype']=='postgres'){
 
@@ -912,7 +912,7 @@ function update_exec_099(){
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab ADD COLUMN default_filters TEXT DEFAULT NULL;";
 
         }
-    
+
     return _update_exec('0.99',$sql_up);
 }
 
@@ -921,37 +921,37 @@ function update_exec_099(){
 function update_test_099a(){
 
 	global $db1,$vmreg;
-	   
+
 	$q_test=$vmreg->query_try("SELECT allow_filters FROM {$db1['frontend']}{$db1['sep']}registro_tab");
-    
+
 	if($q_test==0){
 		return true;
 	}
 	else return false;
-	
+
 }
 
 function update_exec_099a(){
-    
+
     global $db1;
-    
+
     $sql_up=array();
-    
+
     if(defined('USE_REG_SQLITE') && USE_REG_SQLITE){
-        
+
             $sql_up[]="ALTER TABLE registro_tab ADD COLUMN allow_filters integer DEFAULT 0;";
-            
+
         }
         else if($db1['dbtype']=='mysql'){
-            
+
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab ADD COLUMN allow_filters tinyint(1) DEFAULT 0;";
-            
+
         }
         else if($db1['dbtype']=='postgres'){
 
             $sql_up[]="ALTER TABLE {$db1['frontend']}{$db1['sep']}registro_tab ADD COLUMN allow_filters int2 DEFAULT 0;";
         }
-    
+
     return _update_exec('0.99a',$sql_up);
 }
 
@@ -959,60 +959,60 @@ function update_exec_099a(){
 
 
 function _update_exec($version,$sql_array){
-	
+
 	global  $vmsql, $vmreg, $db1;
-	
+
 	$string_out="\n--\n-- <strong>Update for $version</strong>\n--\n\n";
-	
+
 	if(!is_array($sql_array)) $sql_array=(array) $sql_array;
-	
+
 	$manual_make=array();
-	
+
 	$TEST_OK=0;
 	$TEST_KO=0;
-	
+
 	foreach($sql_array as $sql){
-		
+
 		// GET SQL ACTION:
 		$action=array();
 		preg_match("|^ *([A-Z]+) |si",$sql,$action);
-                
+
 		if(count($action)>0){
-			
+
 			$sql_keyword=$action[1];
 			$check=check_privileges($sql_keyword);
-			
+
 			$test=$vmreg->query_try($sql,false);
-                        
+
 			if($test){
 				$string_out.=$sql."\n-- <span class=\"verde\">OK</span>\n\n";
 				$TEST_OK++;
 			}
 			else{
 				$string_out.=$sql."\n-- <span class=\"rosso\">Error</span>\n\n";
-				
+
 				$manual_make[]=$sql;
-				
+
 				$TEST_KO++;
 			}
 		}
 	}
-	
+
 	if(count($manual_make)>0){
-		
+
 		$string_out.="<h3>Please run this sql as root (or with user having the correct privileges on DB):</h3>\n";
-		
+
 		for($i=0;$i<count($manual_make);$i++){
 			$string_out.=$manual_make[$i]."\n\n";
 		}
 	}
-	
+
 	return array($string_out,$TEST_OK,$TEST_KO);
 }
 
 
 if(USE_REG_SQLITE){
-    
+
     $db1['frontend']='';
     $db1['sep']='';
 }
@@ -1080,7 +1080,7 @@ echo openLayout1(_("VFront Update"),array("sty/admin.css"));
 
 echo breadcrumbs(array("HOME","ADMIN",strtolower(_("VFront Update"))));
 
-	
+
 echo "<h1>"._("VFront Update")."</h1>";
 
 if(!$TEST_UPDATE){
@@ -1088,15 +1088,15 @@ if(!$TEST_UPDATE){
 	echo "<p>"._('This test is not available for this VFront rule method')."</p>\n";
 }
 else if($updates==0){
-	
+
 	echo "<p>"._('No updates to be installed in DB VFront')."</p>\n";
 }
 else{
-	
+
 	if(isset($_GET['test'])){
-		
+
 		if($updates>0){
-			
+
 			echo "<p>".sprintf(_('There are %d updates to install.'),$updates)."</p>\n";
 			echo "<p><a href=\"".Common::phpself()."\">"._("Proceed to VFront database update")."</a></p>\n";
 		}
@@ -1105,7 +1105,7 @@ else{
 		}
 	}
 	else{
-		
+
 		if($n_ko==0 && $n_ok>0){
 			echo "<p>".sprintf(_('Found and installed %d updates.'),$updates)."</p>\n";
 		}
@@ -1119,11 +1119,11 @@ else{
 }
 
 if($OUT!=''){
-	
+
 	echo "<div id=\"boxsql\"><code>\n";
-		
+
 	echo nl2br($OUT);
-	
+
 	echo "</code></div>\n";
 }
 

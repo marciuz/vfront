@@ -13,7 +13,7 @@
 
 // Imposto l'esecuzione massima in 10 minuti
 ini_set('max_execution_time',600);
-	
+
 
 include("./inc/conn.php");
 include("./inc/layouts.php");
@@ -29,13 +29,13 @@ proteggi(1);
  * @return string Nome del file senza caratteri accenti o spazi
  */
 function rinomina_file($nomefile){
-	
+
 	$nomefile=str_replace(array('à','è','é','ò','ì','ù'),
 						  array('a','e','e','o','i','u'),
 						  $nomefile);
-	
+
 	$nomefile=preg_replace("'[^\w-.]+'","_",trim($nomefile));
-	
+
 	return $nomefile;
 
 }
@@ -51,17 +51,17 @@ function rinomina_file($nomefile){
  * @return bool
  */
 function verifica_tipo_file($nomefile,$header_file){
-	
+
 	$estensioni_accettate=explode(",",$_SESSION['VF_VARS']['formati_attach']);
-	
+
 	foreach($estensioni_accettate as $k=>$v) $estensioni_accettate[$k]=trim($v);
-	
+
 	$infofile=pathinfo($nomefile);
-	
+
 //	var_dump($estensioni_accettate);
-	
+
 	return (in_array($infofile['extension'],$estensioni_accettate)) ?  true:false;
-	
+
 }
 
 
@@ -73,21 +73,21 @@ function verifica_tipo_file($nomefile,$header_file){
  * @return string
  */
 function img_filetype($nomefile){
-	
+
 	switch (substr($nomefile,-4,4)){
-		
+
 		case '.pdf': $mime='pdf.gif'; $alt='pdf'; break;
 		case '.doc': $mime='doc.gif'; $alt='documento Word'; break;
 		case '.xls': $mime='xls.gif'; $alt='foglio di calcolo Excel'; break;
 		case '.zip': $mime='zip.gif'; $alt='file compresso zip'; break;
 		default   : $mime='generic.gif'; $alt='file'; break;
-		
-		
+
+
 	}
-	
-	
+
+
 	return "<img src=\"img/mime/$mime\" alt=\"$alt\" />";
-	
+
 }
 
 
@@ -98,28 +98,28 @@ function img_filetype($nomefile){
 
 
 if(isset($_GET['del'])){
-	
+
 	$id_da_eliminare=str_replace(_BASE64_PASSFRASE,'',base64_decode($_GET['del']));
-	
+
 	$id_da_eliminare=intval($id_da_eliminare);
-	
+
 	// elimino dal DB
 	$q_del=$vmreg->query("DELETE FROM "._TABELLA_ALLEGATO." WHERE codiceallegato=$id_da_eliminare");
-	
+
 	$test_del_db= ($vmreg->affected_rows($q_del)==1) ? true:false;
 
-	
+
 	// elimino dal filesystem
 	$test_del_fs=@unlink(_PATH_ATTACHMENT."/$id_da_eliminare.dat");
-	
+
 	if($test_del_db && $test_del_fs){
 		header("Location: ".$_SERVER['PHP_SELF']."?t=".$_GET['t']."&id=".$_GET['id']."&az=del&feed=ok");
-		
+
 	}
 	else{
 		header("Location: ".$_SERVER['PHP_SELF']."?t=".$_GET['t']."&id=".$_GET['id']."&az=del&feed=ko");
 	}
-	
+
 	exit;
 }
 
@@ -135,35 +135,35 @@ if(isset($_GET['del'])){
 #
 
 if(count($_FILES)>0){
-	
-	
+
+
 	// variabile per il test finale
 	$success=0;
 	$tipo_errori_up= array();
-	
+
 	// CICLO SUI FILES
 	for($i=0;$i<count($_FILES['gfile']['tmp_name']);$i++){
-		
+
 		// test sulla correttezza dell'upload
 		if(is_file($_FILES['gfile']['tmp_name'][$i]) && $_FILES['gfile']['error'][$i]==0){
-			
+
 			$nome_pulito = rinomina_file($_FILES['gfile']['name'][$i]);
 		}
 		else{
 			$tipo_errori_up[$i]='generico di upload';
 			continue;
 		}
-		
-		
+
+
 		// Test sul tipo di file
 		if(!verifica_tipo_file($nome_pulito,$_FILES['gfile']['type'][$i])){
 			$tipo_errori_up[$i]=_('file type not allowed (the available extensions are: ').str_replace(",",", ",$_SESSION['VF_VARS']['formati_attach']).')';
 			continue;
 		}
-		
-		
+
+
 		// INSERISCE IN DATABASE
-		
+
 		$sql_ins=sprintf("INSERT INTO "._TABELLA_ALLEGATO."
 				 (tipoentita,codiceentita,nomefileall,descroggall,autoreall,lastdata)
 				 VALUES ('%s','%s','%s','%s','%s','%s')",
@@ -175,34 +175,34 @@ if(count($_FILES)>0){
 				 date('Y-m-d H:i:s')
 				 );
 
-		
+
 		$q_ins=$vmreg->query($sql_ins);
-		
+
 		$id_ultimo=$vmreg->insert_id(_TABELLA_ALLEGATO,'codiceallegato');
-		
+
 		$test_move=move_uploaded_file($_FILES['gfile']['tmp_name'][$i],_PATH_ATTACHMENT."/$id_ultimo.dat");
-		
+
 		if($test_move){
-			
+
 			$success++;
 		}
 		else{
 			$tipo_errori_up[$i]=_('it is not possible to upload the file in the folder');
 			continue;
 		}
-		
-		
-		
+
+
+
 	}
-	
+
 	if($success==count($_FILES['gfile']['tmp_name'])){
-		
+
 		header("Location: ".$_SERVER['PHP_SELF']."?t=".$_POST['t']."&id=".$_POST['id']."&feed=ok");
 	}
 	else{
 		header("Location: ".$_SERVER['PHP_SELF']."?t=".$_POST['t']."&id=".$_POST['id']."&feed=ko&msg=".implode("|",$tipo_errori_up));
 	}
-	
+
 	exit;
 }
 ########################################################################
@@ -217,14 +217,14 @@ if(count($_FILES)>0){
 # CASO SPECIALE NEW:
 // L'utente ha cliccato su allegato quando ancora il record non era salvato..
 if($_GET['id']=='new'){
-	
+
 	$msg=_("To attach a file, save the new record first, and then upload the attached files.");
 	openErrorGenerico(_('You cannot attach a file until you have first saved the new record'),false,$msg,'popup');
 	exit;
 }
 
 if($_GET['id']=='ric'){
-	
+
 	$msg=_("You are in the middle of a search. Complete or cancel the search before trying to insert attachments.");
 	openErrorGenerico(_('You cannot attach files while performing a search'),false,$msg,'popup');
 	exit;
@@ -243,7 +243,7 @@ $allegati_del=$info_tab['permetti_allegati_del'];
 
 
 if(!RegTools::is_tabella($tabella) || $id==''){
-	
+
 	openErrorGenerico(_('Request error'),false);
 	exit;
 }
@@ -279,116 +279,116 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 
 	echo "	
 	<script type=\"text/javascript\">
-	
+
 		$JS_aggiorna
-	
+
 		var nuoviAllegati=0;
-		
+
 		var bUploaded = new BytesUploaded('whileuploading.php',500);
-	
+
 		var divs = new Array('allegati','nuoviallegati');
-	
-	
+
+
 		function eti(ido){
-			
+
 			for (var i in divs){
 				document.getElementById('cont-eti-'+divs[i]).style.display='none';
 				document.getElementById('li-'+divs[i]).className='disattiva';
 			}
-			
+
 			// attiva il selezionato
 			document.getElementById('cont-eti-'+ido).style.display='';
 			document.getElementById('li-'+ido).className='attiva';
-			
+
 		}
-	
-	
+
+
 	</script>
 	";
-	
-	
+
+
 	if(isset($_GET['feed']) && $_GET['feed']=='ko'){
-		
-		
+
+
 		$messaggi=str_replace("|","<br />",$_GET['msg']);
-		
+
 		echo "<p><strong>"._('Warning!')."</strong><br />\n$messaggi</p>\n";
 	}
-	
+
 
 	echo "	
 <div id=\"contenitore-variabili\">
 	<div id=\"box-etichette\">
-		
+
 		<ul class=\"eti-var-gr\">
 
-		
+
 			<li onclick=\"eti('allegati');\" id=\"li-allegati\" class=\"attiva\">"._('Attachments')."</li>
 			", ($allegati_ins) ? "<li onclick=\"eti('nuoviallegati');\" id=\"li-nuoviallegati\" class=\"disattiva\">"._('Add attachment')."</li>" : "","
 
 		</ul>
-	
+
 	</div>";
 
-	
+
 	// opzione scarica tutti
 	if($num_allegati>=2){
-		
+
 		$link_scarica_tutti=" - <a href=\"download.php?type=all&amp;idr=".base64_encode($matrice_info_allegati[0]['codiceallegato']._BASE64_PASSFRASE)."\">Scarica tutti gli allegati</a>";
 	}
 	else{
 		$link_scarica_tutti='';
 	}
-	
+
 	// LINGUETTA NUOVO FLUSSO
 	echo "
 	<div class=\"cont-eti\" id=\"cont-eti-allegati\" >
-	
+
 		<p>"._('Attachments for this record').": <strong>$num_allegati</strong> $link_scarica_tutti</p>
-		
+
 		<hr class=\"light2\" />
 		";
-	
+
 		// MOSTRA GLI ALLEGATI
 		for($i=0;$i<count($matrice_info_allegati);$i++){
-			
+
 			$dimensione = RegTools::allegato_filesize($matrice_info_allegati[$i]['codiceallegato']);
-			
+
 			$scarica=(preg_match('|Dimensione|i',$dimensione)) ? "": " - <a href=\"download.php?f=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."\">Scarica</a>";
 			$elimina=($allegati_del) ? " - <span class=\"fakelink-rosso\" onclick=\"if(confirm('"._('Are you sure you want to delete this attachment?')."')){ window.location='".htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')."?t=$tabella&amp;id=$id&amp;del=".base64_encode($matrice_info_allegati[$i]['codiceallegato']._BASE64_PASSFRASE)."';}\" >"._('Delete')."</span>" : "";
-			
+
 			$estensione=substr($matrice_info_allegati[$i]['nomefileall'],-3,3);
-			
+
 			if($estensione=='gif' || $estensione=='jpg' || $estensione=='png' || 
 			$estensione=='GIF' || $estensione=='JPG' || $estensione=='PNG'){
-				
+
 				$immagine='<img src="thumb.php?id='.$matrice_info_allegati[$i]['codiceallegato'].'" alt="'.$matrice_info_allegati[$i]['nomefileall'].'" class="thumb" /><div style="clear:both">&nbsp;</div>';
 			}
 			else{
-				
+
 				$immagine = img_filetype($matrice_info_allegati[$i]['nomefileall']);
 			}
-			
+
 			echo "
 			<div class=\"allegato\">
 				<div class=\"allegato-img\">".$immagine."</div>
 				<div class=\"allegato-info\">
 					<strong>".$matrice_info_allegati[$i]['nomefileall']."</strong><br />
 					$dimensione $scarica $elimina
-					
+
 				</div>
 			</div>\n";
 		}
-	
-	
-	
-	
+
+
+
+
 	echo "
 	    <br class=\"clear\" />
 	</div>
 	";
-	
-	
+
+
 	// LINGUETTA AMMINISTRAZIONE FLUSSI
 	if($allegati_ins){
 	echo "
@@ -399,24 +399,24 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
         <form enctype="multipart/form-data" method="post" action="<?php echo Common::phpself();?>" onsubmit="bUploaded.start('fileprogress');">
 			<div>
 				<div id="contenitore-file"><div><input type="file" name="gfile[]" size="60" /> <span onclick="rimuovi_attach(this);" class="fakelink" style="font-size:0.7em;">rimuovi</span><br /></div></div>
-				
+
 				<span onclick="clona_attach();" class="fakelink"><?php echo _('Add another file');?></span><br /><br /><br />
-				
-				
+
+
 				<input type="hidden" name="t" value="<?php echo $tabella;?>" />
 				<input type="hidden" name="id" value="<?php echo $id;?>" />
-				
+
 				<input type="submit" name="aggiungi" value="  <?php echo _('Send');?>  " onclick="submit();this.value='<?php echo _('Please wait...');?>';this.disabled=true;" />
-					
+
 			</div>
 		</form>
 		<div id="fileprogress" style="font-weight: bold;"> </div>
 
 <?php
-	
+
 	echo "</div>\n";
 	} // -- fine clausola nuovi inserimenti
-	
+
 echo "</div><!-- fine contenitore -->\n\n";
 
 

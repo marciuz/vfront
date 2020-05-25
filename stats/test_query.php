@@ -14,11 +14,11 @@ require_once("../inc/conn.php");
  proteggi(2);
 
 if(isset($_GET['sql'])){
-	
+
 	echo $res=$vmsql->query_try($_GET['sql'],true);
 }
 else{
 	# nessuna chiamata
 	echo "-1";
-	
+
 }

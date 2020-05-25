@@ -16,20 +16,20 @@ require("./inc/conn.php");
 
 
 function cron_clean_dir($dir, $tieni_file_entro_gg=0){
-	
-	
+
+
 	$gg=(60*60*24);
-	
+
 	$tempo_validita=$gg*$tieni_file_entro_gg;
-	
+
 	if (is_dir($dir)) {
 	   if ($dh = opendir($dir)) {
 	      while (($file = readdir($dh)) !== false) {
-	      		
+
 	      		$data_file=filemtime($dir .$file);
-	      	
+
 	      		if((time()-$tempo_validita)>$data_file && $file!='.' && $file!='..'){
-	      			
+
 	      			@unlink($dir .$file);
 	      		}
 	      	}
@@ -48,27 +48,27 @@ function cron_clean_dir($dir, $tieni_file_entro_gg=0){
  * @param int $tieni_file_entro_gg
  */
 function cron_clean_html($gg=0){
-	
+
 	$dir=FRONT_REALPATH."/files/html/";
-	
+
 	cron_clean_dir($dir,$gg);	
-	
+
 }
 
 
 function cron_clean_tmp($gg=0){
-	
+
 	$dir=_PATH_TMP."/";
-	
+
 	cron_clean_dir($dir,$gg);	
 
 }
 
 
 function cron_clean_files_tmp($gg=0){
-	
+
 	$dir=FRONT_REALPATH."/";
-	
+
 	cron_clean_dir($dir,$gg);	
 
 }

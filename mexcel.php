@@ -18,10 +18,10 @@ require("./inc/conn.php");
 proteggi(1);
 
 if(isset($_POST['mexcel'])){
-	
-	
+
+
 	$_data=unserialize(base64_decode($_POST['mexcel']));
-	
+
    $filename= (isset($_data['fn']) && $_data['fn']!='') ? $_data['fn'] : "sheet.xls";
    $titolo= (isset($_data['tit']) && $_data['tit']!='') ? $_data['tit'] : _("Table");
    header ("Content-Type: application/vnd.ms-excel");

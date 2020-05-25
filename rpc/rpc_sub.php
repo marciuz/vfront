@@ -22,89 +22,89 @@ proteggi(1);
 if(count($_POST)>0){
 
 //	$fp=fopen("test.txt","a");
-	
+
 	require_once("../inc/func.rpc_query.php");
-	
-	
+
+
 	if($_GET['post']=='update'){
 
 		// IMPOSTAZIONI CHIAVE PRIMARIA:
 		$attribuzione_PK = $_POST['campo_pk_indip']."='".$vmsql->escape($_POST['valore_pk_indip'])."' ";
-		
+
 		// case new record
 		if(!isset($_POST['hash'])) $_POST['hash']='';
 
 		if(!isset($_POST['dati'])){
 		    $_POST['dati']=array();
 		}
-		
+
 		$sql_update = rpc_sub_query_update($_POST['dati'],$attribuzione_PK,$_GET['action'],$_POST['hash']);
 
 		// contatore per successo delle operazioni 
 		$c=0;
-		
+
 		for($i=0;$i<count($sql_update);$i++){
-			
-			
+
+
 			$result=$vmsql->query_try($sql_update[$i],false);
-			
+
 			Common::rpc_debug($sql_update[$i]);
-			
+
 			if($result) $c++;
 		}
-		
-		
+
+
 		// CONTROLLO I RISULTATI
-		
+
 		$ris = $i-$c;
-		
+
 		if($ris==0){
-			
+
 			echo 1;	 // tutte le operazioni sono andate a buon fine		
 		}
 		elseif($ris<$i){
-			
+
 			echo 2; // alcune operazioni sono andate a buon fine, altre sono fallite
 		}
 		else{
-			
+
 			echo 3; // tutte le operazioni sono fallite
 		}
-		
-		
-		
+
+
+
 	}
-	
+
 	 elseif($_GET['post']=='delete'){
 
 	 	// array
 	 	$sql_delete = rpc_sub_query_delete($_GET['action'],$_POST['hash']);
-	 	
+
 	 	$c=0;
-	 	
+
 	 		for($i=0;$i<count($sql_delete);$i++){
 	 			$result=$vmsql->query_try($sql_delete[$i],false);
 	 			$c++;
 	 		}
-	 	
+
 	 	$ris = $i-$c;
-		
+
 		if($ris==0){
-			
+
 			echo 1;	 // tutte le operazioni sono andate a buon fine		
 		}
 		elseif($ris<$i){
-			
+
 			echo 2; // alcune operazioni sono andate a buon fine, altre sono fallite
 		}
 		else{
-			
+
 			echo 3; // tutte le operazioni sono fallite
 		}
 	 }
-	 
+
 	 else{
-	 	
+
 	 	echo "BOH";
 	 }
 

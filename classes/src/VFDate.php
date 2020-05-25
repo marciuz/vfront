@@ -8,7 +8,7 @@
  */
 class VFDate {
 
-    
+
     /**
      * Codifica la data in base al parametro di configurazione FRONT_DATE_FORMAT
      *
@@ -54,7 +54,7 @@ class VFDate {
         }
     }
 
-    
+
 
     /**
      * Estrae le parti di una data in formato internazionale e restituisce le parti della stessa in un array.

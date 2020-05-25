@@ -68,7 +68,7 @@ class GroupByBuilder {
         $builder = new FunctionBuilder();
         return $builder->build($parsed);
     }
-        
+
     public function build($parsed) {
         $sql = "";
         foreach ($parsed as $k => $v) {
@@ -86,6 +86,6 @@ class GroupByBuilder {
         $sql = substr($sql, 0, -2);
         return "GROUP BY " . $sql;
     }
-    
+
 }
 

@@ -12,7 +12,7 @@
  *                       	only if there is an error and not everytime.
  */
 function LoadVars() {
-	
+
 	/**
 	 * Public method
          * 	add or modify headers
@@ -30,7 +30,7 @@ function LoadVars() {
 		if(rqh.length > 0 && (rqh.length % 2) == 0)
 			__headers = rqh;
 	};
-	
+
 	/**
 	 * Public method
          * 	decode a string to internal values
@@ -48,7 +48,7 @@ function LoadVars() {
 			}
 		}
 	};
-	
+
 	/**
 	 * Public method
          * 	get loaded bytes
@@ -57,7 +57,7 @@ function LoadVars() {
 	function getBytesLoaded() {
 		return __getBytes('responseText.length');
 	};
-	
+
 	/**
 	 * Public method
          * 	get total bytes
@@ -66,7 +66,7 @@ function LoadVars() {
 	function getBytesTotal() {
 		return __getBytes('getResponseHeader("Content-Length")');
 	};
-	
+
 	/**
 	 * Public method
          * 	load a server page
@@ -89,7 +89,7 @@ function LoadVars() {
 		}
 		return result;
 	};
-	
+
 	/**
 	 * Public method
          * 	send something to the server
@@ -98,7 +98,7 @@ function LoadVars() {
 	function send(url, target, method) {
 		__self.sendAndLoad(url, null, method);
 	};
-	
+
 	/**
 	 * Public method
          * 	load a server page after sending something
@@ -144,7 +144,7 @@ function LoadVars() {
 		}
 		return result;
 	};
-	
+
 	/**
 	 * Public method
          * 	return text rappresentation of this object
@@ -152,7 +152,7 @@ function LoadVars() {
 	function toString() {
 		return __toString(false);
 	};
-	
+
 	/**
 	 * Public unofficial method
          * 	get % progress while loading data
@@ -160,7 +160,7 @@ function LoadVars() {
 	function getProgress() {
 		return __progress;
 	};
-	
+
 	/** LIST OF ALL PRIVATE METHODS [ uncommented ] */
 	function __unescapeString(str) {
 		return unescape(str.split('+').join(' '));
@@ -327,13 +327,13 @@ function LoadVars() {
 		}
 		__checkProgress();
 	};
-	
+
 	/** PUBLIC VARIABLES */
 	this.loaded = false; // internal loaded boolean value
 	this.lastError = ''; // last error, if there was one
 	// default contentType for POST interaction
 	this.contentType = 'application/x-www-form-urlencoded';
-	
+
 	/** DECLARATION OF ALL PUBLIC METHODS */
 	this.load = load;
 	this.send = send;
@@ -344,7 +344,7 @@ function LoadVars() {
 	this.getBytesLoaded = getBytesLoaded;
 	this.getBytesTotal = getBytesTotal;
 	this.getProgress = getProgress;
-	
+
 	/** PRIVATE VARIABLES */
 	var __progress = 0;
 	var __self = this;

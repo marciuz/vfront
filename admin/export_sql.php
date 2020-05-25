@@ -14,19 +14,19 @@ include("../inc/conn.php");
 include("../inc/layouts.php");
 
  proteggi(3);
- 
+
 
 
 	########################################################################
 	#
 	#
 	#	ESPORTAZIONE REGISTRI
-	
+
 	$IS_UNIX = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? 0:1;
-	
+
 	if(isset($_POST['exp_dati'])){
 
-			
+
 		if($IS_UNIX){
 			$zippa="| gzip -c ";
 			$estensione_zip=".gz";
@@ -35,10 +35,10 @@ include("../inc/layouts.php");
 			$zippa ="";
 			$estensione_zip="";
 		}
-		
-		
+
+
 		// tipo di dati richiesti
-		
+
 		if($_GET['exp']=='registri'){
 
 			if(USE_REG_SQLITE){
@@ -72,9 +72,9 @@ include("../inc/layouts.php");
 			$DB = $db1['dbname'];
 			$opzioni_pg=' --schema=public ';
 		}
-			
+
 		// opzioni dati/schema
-		
+
 		if($_POST['schema_only']=='1'){
 			$opzioni = "--no-data ";
 			$opzioni_pg = '-s ';
@@ -83,13 +83,13 @@ include("../inc/layouts.php");
 		else{
 			$opzioni = "";
 		}
-		
-			
-		
+
+
+
 			if(VFRONT_DBTYPE=='mysql'){
-				
+
 				$nome_file = _PATH_TMP."/$DB.sql{$estensione_zip}";	
-			
+
 				$bat= 	_PATH_MYSQLDUMP.
 						" --add-drop-table --force ".
 						"-u{$db1['user']} ".
@@ -102,9 +102,9 @@ include("../inc/layouts.php");
 					   	">$nome_file";
 			}
 			elseif (VFRONT_DBTYPE=='postgres'){
-				
+
 				$nome_file = _PATH_TMP."/{$db1['postgres_dbname']}.$DB.sql{$estensione_zip}";	
-				
+
 				$bat= 	"export PGPASSWORD=\"{$db1['passw']}\" ".
 						"&& "._PATH_PG_DUMP." ".
 						"-U{$db1['user']} ".
@@ -113,12 +113,12 @@ include("../inc/layouts.php");
 						"$opzioni_pg ".
 						"{$db1['postgres_dbname']} ".
 						" $zippa > $nome_file";
-				
+
 			}
-				   	
+
 			$exec = passthru($bat);
-				   	
-			
+
+
 
 			if(is_file($nome_file)){
 			   header('Pragma: anytextexeptno-cache', true);
@@ -127,25 +127,25 @@ include("../inc/layouts.php");
 			   header('Content-length: '.filesize($nome_file));
 			   header('Content-disposition: attachment; filename='.basename($nome_file));
 			   readfile($nome_file);
-			   
+
 			   unlink($nome_file);
 			}
 			else{
 				die(_('Error: can\'t create dump file'));
 			}
-			
-		
-			
+
+
+
 		exit;
 	}
-	
-	
+
+
 	#
 	#
 	########################################################################
-	
 
- 
+
+
  echo openLayout1(_("Database export"), array("sty/admin.css"));
 
  $DBREG_NAME=(USE_REG_SQLITE) ? basename($db1['filename_reg']) : $db1['frontend'];
@@ -164,40 +164,40 @@ include("../inc/layouts.php");
  echo "<h1>"._("Database export")."</h1>
 
  	<img src=\"../img/db_export.gif\" class=\"img-float\" alt=\""._("registry settings")."\" />
- 
+
  	<div class=\"box-db\">
 		<h2>"._("Database data export")." (<span class=\"var\">{$db1['dbname']}</span>)</h2>
 		<form action=\"" . Common::phpself() . "?exp=dati\" method=\"post\">
-		
+
 			<br />
-		
+
 			<input type=\"radio\" name=\"schema_only\" id=\"schemaonly_1\" value=\"1\" checked=\"checked\"/><label for=\"schemaonly_1\">"._("Schema only")."</label><br />
 			<input type=\"radio\" name=\"schema_only\" id=\"schemaonly_2\" value=\"2\" /><label for=\"schemaonly_2\">"._("Schema and Data")."</label><br />
-		
+
 			<br />
-			
+
 			<input type=\"submit\" name=\"exp_dati\" value=\""._("Export")."\" />
-			
+
 		</form>
-		
+
 	</div>	
-	
- 
+
+
  	<div class=\"box-db\">
 		<h2>"._("Registries database export")." (<span class=\"var\">$DBREG_NAME</span>)</h2>
-			
+
 		<form action=\"" . Common::phpself() . "?exp=registri\" method=\"post\">
-		
+
 			<br />
-		
+
 			$OPTION_REG
-		
+
 			<br />
-			
+
 			<input type=\"submit\" name=\"exp_dati\" value=\""._("Export")."\" />
-			
+
 		</form>
 	</div>	\n";
- 
- 
+
+
  echo closeLayout1();

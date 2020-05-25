@@ -76,10 +76,10 @@ function sch_syntax_helper($text)
 function syntax_highlight_helper($text, $language)
 {
     $preproc = array();
-   
+
 
     $keywords = array(
-    
+
     "SQL" => array(
     "abort", "abs", "absolute", "access",
     "action", "ada", "add", "admin",
@@ -368,7 +368,7 @@ function syntax_highlight($text, $language)
     $sch[sch_numlit]["\r"]  = sch_normal;
     $sch[sch_numlit][0]     = sch_numlit;
 
-   
+
 
     $sql[normal_text]['"']     = dq_literal;
     $sql[normal_text]["'"]     = sq_literal;
@@ -402,7 +402,7 @@ function syntax_highlight($text, $language)
     $sql[lc_escape]["\r"]      = lc_escape;
     $sql[lc_escape][0]         = line_comment;
 
-   
+
     //
     // Main state transition table
     //
@@ -435,7 +435,7 @@ function syntax_highlight($text, $language)
     $process["SQL"][dash_begin][line_comment] = "rtrim1";
     $process["SQL"][dash_begin][0] = "dash_putback";
 
-    
+
 
     $process_end["C89"] = "syntax_highlight_helper";
     $process_end["C++"] = $process_end["C89"];
@@ -476,7 +476,7 @@ function syntax_highlight($text, $language)
     $edges["SQL"][sq_literal .",". normal_text]   = '</span>';
     $edges["SQL"][line_comment .",". normal_text] = '</span>';
 
-   
+
 
     //
     // The State Machine
@@ -539,6 +539,6 @@ function syntax_highlight($text, $language)
             array_key_exists("$state," . normal_text, $edges[$language]))
             $output .= $edges[$language]["$state," . normal_text];
     }
-                
+
     return $output;
 }

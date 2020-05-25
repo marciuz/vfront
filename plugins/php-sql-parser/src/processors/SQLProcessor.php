@@ -149,7 +149,7 @@ class SQLProcessor extends SQLChunkProcessor {
             case 'SHOW':
                 $token_category = $upper;
                 break;
-                
+
             case 'DESC':
                 if ($token_category === '') {
                     // short version of DESCRIBE

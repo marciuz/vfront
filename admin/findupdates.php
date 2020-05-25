@@ -14,13 +14,13 @@
 
 require_once("../inc/conn.php");
 
-	
+
 $URL="http://www.vfront.org/version.rss";
 
 $RSS=@join("",@file($URL));
 
 if($RSS!==null){
-	
+
 	$xml = new SimpleXMLElement($RSS);
 
 	foreach(@$xml->channel->item as $val){

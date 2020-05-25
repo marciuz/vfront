@@ -15,9 +15,8 @@ include("../inc/conn.php");
 include("../inc/layouts.php");
 
  proteggi(2);
- 
- 
+
+
  echo openLayout1(_("Report Administration"), array("sty/admin.css"));
- 
+
  echo closeLayout1();
- 

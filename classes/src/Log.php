@@ -57,9 +57,9 @@ class Log {
     #
     #	CONTINUA A STAMPARE
     #
-	 	
+
         echo "<table class=\"tab-color\" summary=\"" . _("Log table") . "\">
-	
+
 	 	<tr>
 			<th class=\"grigia\">" . _("date") . "</th>
 			<th class=\"grigia\">" . _("operation") . "</th>
@@ -70,7 +70,7 @@ class Log {
 			<th class=\"grigia\">" . _("source") . "</th>
 			<th class=\"grigia\">" . _("details") . "</th>
 		</tr>
-	
+
 		";
 
         while ($RSlog = $vmreg->fetch_assoc($q_log)) {
@@ -154,35 +154,35 @@ class Log {
         }
 
         $out['modifiche'] = $arr_modifiche;
-        
+
         return $out;
     }
-    
+
     private function parser_sql_update($sql) {
-        
+
         require_once(FRONT_ROOT."/plugins/php-sql-parser/src/PHPSQLParser.php");
-        
+
         $Parser = new PHPSQLParser();
-        
+
         $psql = $Parser->parse($sql);
-        
+
         $out['tabella'] = $psql['UPDATE'][0]['no_quotes'];
         $out['modifiche'] = array();
-        
+
         if(isset($psql['SET']) && count($psql['SET'])>0) {
             foreach($psql['SET'] as $up) {
-                
+
                 $k = $up['sub_tree'][0]['no_quotes'];
                 $v = $up['sub_tree'][2]['base_expr'];
-                
+
                 if($v{0} == "'" && substr($v, -1, 1) == "'") {
                     $v = substr($v, 1, strlen($v)-2);
                 }
-                
+
                 $out['modifiche'][$k] = $v;
             }
         }
-        
+
         return $out;
     }
 
@@ -293,7 +293,7 @@ class Log {
 
 
         $info_operazione = "
-			
+
 			<table id=\"info_log\" summary=\"" . _("information about action") . "\" border=\"1\">
 				<tr>
 					<th colspan=\"2\" style=\"text-align:left\"><h3>" . _("Summary") . " <span class=\"var\">" . strtoupper($RS['op']) . "</span></h3></th>
@@ -330,20 +330,20 @@ class Log {
 					<th>" . _("author group") . "</th>
 					<td>" . $RS['gid'] . "</td>
 				</tr>			
-				
+
 				<tr>
 					<th>" . _("update source") . "</th>
 					<td>" . $fonte . "</td>
 				</tr>		
-						
+
 				<tr>
 					<th>" . _("browser information") . "</th>
 					<td>" . htmlentities(stripslashes($RS['info_browser']), ENT_QUOTES, FRONT_ENCODING) . "</td>
 				</tr>
-				
+
 			</table>		
-					
-			
+
+
 			";
 
         return array('table' => $info_operazione, 'rev' => $is_reversibile);
@@ -389,7 +389,7 @@ class Log {
 
                 $OUT.="<br /><br />
 			<h2>" . _("Record comparison table") . "</h2>
-			
+
 			<p>" . _("Fields that were changed in this operation are highlighted in yellow.") . "</p>
 			<table border=\"1\" summary=\"tabella comparazione\" id=\"tabella-comparazione\">\n";
 
@@ -440,10 +440,10 @@ class Log {
                 if ($info_op['rev']) {
 
                     $OUT.= "<br /><form action=\"" . Common::phpself() . "?ripristino=1&amp;type=update\" method=\"post\">
-					
+
 					<input type=\"hidden\" name=\"id_log\" value=\"$id_log\" />
 					<input type=\"button\" onclick=\"submit();\" name=\"ripristino_op\" value=\" " . _("Rollback this action") . " \" />
-					
+
 					</form>\n";
                 }
             }
@@ -461,7 +461,7 @@ class Log {
 
             $OUT.="<br /><br />
 			<h2>Record inserito</h2>
-			
+
 			<table border=\"1\" summary=\"tabella comparazione\" id=\"tabella-comparazione\">\n";
 
             $OUT.="
@@ -504,7 +504,7 @@ class Log {
 
             $OUT.="<br /><br />
 			<h2>" . _("Record deleted") . "</h2>
-			
+
 			<table border=\"1\" summary=\"tabella comparazione\" id=\"tabella-comparazione\">\n";
 
             $OUT.="
@@ -549,10 +549,10 @@ class Log {
             if ($info_op['rev']) {
 
                 $OUT.= "<br /><form action=\"" . Common::phpself() . "?ripristino=1&amp;type=delete\" method=\"post\">
-				
+
 					<input type=\"hidden\" name=\"id_log\" value=\"$id_log\" />
 					<input type=\"button\" onclick=\"submit();\" name=\"ripristino_op\" value=\" " . _("Rollback this action") . " \" />
-					
+
 					</form>\n";
             }
         }
@@ -644,9 +644,9 @@ class Log {
         }
 
         if (isset($_GET['op']) && $_GET['op'] != '') {
-            
+
             $OP = $vmsql->escape(filter_var($_GET['op'], FILTER_SANITIZE_STRING));
-            
+
             $clausola_op = "AND log.op='" . $OP . "'";
             $class_op = $colore_tab;
             $val_op[$OP] = 1;
@@ -733,12 +733,12 @@ class Log {
 							log.id_record,
 							log.fonte,
 							" . $vmreg->concat("u.nome, ' ',u.cognome", 'nomecognome') . "
-							
-								
+
+
 		 			FROM {$db1['frontend']}{$db1['sep']}log log
 		 			INNER JOIN {$db1['frontend']}{$db1['sep']}utente u ON u.id_utente=log.uid
 		 			INNER JOIN {$db1['frontend']}{$db1['sep']}gruppo g ON u.gid=g.gid
-		 			
+
 	 			WHERE 1=1
 	 			$clausola_uid
 	 			$clausola_op
@@ -833,7 +833,7 @@ class Log {
 
         $FILTRI.= "
 	 	<div id=\"filtri_log\" style=\"$mostra_filtri;\">
-	 
+
 	 	<form action=\"" . Common::phpself() . "\" method=\"get\">
 		 	<fieldset style=\"margin:5px 20px 20px 0px; width:60%;\">
 		 		<label for=\"op\">" . _("Action type:") . "</label>
@@ -853,9 +853,9 @@ class Log {
 
         $FILTRI.= "	
 		 		</select>
-		 		
+
 		 		<br /><br />
-		 		
+
 		 		<label for=\"op\">" . _("Table:") . "</label>
 		 		<select name=\"tabella\" id=\"tabella\">
 		 			<option value=\"\">" . _("All tables") . "</option>
@@ -870,12 +870,12 @@ class Log {
 
         $FILTRI.= "
 		 		</select>
-	 
+
 		 	<br /><br />
-		 	
-		 	
-		 	
-		 		
+
+
+
+
 		 		<label for=\"uid\">" . _("User:") . "</label>
 		 		<select name=\"uid\" id=\"uid\">
 		 			<option value=\"\">" . _("All users") . "</option>
@@ -890,16 +890,16 @@ class Log {
 
         $FILTRI.= "
 		 		</select>
-	 
+
 		 	<br /><br />
-		 	
+
 		 	<label>" . _("Date:") . "</label><br />
 		 	" . _("from:") . " <input type=\"text\" name=\"data_dal\" id=\"data_dal\" value=\"$val_data1\" /> " . _("to") . " <input type=\"text\" name=\"data_al\"  id=\"data_al\" value=\"$val_data2\" />
-		 	
+
 		 	 <script type=\"text/javascript\">
-    
-		 	 
-	 	 
+
+
+
 			   Calendar.setup({
 			        inputField     :    \"data_dal\",   // id of the input field
 			        firstDay	   :    1,
@@ -907,7 +907,7 @@ class Log {
 			        showsTime      :    true,
 			        timeFormat     :    \"24\"
 			    });    
-			    
+
 			   Calendar.setup({
 			        inputField     :    \"data_al\",   // id of the input field
 			        firstDay	   :    1,
@@ -915,18 +915,18 @@ class Log {
 			        showsTime      :    true,
 			        timeFormat     :    \"24\"
 			    });    
-			    
-			
+
+
 			    </script>
-		 	
+
 		 	<br /><br />
-		 		
-		 	
-		 	
+
+
+
 		 	<input type=\"button\" onclick=\"submit();\" name=\"filtra\" value=\" " . _("Filter log") . " \" />
 		 	&nbsp;&nbsp;&nbsp;&nbsp;
 		 	<input type=\"button\" onclick=\"reset(); document.getElementById('tabella').options[0].selected=true; document.getElementById('op').options[0].selected=true; document.getElementById('uid').options[0].selected=true; submit();\" name=\"rimuovi\" value=\" " . _("Remove all filters") . "\" />
-		 		
+
 	 		</fieldset>
 	 	</form>
 	 	</div>\n";
@@ -936,14 +936,14 @@ class Log {
         #
 	 #	CONTINUA A STAMPARE
         #
-	 	
+
 	 echo $FILTRI;
 
         echo $PAG;
 
 
         echo "<table class=\"tab-color\" summary=\"Tabella Log\">
-	
+
 	 	<tr>
 			<th$class_data>" . _("date") . "</th>
 			<th$class_op>" . _("operation") . "</th>
@@ -955,7 +955,7 @@ class Log {
 			<th>" . _("details") . "</th>
 			<th>" . _("history") . "</th>
 		</tr>
-	
+
 		";
 
         while ($RSlog = $vmreg->fetch_assoc($q_log)) {
@@ -1017,7 +1017,7 @@ class Log {
         #	
         #	RIPRISTINO UPDATE
         #
-		
+
 	if ($op == 'update') {
 
             $array_pre = unserialize($storico_pre);
@@ -1177,9 +1177,9 @@ class Log {
             }
         }
     }
-    
-    
-    
+
+
+
 
     /**
      * Funzione di scrittura del log delle operazioni compiute mediante le maschere di VFront
@@ -1341,7 +1341,7 @@ class Log {
 
                             $storico_pre=$vmreg->escape(serialize($RS_pre));
                             $storico_post=$vmreg->escape($storico_post);
-                            
+
                             $sql="INSERT INTO {$db1['frontend']}{$db1['sep']}log (op,tabella,uid,gid,id_record,storico_pre,storico_post,info_browser) 
                                   VALUES ('$op','$tabella',$uid,$gid,'$id','$storico_pre','$storico_post','$info_browser')";
                             $test=$vmreg->query_try($sql,false);

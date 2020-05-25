@@ -33,7 +33,7 @@ class Rpc {
 
         //aggiungi l'ID all'order by
         if ($this->PK != '') {
-            
+
             foreach($this->PK as $pk){
                 $this->orderby.=", ".$pk." ASC";
             }
@@ -65,7 +65,7 @@ class Rpc {
 
             $this->where.="WHERE 1=1 ";
         }
-        
+
         foreach ($ww as $f => $v) {
 
             if (isset($col_types[$f])) {
@@ -80,7 +80,7 @@ class Rpc {
             }
         }
     }
-    
+
     /**
      *
      * @global object $vmsql
@@ -88,7 +88,7 @@ class Rpc {
      * @return void
      */
     public function set_default_where() {
-        
+
         global $vmsql;
 
         if(!is_array($this->Reg->T->default_filters) || count($this->Reg->T->default_filters) == 0){
@@ -103,11 +103,11 @@ class Rpc {
 
             $this->where.="WHERE 1=1 ";
         }
-        
+
         foreach ($this->Reg->T->default_filters as $f => $v) {
 
             if (isset($col_types[$f])) {
-                
+
                 $operator = (isset($v->op)) ? Admin_Registry::get_default_filters_ops($v->op) : '=';
                 $value = $vmsql->escape($v->value);
 
@@ -258,8 +258,8 @@ class Rpc {
 
         return $XML;
     }
-    
-    
+
+
     /**
      *
      * @global object $vmsql
@@ -269,27 +269,27 @@ class Rpc {
     private function get_json_1($sql, $offset) {
 
         global $vmsql;
-        
+
         $offset++;
-        
+
         $q=$vmsql->query($sql);
         $RS = $vmsql->fetch_assoc($q);
-        
+
          $tablename='';
         if(preg_match("/FROM +([a-z0-9_]+)/si",$sql,$found)){
             $tablename=$found[1];
         }
-        
+
         $n_rows=$vmsql->num_rows($q);
-        
-        
+
+
         $o = new stdClass();
         $o->tot = $this->tot_records();
         $o->minoffset = $offset;
         $o->maxoffset = ($offset+($n_rows-1));
         $o->tablename = $tablename;
         $o->row[] = array('offset'=> $offset, 'data'=> $RS);
-               
+
         return json_encode($o);
     }
 
@@ -318,27 +318,27 @@ class Rpc {
 
         global $vmsql;
 
-        
+
         $tablename='';
         if(preg_match("/FROM +([a-z0-9_]+)/si",$sql,$found)){
             $tablename=$found[1];
         }
-        
+
         $q=$vmsql->query($sql);
         $n_rows=$vmsql->num_rows($q);
-        
+
         $o = new stdClass();
         $o->tot = $n_rows;
         $o->minoffset = 1;
         $o->maxoffset = $n_rows;
         $o->tablename = $tablename;
-        
+
         $i = 1;
         while($RS = $vmsql->fetch_assoc($q)){
             $o->row[] = array('offset'=> $i, 'data'=> $RS);
             $i++;
         }
-               
+
         return json_encode($o);
     }
 
@@ -378,8 +378,8 @@ class Rpc {
             return $this->get_json_all($sql);
         }
     }
-    
-    
+
+
     public function get_grid_rules() {
 
         return $this->Reg->get_column_tableview();
@@ -467,11 +467,11 @@ class Rpc {
 
         $fields = '';
         $values = '';
-        
+
         // get special types
         $info_cols = RegTools::columns_info($this->table);
-        
-        
+
+
 
         foreach ($_data as $k => $val) {
 
@@ -482,12 +482,12 @@ class Rpc {
                 $val = RegTools::variabili_campi($val);
 
             $val = urldecode($val);
-            
+
             if ($info_cols[$k]['type'] == 'date' && trim($val) == '') {
                 $values.=" NULL,";
             }
             else if($info_cols[$k]['type'] == 'numeric'){
-                
+
                 if(trim($val) == ''){
                     $values.=" NULL,";
                 }
@@ -499,7 +499,7 @@ class Rpc {
                 $values.="'" . $vmsql->escape($val) . "',";
             }
 
-            
+
         }
 
         $fields = substr($fields, 0, -1);

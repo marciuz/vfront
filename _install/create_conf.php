@@ -52,7 +52,7 @@ $WR.="
  * @subpackage Config
  * @author M.Marcello Verona
  * @copyright 2007-2020 M.Marcello Verona
- * @version 0.96 \$Id: create_conf.php 1076 2014-06-13 13:03:44Z marciuz $
+ * @version 0.99.52 \$Id: create_conf.php 1076 2014-06-13 13:03:44Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
  
@@ -175,11 +175,11 @@ $authtype=($var['authtype']=='null') ? '' : $var['authtype'];
 $WR.=<<<PHPW
 
 
-// PARAMETRI PER LA MODALITA' DI AUTENTICAZIONE ESTERNA  --------------------------------------------------------------------
+// PARAMETERS FOR THE EXTERNAL AUTHENTICATION MODE  --------------------------------------------------------------------
 
 
-// Questo parametro permette di effettuare l'autenticazion mediante uno strumento esterno (database, ldap, eccetera)
-// Qualora si volesse effettuare l'autenticazione direttamente dal database di VFront si imposti la variabile = '' oppure null
+// This parameter allows authentication by an external tool (database, ldap, etc.).
+// If you want to authenticate directly from the database of VFront you set the variable = '' or null
 
 \$conf_auth['tipo_external_auth']= '{$authtype}'; // 'db' | 'db_ext' | 'ldap' | 'soap' | null
 
@@ -282,7 +282,7 @@ $WR.=<<<PHPW
 define('_SYS_ADMIN_MAIL','{$var['mail_sysamin']}');
 
 /**
- * developer emails (for debug emails)
+ * Developer emails (for debug emails).
  */
 define('_DEV_MAIL','{$var['mail_dev']}');
 
@@ -290,7 +290,7 @@ define('_DEV_MAIL','{$var['mail_dev']}');
 /* DEBUG Section */
 
 /**
- * errors on screen | errors in email
+ * Errors on screen | errors in email
  * In production environment we recommend 
  * set the variable to FALSE: in case of error an email will be sent to the administrator
  * and the developer. The user sees a screen where they are notified that an error has been generated.
@@ -299,7 +299,7 @@ define('_DEV_MAIL','{$var['mail_dev']}');
 \$DEBUG_SQL={$var['debug_sql']};
 
 /**
- * open a javascript popup showing SQL queries - default: FALSE
+ * Open a javascript popup showing SQL queries - default: FALSE
  */
 \$DEBUG_SQL_SHOW_QUERY=false;
 
@@ -309,10 +309,11 @@ define('_DEV_MAIL','{$var['mail_dev']}');
 \$RPC_DEBUG=false;
 
 
-/* LOG Secrion */
+/* LOG Section */
 
 /**
- * writes a log of the SQL calls for insertion, modification and deletion - default: TRUE
+ * Writes a log of the SQL calls for insertion, 
+ * modification and deletion - default: TRUE.
  */
 \$RPC_LOG=true;
 
@@ -321,10 +322,10 @@ PHPW;
 
 $WR.="
 
-/*  SEZIONE LANGUAGE AND ENCODING  */
+/*  LANGUAGE AND ENCODING SECTION  */
 
 /**
- * Language : Valori possibili:  en_US, fr_FR, it_IT, de_DE...
+ * Language : Available values are en_US, fr_FR, it_IT, de_DE...
  */
 define('FRONT_LANG','{$var['lang']}');
 
@@ -335,7 +336,7 @@ define('FRONT_LANG','{$var['lang']}');
 define('FRONT_ENCODING','{$var['encoding']}');
 
 
-/*  SEZIONE DATE */
+/*  SECTION DATE */
 
 /**
  * Date format: (iso,eng,ita)
@@ -343,7 +344,7 @@ define('FRONT_ENCODING','{$var['encoding']}');
 define('FRONT_DATE_FORMAT','{$var['dateformat']}');
 
 
-/*  SEZIONE PATH  */
+/*  SECTION PATH  */
 
 /**
  * Real path
@@ -351,115 +352,114 @@ define('FRONT_DATE_FORMAT','{$var['dateformat']}');
 define('FRONT_ROOT','{$var['front_root']}');
 
 /**
- * Real path
+ * Real path (alias of FRONT_ROOT).
  */
-define('FRONT_REALPATH','{$var['front_root']}');
+define('FRONT_REALPATH', FRONT_ROOT);
 
 
 /**
- * Path della document root
+ * Path for document root
  */
 define('FRONT_DOCROOT','{$var['document_root']}');
 
 /**
- * Path mysqldump (per l'esportazione di MySQL) - Default: mysqldump
+ * Path mysqldump (MySQL export) - Default: mysqldump
  */
 define('_PATH_MYSQLDUMP','mysqldump');
 
 /**
- * path pg_dump (per l'esportazione di Postgres) - Default: pg_dump
+ * path pg_dump (Postgres export) - Default: pg_dump
  */
 define('_PATH_PG_DUMP','pg_dump');
 
 /**
- * path per il filesystem allegati
+ * Path for the attached filesystem.
  */
 define('_PATH_ATTACHMENT',FRONT_REALPATH.'/files/data');
 
 /**
- * path di tmp per il filesystem allegati
+ * Temp path for the attached filesystem.
  */
 define('_PATH_ATTACHMENT_TMP',FRONT_REALPATH.'/files/tmp');
 
 /**
- * path per il filesystem documenti utili
+ * Path to the filesystem useful documents.
  */
 define('_PATH_HELPDOCS',FRONT_REALPATH.'/files/docs');
 
 /**
- * path per il filesystem documenti utili admin
+ * Path to the filesystem useful documents admin.
  */
 define('_PATH_HELPDOCS2',FRONT_REALPATH.'/files/docsadmin');
 
 /**
- * path di tmp accessibile via web
+ * Temp path accessible via web.
  */
 define('_PATH_TMP',FRONT_REALPATH.'/files/tmp');
 
 /**
- * path di tmp accessibile via web
+ * Temp path accessible via web.
  */
 define('_PATH_TMP_HTTP',FRONT_DOCROOT.'/files/tmp');
 
 /**
- * path per i fogli di stile XSL allegati
+ * Path for attached XSL style sheets
  */
 define('_PATH_XSL',FRONT_REALPATH.'/files/xsl_custom');
 
 /**
- * path web per i fogli di stile XSL allegati
+ * Web path for attached XSL style sheets
  */
 define('_PATH_WEB_XSL',FRONT_DOCROOT.'/files/xsl_custom');
 
 /**
- * path per error log
+ * Path for error log
  */
 define('FRONT_ERROR_LOG',FRONT_REALPATH.'/files/db/error_log.txt');
 
 
-/*  SEZIONE FOP  */
+/*  SECTION FOP -- OBSOLETE : to be deleted */
 /* Use the Apache FOP application http://xmlgraphics.apache.org/fop/ 
-to generate the PDF version of XML files */
+to generate the PDF version of the XML files */
 
 /**
- * Imposta se Vfront puo' utilizzare l'applicazione FOP 
+ * Set whether Vfront can use the FOP application - disabled by default.
  */
-define('_FOP_ENABLED',{$var['fop_enabled']});
+define('_FOP_ENABLED',false);
 
 /**
- * Imposta se Vfront puo' utilizzare l'applicazione FOP 
+ * Set whether Vfront can use the FOP application 
  */
-define('_PATH_FOP','{$var['path_fop']}');
+define('_PATH_FOP', '');
 
 
-/*  SEZIONE ALLEGATI E LINK  */
+/*  SECTION ATTACHMENTS AND LINK  */
 
 /**
- * definizione della tabella allegato
+ * Definition of table for the attachments.
  */
 define('_TABELLA_ALLEGATO',\"{\$db1['frontend']}{\$db1['sep']}allegato\");
 
 /**
- * definizione della tabella link
+ * Definition of the link's table.
  */
 define('_TABELLA_LINK',\"{\$db1['frontend']}{\$db1['sep']}link\");
 
 
-/*  SEZIONE MISC  */
-
+/*  SECTION MISC  */
 
 /**
- * massimo tempo di editing di un record per considerarlo bloccato (in secondi)
+ * Maximum editing time of a record to consider it locked (in seconds).
  */
 define('_MAX_TEMPO_EDIT',{$var['max_tempo_edit']});
 
 /**
- * passphrase per le codifiche base64
+ * passphrase for the base64 encoding.
  */
 define('_BASE64_PASSFRASE',\"{$var['passfrase']}\");
 
 /**
- * Nome progetto
+ * Project name.
  */
 define('_NOME_PROJ','{$var['name_proj']}');
 
@@ -474,7 +474,7 @@ $version_reg_sqlite=(class_exists('SQLite3')) ? 3:2;
 $WR.="
 
 
-/* SEZIONE SQLITE */
+/* SECTION SQLITE */
 
 define('USE_REG_SQLITE',$registry_method);
 define('VERSION_REG_SQLITE',$version_reg_sqlite);

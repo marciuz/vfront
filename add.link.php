@@ -176,7 +176,6 @@ echo "<br style=\"clear:left;\" />";
 $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.richiediAL();' : "";
 
 
-
 	// prendi aree tematiche
 	/*$q_aree=$vmsql->query("SELECT codiceAreatematica, descAreatematica FROM areatematica ORDER BY descAreatematica");
 
@@ -189,7 +188,6 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 
 	$SELECT.="\t</select>\n";
 	*/
-
 
 
 	echo "	
@@ -259,13 +257,9 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 		}
 
 
-
-
 	echo "
 	</div>
 	";
-
-
 
 
 	// LINGUETTA AMMINISTRAZIONE FLUSSI

@@ -87,10 +87,7 @@ function barre($data,$labels,$scala=5,$testo="",$nome_file="image",
 	}
 
 
-
-
 	$Graph->done( array('filename' => _PATH_TMP."/$nome_file.png") ); 
-
 
 
 		if(is_file(_PATH_TMP."/$nome_file.png"))
@@ -98,7 +95,6 @@ function barre($data,$labels,$scala=5,$testo="",$nome_file="image",
 		else 
 			return false;
 	}
-
 
 
 /**
@@ -122,9 +118,6 @@ function torta($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 	include_once 'Image/Graph.php';
 	// create the graph
 	$Graph =& Image_Graph::factory('graph', array($x, $y));
-
-
-
 
 
 	// create the plotarea
@@ -160,12 +153,6 @@ function torta($data,$labels,$testo="",$nome_file="image",$x=490,$y=300){
 
 	$Graph->setBackgroundColor('white'); 
 	$Graph->setPadding(10); 
-
-
-
-
-
-
 
 
 	// create a Y data value marker

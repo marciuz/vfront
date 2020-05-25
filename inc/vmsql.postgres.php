@@ -594,7 +594,6 @@ class postgres_vmsql {
 	}
 
 
-
 	/**
 	 * Concat DB sintax
 	 *

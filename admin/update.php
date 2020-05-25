@@ -398,10 +398,6 @@ function update_exec_095g(){
 		";
 
 
-
-
-
-
 	}
 	else if($db1['dbtype']=='postgres'){
 

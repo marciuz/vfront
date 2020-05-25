@@ -44,7 +44,6 @@ function xmlize_table_sub($oid,$filename=null,$sub=true,$offset=0,$tot=0,$xsl=''
 //	var_dump($cols);
 
 
-
 	$ORDER_BY = ($cols[2][0]!='') ? "ORDER BY ".$cols[2][0]." ".$cols[3][0] : "";
 
 	$OFF= ($offset==0) ? "" : "$offset";
@@ -52,7 +51,6 @@ function xmlize_table_sub($oid,$filename=null,$sub=true,$offset=0,$tot=0,$xsl=''
 	$LIMIT = ($tot==0) ? "" : $vmsql->limit($tot,$OFF);
 
 	$sql="SELECT ".implode(",",$cols[0])." FROM ".$cols[1][0]." $ORDER_BY  $LIMIT";
-
 
 
 	$q = $vmsql->query($sql);
@@ -65,9 +63,7 @@ function xmlize_table_sub($oid,$filename=null,$sub=true,$offset=0,$tot=0,$xsl=''
 	// Inizia a fare l'xml
 
 
-
 	$XML="";
-
 
 
 	$XML.= ($header) ? "<?xml version='1.0' encoding='utf-8'?>\n" : "";
@@ -112,7 +108,6 @@ function xmlize_table_sub($oid,$filename=null,$sub=true,$offset=0,$tot=0,$xsl=''
 		}
 
 
-
 		$XML.="\t</row>\n";
 
 		if($auto_offset){
@@ -122,8 +117,6 @@ function xmlize_table_sub($oid,$filename=null,$sub=true,$offset=0,$tot=0,$xsl=''
 	}
 
 	$XML.="</recordset>\n";
-
-
 
 
 	if(is_null($filename)) return $XML;
@@ -208,7 +201,6 @@ function xmlize_sottomaschera($id_parent,$oid,$gid=0,$solo_campi_visibili=false)
 	$SUB = (bool) $_GET['sub'];
 
 	$xsl = (isset($_GET['type']) && $_GET['type']=='XML') ? "" : FRONT_DOCROOT."/xml/".RegTools::oid2name($OID)."/stile.xml";
-
 
 
 // SINGOLO RECORD BASATO SULLA SERIE ORDINATA

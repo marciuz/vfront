@@ -1862,7 +1862,6 @@ function panic_page(){
 	}
 
 
-
 	if(!isset($_GET['errty'])) $_GET['errty']='';
 
 	switch($_GET['errty']){

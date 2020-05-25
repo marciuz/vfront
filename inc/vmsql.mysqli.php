@@ -490,8 +490,6 @@ class mysqli_vmsql {
 		}
 
 
-
-
 	}
 
 
@@ -636,7 +634,6 @@ class mysqli_vmsql {
 	}
 
 
-
 	/**
 	 * Concat DB sintax
 	 *
@@ -679,7 +676,6 @@ class mysqli_vmsql {
 	}
 
 
-
 	public function close(){
 
 		if($this->error_handler!==null) $this->db_error_log($this->error_handler);
@@ -709,7 +705,6 @@ class mysqli_vmsql {
 
 		$this->close();
 	}
-
 
 
     public function db_error_log($obj){

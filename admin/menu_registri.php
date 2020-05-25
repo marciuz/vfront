@@ -153,7 +153,6 @@ require_once("../inc/layouts.php");
 	$num_init = $vmreg->num_rows($q_init);
 
 
-
 	if($num_init==1){
 
 
@@ -191,12 +190,8 @@ require_once("../inc/layouts.php");
 				      ORDER BY g.gid");
 
 
-
-
-
 		// se ci sono gruppi
 		if($vmreg->num_rows($qg)>0){
-
 
 
 			$OUT.= "<p><a href=\"nuovo_gruppo.php\">"._("Create new group")."</a></p>\n";

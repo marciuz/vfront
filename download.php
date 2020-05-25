@@ -66,9 +66,7 @@ if(isset($_GET['type']) && $_GET['type']=='all'){
 	}
 
 
-
 	$z -> zipFile("../$nome_zip.zip");
-
 
 
 	// elimino la directory
@@ -100,7 +98,6 @@ if(isset($_GET['type']) && $_GET['type']=='all'){
 	}
 
 
-
 	exit;
 
 }
@@ -127,20 +124,12 @@ elseif(isset($_GET['f'])){
 	$RS=$vmreg->fetch_row($q);
 
 
-
-
-
-
-
-
 	$dir=md5(rand());
 
 	// creo la directory
 	mkdir(_PATH_TMP."/$dir");
 
 	$file_originale=_PATH_TMP."/$dir/".$RS[1];
-
-
 
 
 	$test=@copy(_PATH_ATTACHMENT."/".$RS[0].".dat",$file_originale);

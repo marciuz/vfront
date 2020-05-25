@@ -198,18 +198,12 @@ if(isset($_GET['new']) || isset($_GET['modifica'])){
 	}
 
 
-
 	$chk_auth[1] = ($RS['auth_stat']==1) ? "checked=\"checked\"" : "";
 	$chk_auth[2] = ($RS['auth_stat']==2) ? "checked=\"checked\"" : "";
 	$chk_auth[3] = ($RS['auth_stat']==3) ? "checked=\"checked\"" : "";
 
 	$chk_tipo_graph[1] = (trim($RS['tipo_graph'])=='barre') ? "checked=\"checked\"" : "";
 	$chk_tipo_graph[2] = (trim($RS['tipo_graph'])=='torta') ? "checked=\"checked\"" : "";
-
-
-
-
-
 
 
 	$files=array('js/test_query.js','js/yav/yav.js','js/yav/yav-config-it.js');
@@ -325,9 +319,7 @@ if(isset($_GET['id_s'])){
 	}
 
 
-
 	// Controllo di propriet� validi per i non admin
-
 
 
 	if($_SESSION['user']['livello']<3){
@@ -373,7 +365,6 @@ if(isset($_GET['id_s'])){
 	}
 
 
-
 	// se non ci sono errori
 	if($errore===false){
 
@@ -403,8 +394,6 @@ if(isset($_GET['id_s'])){
 			//$grafico=torta($frequenze,$etichette,$RS['nome_stat'],$nome_file_tmp);
 			$grafico=torta_pchart($frequenze,$etichette,$RS['nome_stat'],$nome_file_tmp);
 		}
-
-
 
 
 		if($grafico){
@@ -453,7 +442,6 @@ if(isset($_GET['id_s'])){
 
 			echo breadcrumbs(array("HOME","ADMIN","index.php"=>_("statistics"),$nome_stat_html));
 		}
-
 
 
 		echo "<h1>$nome_stat_html</h1>\n";
@@ -513,11 +501,9 @@ if(isset($_GET['id_s'])){
 		}
 
 
-
 		echo closeLayout1();
 
 	}
-
 
 
 }

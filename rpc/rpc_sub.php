@@ -72,7 +72,6 @@ if(count($_POST)>0){
 		}
 
 
-
 	}
 
 	 elseif($_GET['post']=='delete'){

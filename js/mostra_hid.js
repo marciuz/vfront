@@ -64,7 +64,6 @@ function mostra_hid(val,id){
 		break;
 
 
-
 		case 'hidden':  hid.style.display='inline';
 						hid.getElementsByTagName('input')[0].disabled=false;
 		break;	

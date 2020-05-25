@@ -874,8 +874,6 @@ class Log {
 		 	<br /><br />
 
 
-
-
 		 		<label for=\"uid\">" . _("User:") . "</label>
 		 		<select name=\"uid\" id=\"uid\">
 		 			<option value=\"\">" . _("All users") . "</option>
@@ -899,7 +897,6 @@ class Log {
 		 	 <script type=\"text/javascript\">
 
 
-
 			   Calendar.setup({
 			        inputField     :    \"data_dal\",   // id of the input field
 			        firstDay	   :    1,
@@ -920,7 +917,6 @@ class Log {
 			    </script>
 
 		 	<br /><br />
-
 
 
 		 	<input type=\"button\" onclick=\"submit();\" name=\"filtra\" value=\" " . _("Filter log") . " \" />
@@ -1177,8 +1173,6 @@ class Log {
             }
         }
     }
-
-
 
 
     /**

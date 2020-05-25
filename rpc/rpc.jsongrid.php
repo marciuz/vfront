@@ -179,12 +179,6 @@ function xmlize_campo_grid($tag,$attr){
 	}
 
 
-
-
-
-
-
-
 	######################################################################
 	#
 	#	RISPOSTA DI RICERCA CON MOLTI RISULTATI:
@@ -201,7 +195,6 @@ function xmlize_campo_grid($tag,$attr){
 
 		$ids = str_replace("|" , "','" , $vmsql->escape($_REQUEST['q']));
 	    }
-
 
 
 		$WHERE = " WHERE $PK IN ('".$ids."') ";
@@ -222,7 +215,6 @@ function xmlize_campo_grid($tag,$attr){
 	}
 
 
-
 	######################################################################
 	#
 	#	TABELLA NORMALE
@@ -237,9 +229,6 @@ function xmlize_campo_grid($tag,$attr){
 	}
 
 
-
-
 	json_grid($sql,$OFFSET,null,true,$PK);
-
 
 

@@ -292,7 +292,6 @@
 	};
 
 
-
 	/**
 	 * Create a mapping object that allows camel case parameters to be looked up
 	 * for their Hungarian counterparts. The mapping is stored in a private
@@ -2277,7 +2276,6 @@
 	}
 
 
-
 	/**
 	 * Create an Ajax call based on the table's settings, taking into account that
 	 * parameters can have multiple forms, and backwards compatibility.
@@ -2907,7 +2905,6 @@
 	}
 
 
-
 	var __filter_div = $('<div>')[0];
 	var __filter_div_textContent = __filter_div.textContent !== undefined;
 
@@ -3066,7 +3063,6 @@
 			replace(/_PAGE_/g,  formatter.call( settings, all ? 1 : Math.ceil( start / len ) ) ).
 			replace(/_PAGES_/g, formatter.call( settings, all ? 1 : Math.ceil( vis / len ) ) );
 	}
-
 
 
 	/**
@@ -3235,7 +3231,6 @@
 	}
 
 
-
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Note that most of the paging logic is done in
 	 * DataTable.ext.pager
@@ -3372,7 +3367,6 @@
 
 		return changed;
 	}
-
 
 
 	/**
@@ -3560,7 +3554,6 @@
 
 		return scroller[0];
 	}
-
 
 
 	/**
@@ -3857,7 +3850,6 @@
 	}
 
 
-
 	/**
 	 * Apply a given function to the display child nodes of an element array (typically
 	 * TD children of TR rows
@@ -3894,7 +3886,6 @@
 			i++;
 		}
 	}
-
 
 
 	var __re_html_remove = /<.*?>/g;
@@ -4269,7 +4260,6 @@
 
 		return DataTable.__scrollbarWidth;
 	}
-
 
 
 	function _fnSortFlatten ( settings )
@@ -4693,7 +4683,6 @@
 			}
 		}
 	}
-
 
 
 	/**
@@ -6313,7 +6302,6 @@
 	};
 
 
-
 	/**
 	 * Computed structure of the DataTables API, defined by the options passed to
 	 * `DataTable.Api.register()` when building the API.
@@ -6964,7 +6952,6 @@
 	};
 
 
-
 	/**
 	 * Context selector for the API's context (i.e. the tables the API instance
 	 * refers to.
@@ -7023,7 +7010,6 @@
 	} );
 
 
-
 	/**
 	 * Redraw the tables in the current context.
 	 *
@@ -7037,7 +7023,6 @@
 			_fnReDraw( settings, resetPaging===false );
 		} );
 	} );
-
 
 
 	/**
@@ -7139,7 +7124,6 @@
 			_fnLengthChange( settings, len );
 		} );
 	} );
-
 
 
 	var __reload = function ( settings, holdPosition, callback ) {
@@ -7283,8 +7267,6 @@
 			__reload( ctx, resetPaging===false, callback );
 		} );
 	} );
-
-
 
 
 	var _selector_run = function ( selector, select )
@@ -7594,9 +7576,6 @@
 	} );
 
 
-
-
-
 	/**
 	 *
 	 */
@@ -7651,7 +7630,6 @@
 		// Return an Api.rows() extended instance, with the newly added row selected
 		return this.row( rows[0] );
 	} );
-
 
 
 	var __details_add = function ( ctx, row, data, klass )
@@ -7808,7 +7786,6 @@
 	} );
 
 
-
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Columns
 	 *
@@ -7886,9 +7863,6 @@
 			}
 		} );
 	};
-
-
-
 
 
 	var __setColumnVis = function ( settings, column, vis ) {
@@ -8031,7 +8005,6 @@
 	} );
 
 
-
 	_api_registerPlural( 'columns().visible()', 'column().visible()', function ( vis ) {
 		return this.iterator( 'column', function ( settings, column ) {
 			return vis === undefined ?
@@ -8039,7 +8012,6 @@
 				__setColumnVis( settings, column, vis );
 		} );
 	} );
-
 
 
 	_api_registerPlural( 'columns().indexes()', 'column().index()', function ( type ) {
@@ -8061,7 +8033,6 @@
 	// 	var selector = this.selector;
 	// 	return this.columns( selector.cols, selector.opts ).visible( false );
 	// } );
-
 
 
 	_api_register( 'columns.adjust()', function () {
@@ -8089,8 +8060,6 @@
 	_api_register( 'column()', function ( selector, opts ) {
 		return _selector_first( this.columns( selector, opts ) );
 	} );
-
-
 
 
 	var __cell_selector = function ( settings, selector, opts )
@@ -8139,8 +8108,6 @@
 				.toArray();
 		} );
 	};
-
-
 
 
 	_api_register( 'cells()', function ( rowSelector, columnSelector, opts ) {
@@ -8247,12 +8214,9 @@
 	} );
 
 
-
-
 	_api_register( 'cell()', function ( rowSelector, columnSelector, opts ) {
 		return _selector_first( this.cells( rowSelector, columnSelector, opts ) );
 	} );
-
 
 
 	_api_register( 'cell().data()', function ( data ) {
@@ -8272,7 +8236,6 @@
 
 		return this;
 	} );
-
 
 
 	/**
@@ -8366,7 +8329,6 @@
 	} );
 
 
-
 	_api_register( 'search()', function ( input, regex, smart, caseInsen ) {
 		var ctx = this.context;
 
@@ -8420,7 +8382,6 @@
 			_fnFilterComplete( settings, settings.oPreviousSearch, 1 );
 		} );
 	} );
-
 
 
 	/**
@@ -8531,7 +8492,6 @@
 	 *    won't be.
 	 */
 	DataTable.camelToHungarian = _fnCamelToHungarian;
-
 
 
 	/**
@@ -8721,7 +8681,6 @@
 	DataTable.models = {};
 
 
-
 	/**
 	 * Template object for the way in which DataTables holds information about
 	 * search information for the global filter and individual column filters.
@@ -8758,8 +8717,6 @@
 		 */
 		"bSmart": true
 	};
-
-
 
 
 	/**
@@ -11264,7 +11221,6 @@
 	_fnHungarianMap( DataTable.defaults );
 
 
-
 	/*
 	 * Developer note - See note in model.defaults.js about the use of Hungarian
 	 * notation and camel case.
@@ -12127,7 +12083,6 @@
 	};
 
 	_fnHungarianMap( DataTable.defaults.column );
-
 
 
 	/**
@@ -13616,7 +13571,6 @@
 	}());
 
 
-
 	var extPagination = DataTable.ext.pager;
 
 	function _numbers ( page, pages ) {
@@ -13775,7 +13729,6 @@
 	} );
 
 
-
 	var __numericReplace = function ( d, decimalPlace, re1, re2 ) {
 		if ( !d || d === '-' ) {
 			return -Infinity;
@@ -13930,7 +13883,6 @@
 	] );
 
 
-
 	// Filter formatting functions. See model.ext.ofnSearch for information about
 	// what is required from these methods.
 
@@ -13954,7 +13906,6 @@
 					data;
 		}
 	} );
-
 
 
 	$.extend( true, DataTable.ext.renderer, {

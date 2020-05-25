@@ -39,11 +39,8 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
 
     global $vmsql, $vmreg, $gid;
 
-
     // estrai i valori come variabili
     extract($ar_campo);
-
-
 
     /*
       id_reg
@@ -91,14 +88,31 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
     $campo_suggest = Common::is_true($in_suggest);
 
 
-
     // Impostazioni del campo suggest
     $campo_in_table = Common::is_true($in_table);
 
 
-    // A seconda del tipo di campo fa delle proposte:
-
-    $sel = array_flip(array('int', 'float', 'double', 'char', 'password', 'text', 'mediumtext', 'date', 'datetime', 'bool', 'bit', 'hidden', 'select', 'select_from', 'select_auto', 'onlyread', 'geometry'));
+    // Depending on the type of field he makes proposals:
+    $sel = array_flip([
+        'int',
+        'float',
+        'double',
+        'char',
+        'password',
+        'text',
+        'mediumtext',
+        'date',
+        'datetime',
+        'bool',
+        'bit',
+        'hidden',
+        'select',
+        'select_from',
+        'select_auto',
+        'onlyread',
+        'geometry',
+        'json',
+    ]);
 
 
     $options = '';
@@ -169,6 +183,8 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
 
         case 'enum': $options = "\t\t\t<option value=\"select_enum\" " . selected_def('select_enum', $in_tipo) . ">" . _("Default list") . "</option>\n";
             break;
+        
+        case 'json': $options = "\t\t\t<option value=\"text\" " . selected_def('text', $in_tipo) . ">" . _("free long text") . "</option>\n";
 
         default: $options = "";
     }
@@ -209,7 +225,6 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
     }
 
 
-
     //TODO: da mettere le indicazioni di chiave primaria, 
     // 		cos� che se il valore non � autoincrement sia comunque richiesto un inserimento
 
@@ -218,7 +233,6 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
             _('YES');
 
     $commento = (strlen(trim($commento)) > 0) ? "<br /><em class=\"commento\">" . htmlentities($commento, ENT_QUOTES, FRONT_ENCODING) . "</em>" : "";
-
 
 
     // Immagine delle chiavette per le chiavi primarie
@@ -253,12 +267,7 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
     }
 
 
-
-
     // Gestione search | suggest
-
-
-
 
 
     $OUT = "\t<div class=\"campo\">
@@ -310,7 +319,6 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
     // vero|falso dei checkbox
     $att_visibile_checked = ($campo_visibile) ? "checked=\"checked\"" : "";
     $att_richiesto_checked = ($in_richiesto) ? "checked=\"checked\"" : "";
-
 
 
     $valore_visibile = ($campo_visibile_disabled) ? 0 : 1;
@@ -365,10 +373,7 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
     $OUT .= "\t\t</select>\n";
 
 
-
-
     $OUT .= "\t\t<div id=\"hid_$id_reg\" >\n";
-
 
 
     // TIPO SELECT 
@@ -419,7 +424,6 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
 			</div>";
 
 
-
     // Tipo ENUM (select_enum)
 
     if ($data_type == 'enum') {
@@ -440,13 +444,11 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
     }
 
 
-
     // Tipo Hidden
     $value_hidden = ($in_tipo == 'hidden') ? $in_default : "";
     $style_hidden = ($in_tipo == 'hidden') ? "" : "display:none;";
     $disabled_hidden = ($in_tipo == 'hidden') ? "" : "disabled=\"disabled\"";
     $sovrascrivi_extra = ($in_tipo == 'hidden' && $extra == '1') ? "checked=\"checked\"" : "";
-
 
 
     $OUT .= "
@@ -463,16 +465,12 @@ function tratta_campo($ar_campo, $pk, $fk, $colref_fk = array()) {
 		</div>\n";
 
 
-
-
     $OUT .= "	
-
 
 
 		</div>
 
 	</div>\n\n";
-
 
 
     return $OUT;

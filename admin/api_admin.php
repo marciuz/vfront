@@ -191,7 +191,6 @@ else {
     else{
 
 
-
         $table="<table class=\"tab-color\" summary=\"api table\" >\n";
 
         $table.="

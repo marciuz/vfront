@@ -134,7 +134,6 @@ $SELECT_TABELLE.="\t</select>\n";
 			comprese le impostazioni per le sottomaschere. Usare questa funzione con cautela.</p>
 
 
-
 	</div>
 	";
 

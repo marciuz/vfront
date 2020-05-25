@@ -19,8 +19,6 @@
 	$qstring_button=Common::phpself()."?det=".intval($_GET['det'])."&amp;gid=".intval($_GET['gid'])."&amp;a=5";
 
 
-
-
 	// Form new|modify button
 
 	if(isset($_GET['modbutton'])){
@@ -188,7 +186,6 @@
 						"<ul><li>{{".implode("}}</li><li>{{",$campi_tabella_pc)."}}</li></ul>
 
 
-
 					</div>
 
 				</div>
@@ -207,15 +204,6 @@
 		</form>
 
 	</div>";
-
-
-
-
-
-
-
-
-
 
 
 	if($n_button==0){

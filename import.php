@@ -48,8 +48,6 @@ function vf_fgetcsv($fp, $lenght=null, $sep=null, $quote=null){
 }
 
 
-
-
 function controllo_tipo($dato,$tipo,$is_nullable){
 
 	global  $vmsql, $vmreg;
@@ -233,9 +231,6 @@ function import_step2(){
 	$_SESSION['import']['length']=($x-1);
 
 
-
-
-
 	$fp=fopen(_PATH_TMP."/".$_SESSION['import']['filename'],'r');
 
 	$row=1;
@@ -294,8 +289,6 @@ function import_step2(){
 	    }
 
 
-
-
 	    $T.="<tr class=\"r$row\">\n";
 
 	    for ($c=0; $c < $num; $c++) {
@@ -320,7 +313,6 @@ function import_step2(){
 	 echo openLayout1(_("Data import"),$files,'popup');
 
 	 echo "<h1>"._('Import data into the table')." <span class=\"var\">".$nome_tab."</span></h1>\n";
-
 
 
 	 echo "<form action=\"" . Common::phpself() . "?step=11\" method=\"post\">\n";
@@ -370,7 +362,6 @@ function import_step2(){
 	 echo "</form>\n";
 
 
-
 	 echo closeLayout1();
 
 }
@@ -415,10 +406,6 @@ function import_step3(){
 	$campi_tab=RegTools::prendi_colonne_frontend($nome_tab,"column_name,data_type,is_nullable",false);
 
 
-
-
-
-
 	$files=array("js/scriptaculous/lib/prototype.js","sty/import.css","js/import.js");
 
 	 echo openLayout1(_("Data import"),$files,'popup');
@@ -457,10 +444,8 @@ function import_step3(){
 		echo "<td width=\"270\">".$importazione_csv."</td>\n";
 
 
-
 		echo "</tr>\n";
 	}
-
 
 
 	echo "</table>\n";
@@ -484,7 +469,6 @@ function import_step4(){
 }
 
 
-
 function import_query($only_sql=false){
 
 	ini_set('max_execution_time',600);
@@ -505,7 +489,6 @@ function import_query($only_sql=false){
 
 	// apro il file
 	$fp=fopen(_PATH_TMP."/".$_SESSION['import']['filename'],'r');
-
 
 
 	$_da_processare= $_SESSION['import']['campi_da_processare'];
@@ -597,13 +580,11 @@ function import_query($only_sql=false){
 	    }
 
 
-
 	    $sql_da_eseguire="INSERT INTO ".$nome_tab." (".$campi.") VALUES (".substr($sql,0,-1).");\n";
 
 	    if(!$only_sql){
 	    	$res = $vmsql->query_try($sql_da_eseguire,false,true);
 	    }
-
 
 
 	    if($res!=1){
@@ -652,8 +633,6 @@ function import_query($only_sql=false){
 	    $row++;
 
 
-
-
 	    $SQL_FINALE.=$sql_da_eseguire;
 	}
 
@@ -689,7 +668,6 @@ function exec_query_import(){
 	echo "<div id=\"num\">"._('Processing row')." <span id=\"row\">0</span> "._('of')." {$_SESSION['import']['length']}</div>\n";
 	echo "<div>"._('Inserts:')." <span id=\"ins\">0</span> - "._('Errors:')." <span id=\"errori\">0</span></div>\n";
 	echo "<div><span id=\"percento\">0% "._('done')."</span></div>\n";
-
 
 
 	echo "<p><input type=\"button\" id=\"importa\" value=\" "._('Import')." \" />" 
@@ -731,8 +709,6 @@ function exec_query_import(){
 		var d = new Date();
 
 		$('txt_start').update(add0(d.getHours())+":"+add0(d.getMinutes())+":"+add0(d.getSeconds())+' -- <?php echo _('Begin procedure');?></span><br />');
-
-
 
 
 		updater= new PeriodicalExecuter(function(pe) {

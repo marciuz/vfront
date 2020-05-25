@@ -119,10 +119,7 @@ if(count($vista)>0){
 		$grafico2 = barre_pchart($count_vista,$vista,$scala_v,_('Views population'),$nome_file_viste_img,540,$altezza_grafico_v,array('green','yellowgreen'),165,'%d','ivory');
 
 
-
-
 		$OUT.="<table summary=\"cont\"  class=\"tab-cont\">\n<tr>";
-
 
 
 		if($grafico2){

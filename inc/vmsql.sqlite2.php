@@ -621,7 +621,6 @@ class sqlite2_vmsql {
 	}
 
 
-
 	/**
 	 * Concat DB sintax
 	 *

@@ -20,10 +20,7 @@ function createRequestObject() {
 	var esiti=0;
 
 
-
 function try_query(SQL,id0) {
-
-
 
 
 	ID=id0;

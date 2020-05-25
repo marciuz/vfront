@@ -16,7 +16,6 @@ function RTrim() {
 }
 
 
-
 String.prototype.Trim=Trim;   
 String.prototype.RTrim=RTrim;   
 String.prototype.LTrim=LTrim;   

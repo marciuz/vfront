@@ -21,10 +21,6 @@ require_once("../inc/func.xmlize.php");
 require_once("../inc/func.getxml.php");
 
 
-
-
-
-
 	########################################################################################
 	#
 	#
@@ -64,12 +60,7 @@ require_once("../inc/func.getxml.php");
 		}
 
 
-
-
-
-
 		$tab= preg_replace("'[^a-z0-9_]'i","",$_GET['action']);
-
 
 
 		echo openLayout1($titolo_pag." ".$tab);
@@ -101,7 +92,6 @@ require_once("../inc/func.getxml.php");
 
 			// non fa nulla
 		}
-
 
 
 		echo "<p><b>"._("views with paging:")."</b></p>\n";

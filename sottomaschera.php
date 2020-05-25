@@ -39,15 +39,6 @@ $info_sub = $vmreg->fetch_assoc($q_info_sub);
  $SM_TIPO_VISTA = $info_sub['tipo_vista'];
 
 
-
-
-
-
-
-
-
-
-
 ###############################################################
 #
 #	INFO COLONNE SOTTOMASCHERA
@@ -81,7 +72,6 @@ for($i=0;$i<count($info_campi_sub);$i++){
 
 // NOME della sottomaschera
 $nome_sub = (trim($info_sub['nome_frontend'])!="") ? $info_sub['nome_frontend'] : $info_sub['nome_tabella'];
-
 
 
 ###############################################################
@@ -172,7 +162,6 @@ $sql_ETICHETTA = "SELECT parent.$CAMPO_REF_PARENT
 		list($ETICHETTA) = $vmsql->fetch_row($q_ETICHETTA);
 	}
 	else $ETICHETTA = "<em>"._('Data not available')."</em>";
-
 
 
 }
@@ -287,7 +276,6 @@ $DATE_FORMAT = (isset($_SESSION['VF_VARS']['force_isodate_on_mask'])
 				 : FRONT_DATE_FORMAT;
 
 
-
 $INIZIO_LAYOUT = openLayout1(_("Subform")." ".$nome_sub,$files,'sottomaschera');
 
 $OUT= str_replace("<body>","<body onload=\"self.focus();\">",$INIZIO_LAYOUT);   unset($INIZIO_LAYOUT);
@@ -332,7 +320,6 @@ $js_manuale.="
 
 	var campi_mod= new Array();
 	var valori_del = new Array();
-
 
 
 	</script>\n";
@@ -389,15 +376,9 @@ $OUT.= "
 	}
 
 
-
-
-
 	$OUT.="<div class=\"etichetta-record\">".Common::vf_utf8_encode($ETICHETTA)
             ." <span style=\"color:#000\">(<span id=\"numero_record\">$n_dati</span> "
             ._('record').")</span></div>\n";
-
-
-
 
 
 	$TRIGGER_ASSEGNAZIONE="";
@@ -621,7 +602,6 @@ $OUT.= "
 		}
 
 
-
 	}	
 
 	######################################################################################################################
@@ -715,8 +695,6 @@ $OUT.= "
 			$DIVR.="</div>\n";
 
 		}
-
-
 
 
 	}

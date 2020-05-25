@@ -205,7 +205,6 @@ class iSchema_mysql {
 	}
 
 
-
 	/**
 	 * Get the columns info of $table
 	 * if the $column_name is specified get only the definition of $column_name

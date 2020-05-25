@@ -87,7 +87,6 @@ class Hash_Iframe{
 		$this->n=$n;
 
 
-
 		// CASO SPECIALE SELECT FROM
 
 
@@ -247,7 +246,6 @@ class Hash_Iframe{
 				}
 
 
-
 				$HTML_IFRAME.="
 
 				//T2 = new Date().getTime(); alert((T2-T1)/1000);
@@ -258,8 +256,6 @@ class Hash_Iframe{
 			";
 
 
-
-
 			$HTML_IFRAME.="
 		</script>
 
@@ -268,7 +264,6 @@ class Hash_Iframe{
 					return $HTML_IFRAME;
 
 	}
-
 
 
     /**

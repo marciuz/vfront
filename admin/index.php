@@ -83,7 +83,6 @@ include("../inc/layouts.php");
  <div style=\"clear:left;\">
 
 
-
 	<div id=\"box-stat\" class=\"box-db\">
 		<h2>"._("DB Statistics")."</h2>
 		<ul class=\"ul-db\">

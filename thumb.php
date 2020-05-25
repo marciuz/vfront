@@ -46,7 +46,6 @@ function printThumbnail($imgfile,$max_width=100,$max_height=100) {
    }
 
 
-
    $ID = (int) $_GET['id'];
 
    $IMG=_PATH_ATTACHMENT."/$ID.dat";

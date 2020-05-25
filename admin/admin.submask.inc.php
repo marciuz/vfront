@@ -8,7 +8,6 @@
 	#
 
 
-
 function tipo_scheda_name($name){
 
 	switch($name){
@@ -71,7 +70,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 				ORDER BY $order $sort ";
 	$q_tab= $vmreg->query($sql_tab);
 	$matrice_tab = $vmreg->fetch_assoc_all($q_tab);
-
 
 
 	echo "<h2>"._("Table subforms rules")." <span class=\"var\">".RegTools::oid2name($oid)."</span></h2>\n";
@@ -141,7 +139,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 }
 
 
-
 	$sottomaschere = RegTools::prendi_sottomaschere($oid,true);
 
 
@@ -185,7 +182,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 			</form>\n";
 
 
-
 		echo "</div>\n";
 
 
@@ -227,12 +223,10 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		echo "<p><strong>"._("There are no subforms available for this table/group")."</strong></p>\n";
 
 
-
 		if($info['table_type']=='VIEW'){
 
 
 				$tabelle_elenco=RegTools::prendi_tabelle(intval($_GET['gid']));
-
 
 
 				echo "<form action=\"" . Common::phpself() . "?det=".$_GET['det']."&amp;gid=".$_GET['gid']."\" method=\"post\" >\n";
@@ -269,12 +263,9 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		$k_sub= array_search($_GET['conf_sub'],$sottomaschere['id_submask']);
 
 
-
 		echo "<h3 style=\"margin-top:60px;border-bottom:1px solid #CCC;width:75%;\">"._("Subform general settings")." <span class=\"var\">".$sottomaschere['nome_tabella'][$k_sub]."</span></h3>\n";
 
 		echo "<strong>"._("Link between tables")."</strong>: \n";
-
-
 
 
 		echo "<form name=\"sub_gen\" action=\"" . Common::phpself() . "?mod_sub_gen\" method=\"post\">\n";
@@ -309,7 +300,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
         }
 
 
-
 		echo $info['table_name'].".";
 
 		echo "<select name=\"sub_gen[sub_pk_parent]\">\n";
@@ -319,8 +309,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		list($colonne_parent) = RegTools::prendi_colonne_frontend($oid,'column_name',false);
 
 		list($colonne_this) = RegTools::prendi_colonne_frontend($sottomaschere['nome_tabella'][$k_sub],'column_name',false,0);
-
-
 
 
 		// TESTA LA VISIBILITA' DEL CAMPO
@@ -348,8 +336,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		}
 
 
-
-
 		for($i=0;$i<count($colonne_parent);$i++){
 
 			$aggiunta_sub_parent = ($parent_consigliata==$colonne_parent[$i]) ?	 " (consigliata)" : "";
@@ -360,7 +346,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		}
 
 		echo "</select>\n";
-
 
 
 		echo " ---<strong>&gt;</strong> ".$sottomaschere['nome_tabella'][$k_sub].".";
@@ -388,9 +373,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		echo "</select><div class=\"info-campo\">"._("Set the connection between the table records and the subform records")."</div>\n";
 
 
-
-
-
 		// MOSTRA AVVISO IN CASO DI CAMPO NON VISIBILE
 
 		if(!$campo_fk_visibile){
@@ -399,10 +381,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 				"._("WARNING! The selected field in the parent table is not the primary key and is not set as visible!")." "._('When you set a field that is not the primary key, it must be visible. In this case the connection to the table will not work <br /> Set the field as visible (can also be a hidden field) from the Field Settings')."</span><br /><br />\n";
 		}
 		//---------------------------------------------
-
-
-
-
 
 
 		$sub_select_check= ($sottomaschere['sub_select'][$k_sub]=='1') ? "checked=\"checked\"" : "";
@@ -494,7 +472,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		<div class=\"info-campo\">"._("Set the sort criteria for the subform")."</div>
 
 
-
 		<label for=\"max_records\">"._("Max records in the subform")."</label><br/> 
 		<input type=\"text\" name=\"sub_gen[max_records]\"  id=\"max_records\" value=\"".$sottomaschere['max_records'][$k_sub]."\" maxlength=\"3\" size=\"5\" />
 		<div class=\"info-campo\">"._("Maximum number of records for the subform. You should not set this number too high, as it could slow down loading of the subform.")."</div>
@@ -508,11 +485,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 		";
 
 		echo "</form>\n";
-
-
-
-
-
 
 
 		###############################################################################################################
@@ -531,7 +503,6 @@ function submask_menu($oid=0,$order='nome_tabella'){
 
 
 			echo "\t<form method=\"post\" action=\"" . Common::phpself() . "?gid=".$_GET['gid']."&amp;mod_sub_campi\">\n";
-
 
 
 			# Inizia a prendere i campi

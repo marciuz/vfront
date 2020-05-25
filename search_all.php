@@ -170,7 +170,6 @@ if(isset($_GET['s'])){
  		}
 
 
-
  		echo "</tr>\n";
  	}
 

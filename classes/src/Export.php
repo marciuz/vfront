@@ -23,14 +23,12 @@ class Export {
 	private $nome_tabella;
 
 
-
 	function __construct($OID){
 
 		$this->oid = (int) $OID;
 
 		$this->nome_tabella = RegTools::oid2name($this->oid);
 	}
-
 
 
 	private function __query_exec($sql){

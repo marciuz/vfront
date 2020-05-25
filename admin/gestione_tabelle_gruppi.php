@@ -81,7 +81,6 @@ function tab_menu($gid=0,$order='table_name'){
 	echo openLayout1(_("Table administration"),array("sty/admin.css","js/mostra_nascondi_id.js"));
 
 
-
 	echo breadcrumbs(array("HOME","ADMIN","menu_registri.php"=>_("menu groups/registries"),""));
 
 	echo "<h1>"._("Rules table group")." <span class=\"var\">$gid::". Common::gid2group_name($gid)."</span></h1>\n";
@@ -119,8 +118,6 @@ function tab_menu($gid=0,$order='table_name'){
 			<br/>
 		</div>
 		";
-
-
 
 
 	echo "<table summary=\"tabelle db per utenti\" id=\"tab-tabelle\" >\n";
@@ -173,7 +170,6 @@ function tab_menu($gid=0,$order='table_name'){
 
 		 	$inizia_vista=false;
 		 }
-
 
 
 		echo "\t\t<tr class=\"$colore\">
@@ -289,7 +285,6 @@ function tab_dett($oid,$gid=0){
 	$def['permetti_link_display']= (in_array((string) $info['permetti_link'], array("1","t"))) ? "" : "none";
 
 
-
 	###############################################
 	#
 	#	Inizia a stampare
@@ -305,7 +300,6 @@ function tab_dett($oid,$gid=0){
 	$files[]="js/admin_misc.js";
 
 	echo openLayout1(_("Table Administration"),$files);
-
 
 
 	echo breadcrumbs(array("HOME","ADMIN",
@@ -426,7 +420,6 @@ function tab_dett($oid,$gid=0){
 		";
 
 
-
 	// CAMPI TABELLA:
 	list($campi_tabella,$in_tipo01) = RegTools::prendi_colonne_frontend($oid,"column_name,in_tipo",false);
 
@@ -437,7 +430,6 @@ function tab_dett($oid,$gid=0){
 	#
 	#
 	#
-
 
 
 	$st_gen = (!isset($_GET['a']) || $_GET['a']==1) ? "" : "display:none;"; 
@@ -471,8 +463,6 @@ function tab_dett($oid,$gid=0){
      </div>\n";
 
 
-
-
 	// TABLE ALIAS
 	$table_alias= (isset($info['table_alias'])) ? $vmreg->escape($info['table_alias']) : '';
 
@@ -484,15 +474,9 @@ function tab_dett($oid,$gid=0){
 	echo "</div>\n";
 
 
-
-
-
-
 	##########################################
 	#
 	#	ORDERBY BLOCK
-
-
 
 
 	echo "
@@ -548,7 +532,6 @@ function tab_dett($oid,$gid=0){
 	} while ($c<count($array_orderby));
 
 
-
 	echo "</div>\n";	
 
 	echo "<span class=\"fakelink\" onclick=\"add_orderby()\" >"._('Add order by')."</span>\n";
@@ -565,7 +548,6 @@ function tab_dett($oid,$gid=0){
 		<div class=\"info-campo\">"._("Set whether this table should be visible for this group")."</div>
 
 		";
-
 
 
 		if($info['table_type']=='VIEW'){
@@ -605,9 +587,6 @@ function tab_dett($oid,$gid=0){
 
 				";
 			}
-
-
-
 
 
 			if($VIEW_UP){
@@ -679,7 +658,6 @@ function tab_dett($oid,$gid=0){
 		";
 
 
-
 		$import_check= ($info['table_type']=='VIEW') ? "disabled=\"disabled\"" : '';
 
 		echo "
@@ -701,8 +679,6 @@ function tab_dett($oid,$gid=0){
 		<div class=\"info-campo\">"._("Allows you to filter the records by clicking on the icon next to a single field")."</div>
 
 		";
-
-
 
 
 		// IN CASO DI VISTA IMPOSTA ESPLICITAMENTE LA CHIAVE PRIMARIA DELLA TABELLA
@@ -734,7 +710,6 @@ function tab_dett($oid,$gid=0){
 		echo "<input name=\"table_comment\" id=\"table_comment\" type=\"text\" maxlength=\"140\" size=\"100\"  value=\"$table_comment\" />\n";
 		echo "<div class=\"info-campo\">"._("Show a comment for the table. If blank shows the original comment.")."</div>\n";
 		echo "</div>\n";
-
 
 
 		echo "
@@ -788,7 +763,6 @@ function tab_dett($oid,$gid=0){
 				</div>
 
 
-
 			<input type=\"hidden\" name=\"permetti_link\" id=\"permetti_link-hid\" value=\"0\" />
 			<input type=\"checkbox\" name=\"permetti_link\" id=\"permetti_link\" value=\"1\" ".$def['permetti_link']." onclick=\";if(this.checked){document.getElementById('opzioni_link').style.display='';}else{document.getElementById('opzioni_link').style.display='none';}\"  />
 			<label for=\"permetti_link\">"._("Table with link")."</label>
@@ -827,16 +801,11 @@ function tab_dett($oid,$gid=0){
 	//-- fine impostazioni generali
 
 
-
-
 	######################################################################################
 	#
 	#	IMPOSTAZIONI CAMPI SORT
 	#
         require_once("./admin.sort.inc.php");
-
-
-
 
 
 	##########################################
@@ -846,16 +815,11 @@ function tab_dett($oid,$gid=0){
 	 require_once("./admin.submask.inc.php");
 
 
-
-
-
 	##############################################
 	#
 	#	 FORM SETTINGS SPECIAL BUTTONS
 	#
 	require_once("./admin.buttons.inc.php");
-
-
 
 
     ##############################################################
@@ -865,15 +829,11 @@ function tab_dett($oid,$gid=0){
         require_once("./admin.widget.inc.php");
 
 
-
-
     ##############################################################
 	#
 	#	 FORM DEFAULT FILTERS
 	#
         require_once("./admin.default-filters.inc.php");
-
-
 
 
 	###############################################################################
@@ -899,7 +859,6 @@ function tab_dett($oid,$gid=0){
 		if(count($mat_gruppi)>0){
 
 		echo "\t<form method=\"post\" action=\"" . Common::phpself() . "\" id=\"form_copia_campi\">\n"; 
-
 
 
 		$sel_gruppi="\t<select name=\"copia_campi_gid\" id=\"copia_campi_gid\" >\n";
@@ -929,7 +888,6 @@ function tab_dett($oid,$gid=0){
 	echo "\t<form method=\"post\" action=\"" . Common::phpself() . "\">\n";
 
 
-
 	while(list($k,$array_val)=each($matrice_col)){
 
 		echo tratta_campo($array_val, $array_pk, $array_fk, $colref_fk);
@@ -945,14 +903,12 @@ function tab_dett($oid,$gid=0){
 	echo "\t\t<input type=\"hidden\" name=\"risposta_sql_all\" id=\"risposta_sql_all\" value=\"\" />\n";
 
 
-
 	echo "\t\t<input type=\"button\" name=\"invia_campi\" value=\""._("Save field settings")."\" onclick=\"submit();\" />\n "; 
 
 	echo "\t\t<input type=\"button\" onclick=\"if(confirm('"
 	     ._("Warning! Do you really want to change the settings in this way for all groups?") 
 	     ."')){ document.getElementById('trasversale').value='1';submit();}\" name=\"invia_gen_trasversale\" "
 	     ."value=\"". _("Save field settings for all groups") ."\" />\n";
-
 
 
 	echo "\t</form>\n";
@@ -1020,7 +976,6 @@ if(isset($_POST['invia_gen']) || isset($_POST['trasversale_gen'])){
 
 		$sql_gen.=" OR table_name='$table_name'";
 	}
-
 
 
 	$q_gen=$vmreg->query($sql_gen);
@@ -1113,7 +1068,6 @@ else if(isset($_POST['sottomaschere'])){
 	}
 
 
-
 	if($esito_inizializzazione_sub){
 		header("Location: ".$_SERVER['PHP_SELF']."?gid=".$_dati_gen['gid']."&feed=ok_new_sub&det=".$_dati_gen['oid']."&a=3");
 	}
@@ -1190,8 +1144,6 @@ else if(isset($_POST['campo'])){
 			$affected+= $vmreg->affected_rows($q_campi);
 
 		}
-
-
 
 
 	if($affected>0){
@@ -1308,7 +1260,6 @@ else if(isset($_GET['mod_sub_gen']) && isset($_POST['sub_gen'])){
 	}
 
 
-
 	exit;
 }
 
@@ -1328,7 +1279,6 @@ else if(isset($_GET['mod_sub_campi']) && isset($_POST['campo_sub'])){
 	$gid=(int) $_GET['gid'];
 
 	$ID_SUBMASK = (int) $_POST['id_submask'];
-
 
 
 	# contatore per le righe coinvolte
@@ -1376,8 +1326,6 @@ else if(isset($_GET['mod_sub_campi']) && isset($_POST['campo_sub'])){
 		}
 
 
-
-
 		if($affected>0){
 			$vmreg->commit();
 			header("Location: ".$_SERVER['PHP_SELF']."?gid=$gid&feed=ok_sub_upd&det=".intval($_POST['oid'])."&conf_sub=".intval($_POST['id_submask'])."&a=3");
@@ -1397,7 +1345,6 @@ else if(isset($_GET['mod_sub_campi']) && isset($_POST['campo_sub'])){
 
 # Funzioni di modifica di massa
 else if(isset($_GET['mass']) && intval($_GET['gid']) > 0){
-
 
 
 	switch($_GET['mass']){

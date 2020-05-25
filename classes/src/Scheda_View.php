@@ -67,7 +67,6 @@ class Scheda_View {
     }
 
 
-
     static public function type_text($data_col_value, $in_line){
 
         $class_width= (intval($in_line)===1) ? 'halftextarea':'fulltextarea';

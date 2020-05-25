@@ -472,7 +472,6 @@ class Rpc {
         $info_cols = RegTools::columns_info($this->table);
 
 
-
         foreach ($_data as $k => $val) {
 
             $fields.="$k,";

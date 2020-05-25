@@ -24,8 +24,6 @@ proteggi(2);
 if(isset($_POST['firstlist'])){
 
 
-
-
 	/*
 
 	OLD SETTINGS (only order)
@@ -50,10 +48,6 @@ if(isset($_POST['firstlist'])){
 	else{
 		echo "<span class=\"rosso\"><img src=\"../img/op_ko.gif\" alt=\"opok\" /> "._("Operation not performed!")."</span>";
 	}*/
-
-
-
-
 
 
 	$ordine=array(0);

@@ -55,7 +55,6 @@ class VFDate {
     }
 
 
-
     /**
      * Estrae le parti di una data in formato internazionale e restituisce le parti della stessa in un array.
      * Fornisce inoltre un valore di chiave "ita" già pronto con la data in formato italiano.

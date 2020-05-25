@@ -93,7 +93,6 @@ if(count($_POST)>0){
 	}
 
 
-
 	// INSERT--------------------------------
 
 	else if($_GET['post']=='new'){
@@ -136,7 +135,6 @@ if(count($_POST)>0){
 	}
 
 
-
 	// DELETE--------------------------------
 
 	else if($_GET['post']=='delete'){
@@ -159,8 +157,6 @@ if(count($_POST)>0){
 	}
 
 
-
-
 	// SEARCH--------------------------------
 
 	else if($_GET['post']=='cerca'){
@@ -177,9 +173,6 @@ if(count($_POST)>0){
 	}
 
 
-
-
-
 	// DUPLICA --------------------------------
 
 	else if($_GET['post']=='duplica'){
@@ -194,7 +187,6 @@ if(count($_POST)>0){
 		echo $risultati_duplicazione;
 
 	}
-
 
 
 }else{

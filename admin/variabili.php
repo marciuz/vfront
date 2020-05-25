@@ -35,7 +35,6 @@ if(isset($_GET['modglob'])){
 	$c=0;
 
 
-
 	foreach($var as $k=>$val){
 
 		$k = filter_var($k, FILTER_SANITIZE_STRING);
@@ -58,7 +57,6 @@ if(isset($_GET['modglob'])){
 	header("Location: ".$_SERVER['PHP_SELF']."?feed=$c&gidfocus=0");
 	exit;
 }
-
 
 
 if(isset($_GET['modvar'])){
@@ -152,7 +150,6 @@ function form_variabili($gid=0){
 
 
 	$m_vars=$vmreg->fetch_assoc_all($q);
-
 
 
 	foreach($m_vars as $k=>$val){
@@ -257,7 +254,6 @@ $select_vars="\t<select name=\"variabile_nuova\">".$opzioni_vars."</select>\n";
 ########################################################################
 
 
-
 $files = array("sty/admin.css","sty/scheda.css","sty/linguette.css","js/mostra_nascondi_id.js");
 
 $OUT = openLayout1(_("Global variables"),$files);
@@ -301,9 +297,7 @@ echo $OUT;
 ###############################################################################################
 
 
-
 // Prendi i gruppi
-
 
 
 $q_gr = $vmreg->query("SELECT gid, nome_gruppo FROM ".$db1['frontend'].$db1['sep']."gruppo
@@ -328,7 +322,6 @@ if($n_gr>0){
 }
 
 ?>
-
 
 
 <script type="text/javascript">
@@ -359,11 +352,9 @@ $c=  (isset($_GET['feed'])) ? intval($_GET['feed']) : 0;
 $gidfocus = (isset($_GET['gidfocus'])) ?  intval($_GET['gidfocus']) : 0;
 
 
-
 if(count($nomi_gr)>0){
 
 	echo "
-
 
 
 	<div id=\"box-etichette\">
@@ -415,7 +406,6 @@ if(count($nomi_gr)>0){
 
 
 	$DIV_VARS
-
 
 
 	";

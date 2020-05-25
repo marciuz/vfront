@@ -118,8 +118,6 @@ if(isset($_POST['sincronizza_nuove'])){
 		list($gruppi)=$vmreg->fetch_row_all($qg,true);
 
 
-
-
 		/*
 			Anche se ho a disposizione il nome delle tabelle le prendo di nuovo,
 			perché mi servono anche i commenti
@@ -162,7 +160,6 @@ if(isset($_POST['sincronizza_nuove'])){
 #	--fine nuove tabelle
 #
 ################################################################################�	
-
 
 
 ##############################################
@@ -222,7 +219,6 @@ if(isset($_GET['azzera'])){
 			}
 
 
-
 		$vmreg->commit();
 
 		header("Location: ".$_SERVER['PHP_SELF']."?feed=ok_azzera");
@@ -233,8 +229,6 @@ if(isset($_GET['azzera'])){
 
 		header("Location: ".$_SERVER['PHP_SELF']."?feed=ko_azzera2");
 	}
-
-
 
 
 	exit;
@@ -281,7 +275,6 @@ if(isset($_GET['diff'])){
 		}
 
 
-
 		// INFO COLONNE DAL frontend
 		/*
 			$SQL_confronto_colonne2="
@@ -315,9 +308,6 @@ if(isset($_GET['diff'])){
 		}
 
 
-
-
-
 		if($colonne1!=$colonne2){
 
 			$TESTO= "<table id=\"diff-tab\" summary=\""._("differences between tables")."\" border=\"1\">";
@@ -338,7 +328,6 @@ if(isset($_GET['diff'])){
 				if(!isset($colonne1[$campo]) || !isset($colonne2[$campo]) || $colonne1[$campo]!=$colonne2[$campo]){
 
 					$class="evidenza";
-
 
 
 					// tipo di differenza:
@@ -395,9 +384,7 @@ if(isset($_GET['diff'])){
 				}
 
 
-
 			}
-
 
 
 			$TESTO.= "</table>";	
@@ -406,7 +393,6 @@ if(isset($_GET['diff'])){
 
 
 			$differenza=true;
-
 
 
 		}
@@ -465,8 +451,6 @@ if(isset($_GET['diff'])){
 #	--fine procedura visualizzazione differneze
 #
 ################################################################################�	
-
-
 
 
 $files=array("sty/admin.css","sty/tabelle.css","sty/linguette.css");
@@ -554,7 +538,6 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 	</div>";
 
 
-
 	$IS=new iSchema();
 
 	// IS Tables
@@ -593,8 +576,6 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 	}
 
 
-
-
 	// TEST 1 DB->FRONTEND
 	if(count($mat_nuove_tabelle)>0){
 
@@ -606,8 +587,6 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 		$test1=true;
 		$matrice_t1=array();
 	}
-
-
 
 
 	// TEST 2 FRONTEND->DB
@@ -708,11 +687,6 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 	}
 
 
-
-
-
-
-
 	$new_t=array();
 	$old_t=array();
 
@@ -796,15 +770,12 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 	}
 
 
-
-
 	// differenze campi
 	$OUT_TEST_TAB='';
 
 	if(!$uguali){
 
 		$mostra_diff_campi=false;
-
 
 
 		$tab_string="";
@@ -835,12 +806,6 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 			}
 		}
 	}
-
-
-
-
-
-
 
 
 	// CONTENITORE TEST INTEGRITA'
@@ -893,10 +858,7 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 		}
 
 
-
 		$TAB_FRONT.="\t</tbody>\n</table>";
-
-
 
 
 	echo "
@@ -912,7 +874,6 @@ $OUT= openLayout1(_("Database synchronization"),$files);
 </div>
 
 	";
-
 
 
 echo closeLayout1();

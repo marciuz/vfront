@@ -34,8 +34,6 @@ class sqlite3_vmsql {
 	protected $last_error=null;
 
 
-
-
 	/**
 	 * @desc DB Connection
 	 * @param string $filepath
@@ -657,10 +655,8 @@ class sqlite3_vmsql {
 		}
 
 
-
 		return $escaped;
 	}
-
 
 
 	/**
@@ -703,7 +699,6 @@ class sqlite3_vmsql {
 
 		return "SQLite ".$v['versionString'];
 	}
-
 
 
 	/**

@@ -68,8 +68,6 @@ proteggi(3);
 	list($n_utenti)=$vmreg->fetch_row($q_u);
 
 
-
-
 	// dati gruppo
 	$sql_g = "SELECT * FROM {$db1['frontend']}{$db1['sep']}gruppo WHERE gid=$GID";
 	$q_g = $vmreg->query($sql_g);

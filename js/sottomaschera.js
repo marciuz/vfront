@@ -278,8 +278,6 @@ function debug_var(){
 	alert(txt);
 
 
-
-
 }
 
 
@@ -376,8 +374,6 @@ function sndReqSubUpdate(action) {
 	}
 
 
-
-
 	// aggiungo la PK indipendente
 	post_string +="campo_pk_indip="+campo_pk_indipendente;
 	post_string +="&valore_pk_indip="+pk_parent; 
@@ -417,10 +413,6 @@ function handleResponseSubPostUpdate(){
 
 				setStatusAndReload(_('Record(s) updated correctly'),800,'risposta-giallo');
 			}
-
-
-
-
 
 
 		}
@@ -465,7 +457,6 @@ function elimina(n_riga_del){
 
 	eliminazione_attiva=true;
 	$('p_save').disabled=false;
-
 
 
 	$('p_annulla').disabled=false;
@@ -644,7 +635,6 @@ function duplica_riga(){
 	}
 
 
-
 }
 
 function rinumera_nodo(nodo){
@@ -694,7 +684,6 @@ function rinumera_nodo(nodo){
 
 		}
 	}
-
 
 
 	if(nodoConsiderato!=false){
@@ -797,7 +786,6 @@ function makeCalendar(n,column_name,show_time){
 	}
 
 
-
 	 Calendar.setup({
         inputField     :    "dati__"+ n + "__" + column_name ,   // id of the input field
         button	       :    "trigger__" + n + "__" + column_name ,   // id of the img field
@@ -840,7 +828,6 @@ jQuery(document).ready( function (){
         jQuery('#feed_'+target).hide();
         reg_json_loaded[hash_js]=1;
     });
-
 
 
 });

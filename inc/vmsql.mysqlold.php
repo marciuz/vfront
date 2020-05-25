@@ -25,7 +25,6 @@ class mysql_vmsql {
 	protected $last_error=null;
 
 
-
 	/**
 	 * @desc DB Connection
 	 * @param array $array_db
@@ -572,7 +571,6 @@ class mysql_vmsql {
 	}
 
 
-
 	/**
 	 * Concat DB sintax
 	 *
@@ -613,7 +611,6 @@ class mysql_vmsql {
 
 		return $db_version;
 	}
-
 
 
 	public function close(){

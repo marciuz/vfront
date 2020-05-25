@@ -259,7 +259,6 @@ function rpc_query_insert_duplicato($_pk,$tabella="",$oid_sub="",$duplica_allega
 		}
 
 
-
 		// ... vai avanti
 		$sql="INSERT INTO $tabella (".implode(",",$campi).") 
 			SELECT ".implode(",",$campi)." FROM $tabella WHERE ".$campo_id."=".$val_id."";
@@ -298,7 +297,6 @@ function rpc_query_insert_duplicato($_pk,$tabella="",$oid_sub="",$duplica_allega
 
 				$duplicazione_sub_test[] = duplica_record_sottomaschera($RS_sub['nome_tabella'],$lista_campi,$RS_sub['campo_fk_sub'],$val_id,$insert_id);
 			}
-
 
 
 			Common::rpc_debug($sql_sub);
@@ -522,7 +520,6 @@ function rpc_sub_query_update($_dati,$_str_pk_indipendente,$tabella,$hash_campo=
 	}
 
 
-
 	foreach($_dati as $k=>$arval){
 
 
@@ -533,9 +530,6 @@ function rpc_sub_query_update($_dati,$_str_pk_indipendente,$tabella,$hash_campo=
 		$valore='';
 		$campo_pk_indip="";
 		$valore_pk_indip="";
-
-
-
 
 
 		$hash_campo_obj=(isset($hash_campo[$k])) ? unserialize(base64_decode($hash_campo[$k])) : null;
@@ -581,7 +575,6 @@ function rpc_sub_query_update($_dati,$_str_pk_indipendente,$tabella,$hash_campo=
 			$buffer_string="INSERT INTO $tabella ($campi) VALUES ($valori)";
 
 		}	//-- fine INSERT
-
 
 
 		// DATO DA MODIFICARE
@@ -663,7 +656,6 @@ function rpc_sub_query_update($_dati,$_str_pk_indipendente,$tabella,$hash_campo=
 
 
 		$sql_out[]=$buffer_string;
-
 
 
 	} // -- fine ciclo

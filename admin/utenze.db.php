@@ -20,9 +20,6 @@ include("../inc/func.magic_excel.php");
  proteggi(2);
 
 
-
-
-
 /**
  * @desc Funzione di ordinamento della tabella degli utenti 
  * @param string $eti Etichetta di colonna
@@ -77,7 +74,6 @@ if(isset($_POST['id_utente']) && isset($_GET['mod'])){
 	}
 
 
-
 	if($esito==1){
 
 		switch($_dati['feed_mail']){
@@ -97,8 +93,6 @@ if(isset($_POST['id_utente']) && isset($_GET['mod'])){
 		}
 
 
-
-
 		header("Location: ?feed=$feedok&mod=".$_dati['id_utente']);
 		exit;
 	}
@@ -106,7 +100,6 @@ if(isset($_POST['id_utente']) && isset($_GET['mod'])){
 		header("Location: ?feed=ko&mod=".$_dati['id_utente']);
 		exit;
 	}
-
 
 
 }
@@ -315,7 +308,6 @@ else if (isset($_GET['mod'])){
 			break;	
 
 
-
 			// KO----------
 			case 'ko': $feed_str="<p class=\"feed-mod-ko\">"._("Error in user settings update")."</p>\n";
 			break;			
@@ -337,7 +329,6 @@ else if (isset($_GET['mod'])){
 
 			case 'ko_mail': $feed_str="<p class=\"feed-mod-ko\">"._("The email you entered does not appear to be valid")."</p>\n";
 			break;			
-
 
 
 			default: $feed_str="";
@@ -398,12 +389,9 @@ else if (isset($_GET['mod'])){
 	}
 
 
-
 	echo "
 		</fieldset>
 		";
-
-
 
 
 	echo "
@@ -430,16 +418,10 @@ else if (isset($_GET['mod'])){
 		<br />
 
 
-
 		</form>
 
 		</div>
 	";
-
-
-
-
-
 
 
 	// change user & passwd
@@ -503,14 +485,6 @@ else if (isset($_GET['mod'])){
 		";
 
 	}
-
-
-
-
-
-
-
-
 
 
 	echo closeLayout1();
@@ -599,7 +573,6 @@ else if(isset($_GET['new']) && $_SESSION['user']['livello']>=2 && $conf_auth['ti
     ";
 
 
-
     echo "
     </fieldset>
     </form>\n";
@@ -619,8 +592,6 @@ else if(isset($_GET['new']) && $_SESSION['user']['livello']>=2 && $conf_auth['ti
 					));
 
  echo "<h1>"._("User management of frontend")."</h1>\n";
-
-
 
 
  if(isset($_GET['feed'])){
@@ -651,13 +622,7 @@ else if(isset($_GET['new']) && $_SESSION['user']['livello']>=2 && $conf_auth['ti
 	}
 
 
-
-
-
-
  echo "<img src=\"../img/utenti.gif\" class=\"img-float\" alt=\"impostazioni registri\" />\n";
-
-
 
 
  // FILTRI:
@@ -673,7 +638,6 @@ echo "<form action=\"" . Common::phpself() . "\" method=\"get\" >\n";
 
 
 		echo "\t\t<option value=\"99999\">"._("All groups")."</option>\n";
-
 
 
 		while($RSg=$vmreg->fetch_assoc($q_g)){
@@ -701,8 +665,6 @@ echo "<form action=\"" . Common::phpself() . "\" method=\"get\" >\n";
 		echo "<input type=\"hidden\" name=\"ord\" value=\"".$_ORD."\" />\n";
 
 	// --- fine gruppo
-
-
 
 
 echo "</form>\n"; 
@@ -735,7 +697,6 @@ echo "</form>\n";
 
  	$WHERE="";
  }
-
 
 
  // ORDINAMENTO
@@ -798,7 +759,6 @@ echo "</form>\n";
 
 
  $TAB.= "</table>\n";
-
 
 
  	echo magic_excel($TAB,'utenti-'.date('Y-m-d').'.xls', sprintf(_('Frontend\'s user at %s'),date('d/m/Y')) , FRONT_DOCROOT."/mexcel.php");

@@ -162,7 +162,6 @@ if(isset($_GET['del']) && $_SESSION['user']['livello']>1){
 else if(isset($_GET['doc'])){
 
 
-
 	// PRENDI I FILES
 
 	$dir= _PATH_HELPDOCS2;

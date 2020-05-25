@@ -148,7 +148,6 @@ if(isset($_POST['sincronizza_nuove'])){
 		}
 
 
-
 		vmsql_commit($link);
 
 		header("Location: ".$_SERVER['PHP_SELF']."?feed=ok_nuove");
@@ -161,8 +160,6 @@ if(isset($_POST['sincronizza_nuove'])){
 	}
 
 
-
-
 	exit;
 
 }
@@ -172,7 +169,6 @@ if(isset($_POST['sincronizza_nuove'])){
 #	--fine nuove tabelle
 #
 ################################################################################�	
-
 
 
 ##############################################
@@ -237,7 +233,6 @@ if(isset($_GET['azzera'])){
 			}
 
 
-
 		vmsql_commit($link);
 
 		header("Location: ".$_SERVER['PHP_SELF']."?feed=ok_azzera");
@@ -248,8 +243,6 @@ if(isset($_GET['azzera'])){
 
 		header("Location: ".$_SERVER['PHP_SELF']."?feed=ko_azzera2");
 	}
-
-
 
 
 	exit;
@@ -314,9 +307,6 @@ if(isset($_GET['diff'])){
 
 			$colonne[$RSc2['column_name']]=1;
 		}
-
-
-
 
 
 		if($colonne1!=$colonne2){
@@ -394,9 +384,7 @@ if(isset($_GET['diff'])){
 				}
 
 
-
 			}
-
 
 
 			$TESTO.= "</table>";	
@@ -405,7 +393,6 @@ if(isset($_GET['diff'])){
 
 
 			$differenza=true;
-
 
 
 		}
@@ -462,8 +449,6 @@ if(isset($_GET['diff'])){
 #	--fine procedura visualizzazione differneze
 #
 ################################################################################�	
-
-
 
 
 $files=array("sty/admin.css","sty/tabelle.css","sty/linguette.css");
@@ -551,7 +536,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 	</div>";
 
 
-
 	// TEST 1 DB->FRONTEND
 
 	$sql1="SELECT t.table_name , obj_description(c.oid, 'pg_class'::name) AS table_comment 
@@ -567,8 +551,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 	$q1=vmsql_query($sql1,$link);
 
 
-
-
 	$n_row_t1=vmsql_num_rows($q1);
 
 	if($n_row_t1>0){
@@ -580,8 +562,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 
 		$test1=true;
 	}
-
-
 
 
 	// TEST 2 FRONTEND->DB
@@ -663,7 +643,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 		}
 
 
-
 		if($colonne1!=$colonne2){
 
 			$diversi[$tabelle_presenti[$i]]=array($colonne1,$colonne2);
@@ -671,9 +650,7 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 			$uguali=false;
 
 
-
 		}
-
 
 
 	}
@@ -719,7 +696,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 		if(count($tab_diverse)>1){
 
 
-
 			$OUT_TEST.="<p>"._("Le tabelle da sincronizzare sono")." <br /> $tab_string </p>";
 		}
 		else{	
@@ -727,7 +703,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 		}
 
 	}
-
 
 
 // TABELLE NUOVE DA SINCRONIZZARE
@@ -807,15 +782,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 	}
 
 
-
-
-
-
-
-
-
-
-
 	// CONTENITORE TEST INTEGRITA'
 	echo "
 	<div class=\"cont-eti\" id=\"cont-eti-integrita\">
@@ -865,10 +831,7 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 		}
 
 
-
 		$TAB_FRONT.="\t</tbody>\n</table>";
-
-
 
 
 	echo "
@@ -884,7 +847,6 @@ echo openLayout1(_("Sincronizzazione database"),$files);
 </div>
 
 	";
-
 
 
 echo closeLayout1();

@@ -1,7 +1,6 @@
 <?php
 
 
-
 	##############################################################
 	#
 	#	 FORM IMPOSTAZIONI WIDGET
@@ -135,7 +134,6 @@
 				</p>
 
 
-
 				<div id=\"advanced_widgets_opt\">
 
 					<p>
@@ -211,7 +209,6 @@
 						"<ul><li>{{".implode("}}</li><li>{{",$campi_tabella_pc)."}}</li></ul>
 
 
-
 					</div>
 
 				</div>
@@ -230,15 +227,6 @@
 		</form>
 
 	</div>";
-
-
-
-
-
-
-
-
-
 
 
 	if($n_widget==0){
@@ -287,12 +275,6 @@
 	echo "</div>\n";
 
 
-
-
 	//-- fine impostazioni pulsanti speciali
-
-
-
-
 
 

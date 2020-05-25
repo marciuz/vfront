@@ -16,7 +16,6 @@ require_once("../inc/conn.php");
 proteggi(1);
 
 
-
 	$tabella = $_REQUEST['t'];
 
 	if(!RegTools::is_tabella($tabella)){
@@ -77,7 +76,6 @@ proteggi(1);
 	}
 
 
-
 	// Prendi la variabile di LIMIT
 	$LIMIT = (isset($_SESSION['VF_VARS']['n_record_tabella']) && ($_SESSION['VF_VARS']['n_record_tabella']>0)) 
 			? $_SESSION['VF_VARS']['n_record_tabella'] : 20;
@@ -105,9 +103,6 @@ proteggi(1);
 	}
 
 
-
-
-
 	######################################################################
 	#
 	#	RISPOSTA DI RICERCA CON MOLTI RISULTATI:
@@ -126,7 +121,6 @@ proteggi(1);
 	    }
 
 
-
 		$WHERE = " WHERE ".$PK[0]." IN ('".$ids."') ";
 
 		$sql ="SELECT ".$PK[0]." as pk, $campi_vis ". 
@@ -138,7 +132,6 @@ proteggi(1);
 		  ".$vmsql->limit($LIMIT_SEARCH,$OFFSET);
 
 	}
-
 
 
 	######################################################################
@@ -153,7 +146,6 @@ proteggi(1);
 		  $ORDERBY 
 		  ".$vmsql->limit($LIMIT,$OFFSET);
 	}
-
 
 
 	if(isset($_GET['ty']) && $_GET['ty']=='dhtmlxgrid_json'){

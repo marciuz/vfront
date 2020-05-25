@@ -112,8 +112,6 @@ if(isset($_POST['control_1'])){
 		break;
 
 
-
-
 		//-----------------------------------
 
 		case 'date' : $r="dati[".$_POST['column_name']."]|date|".sprintf(_('The value of %s must be a valid date'),$_POST['column_name']);
@@ -257,8 +255,6 @@ switch($RS['data_type']){
 	break;	
 
 
-
-
 }
 
 
@@ -341,8 +337,6 @@ if(count($a_tipo)>0){
 	echo "<label for=\"tipo\">"._('Available checks for this field type:')."</label><br />\n";
 
 
-
-
 	echo "<select name=\"tipo\" id=\"tipo\" onchange=\"submit();\">\n";
 
 
@@ -377,7 +371,6 @@ switch($_GET['tipo']){
 			$aggiungi="\t\t\t<label for=\"val1\">"._('Insert the max length value allowed:')." </label>
 					<input type=\"text\" name=\"val1\" value=\"\" id=\"val1\" />\n";
 	break;	
-
 
 
 	case 'minlength':
@@ -459,8 +452,6 @@ if(isset($_GET['tipo']) && $_GET['tipo']!='null'){
 	<input type=\"button\" name=\"invia\" id=\"invia\" value=\""._('Save data check')."\" onclick=\"$onclick\" />
 
 	</form>\n";
-
-
 
 
 }

@@ -63,7 +63,6 @@ for($i=0;$i<count($ERR);$i++){
 	for($j=0;$j<count($ERR[$i]);$j++){
 
 
-
 		if($j==0 || $j==3){
 
 			$str=substr($ERR[$i][$j],1,-1);

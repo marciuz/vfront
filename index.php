@@ -150,8 +150,6 @@ function mostra_login(){
 	";
 
 
-
-
 	echo closeLayout1();
 
 	exit;
@@ -176,7 +174,6 @@ function mostra_loggato(){
 				 "js/home.js");
 
 	echo openLayout1(_NOME_PROJ,$files);
-
 
 
 	echo "<h1 style=\"padding-left:4px;\">"._('Main menu')."</h1>\n";
@@ -242,7 +239,6 @@ function mostra_loggato(){
 	$matrice_stat = $vmreg->fetch_assoc_all($q_stat);
 
 
-
 	$LI1 = "";
 
 		for($i=0;$i<count($matrice_tab);$i++){
@@ -287,7 +283,6 @@ function mostra_loggato(){
 ######################################################################################################################
 
 
-
 	if($LI1==''){
 
 		if($_SESSION['user']['livello']==3){
@@ -328,7 +323,6 @@ function mostra_loggato(){
 		}
 
 	}
-
 
 
 	echo "

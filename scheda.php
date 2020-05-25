@@ -68,8 +68,6 @@ $Scheda->set_max($RPC);
 ############################################################################
 
 
-
-
 $FORM='';
 
 
@@ -165,8 +163,6 @@ $FORM.="</form>";
     }
 
 
-
-
     // SE ci sono campi data , datetime o timestamp, prendi il calendario
     if($Scheda->load_calendar){
         $files[]="js/jscalendar/calendar.js";
@@ -232,8 +228,6 @@ $FORM.="</form>";
     if(!isset($_GET['parent_table'])) $_GET['parent_table']='';
 
 
-
-
     $lista_submask=array();
     $alias_submask=array();
     $lista_embed=array();
@@ -266,7 +260,6 @@ $FORM.="</form>";
             }
 
     }
-
 
 
     $pathRelativo = Common::dir_name();
@@ -466,7 +459,6 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
     echo "<div id=\"counter_container\"><span id=\"numeri\"></span>&nbsp;&nbsp;<span id=\"refresh\">&nbsp;</span></div>\n";
 
 
-
     // PULSANTI NAV
     echo "
 <div id=\"pulsanti\">
@@ -492,13 +484,7 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
     echo "</div>\n";
 
 
-
     echo $Scheda->action_buttons();
-
-
-
-
-
 
 
     // BUTTON SUBMASK & CUSTOM BUTTONS
@@ -539,10 +525,7 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
         }
 
 
-
     echo $FORM;
-
-
 
 
     if($_SESSION['user']['livello']==3){
@@ -557,7 +540,6 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
         $amministrazione_tabella_up='';
         $amministrazione_tabella_down='';
     }
-
 
 
     echo "<div id=\"tipo-vista2\">
@@ -631,11 +613,6 @@ for($i=0;$i<count($array_id_submask);$i++){
 }
 
 
-
-
-
-
-
  ?>
 
 
@@ -647,7 +624,6 @@ for($i=0;$i<count($array_id_submask);$i++){
         $altezza_iframe_tabella=(28 * 20) + 6;
 
         if($htmltable_type=='dataTables'){
-
 
 
             echo '<table id="gridTableView" class="display" cellspacing="0" width="100%" style="height:'.$altezza_iframe_tabella.'px;" >

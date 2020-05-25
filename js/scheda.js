@@ -1157,7 +1157,6 @@ function CKeditor_OnComplete(){
     VF.fck_pronti=VF.fck_vars.length;
 
 
-
 	for(i=0;i<VF.fck_vars.length;i++){
 
 		CKEDITOR.instances['dati_'+VF.fck_vars[i]].on('key', function(ee) { 
@@ -1396,7 +1395,6 @@ function annulla_campi(manda){
 	}
 
 
-
 	disattiva_campi();
 
 	VF.modifiche_attive=false;
@@ -1509,8 +1507,6 @@ function nuovo_record(){
 	pulisci_SUB();
 
 
-
-
 	// Metti una variabile 'new' su localIDRecord utile per allegati e link
 	VF.localIDRecord = 'new';
 	richiediAL();
@@ -1550,12 +1546,10 @@ function cerca(){
 	jQuery('.sub-search').show();
 
 
-
 	jQuery('.table-submask-vis').each( function(){
 
 	   table_on_search(jQuery(this));
 	});
-
 
 
 	f=document.forms.singleform;
@@ -1700,7 +1694,6 @@ function debug_var(){
     alert(str);
     return str;
 }
-
 
 
 function setStatus(messaggio,tempo,classe) {
@@ -1926,7 +1919,6 @@ function switch_vista(){
 	}
 
 
-
 // ------------------------------ fine history	
 
 
@@ -1939,7 +1931,6 @@ function switch_vista(){
 
 	    window.open(url,name,'width='+w+',height='+h+' ,toolbar=yes, location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes');
 	}
-
 
 
 	function apri_submask(id_table_parent,id_submask, on_shadowbox){
@@ -2632,6 +2623,5 @@ jQuery(document).ready( function(){
  jQuery(window).on('resize', function(){
      dhtmlxgrid_resize('reload');
  });
-
 
 

@@ -71,7 +71,6 @@ function verifica_recordlock($tabella,$colonna,$id){
 	else return true;
 
 
-
 }
 
 

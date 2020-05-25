@@ -111,8 +111,6 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("VFront Version")."</h2>";
 	$OUT.="<div class=\"piccolo\">"._('Authentication type:')."</div><br />\n";
 
 
-
-
 $OUT.="<h2 class=\"title-vfrontinfo\">"._("Software version")."</h2>";
 
 
@@ -322,9 +320,6 @@ $OUT.="<h2 class=\"title-vfrontinfo\">"._("Writable folders settings")."</h2>";
 	$OUT.="<div class=\"piccolo\">$is_html_write_txt</div><br />\n";
 
 
-
-
-
 	// ATTACH
 
 	$is_attach_write = (is_writable(_PATH_ATTACHMENT)) ? "<span class=\"verde\">"._("YES")."</span>" : "<span class=\"rosso\">"._("NO")."</span>";
@@ -386,8 +381,6 @@ if(_FOP_ENABLED){
 
 	$OUT.="<span class=\"grigio\">FOP "._("is executable?")." </span> <strong>$is_fop_exec</strong>\n";
 	$OUT.="<div class=\"piccolo\">$is_fop_exec_txt</div><br />\n";
-
-
 
 
 	// VERSIONE

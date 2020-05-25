@@ -109,12 +109,6 @@ echo "</form>\n";
 echo "</div>\n";
 
 
-
-
 //-- fine impostazioni DEFAULT-FILTERS
-
-
-
-
 
 

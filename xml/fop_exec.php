@@ -17,7 +17,6 @@ require_once("../inc/func.xmlize.php");
 require_once("../inc/func.getxml.php");
 
 
-
 $tabella = preg_replace("'[^a-z0-9_]'i","",$_GET['action']);
 
 // SICUREZZA ---------------------------------------------
@@ -61,10 +60,6 @@ $tabella = preg_replace("'[^a-z0-9_]'i","",$_GET['action']);
 
 		echo "<h1>"._("Access forbidden")."</h1>\n"; exit;
 	}
-
-
-
-
 
 
 // ---------------------------------------------------------

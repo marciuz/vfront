@@ -192,7 +192,6 @@ if(count($_FILES)>0){
 		}
 
 
-
 	}
 
 	if($success==count($_FILES['gfile']['tmp_name'])){
@@ -379,8 +378,6 @@ $JS_aggiorna= (isset($_GET['feed']) && $_GET['feed']=='ok') ?  'window.opener.ri
 				</div>
 			</div>\n";
 		}
-
-
 
 
 	echo "

@@ -242,7 +242,6 @@ class Registry {
     }
 
 
-
     /**
      * Funzione che recupera l'ordinamento impostato in una tabella data
      *
@@ -274,8 +273,6 @@ class Registry {
 
         return substr($string_orderby,0,-1);
     }
-
-
 
 
     private function cache_get($id_table){

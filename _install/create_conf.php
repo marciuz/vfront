@@ -495,7 +495,6 @@ $file_conf_target="../conf/conf.target_install";
 $file_conf_dest="../conf/conf.vfront.php";
 
 
-
 	if($fp=@fopen($file_conf_target,"w")){
 		$fpw=@fwrite($fp,$WR);
 		@fclose($fp);

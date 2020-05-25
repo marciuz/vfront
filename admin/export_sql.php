@@ -16,7 +16,6 @@ include("../inc/layouts.php");
  proteggi(3);
 
 
-
 	########################################################################
 	#
 	#
@@ -85,7 +84,6 @@ include("../inc/layouts.php");
 		}
 
 
-
 			if(VFRONT_DBTYPE=='mysql'){
 
 				$nome_file = _PATH_TMP."/$DB.sql{$estensione_zip}";	
@@ -119,7 +117,6 @@ include("../inc/layouts.php");
 			$exec = passthru($bat);
 
 
-
 			if(is_file($nome_file)){
 			   header('Pragma: anytextexeptno-cache', true);
 			   header('Content-type: application/x-gzip');
@@ -135,7 +132,6 @@ include("../inc/layouts.php");
 			}
 
 
-
 		exit;
 	}
 
@@ -143,7 +139,6 @@ include("../inc/layouts.php");
 	#
 	#
 	########################################################################
-
 
 
  echo openLayout1(_("Database export"), array("sty/admin.css"));

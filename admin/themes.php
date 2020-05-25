@@ -48,7 +48,6 @@ echo breadcrumbs(array("HOME","ADMIN",strtolower(_("Select themes"))));
 echo "<h1>"._("Select themes")."</h1>\n";
 
 
-
 $c=0;
 
 $T="<table summary=\"theme table\" id=\"theme-table\" border=\"1\" >";

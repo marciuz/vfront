@@ -37,8 +37,6 @@ if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['q
 	}
 
 
-
-
 	switch($_GET['formato']){
 
 		case 'csv':  $EXP->tabella_csv($sep=',');
@@ -61,7 +59,6 @@ if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['q
 }
 
 
-
  echo openLayout1(_("Data Export"), array("sty/admin.css"),'popup');
 
  if(!isset($_GET['idt'])){
@@ -81,7 +78,6 @@ if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['q
 
 
  echo "<img src=\"../img/db_export.gif\" class=\"img-float\" alt=\""._("registry settings")."\" />\n";
-
 
 
  echo "<form action=\"" . Common::phpself() . "\" method=\"get\" style=\"margin:30px 0px 0px 90px\">\n";
@@ -124,7 +120,6 @@ if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['q
  echo "\t\t</blockquote><br />\n";
 
 
-
   echo "\t\t<p><strong>"._("Data export mode:")."</strong></p>\n";
 
  echo "\t\t<blockquote>\n";
@@ -139,8 +134,6 @@ if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['q
 
 
  echo "</form>\n";
-
-
 
 
  echo closeLayout1();

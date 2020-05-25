@@ -133,9 +133,6 @@ $OUT.="<link media=\"only screen and (max-device-width: 480px)\" href=\"".FRONT_
 	$OUT.="<script type=\"text/javascript\" src=\"".FRONT_DOCROOT."/js/lang/vfront-".$jslang.".js\"></script>\n";
 
 
-
-
-
 	# JS
 	if(count($js)>0){
 
@@ -189,10 +186,7 @@ $OUT.= "
 </head>";
 
 
-
-
 // LAYOUT 
-
 
 
 	if($tipo!="sottomaschera" && $tipo!='popup' && $tipo!='popup1'){
@@ -221,13 +215,9 @@ $OUT.= "
 	}
 
 
-
-
-
 $OUT.= "<div id=\"contenuto\">
 	<!--CONTENUTO-->
 	";
-
 
 
 	return $OUT;
@@ -441,7 +431,6 @@ function openErrorGenerico($messaggio,$email=true, $testo_custom=""){
 		echo "<p>".$testo_custom."</p>
 		<p><a href=\"".FRONT_DOCROOT."/index.php\">"._("Back to home")."</a></p>\n";
 	}
-
 
 
 	echo closeLayout1();

@@ -369,7 +369,6 @@ function syntax_highlight($text, $language)
     $sch[sch_numlit][0]     = sch_numlit;
 
 
-
     $sql[normal_text]['"']     = dq_literal;
     $sql[normal_text]["'"]     = sq_literal;
     $sql[normal_text]['`']     = bt_literal;
@@ -436,7 +435,6 @@ function syntax_highlight($text, $language)
     $process["SQL"][dash_begin][0] = "dash_putback";
 
 
-
     $process_end["C89"] = "syntax_highlight_helper";
     $process_end["C++"] = $process_end["C89"];
     $process_end["C"] = $process_end["C89"];
@@ -475,7 +473,6 @@ function syntax_highlight($text, $language)
     $edges["SQL"][dq_literal .",". normal_text]   = '</span>';
     $edges["SQL"][sq_literal .",". normal_text]   = '</span>';
     $edges["SQL"][line_comment .",". normal_text] = '</span>';
-
 
 
     //

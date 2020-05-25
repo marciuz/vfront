@@ -68,5 +68,4 @@ jQuery(document).ready( function() {
 		//var attiva = '<?php echo $attiva;?>';
 
 
-
 });

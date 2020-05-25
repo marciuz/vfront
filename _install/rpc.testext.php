@@ -82,7 +82,6 @@ if($_data['authtype']=='db'){
 		}
 
 
-
 	}
 
 	else echo '0@<span class="ko">'._('Please set the database type').'</span>';
@@ -93,7 +92,6 @@ if($_data['authtype']=='db'){
 elseif($_data['authtype']=='db_ext'){
 
 	$msg_error_conn="0@<span class=\"ko\">Please check the DB host, port, user and password</span>";
-
 
 
 	if($_data['authdb_ext_type']=='mysql'){
@@ -110,7 +108,6 @@ elseif($_data['authtype']=='db_ext'){
 		else{
 			$vmsql = new mysql_vmsql();
 		}
-
 
 
 //		$func_query= (function_exists('mysqli_query')) ? 'mysqli_query' : 'mysql_query';
@@ -177,9 +174,6 @@ elseif($_data['authtype']=='db_ext'){
 		}
 
 
-
-
-
 }
 
 elseif($_data['authtype']=='ldap'){
@@ -220,7 +214,6 @@ elseif($_data['authtype']=='ldap'){
 			}
 
 		}
-
 
 
 		echo ($ldapbind) 

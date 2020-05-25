@@ -518,7 +518,6 @@ JS;
             }
 
 
-
             // Impostazioni di campi obbligatori
             if($C->is_nullable=="NO" || $C->in_richiesto=="1"){
                 $obbligatorio = "<span class=\"red\">*</span>";
@@ -638,7 +637,6 @@ JS;
 
         return $FORM_0;
     }
-
 
 
     /**
@@ -793,7 +791,6 @@ JS;
             return '';
         }
     }
-
 
 
     public function print_hotkeys_pop(){

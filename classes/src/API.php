@@ -34,7 +34,6 @@ class API {
     protected $tables;
 
 
-
     public function __construct() {
 
         $this->IS = new iSchema();
@@ -55,7 +54,6 @@ class API {
             $this->tables=$this->IS->list_tables();
         }
     }
-
 
 
     /**
@@ -135,7 +133,6 @@ class API {
     }
 
 
-
     public function send_json(){
 
         $this->__tojson($this->return, true);
@@ -152,7 +149,6 @@ class API {
             return json_encode($obj);
         }
     }
-
 
 
     /**
@@ -267,9 +263,7 @@ class API {
     }
 
 
-
     // REST FUNCTIONS ---------------
-
 
 
     /**
@@ -407,7 +401,6 @@ class API {
     }
 
 
-
     protected function __select($req){
 
         global $vmsql;
@@ -459,7 +452,6 @@ class API {
         }
 
 
-
         // WHERE conditions --------------
 
         if(isset($req[1]) && $req[1]=='id' && isset($req[2])){
@@ -495,8 +487,6 @@ class API {
     }
 
 
-
-
     /**
      * Parse raw data and convert it in array field=>value
      * 
@@ -518,7 +508,6 @@ class API {
 
         return $_DATA;
     }
-
 
 
     protected function create_where($req){
@@ -759,7 +748,6 @@ class API {
         // return json
         $this->send_json();
     }
-
 
 
     private function __delete($req){

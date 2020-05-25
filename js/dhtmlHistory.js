@@ -165,9 +165,6 @@ window.dhtmlHistory = {
    },
 
 
-
-
-
    /** Our current hash location, without the "#" symbol. */
    /** private */ currentLocation: null,
 
@@ -533,8 +530,6 @@ window.historyStorage = {
 
       return matcher.test(key);
    },
-
-
 
 
    /** A reference to our textarea field. */

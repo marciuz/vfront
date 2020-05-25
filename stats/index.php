@@ -65,8 +65,6 @@ echo openLayout1(_("Database statistics"),$files);
 	</ul>";
 
 
-
-
 	// PRENDI LE STAT PERSONALIZZATE
 
 	$sql = "SELECT s.id_stat, s.nome_stat , s.autore, s.data_stat, ".$vmreg->concat("u.nome, ' ', u.cognome", 'nomecognome')."

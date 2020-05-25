@@ -33,7 +33,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	extract($ar_campo);
 
 
-
 	/*
 	id_reg
 	table_oid
@@ -80,23 +79,7 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	$options='';
-
 
 
 	// A seconda del tipo di campo fa delle proposte:
@@ -170,20 +153,12 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	}
 
 
-
-
 	$aggiunta_options="
 				<option value=\"hidden\" ".selected_def('hidden',$in_tipo).">"._("hidden")."</option>
 				<option value=\"select\" ".selected_def('select',$in_tipo).">"._("defined values")."</option>
 				<option value=\"select_from\" ".selected_def('select_from',$in_tipo).">"._("values defined by table")."</option>
 				<option value=\"onlyread\" ".selected_def('onlyread',$in_tipo).">"._("read only")."</option>
 		";
-
-
-
-
-
-
 
 
 	/* Impostazioni nel caso di valore autoincrement:
@@ -194,8 +169,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 		$campo_richiesto_disabled = true;
 		$select_tipo_disable = true;
 	}
-
-
 
 
 	//TODO: da mettere le indicazioni di chiave primaria, 
@@ -248,12 +221,7 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	}
 
 
-
-
 	// Gestione search | suggest
-
-
-
 
 
 	$OUT= "\t<div class=\"campo\">
@@ -265,14 +233,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 				</div>";
 
 
-
-
-
-
-
-
-
-
 	##########################################################################################################
 	#
 	#	IMPOSTAZIONI PER IL CAMPO IMPOSTATO COME RIFERIMENTO AL PARENT
@@ -280,7 +240,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	#
 
 	if($campo_FK!=false){
-
 
 
 		// PRENDI i campi della tabella parent
@@ -293,7 +252,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 		$q_parent = $vmreg->query($sql_parent);
 
 		list($campi_parent) = $vmreg->fetch_row_all($q_parent,true);
-
 
 
 		$OUT.="<div class=\"campo-body$img_campo\">
@@ -310,8 +268,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 
 		$OUT.="<label for=\"in_default_$id_reg_sub\">"._("Field to create subform label:")."</label><br />
 			<select name=\"campo_sub[$id_reg_sub][in_default]\" id=\"in_default_$id_reg_sub\">\n";
-
-
 
 
 		for($i=0;$i<count($campi_parent);$i++){
@@ -333,24 +289,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	$OUT.="
 				<div class=\"campo-body$img_campo\">
 
@@ -370,7 +308,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 		$att_richiesto_checked=($in_richiesto) ? "checked=\"checked\"" : "";
 
 
-
 		$valore_visibile=($campo_visibile_disabled) ? 0:1;
 		$valore_obbligatorio=($att_dis_richiesto) ? 1:0;
 
@@ -383,8 +320,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 		\t\t\t<input type=\"checkbox\" name=\"campo_sub[$id_reg_sub][in_richiesto]\" id=\"in_richiesto_$id_reg_sub\" value=\"1\" $att_richiesto_checked $att_dis_richiesto/>\n";
 
 
-
-
 		$OUT.="\t\t<br/><label for=\"in_tipo_$id_reg_sub\">Tipo di input</label> 
 			<select name=\"campo_sub[$id_reg_sub][in_tipo]\" id=\"in_tipo_$id_reg_sub\" onchange=\"mostra_hid(this.value,$id_reg_sub)\" $att_dis_select>\n";
 
@@ -393,8 +328,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 		$OUT.= $options.$aggiunta_options;
 
 		$OUT.="\t\t</select>\n";
-
-
 
 
 		$OUT.="\t\t<div id=\"hid_$id_reg_sub\" >\n";
@@ -451,7 +384,6 @@ function tratta_campo_submask($ar_campo,$pk,$fk,$colref_fk=array(),$campo_FK=fal
 		</div>
 
 	</div>\n\n";
-
 
 
 	return $OUT;

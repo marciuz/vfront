@@ -42,7 +42,6 @@ function xmlize($sql,$filename=null,$header=false,$offset=0,$tot=0,$xsl='',$dtd=
 	// Inizia a fare l'xml
 
 
-
 	$XML="";
 
 	$XML.= ($header) ? "<?xml version='1.0' encoding='utf-8'?>\n" : "";
@@ -68,7 +67,6 @@ function xmlize($sql,$filename=null,$header=false,$offset=0,$tot=0,$xsl='',$dtd=
 	}
 
 	$XML.="<recordset tot=\"$tot\" minoffset=\"$offset\" maxoffset=\"". ($offset+($n_rows-1))."\" tablename=\"$tablename\">\n";
-
 
 
 	while($RS=$vmsql->fetch_assoc($q)){
@@ -101,8 +99,6 @@ function xmlize($sql,$filename=null,$header=false,$offset=0,$tot=0,$xsl='',$dtd=
 	}
 
 	$XML.="</recordset>";
-
-
 
 
 	if(is_null($filename)) return $XML;

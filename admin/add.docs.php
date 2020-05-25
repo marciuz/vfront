@@ -169,7 +169,6 @@ if(count($_FILES)>0){
 		}
 
 
-
 	}
 
 	if($success==count($_FILES['gfile']['tmp_name'])){
@@ -304,8 +303,6 @@ echo "<img src=\"./img/flussi.gif\" class=\"img-float\" alt=\""._('Manage attach
 				</div>
 			</div>\n";
 		}
-
-
 
 
 	echo "

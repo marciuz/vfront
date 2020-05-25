@@ -14,7 +14,6 @@
 class iSchema_sqlite {
 
 
-
 	/**
 	 * Get the Foreign Keys for a table.
 	 * Return an array with
@@ -84,7 +83,6 @@ class iSchema_sqlite {
 
 		return $cols;
 	}
-
 
 
 	/**
@@ -158,7 +156,6 @@ class iSchema_sqlite {
 		}
 
 
-
 		$sql_tab="SELECT name as table_name,
               upper(type) as table_type,
               '' as comment
@@ -186,8 +183,6 @@ class iSchema_sqlite {
 	}
 
 
-
-
 	/**
 	 * Get the columns info of $table
 	 * if the $column_name is specified get only the definition of $column_name
@@ -205,7 +200,6 @@ class iSchema_sqlite {
 		//$sql_add= ($column_name=='') ? '' : "AND tc.COLUMN_NAME='".strtoupper($column_name)."'";
 
 		$sql="PRAGMA table_info('$table')";
-
 
 
 		$q=$vmsql->query($sql);
@@ -257,7 +251,6 @@ class iSchema_sqlite {
 	}
 
 
-
 	/**
 	 * Get the comment of the table
 	 *
@@ -271,7 +264,6 @@ class iSchema_sqlite {
 		return '';
 
 	}
-
 
 
 	/**

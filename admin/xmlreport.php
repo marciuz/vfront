@@ -29,8 +29,6 @@ include("../inc/layouts.php");
  	$_dati=$vmreg->recursive_escape($_POST);
 
 
-
-
  	// gestione file -------------------------------------------------------------------------------
  	if($_FILES['new_xsl']['size']>0){
 
@@ -75,7 +73,6 @@ include("../inc/layouts.php");
 
 
  	}// gestione file -------------------------------------------------------------------------------
-
 
 
  	$nome_report = preg_replace("|[^\w-_]+|","_",$_dati['nome_report']);
@@ -170,7 +167,6 @@ include("../inc/layouts.php");
  	}// gestione file -------------------------------------------------------------------------------
 
 
-
  	if(!is_array($_dati['gid'])) $_dati['gid']=array();
 
  	$nome_report = preg_replace("|[^\w-_]+|","_",strtolower($_dati['nome_report']));
@@ -219,7 +215,6 @@ include("../inc/layouts.php");
  	list($n_xsl)=$vmreg->fetch_row($q_xsl);
 
 
-
  	$q=$vmreg->query("DELETE FROM {$db1['frontend']}{$db1['sep']}xml_rules WHERE id_xml_rules=".intval($_GET['del']));
 
  	 if($vmreg->affected_rows($q)==1){
@@ -231,7 +226,6 @@ include("../inc/layouts.php");
 
  	exit;
  }
-
 
 
  ######################################
@@ -350,7 +344,6 @@ else if(isset($_GET['new']) || isset($_GET['newquery'])){
  	echo _("otherwise link a new file:")." <input type=\"file\" name=\"new_xsl\" id=\"new_xsl\" size=\"48\" />\n";
 
 
-
  	###################################################
  	#
  	#	FO
@@ -393,8 +386,6 @@ else if(isset($_GET['new']) || isset($_GET['newquery'])){
  	echo closeLayout1();
  	exit;
  }
-
-
 
 
  ######################################
@@ -454,9 +445,6 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
  	echo "<br /><br /><label for=\"accesso\" >"._("Access type:")."</label>\n ";
 
 
-
-
-
  	// TENDINA ACCESS TYPE
 
  	echo "<select name=\"accesso\" id=\"accesso\" onchange=\"if(this.value=='GROUP'){ document.getElementById('gruppi').style.display='';} else {document.getElementById('gruppi').style.display='none';}\">
@@ -465,9 +453,6 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
  		<option value=\"FRONTEND\" $sel_FRONTEND>"._("Frontend (only authenticated users)")."</option>
  		<option value=\"GROUP\" $sel_GROUP>"._("Only for groups (select)")."</option>
  		</select>\n";
-
-
-
 
 
  	// prendi gruppi
@@ -496,11 +481,6 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
  	</div>";
 
 
-
-
-
-
-
  	// cerca fogli di stile XSL custom
 
  	$dir_xsl = _PATH_XSL;
@@ -513,8 +493,6 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
 	        closedir($dh);
 	    }
 	}
-
-
 
 
  	echo "<br /><br /><label for=\"xsl\" >"._("XSL sheet to be linked:")."</label>\n<select name=\"xsl\" id=\"xsl\">
@@ -531,7 +509,6 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
  	echo "</select>\n";
 
  	echo _("otherwise link a new file:")." <input type=\"file\" name=\"new_xsl\" id=\"new_xsl\" size=\"48\" />\n";
-
 
 
  	###################################################
@@ -582,18 +559,7 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
  }
 
 
-
-
-
-
-
-
-
-
  $files=array('sty/tabelle.css');
-
-
-
 
 
  echo openLayout1(_("XML Administration and Reports"),$files);
@@ -641,7 +607,6 @@ else if(isset($_GET['mod']) && $_GET['mod']>0){
 	 	if($mat_xml[$i]['xslfo']=='-1')  $xslfo_riga="-";
 	 	else if($mat_xml[$i]['xslfo']=='') $xslfo_riga="<em>"._("default")."</em>"; 
 	 	else  $xslfo_riga=$mat_xml[$i]['xslfo'];
-
 
 
 	 	$tipo_report= ($mat_xml[$i]['tipo_report'].""=='t') ? "da tabella" : "da query";

@@ -160,25 +160,23 @@ class Log {
 
     private function parser_sql_update($sql) {
 
-        require_once(FRONT_ROOT."/plugins/php-sql-parser/src/PHPSQLParser.php");
-
-        $Parser = new PHPSQLParser();
+        $Parser = new \PHPSQLParser\PHPSQLParser();
 
         $psql = $Parser->parse($sql);
 
         $out['tabella'] = $psql['UPDATE'][0]['no_quotes'];
         $out['modifiche'] = array();
-
+        
         if(isset($psql['SET']) && count($psql['SET'])>0) {
             foreach($psql['SET'] as $up) {
 
-                $k = $up['sub_tree'][0]['no_quotes'];
+                $k = $up['sub_tree'][0]['no_quotes']['parts'][0];
                 $v = $up['sub_tree'][2]['base_expr'];
 
                 if($v{0} == "'" && substr($v, -1, 1) == "'") {
                     $v = substr($v, 1, strlen($v)-2);
                 }
-
+                
                 $out['modifiche'][$k] = $v;
             }
         }
@@ -471,22 +469,24 @@ class Log {
 			</tr>
 			";
 
-            for ($i = 0; $i < count($parse_sql['campi']); $i++) {
+            if(is_array($parse_sql['campi'])) {
+                for ($i = 0; $i < count($parse_sql['campi']); $i++) {
 
-                $valore_new = htmlentities($parse_sql['valori'][$i], null, FRONT_ENCODING);
+                    $valore_new = htmlentities($parse_sql['valori'][$i], null, FRONT_ENCODING);
 
-                if ($valore_new == '' || $valore_new == null)
-                    $valore_new = "<em class=\"null_old\">Null</em>";
+                    if ($valore_new == '' || $valore_new == null)
+                        $valore_new = "<em class=\"null_old\">Null</em>";
 
-                $valore = "<span class=\"intatto_old\">" . $valore_new . "</span>";
-                $classe_tr = "";
+                    $valore = "<span class=\"intatto_old\">" . $valore_new . "</span>";
+                    $classe_tr = "";
 
 
-                $OUT.= "<tr $classe_tr>\n";
+                    $OUT.= "<tr $classe_tr>\n";
 
-                $OUT.= "<td class=\"campo\">" . $parse_sql['campi'][$i] . "</td>\n";
+                    $OUT.= "<td class=\"campo\">" . $parse_sql['campi'][$i] . "</td>\n";
 
-                $OUT.= "<td>" . $valore . "</td>\n";
+                    $OUT.= "<td>" . $valore . "</td>\n";
+                }
             }
 
             $OUT.="</table>\n";
@@ -1074,7 +1074,7 @@ class Log {
 
 
                     // INSERISCI NEL LOG
-                    $this->rpc_log('ripristino', $tabella, $_SESSION['user']['uid'], $_SESSION['gid'], $id_record, true);
+                    $this->rpc_log('ripristino', $tabella, User_Session::id(), User_Session::gid(), $id_record, true);
                     header("Location: " . $_SERVER['PHP_SELF'] . "?id_record=$id_record&feed=ok");
                     exit;
                 } else {
@@ -1164,7 +1164,7 @@ class Log {
 
 
                 // INSERISCI NEL LOG
-                $this->rpc_log('ripristino', $tabella, $_SESSION['user']['uid'], $_SESSION['gid'], $id_record, true);
+                $this->rpc_log('ripristino', $tabella, User_Session::id(), User_Session::gid(), $id_record, true);
                 header("Location: " . $_SERVER['PHP_SELF'] . "?id_record=$id_record&feed=ok");
                 exit;
             } else {

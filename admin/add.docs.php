@@ -148,7 +148,7 @@ if(count($_FILES)>0){
 				 $_POST['id'],
 				 $nome_pulito,
 				 '',
-				 ucfirst($_SESSION['user']['nome'])." ".ucfirst($_SESSION['user']['cognome']),
+				 ucfirst(User_Session::firstname())." ".ucfirst(User_Session::lastname()),
 				 date('Y-m-d H:i:s')
 				 );
 

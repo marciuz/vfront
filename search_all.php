@@ -11,7 +11,7 @@ function search_all($s, $only_visible=true, $exact=false, $views=true,  $max_res
 	if($s=='') return null;
 
 
-	$tab=RegTools::prendi_tabelle($_SESSION['gid'],$only_visible,!$views);
+	$tab=RegTools::prendi_tabelle(User_Session::gid(),$only_visible,!$views);
 
 	$stat['n_tabelle']=count($tab);
 	$stat['n_campi']=0;
@@ -19,7 +19,7 @@ function search_all($s, $only_visible=true, $exact=false, $views=true,  $max_res
 	$cols=array();
 
 	foreach($tab as $t){
-		list($cols[$t['table_name']])=RegTools::prendi_colonne_frontend($t['table_name'],"column_name,table_type",$only_visible,$_SESSION['gid']);
+		list($cols[$t['table_name']])=RegTools::prendi_colonne_frontend($t['table_name'],"column_name,table_type",$only_visible,User_Session::gid());
 	}
 
 
@@ -120,7 +120,7 @@ if(isset($_GET['s'])){
 
  $s=trim($vmsql->escape($_GET['s']));
 
- $only_visibile = ($_SESSION['user']['livello']<3) ? true:false;
+ $only_visibile = (User_Session::level()<3) ? true:false;
 // $only_visibile = true;
 
  $also_view= (bool) $_GET['view_search'];
@@ -152,7 +152,7 @@ if(isset($_GET['s'])){
  			echo "<td>".$v."</td>\n";
  		}
 
- 		$oid= RegTools::name2oid($val['tabella'],$_SESSION['gid']);
+ 		$oid= RegTools::name2oid($val['tabella'],User_Session::gid());
 
  		if(RegTools::is_tabella_by_oid($oid,true)){
 

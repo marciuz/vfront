@@ -71,8 +71,8 @@ echo openLayout1(_("Database statistics"),$files);
 			FROM {$db1['frontend']}{$db1['sep']}stat s, {$db1['frontend']}{$db1['sep']}utente u
 			WHERE s.autore=u.id_utente
 			AND (auth_stat=1
-				OR (auth_stat=2 AND u.gid=".intval($_SESSION['gid']).")
-				OR (auth_stat=3 AND u.id_utente=".intval($_SESSION['user']['uid']).")
+				OR (auth_stat=2 AND u.gid=".intval(User_Session::gid()).")
+				OR (auth_stat=3 AND u.id_utente=".intval(User_Session::id()).")
 				)
 			ORDER BY data_stat DESC";
 
@@ -83,7 +83,7 @@ echo openLayout1(_("Database statistics"),$files);
 	while($RS=$vmreg->fetch_assoc($q)){
 
 		// se � proprietario o amministratore pu� modificare o cancellare la statistica
-		$aggiunta_mod_del = (($_SESSION['user']['uid']==$RS['autore']) || $_SESSION['user']['livello']==3) ? 
+		$aggiunta_mod_del = ((User_Session::id()==$RS['autore']) || User_Session::level()==3) ? 
 							" - <a href=\"stat.personal.php?modifica=".$RS['id_stat']."\">modifica</a> - <a href=\"stat.personal.php?elimina=".$RS['id_stat']."\" class=\"rosso\">"._("delete")."</a>" : "";
 
 		$stat_pers[]="<li><a href=\"stat.personal.php?id_s=".$RS['id_stat']."\">".$RS['nome_stat']."</a> (".$RS['nomecognome'].", ".VFDate::date_encode($RS['data_stat']).") $aggiunta_mod_del</li>\n";

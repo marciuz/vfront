@@ -197,16 +197,17 @@ class Admin_Registry
         }
 
         if (isset($GLOBALS['VMSQL_ERROR'])) {
+            
             $vmreg->rollback($vmsql, $vmreg);
             return false;
-        } else {
+        }
+        else {
 
             // metti l'utente 1 (admin) nel gruppo 0
             $q_ut=$vmreg->query("UPDATE {$db1['frontend']}{$db1['sep']}utente SET gid=0 WHERE id_utente=1");
 
             // aggiorna la sessione
-            $_SESSION['user']['gid']=0;
-            $_SESSION['gid']=0;
+            User_Session::attr(User_Session::FIELD_GROUP_ID, 0);
 
             // Elimina il gruppo temporaneo -1
             $q_del_g=$vmreg->query("DELETE FROM {$db1['frontend']}{$db1['sep']}gruppo WHERE gid=-1 ");

@@ -19,16 +19,16 @@
 #
 
 /**
- * Classe generica per l'autenticazione a VFront. 
- * L'accesso pu� essere in 1 o 2 passi
- * In 1 passo se si usa l'autenticazione mediante il database di VFront
- * In 2 mediante strumenti esterni (LDAP, altro DB, ecc) per l'autenticazione
- * e il DB di VFRont per l'accreditamento dei diritti
+ * Generic class for authentication to VFront. 
+ * Access can be in 1 or 2 steps.
+ * In 1 step if you use authentication through the database of VFront.
+ * In 2 by external tools (LDAP, other DB, etc.) for authentication
+ * and the VFront DB for the accreditation of permissions.
  * @package VFront
  * @subpackage Authentication
  * @author Mario Marcello Verona <marcelloverona@gmail.com>
- * @copyright 2007-2010 M.Marcello Verona
- * @version 0.96 $Id: class.auth.php 1075 2014-06-13 13:01:01Z marciuz $
+ * @copyright 2007-2020 M.Marcello Verona
+ * @version 0.99.52 $Id: class.auth.php 1075 2014-06-13 13:01:01Z marciuz $
  * @license http://www.gnu.org/licenses/gpl.html GNU Public License 
  */
 class Auth {
@@ -94,7 +94,7 @@ class Auth {
      */
     public function __construct($user, $passw, $urlreq = '') {
 
-        global $vmsql, $vmreg, $db1, $conf_auth;
+        global $conf_auth;
 
         if (strlen($urlreq) > 0 && strlen($urlreq) < 500 && strpos($urlreq, "http") === false) {
             $this->urlreq = $urlreq;
@@ -148,27 +148,27 @@ class Auth {
             }
         }
     }
-
-//-- Fine funzione AUTH
+    //-- Fine funzione AUTH
 
     /**
      * @desc Funzione di autenticazione basata sul DB di VFront, tabella utenti
      *
      */
-    function __step_1() {
+    private function __step_1() {
 
-        global $vmsql, $vmreg, $db1, $conf_auth;
+        global $conf_auth;
 
-        // Verifico che esista nel db Frontend
+        // Verifico che esista nel db Frontend.
         $this->utente_in_frontend = $this->__frontend_user($this->user, $this->passw);
 
         // L'utente esiste anche nel DB!
-        // prende i dati, li mette in sessione, lo fa andare avanti
+        // prende i dati, li mette in sessione, lo fa andare avanti.
         if ($this->utente_in_frontend['response']) {
 
             $this->__metti_in_sessione();
             $this->vfront_redirect();
             exit;
+            
         }
         else {
 
@@ -187,8 +187,6 @@ class Auth {
                     else {
                         header("Location: " . $this->home_redirect);
                     }
-
-                    //$this->vfront_redirect(); 
                     exit;
                 }
             }
@@ -201,9 +199,9 @@ class Auth {
      * @desc Funzione di accreditamento e inserimento se non esistono i diritti
      *
      */
-    function __step_2() {
+    private function __step_2() {
 
-        global $vmsql, $vmreg, $db1, $conf_auth;
+        global $vmreg, $db1, $conf_auth;
 
 
         // Verifico che esista nel db Frontend, senza password, l'utente e' gia' autenticato
@@ -278,13 +276,13 @@ class Auth {
      *
      * @param int $tipo_err 0=errore nell'utente password, 1=livello troppo basso per vedere la pagina
      */
-    function __respingi_utente($tipo_err = 0) {
+    private function __respingi_utente($tipo_err = 0) {
 
         switch ($tipo_err) {
 
             case 0: // errore nell'utente password
-                unset($_SESSION['user']);
-                unset($_SESSION['gid']);
+                
+                User_Session::delete();
                 header("Location: " . FRONT_DOCROOT . "/index.php?nolog");
                 exit;
                 break;
@@ -304,9 +302,9 @@ class Auth {
      * @param bool $use_passw Utilizza la password per l'autenticazione (default=true)
      * @return array Array con le informazioni sull'utente
      */
-    function __frontend_user($user, $passw = '', $use_passw = true) {
+    private function __frontend_user($user, $passw = '', $use_passw = true) {
 
-        global $vmsql, $vmreg, $db1;
+        global $vmreg, $db1;
 
         // cerca l'utente in database
         $sql = "SELECT * FROM {$db1['frontend']}{$db1['sep']}utente 
@@ -341,7 +339,7 @@ class Auth {
      * @param string $recover_passw Password
      * @return array Array con le informazioni sull'utente
      */
-    function __frontend_user_recover_passw($user, $recover_passw) {
+    private function __frontend_user_recover_passw($user, $recover_passw) {
 
         global $vmsql, $vmreg, $db1;
 
@@ -385,9 +383,9 @@ class Auth {
      * @desc Inserisce in sessione le variabili relative all'utente quando autenticato e accreditato
      *
      */
-    function __metti_in_sessione() {
-
-        $_SESSION['user'] = array(
+    protected function __metti_in_sessione() {
+        
+        User_Session::setuser([
             'uid' => $this->utente_in_frontend[0]['id_utente'],
             'nick' => $this->utente_in_frontend[0]['nick'],
             'email' => $this->utente_in_frontend[0]['email'],
@@ -395,10 +393,9 @@ class Auth {
             'cognome' => $this->utente_in_frontend[0]['cognome'],
             'data_ins' => $this->utente_in_frontend[0]['data_ins'],
             'gid' => $this->utente_in_frontend[0]['gid'],
-            'livello' => $this->utente_in_frontend[0]['livello']
-        );
+            'livello' => $this->utente_in_frontend[0]['livello'],
+        ]);
 
-        $_SESSION['gid'] = $this->utente_in_frontend[0]['gid'];
     }
 
     protected function vfront_redirect() {
@@ -408,7 +405,6 @@ class Auth {
 
         if (isset($_SESSION['VF_VARS']['home_redirect']) &&
                 strlen(trim($_SESSION['VF_VARS']['home_redirect'])) > 0
-        // && ($_SESSION['VF_VARS']['home_redirect']!=0) 
         ) {
 
             $redirect = FRONT_DOCROOT . "/" . $_SESSION['VF_VARS']['home_redirect'];

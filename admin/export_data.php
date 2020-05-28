@@ -17,7 +17,7 @@ include("../inc/layouts.php");
 
 if((isset($_GET['id_table']) && is_numeric($_GET['id_table'])) || isset($_GET['qr_send'])){
 
-	$id_tabella = (isset($_GET['qr_send'])) ? RegTools::name2oid($_GET['qr_send'],$_SESSION['gid']) : (int) $_GET['id_table'];
+	$id_tabella = (isset($_GET['qr_send'])) ? RegTools::name2oid($_GET['qr_send'],User_Session::gid()) : (int) $_GET['id_table'];
 
 	if($id_tabella==0 || !RegTools::is_tabella_by_oid($id_tabella)){
 

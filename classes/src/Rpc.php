@@ -11,6 +11,18 @@ if (!defined('FRONT_ROOT')) {
 require_once(FRONT_ROOT . "/inc/func.xmlize.php");
 
 class Rpc {
+    
+    const SQL_INSERT = 'INSERT';
+    const SQL_UPDATE = 'UPDATE';
+    const SQL_DELETE = 'DELETE';
+    const SQL_SELECT = 'SELECT';
+    
+    const SQL_VERBS = [
+        self::SQL_INSERT,
+        self::SQL_UPDATE,
+        self::SQL_SELECT,
+        self::SQL_DELETE,
+    ];
 
     protected $table;
     protected $PK;
@@ -22,12 +34,12 @@ class Rpc {
     public $outputType = '';
     protected $Reg;
 
-    public function __construct($table, $outputType='XML') {
+    public function __construct($table, $outputType='JSON') {
 
-        $this->outputType= (in_array($outputType, array('XML', 'JSON'))) ? $outputType : 'XML';
+        $this->outputType= (in_array($outputType, array('XML', 'JSON'))) ? $outputType : 'JSON';
         $this->table = $table;
         $this->Reg = new Registry();
-        $this->Reg->load_registry($this->table, intval($_SESSION['gid']));
+        $this->Reg->load_registry($this->table, intval(User_Session::gid()));
         $this->PK = $this->Reg->PK;
         $this->orderby = $this->Reg->prendi_orderby();
 

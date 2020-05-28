@@ -19,13 +19,21 @@ foreach($_data as $k=>$v) $_data[$k]=trim(strip_tags($v));
 if($_data['dbtype']=='mysql'){
 
 	if(function_exists('mysqli_connect')){
-		$mylink = @mysqli_connect($_data['dbhost1'],$_data['dbuser1'],$_data['dbpassw1'],$_data['dbname1'],$_data['dbport1']) or die(0);
+            
+		$mylink = @mysqli_connect($_data['dbhost1'],$_data['dbuser1'],$_data['dbpassw1'],$_data['dbname1'],$_data['dbport1']) ;
 	}
 	else{
-		$mylink = @mysql_connect($_data['dbhost1'].":".$_data['dbport1'],$_data['dbuser1'],$_data['dbpassw1']) or die(0);
-		$connection_DB_test= @mysql_select_db($_data['dbname1']) or die(0);
+		$mylink = @mysql_connect($_data['dbhost1'].":".$_data['dbport1'],$_data['dbuser1'],$_data['dbpassw1']);
+		$connection_DB_test= @mysql_select_db($_data['dbname1']);
 	}
-	echo 1;
+        
+        if(empty($mylink)) {
+            echo 0;
+        }
+        else{
+            echo 1;
+        }
+        
 }
 elseif($_data['dbtype']=='postgres'){
 

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <vfrontinfo>
-	<version>0.99.5</version>
-	<subversion>$Revision: 1175 $</subversion>
-	<subversion_date>$Date: 2017-05-12 23:20:03 +0200$ </subversion_date> 
+    <version>0.99.52</version>
 </vfrontinfo>

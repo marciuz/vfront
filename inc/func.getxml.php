@@ -72,7 +72,7 @@ function get_vfront_xml($_INFO) {
 
         $gruppi = explode(",", $RS_rules['accesso_gruppo']);
 
-        if (is_array($gruppi) && in_array($_SESSION['gid'], $gruppi)) {
+        if (is_array($gruppi) && in_array(User_Session::gid(), $gruppi)) {
 
             // va avanti
         }
@@ -92,9 +92,9 @@ function get_vfront_xml($_INFO) {
     }
     else {
 
-        $PK = RegTools::prendi_PK($tabella, intval($_SESSION['gid']));
+        $PK = RegTools::prendi_PK($tabella, intval(User_Session::gid()));
 
-        $orderby = RegTools::prendi_orderby($tabella, intval($_SESSION['gid']));
+        $orderby = RegTools::prendi_orderby($tabella, intval(User_Session::gid()));
 
         if (trim($orderby) == 'ASC') {
             $orderby = 1;

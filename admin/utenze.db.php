@@ -44,7 +44,7 @@ if(isset($_POST['id_utente']) && isset($_GET['mod'])){
 
 	$_dati=$vmreg->recursive_escape($_POST);
 
-	if($_SESSION['user']['livello']<$_dati['livello']){
+	if(User_Session::level()<$_dati['livello']){
 
 		header("Location: ?msg=no_lev");
 		exit;
@@ -125,7 +125,7 @@ else if(isset($_GET['insert_new']) && $_POST['nome']){
 
 
 	// ripeto la clausola di sicurezza
-	if($_SESSION['user']['livello']<2 || $conf_auth['tipo_external_auth']!=''){
+	if(User_Session::level()<2 || $conf_auth['tipo_external_auth']!=''){
 
 		header("Location: ?noauth");
 		exit;
@@ -264,7 +264,7 @@ else if (isset($_GET['mod'])){
 
 	// PRTENDI DATI UTENTE IN ESAME
 	$q_ut=$vmreg->query("SELECT * FROM {$db1['frontend']}{$db1['sep']}utente WHERE id_utente=".$UID
-					 ." AND livello<=".intval($_SESSION['user']['livello']) );
+					 ." AND livello<=".intval(User_Session::level()) );
 
 	$ut_info=$vmreg->fetch_assoc($q_ut);
 
@@ -356,7 +356,7 @@ else if (isset($_GET['mod'])){
 
 
 	// Se � amministratore pu� pare amministratori
-	if($_SESSION['user']['livello']==3){
+	if(User_Session::level()==3){
 
 		echo "
 		<input type=\"radio\" name=\"livello\" value=\"3\" $sel_liv3/> "._("Administrator")."
@@ -426,7 +426,7 @@ else if (isset($_GET['mod'])){
 
 	// change user & passwd
 
-	if($_SESSION['user']['livello']>=2 && $conf_auth['tipo_external_auth']==''){
+	if(User_Session::level()>=2 && $conf_auth['tipo_external_auth']==''){
 
 		echo "<div id=\"change_userdata\" style=\"float:left;\" >
 
@@ -497,7 +497,7 @@ else if (isset($_GET['del'])){
 	if($id_utente>0){
 
 		$q_del=$vmreg->query("DELETE FROM {$db1['frontend']}{$db1['sep']}utente
-							WHERE id_utente=$id_utente AND livello<=".intval($_SESSION['user']['livello']));
+							WHERE id_utente=$id_utente AND livello<=".intval(User_Session::level()));
 
 		if($vmreg->affected_rows($q_del)==1){
 
@@ -521,7 +521,7 @@ else if (isset($_GET['del'])){
 #	NEW USER
 #
 
-else if(isset($_GET['new']) && $_SESSION['user']['livello']>=2 && $conf_auth['tipo_external_auth']==''){
+else if(isset($_GET['new']) && User_Session::level()>=2 && $conf_auth['tipo_external_auth']==''){
 
 
 	echo openLayout1(_("Personal info"),array("sty/tabelle.css","js/mostra_nascondi_id.js","sty/admin.css"));
@@ -651,7 +651,7 @@ echo "<form action=\"" . Common::phpself() . "\" method=\"get\" >\n";
 
 
 		// NEW USER 
-		if($_SESSION['user']['livello']>=2 && $conf_auth['tipo_external_auth']==''){
+		if(User_Session::level()>=2 && $conf_auth['tipo_external_auth']==''){
 
 			echo " | <a href=\"?new\">"._('Create new user')."</a>\n";
 		}
@@ -733,12 +733,12 @@ echo "</form>\n";
 
 
  // Controllo sul livello di chi sta operando... se � 2 non fa modificare i 3
- 	$link_modifica = ($RS['livello']<=$_SESSION['user']['livello']) 
+ 	$link_modifica = ($RS['livello']<=User_Session::level()) 
  		? "<a href=\"".Common::phpself()."?mod={$RS['id_utente']}\">"._("modify")."</a>" 
  		: "&nbsp;";
 
  // Controllo sul livello di chi sta operando... se � 2 non fa modificare i 3
- 	$link_delete = ($RS['livello']<=$_SESSION['user']['livello']) 
+ 	$link_delete = ($RS['livello']<=User_Session::level()) 
  		? "<a href=\"".Common::phpself()."?del={$RS['id_utente']}\">"._("delete")."</a>" 
  		: "&nbsp;";
 

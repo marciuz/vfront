@@ -308,7 +308,7 @@ function tab_dett($oid,$gid=0){
 					''));
 
 
-	$see_now=($_SESSION['user']['livello']==3) ? " - <a href=\"../scheda.php?oid=$oid\" title=\"See now\">"._('See')."</a>\n" : "\n";
+	$see_now=(User_Session::level()==3) ? " - <a href=\"../scheda.php?oid=$oid\" title=\"See now\">"._('See')."</a>\n" : "\n";
 
 	if($info['table_type']=='VIEW'){
 		echo "\n<h1>"._("View settings")." <span class=\"verde\">".$info['table_name']."</span> "
@@ -1441,7 +1441,7 @@ else if(isset($_POST['newbutton'])){
 						$button_data['background'],
 						$button_data['definition'],
 						$button_data['id_table'],
-						$_SESSION['user']['uid'],
+						User_Session::id(),
 						$settings
 						);
 
@@ -1484,7 +1484,7 @@ else if(isset($_POST['modbutton'])){
 						$button_data['background'],
 						$button_data['definition'],
 						$button_data['id_table'],
-						$_SESSION['user']['uid'],
+						User_Session::id(),
 						$settings,
 						$_POST['modbutton']
 						);
@@ -1504,7 +1504,7 @@ else if(isset($_POST['modbutton'])){
 
 else if(isset($_GET['delbutton'])){
 
-	$sql_add= (!Common::is_admin()) ? " AND id_utente=".$_SESSION['user']['uid'] : '';
+	$sql_add= (!Common::is_admin()) ? " AND id_utente=".User_Session::id() : '';
 
 	$q_del_b=$vmreg->query("DELETE FROM {$db1['frontend']}{$db1['sep']}button WHERE id_button=".intval($_GET['delbutton'])." $sql_add");
 

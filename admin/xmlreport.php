@@ -1,6 +1,6 @@
 <?php
 /**
- * Sono qui definite le procedure per gestire i report di VFront.
+ * Here are defined the procedures for managing reports of VFront.
  * 
  * @desc Modulo di gestione dei report
  * @package VFront
@@ -14,7 +14,7 @@
 include("../inc/conn.php");
 include("../inc/layouts.php");
 
- proteggi(2);
+proteggi(2);
 
 
  ######################################
@@ -87,7 +87,7 @@ include("../inc/layouts.php");
  				$_dati['tabella'],
  				$_dati['accesso'],
  				implode(",",$_dati['gid']),
- 				$_SESSION['user']['uid'],
+ 				User_Session::id(),
  				date("Y-m-d H:i:s"),
  				$NEW_XSL_NAME,
  				$NEW_XSLFO_NAME,
@@ -178,7 +178,7 @@ include("../inc/layouts.php");
  				$nome_report,	
  				$_dati['accesso'],
  				implode(",",$_dati['gid']),
- 				$_SESSION['user']['uid'],
+ 				User_Session::id(),
  				date("Y-m-d H:i:s"),
  				$NEW_XSL_NAME,
  				$NEW_XSLFO_NAME,

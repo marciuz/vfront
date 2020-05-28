@@ -31,7 +31,7 @@ if(isset($_REQUEST['campo']) && isset($_REQUEST['tabella'])){
 			FROM ".$db1['frontend'].$db1['sep']."registro_col c, ".$db1['frontend'].$db1['sep']."registro_tab t 
 			WHERE c.column_name='".$_REQUEST['campo']."'
 			AND t.table_name='".$_REQUEST['tabella']."'
-			AND t.gid='".$_SESSION['gid']."'
+			AND t.gid='".User_Session::gid()."'
 			AND c.id_table=t.id_table
 			";
 		$q=$vmsql->query($sql);

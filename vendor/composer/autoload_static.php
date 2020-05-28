@@ -28,12 +28,23 @@ class ComposerStaticInita8e9797588e280da07ae9157cd0d1a51
         0 => __DIR__ . '/../..' . '/classes/src',
     );
 
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPSQLParser\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/greenlion/php-sql-parser/src',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInita8e9797588e280da07ae9157cd0d1a51::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInita8e9797588e280da07ae9157cd0d1a51::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInita8e9797588e280da07ae9157cd0d1a51::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita8e9797588e280da07ae9157cd0d1a51::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

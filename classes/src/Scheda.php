@@ -43,7 +43,7 @@ class Scheda {
 
         $this->oid = (int) $oid;
         //$this->data_tab = $this->get_data_table($oid);
-        $this->gid = ($gid === null) ? $_SESSION['gid'] : $gid;
+        $this->gid = ($gid === null) ? User_Session::gid() : $gid;
 
         $this->load_calendar = ($_SESSION['VF_VARS']['usa_calendari']==1) ? true:false;
 

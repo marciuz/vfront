@@ -21,7 +21,7 @@ function var_frontend($gid="session",$store_type=null){
 
 	global $vmreg, $db1;
 
-	$gid= ($gid=="session" && isset($_SESSION['gid'])) ? (int) $_SESSION['gid'] : (int) $gid;
+	$gid= ($gid=="session" && User_Session::gid() !== null) ? (int) User_Session::gid() : (int) $gid;
 
 	$vfront_vars=array();
 

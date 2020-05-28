@@ -598,7 +598,7 @@ function import_query($only_sql=false){
 	    	$last_id=$vmsql->insert_id($nome_tab,$PK_tab);
 	    	$ids[]=$last_id;
 	    	$Log = new Log();
-	    	$Log->rpc_log('import',$nome_tab,$_SESSION['user']['uid'],$_SESSION['gid'],$last_id,true,'',$sql_da_eseguire,$info_browser);
+	    	$Log->rpc_log('import',$nome_tab,User_Session::id(),User_Session::gid(),$last_id,true,'',$sql_da_eseguire,$info_browser);
 	    }
 
 

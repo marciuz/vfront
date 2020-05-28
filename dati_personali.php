@@ -27,33 +27,33 @@ echo "<table summary=\"dati utente\" class=\"tab-color\">
 
 	<tr>
 		<th>ID</th>
-		<td>".$_SESSION['user']['uid']."</td>
+		<td>".User_Session::id()."</td>
 	</tr>
 	<tr>
 		<th>"._("Name")."</th>
-		<td>".$_SESSION['user']['nome']."</td>
+		<td>".User_Session::firstname()."</td>
 	</tr>
 	<tr>
 		<th>"._("Surname")."</th>
-		<td>".$_SESSION['user']['cognome']."</td>
+		<td>".User_Session::lastname()."</td>
 	</tr>
 	<tr>
 		<th>"._("email")."</th>
-		<td>".$_SESSION['user']['email']."</td>
+		<td>".User_Session::email()."</td>
 	</tr>
 	<tr>
 		<th>"._("last modified date")."</th>
-		<td>".VFDate::date_encode($_SESSION['user']['data_ins'],false)."</td>
+		<td>".VFDate::date_encode(User_Session::attr(User_Session::FIELD_INSERT_DATE),false)."</td>
 	</tr>
 
 	<tr>
 		<th>"._("group")."</th>
-		<td>".$_SESSION['user']['gid']." - ". Common::gid2group_name($_SESSION['user']['gid'])."</td>
+		<td>".User_Session::gid()." - ". Common::gid2group_name(User_Session::gid())."</td>
 	</tr>
 
 	<tr>
 		<th>"._("level")."</th>
-		<td>".$_SESSION['user']['livello']."</td>
+		<td>".User_Session::level()."</td>
 	</tr>		
 
 </table>

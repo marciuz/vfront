@@ -237,7 +237,7 @@ class RegTools {
             else{
 
                 if($gid=="session"){
-                    $gid= (int) $_SESSION['gid'];
+                    $gid= (int) User_Session::gid();
                 }
                 else{
                     $gid= (int) $gid;
@@ -289,7 +289,7 @@ class RegTools {
         // otherwise table_name... need GID
         else{
 
-            $gid = ($gid=="session") ? intval($_SESSION['gid']) : intval($gid);
+            $gid = ($gid=="session") ? intval(User_Session::gid()) : intval($gid);
             $clausola_ID = "AND t.table_name='$oid_or_name' AND t.gid=$gid	";
         }
 
@@ -435,30 +435,60 @@ class RegTools {
 
         switch ($variabile){
 
-            case '%uid' : $out= (isset($_SESSION['user']['uid'])) ? $_SESSION['user']['uid'] : false; break;
-            case '%nick' : $out= (isset($_SESSION['user']['nick'])) ? $_SESSION['user']['nick'] : false; break;
-            case '%email' : $out= (isset($_SESSION['user']['email'])) ? $_SESSION['user']['email'] : false; break;
-            case '%gid' : $out= (isset($_SESSION['gid'])) ? $_SESSION['gid'] : false; break;
-            case '%gruppo' : $out= (isset($_SESSION['gid'])) ? Common::gid2group_name($_SESSION['gid']) : false; break;
+            case '%uid' : 
+                $out= User_Session::id();
+                break;
+            
+            case '%nick' : 
+                $out= User_Session::attr(User_Session::FIELD_NICKNAME);
+                break;
+            
+            case '%email' : 
+                $out= User_Session::email(); 
+                break;
+            
+            case '%gid' : 
+                $out= User_Session::gid(); 
+                break;
+            
+            case '%gruppo' : 
+            case '%groupname' : 
+                $out= (User_Session::gid() !== null) ? Common::gid2group_name(User_Session::gid()) : false; 
+                break;
+            
             case '%nome' : 
-            case '%name' : $out= (isset($_SESSION['user']['nome'])) ? $_SESSION['user']['nome'] : false; break;
+            case '%name' : 
+                $out= User_Session::firstname(); 
+                break;
+            
             case '%cognome' : 
-            case '%surname'	: $out= (isset($_SESSION['user']['cognome'])) ? $_SESSION['user']['cognome'] : false; break;
+            case '%surname' : 
+                $out= User_Session::lastname(); 
+                break;
+        
             case '%nomecognome' : 
-            case '%namesurname' : $out= (isset($_SESSION['user']['nome']) && isset($_SESSION['user']['cognome'])) 
-                 ? $_SESSION['user']['nome']." ".$_SESSION['user']['cognome'] : false; break;
+            case '%namesurname' : 
+                $out= User_Session::firstname() . ' ' . User_Session::lastname();
+                break;
 
-            case '%nomecognome' : 
-            case '%surnamename' : $out= (isset($_SESSION['user']['cognome']) && isset($_SESSION['user']['nome'])) 
-                 ? $_SESSION['user']['cognome']." ".$_SESSION['user']['nome'] : false; break;
+            case '%cognomenome' : 
+            case '%surnamename' : 
+                $out = User_Session::lastname() . ' ' . User_Session::firstname();
+                break;
 
-            case '%now' : $out= date('Y-m-d'); break;
-            case '%timestamp' : $out= date('Y-m-d H:i:s'); break;
+            case '%now' : 
+                $out= date('Y-m-d'); 
+                break;
+            
+            case '%timestamp' : 
+                $out= date('Y-m-d H:i:s'); 
+                break;
 
-            default: $out=false;	
+            default: 
+                $out=false;	
         }
 
-        return ($out!=false && $out!='') ? $out : false;
+        return (!empty($out)) ? $out : false;
 
     }
 
@@ -476,7 +506,7 @@ class RegTools {
 
         if($gid=='session'){
 
-            $gid = (int) $_SESSION['gid'];
+            $gid = (int) User_Session::gid();
         }
         else{
             $gid= (int) $gid;
@@ -531,7 +561,7 @@ class RegTools {
 
         if($gid=='session'){
 
-            $gid = (int) $_SESSION['gid'];
+            $gid = (int) User_Session::gid();
         }
         else{
             $gid= (int) $gid;
@@ -574,7 +604,7 @@ class RegTools {
 
         if($gid=='session'){
 
-            $gid = (int) $_SESSION['gid'];
+            $gid = (int) User_Session::gid();
         }
         else{
             $gid= (int) $gid;
@@ -792,7 +822,7 @@ class RegTools {
         }
         else{
 
-            $id_table= self::name2oid($tabella_o_gid,$_SESSION['gid']);
+            $id_table= self::name2oid($tabella_o_gid,User_Session::gid());
         }
 
 
@@ -909,9 +939,8 @@ class RegTools {
      */
     static public function campi_elaborati($nome_tabella,$only_visibile=true){
 
-        require_once(FRONT_ROOT."/plugins/php-sql-parser/src/PHPSQLParser.php");
 
-        $Parser = new PHPSQLParser();
+        $Parser = new \PHPSQLParser\PHPSQLParser();
 
         $fields ="c.column_name, c.data_type, "
                 ."c.in_tipo, c.in_default, t.orderby, t.orderby_sort";

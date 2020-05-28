@@ -310,7 +310,7 @@ $nomi_gr=array();
 list($gids,$nomi_gr) = $vmreg->fetch_row_all($q_gr,true);
 
 
-$n_gr = count($gids);
+$n_gr = (is_array($gids)) ? count($gids) : 0;
 
 
 if($n_gr>0){
@@ -352,7 +352,7 @@ $c=  (isset($_GET['feed'])) ? intval($_GET['feed']) : 0;
 $gidfocus = (isset($_GET['gidfocus'])) ?  intval($_GET['gidfocus']) : 0;
 
 
-if(count($nomi_gr)>0){
+if(is_array($nomi_gr) && count($nomi_gr)>0){
 
 	echo "
 

@@ -70,7 +70,6 @@ class Select_Values {
 
     public function __construct(){
 
-        require_once(FRONT_ROOT."/plugins/php-sql-parser/src/PHPSQLParser.php");
     }
 
 
@@ -86,7 +85,7 @@ class Select_Values {
             return false;
         }
 
-        $Parser = new PHPSQLParser();
+        $Parser = new \PHPSQLParser\PHPSQLParser();
         $pp = $Parser->parse($sql_tendina);
 
         $campi = array();

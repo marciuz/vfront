@@ -47,7 +47,7 @@ if($oid == 0){
     openErrorGenerico('Ups! The table you\'re looking for doesn\'t exists!', false);
     exit;
 }
-$gid = $_SESSION['gid'];
+$gid = User_Session::gid();
 $Scheda = new Scheda($oid);
 // $Scheda->get_fields_info();
 $nome_tab = $Scheda->table_name();
@@ -528,7 +528,7 @@ if($_SESSION['VF_VARS']['shortcut_tastiera_attivi']==1){
     echo $FORM;
 
 
-    if($_SESSION['user']['livello']==3){
+    if(User_Session::level()==3){
 
         $amministrazione_tabella_up="
             <td class=\"comm_img\"><a href=\"admin/gestione_tabelle_gruppi.php?det=$oid&amp;gid={$Scheda->PT->gid}\"><img src=\"img/rotelle.gif\" alt=\""._('administer form')."\" class=\"noborder\" /></a></td>";

@@ -18,7 +18,7 @@ proteggi(1);
 
 $sottomaschere = explode("|",$_GET['subs']);
 
-$id_table=RegTools::name2oid($_GET['action'],$_SESSION['gid']);
+$id_table=RegTools::name2oid($_GET['action'],User_Session::gid());
 $_K = RegTools::prendi_K_relazione_sub($id_table, 'assoc');
 
 $_FK=array();

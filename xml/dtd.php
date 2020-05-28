@@ -16,7 +16,7 @@ require("../inc/conn.php");
 
 function genera_dtd($tabella,$solo_visibili=false){
 
-	list($col,$is_null)= RegTools::prendi_colonne_frontend($tabella,'column_name,is_nullable',$solo_visibili,intval($_SESSION['gid']));
+	list($col,$is_null)= RegTools::prendi_colonne_frontend($tabella,'column_name,is_nullable',$solo_visibili,intval(User_Session::gid()));
 
 
 $DTD='<?xml version="1.0" encoding="UTF-8"?>

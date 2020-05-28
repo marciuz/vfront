@@ -42,7 +42,7 @@ if(isset($_GET['crea']) && count($_POST)>0){
 				  $_dati['desc_stat'],
 				  $_dati['def_stat'],
 				  $_dati['auth_stat'],
-				  $_SESSION['user']['uid'],
+				  User_Session::id(),
 				  trim($_dati['tipo_graph']),
 				  $_dati['publish'],
 				  date('Y-m-d H:i:s')
@@ -165,7 +165,7 @@ if(isset($_GET['new']) || isset($_GET['modifica'])){
 
 
 		// Verifica il diritto di modifica!
-		if($RS['autore']!=$_SESSION['user']['uid'] && $_SESSION['user']['livello']<3){
+		if($RS['autore']!=User_Session::id() && User_Session::level()<3){
 
 			header("Location: ".$_SERVER['PHP_SELF']."?errore=noauth");
 			exit;
@@ -322,14 +322,14 @@ if(isset($_GET['id_s'])){
 	// Controllo di propriet� validi per i non admin
 
 
-	if($_SESSION['user']['livello']<3){
+	if(User_Session::level()<3){
 
-		if($RS['auth_stat']==2 && $RS['gid']!=$_SESSION['gid']){
+		if($RS['auth_stat']==2 && $RS['gid']!=User_Session::gid()){
 
 			$errore='nogid';
 		}
 
-		if($RS['auth_stat']==3 && $RS['autore']!=$_SESSION['user']['uid']) {
+		if($RS['auth_stat']==3 && $RS['autore']!=User_Session::id()) {
 
 			$errore='nouser';
 		}

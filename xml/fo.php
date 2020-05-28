@@ -33,7 +33,7 @@ $rif_tabella=$_GET['action'];
 
 	}
 
-list($cols,$alias)= RegTools::prendi_colonne_frontend($tabella,'column_name, alias_frontend',$solo_visibili,intval($_SESSION['gid']));
+list($cols,$alias)= RegTools::prendi_colonne_frontend($tabella,'column_name, alias_frontend',$solo_visibili,intval(User_Session::gid()));
 
 $str_tabella = ucfirst($tabella);
 

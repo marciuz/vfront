@@ -139,14 +139,16 @@ class XMLizer {
             // non fa niente e continua con lo script
         }
         elseif ($RS_rules['accesso'] == 'FRONTEND') {
-            if (!isset($_SESSION['user']['livello']))
+            
+            if (!User_Session::is_logged()){
                 return false;
+            }
         }
         elseif ($RS_rules['accesso'] == 'GROUP') {
 
             $gruppi = explode(",", $RS_rules['accesso_gruppo']);
 
-            if (is_array($gruppi) && in_array($_SESSION['gid'], $gruppi)) {
+            if (is_array($gruppi) && in_array(User_Session::gid(), $gruppi)) {
 
                 // va avanti
             }
@@ -181,7 +183,7 @@ class XMLizer {
             die("Non si possiedono i diritti per leggere questo report");
 
         if ($gid == null)
-            $gid = intval($_SESSION['gid']);
+            $gid = intval(User_Session::gid());
 
         $PK = RegTools::prendi_PK($tabella, $gid);
 
@@ -413,7 +415,7 @@ class XMLizer {
     function xmlize_table_sub($tabella, $gid = null, $filename = null, $offset = 0, $tot = 0) {
 
         if ($gid == null) {
-            $gid = (int) $_SESSION['gid'];
+            $gid = (int) User_Session::gid();
         }
 
         $oid = RegTools::name2oid($tabella, $gid);

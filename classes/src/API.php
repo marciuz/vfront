@@ -259,7 +259,7 @@ class API {
      */
     public function gen_key(){
 
-        return "VF-".sha1($_SESSION['user']['email'].rand());
+        return "VF-".sha1(User_Session::email().rand());
     }
 
 

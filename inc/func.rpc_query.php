@@ -46,7 +46,7 @@ function rpc_query_search($_dati,$tabella){
 	    $OP_LIKE = 'LIKE';
 	}
 
-	$orderby = RegTools::prendi_orderby($tabella,$_SESSION['gid']);
+	$orderby = RegTools::prendi_orderby($tabella,User_Session::gid());
 
 	$condizione='';
 
@@ -144,7 +144,7 @@ function rpc_query_search_from_sub($_dati,$tabella,$oid_sub){
 	}
 
 
-	//$orderby = RegTools::prendi_orderby($tabella,$_SESSION['gid']);
+	//$orderby = RegTools::prendi_orderby($tabella,User_Session::gid());
 
 	$condizione='';
 

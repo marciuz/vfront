@@ -18,7 +18,7 @@ include("../inc/layouts.php");
  $files=array();
  $files[]="sty/admin.css";
 
- if($_SESSION['user']['livello']==3 && $_SESSION['VF_VARS']['show_updates']==1){
+ if(User_Session::level()==3 && $_SESSION['VF_VARS']['show_updates']==1){
 	  $files[]="js/find_updates.js";
  }
 
@@ -33,7 +33,7 @@ include("../inc/layouts.php");
  echo " <div>\n";
 
 
- if($_SESSION['user']['livello']==3){
+ if(User_Session::level()==3){
 
  echo "
 	<div id=\"box-registri\" class=\"box-db\">
@@ -97,7 +97,7 @@ include("../inc/layouts.php");
 		<h2>"._("Data export")."</h2>
 		<ul class=\"ul-db\">\n";
 
-	 if($_SESSION['user']['livello']==3){
+	 if(User_Session::level()==3){
 			echo "<li><a href=\"export_sql.php\">"._("Database export (DUMP)")."</a></li>\n";
 	 }
 
@@ -147,7 +147,7 @@ include("../inc/layouts.php");
  echo "<div style=\"clear:left;\">\n";
 
 
- if($_SESSION['user']['livello']==3){
+ if(User_Session::level()==3){
 
 	 echo "
  <div id=\"box-layout\" class=\"box-db\">
@@ -190,7 +190,7 @@ echo "
 
 
  }
- elseif($_SESSION['user']['livello']==2){	
+ elseif(User_Session::level()==2){	
 
 	echo "
 	<div id=\"box-impostazioni\" class=\"box-db\">

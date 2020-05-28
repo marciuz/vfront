@@ -1,4 +1,5 @@
 <?php
+
 ########################################################################
 #
 #	 This file is part of VFront.
@@ -18,68 +19,55 @@
 
 
 /**
-* File di index di VFront.
-* Questo file viene richiamato per fare il login e|o come Home per l'utente
-* Il file di index mostra il login qualora non ci fosse una sessione valida.
-* 
-* @package VFront
-* @author Mario Marcello Verona <marcelloverona@gmail.com>
-* @copyright 2007-2008 Mario Marcello Verona
-* @version 0.96 $Id: index.php 1170 2017-05-12 18:06:01Z marciuz $
-* @license http://www.gnu.org/licenses/gpl.html GNU Public License
+ * File di index di VFront.
+ * Questo file viene richiamato per fare il login e|o come Home per l'utente
+ * Il file di index mostra il login qualora non ci fosse una sessione valida.
+ * 
+ * @package VFront
+ * @author Mario Marcello Verona <marcelloverona@gmail.com>
+ * @copyright 2007-2008 Mario Marcello Verona
+ * @version 0.96 $Id: index.php 1170 2017-05-12 18:06:01Z marciuz $
+ * @license http://www.gnu.org/licenses/gpl.html GNU Public License
  * @todo Escape data in external auth
-*/
-
-
+ */
 require_once("./inc/conn.php");
 require_once("./inc/layouts.php");
 
 
-$INPUTS="";
+$INPUTS = "";
 
 
-if(isset($_GET['login'])){
+if (isset($_GET['login'])) {
 
-	$_dati = $vmreg->recursive_escape($_POST);
+    $_dati = $vmreg->recursive_escape($_POST);
+    $LOGIN = new Auth($_dati['nick'], $_dati['passw']);
+    exit;
+    
+} 
+else if (isset($_GET['logout'])) {
 
-	$LOGIN = new Auth($_dati['nick'],$_dati['passw']);
+    $_SESSION = array();
+    header("Location: " . FRONT_DOCROOT . "/index.php");
+    exit;
+    
+} 
+else if (isset($_GET['nolog'])) {
 
-	exit;
-}
-elseif(isset($_GET['logout'])){
-
-	$_SESSION=array();
-
-	header("Location: ".FRONT_DOCROOT."/index.php");
-
-	exit;
-}
-elseif(isset($_GET['nolog'])){
-
-	$_SESSION=array();
-
-	// reload global vars
-	$_SESSION['VF_VARS']=var_frontend('session','session');
-
-	mostra_login();
-
-	exit;
-}
-elseif (isset($_SESSION['user']) && is_array($_SESSION['user'])){
-
-
-	mostra_loggato();
-
-
-}
-else{
-
-	mostra_login();
+    $_SESSION = array();
+    $_SESSION['VF_VARS'] = var_frontend('session', 'session');
+    mostra_login();
+    exit;
+    
+} 
+else if (User_Session::is_logged()) {
+    mostra_loggato();
+} 
+else {
+    mostra_login();
 }
 
 
 ##########################################################################################################
-
 
 /**
  * Questa funzione genera la pagina di login nel caso il file index sia stato richiamato senza 
@@ -88,60 +76,53 @@ else{
  * di VFront e se l'autenticazione non avviene mediante strumenti esterni.
  *
  */
-function mostra_login(){
+function mostra_login() {
 
-	global $conf_auth;
+    global $conf_auth;
 
-	// MODULO PRINCIPALE
+    // MODULO PRINCIPALE
 
-	$apertura= str_replace("<body>","<body onload=\"document.getElementById('nick').focus();\">",openLayout1(_NOME_PROJ));
-	echo $apertura;
+    $apertura = str_replace("<body>", "<body onload=\"document.getElementById('nick').focus();\">", openLayout1(_NOME_PROJ));
+    echo $apertura;
 
-	if(isset($_GET['nolog'])){
-		echo "<div id=\"nologin\"><p>"._('Error in username or password, please verify')."</p></div>\n";
-	}
+    if (isset($_GET['nolog'])) {
+        echo "<div id=\"nologin\"><p>" . _('Error in username or password, please verify') . "</p></div>\n";
+    }
 
-	if(isset($_SESSION['VF_VARS']['recupero_password']) 
-	      && $_SESSION['VF_VARS']['recupero_password']==1){
-
-
-		if($conf_auth['tipo_external_auth']==null){
+    if (isset($_SESSION['VF_VARS']['recupero_password']) && $_SESSION['VF_VARS']['recupero_password'] == 1) {
 
 
-			$PASSW_RECOVER="<p><a href=\"password_recover.php\">"._('I\'ve forgotten my password')."</a></p>";
-		}
-		else if(isset($_SESSION['VF_VARS']['recupero_password_url'])
-			&& $_SESSION['VF_VARS']['recupero_password_url']!=''){
+        if ($conf_auth['tipo_external_auth'] == null) {
 
-			$PASSW_RECOVER="<p><a href=\"{$_SESSION['VF_VARS']['recupero_password_url']}\">"._('I\'ve forgotten my password')."</a></p>";
-		}
-		else{
-			$PASSW_RECOVER='';
-		}
-	}
-	else{
-		$PASSW_RECOVER='';
-	}
 
-	$access_label= ($conf_auth['tipo_external_auth']=='' || ($conf_auth['campo_nick']==$conf_auth['campo_mail'])) 
-				? _('E-mail')
-				: _('Username');
+            $PASSW_RECOVER = "<p><a href=\"password_recover.php\">" . _('I\'ve forgotten my password') . "</a></p>";
+        } else if (isset($_SESSION['VF_VARS']['recupero_password_url']) && $_SESSION['VF_VARS']['recupero_password_url'] != '') {
 
-	echo "
+            $PASSW_RECOVER = "<p><a href=\"{$_SESSION['VF_VARS']['recupero_password_url']}\">" . _('I\'ve forgotten my password') . "</a></p>";
+        } else {
+            $PASSW_RECOVER = '';
+        }
+    } else {
+        $PASSW_RECOVER = '';
+    }
+
+    $access_label = ($conf_auth['tipo_external_auth'] == '' || ($conf_auth['campo_nick'] == $conf_auth['campo_mail'])) ? _('E-mail') : _('Username');
+
+    echo "
 		<div id=\"login\" align=\"center\">
 			<form method=\"post\" action=\"" . Common::phpself() . "?login\" >
 				<fieldset>
 
-					<legend>"._('System access')."</legend>
+					<legend>" . _('System access') . "</legend>
 					<p>		
-						<label for=\"nick\">".$access_label."</label><br />
+						<label for=\"nick\">" . $access_label . "</label><br />
 						<input type=\"text\" name=\"nick\" size=\"30\" maxlength=\"200\" id=\"nick\" /><br />
 					</p>
 					<p>
-						<label for=\"passw\">"._('Password')."</label><br />
+						<label for=\"passw\">" . _('Password') . "</label><br />
 						<input type=\"password\" name=\"passw\" size=\"30\" maxlength=\"100\" id=\"passw\" /><br />
 					</p>
-					<p><input type=\"submit\" name=\"accedi\" value=\"  "._('Access')."  \" id=\"accedi\" /></p>
+					<p><input type=\"submit\" name=\"accedi\" value=\"  " . _('Access') . "  \" id=\"accedi\" /></p>
 					$PASSW_RECOVER
 				</fieldset>
 
@@ -150,11 +131,10 @@ function mostra_login(){
 	";
 
 
-	echo closeLayout1();
-
-	exit;
+    echo closeLayout1();
+    
+    exit;
 }
-
 
 /**
  * Funzione che genera il codice per produrre la home page.
@@ -163,173 +143,166 @@ function mostra_login(){
  * @see function mostra_login
  *
  */
-function mostra_loggato(){
+function mostra_loggato() {
 
-	global  $vmsql, $vmreg, $db1;
+    global $vmreg, $db1;
 
-	proteggi(1);
+    proteggi(1);
 
-	$files=array("js/scriptaculous/lib/prototype.js",
-				 "js/scriptaculous/src/scriptaculous.js",
-				 "js/home.js");
+    $files = array("js/scriptaculous/lib/prototype.js",
+        "js/scriptaculous/src/scriptaculous.js",
+        "js/home.js");
 
-	echo openLayout1(_NOME_PROJ,$files);
-
-
-	echo "<h1 style=\"padding-left:4px;\">"._('Main menu')."</h1>\n";
-
-	if($_SESSION['gid']==0 && (isset($_SESSION['VF_VARS']['alert_login_default']) && $_SESSION['VF_VARS']['alert_login_default']==1)){
-
-		echo "<div class=\"info\"><strong>"._('Warning!')."</strong><br />
-		"._('You\'re attempting to  login via the <strong>default group')."</strong>.
-		"._("If you login for the first time, this is correct; contact your system administrator to set the privileges correctly")."</div>\n";
-
-	}
+    echo openLayout1(_NOME_PROJ, $files);
 
 
-	// TEst configurazione
-	if($_SESSION['user']['livello']>=2){
+    echo "<h1 style=\"padding-left:4px;\">" . _('Main menu') . "</h1>\n";
 
-		// prendi il test
-		$testvfront=@join('',@file('./conf/.testvfront'));
+    if (User_Session::gid() == 0 && (isset($_SESSION['VF_VARS']['alert_login_default']) && $_SESSION['VF_VARS']['alert_login_default'] == 1)) {
 
-		if($testvfront=='1' && $_SESSION['VF_VARS']['alert_config']==1){
-
-			echo "<div class=\"alertbox\" id=\"alert_config\"><strong>"._('Warning!')."</strong><br />\n";
-			echo sprintf(_('There are some problems in configuring VFront which may affect the full functioning of the application. See %s'),'<a href="admin/vfront.info.php">'._('diagnostic page').'</a>');
-			echo " - \n";
-			echo "<span id=\"hide_alert_config\" class=\"fakelink\" onclick=\"$('alert_config').fade();\">"._('Do not show this message again')."</span> ".
-			"(".sprintf(_('you can always restore from page %s'),"<a href=\"admin/variabili.php\">"._('variables')."</a>").")";
-			echo "</div>\n";
-
-		}
-
-	}
-
-######################################################################################################################
-
-	// RECUPERO LE TABELLE
-	$matrice_tab= RegTools::prendi_tabelle($_SESSION['gid'], true, true, true);
-
-	// RECUPERO LE VISTE
-	$matrice_view= RegTools::prendi_viste($_SESSION['gid'], true, true);
+        echo "<div class=\"info\"><strong>" . _('Warning!') . "</strong><br />
+		" . _('You\'re attempting to  login via the <strong>default group') . "</strong>.
+		" . _("If you login for the first time, this is correct; contact your system administrator to set the privileges correctly") . "</div>\n";
+    }
 
 
-	// RECUPERO LE STATISTICHE
+    // TEst configurazione
+    if (User_Session::level() >= 2) {
 
-	if(Common::is_admin()){
-		$sql_add_stat='';
-	}
-	else{
-		$sql_add_stat=" AND ( (auth_stat=1) ";
-		$sql_add_stat.="   OR (auth_stat=2  AND u.gid=".$_SESSION['gid']." )";
-		$sql_add_stat.="   OR (auth_stat=3  AND autore=".$_SESSION['user']['uid']." ))";
-	}
+        // prendi il test
+        $testvfront = @join('', @file('./conf/.testvfront'));
+
+        if ($testvfront == '1' && $_SESSION['VF_VARS']['alert_config'] == 1) {
+
+            echo "<div class=\"alertbox\" id=\"alert_config\"><strong>" . _('Warning!') . "</strong><br />\n";
+            echo sprintf(_('There are some problems in configuring VFront which may affect the full functioning of the application. See %s'), '<a href="admin/vfront.info.php">' . _('diagnostic page') . '</a>');
+            echo " - \n";
+            echo "<span id=\"hide_alert_config\" class=\"fakelink\" onclick=\"$('alert_config').fade();\">" . _('Do not show this message again') . "</span> " .
+            "(" . sprintf(_('you can always restore from page %s'), "<a href=\"admin/variabili.php\">" . _('variables') . "</a>") . ")";
+            echo "</div>\n";
+        }
+    }
+
+    // 
+    // RECUPERO LE TABELLE
+    $matrice_tab = RegTools::prendi_tabelle(User_Session::gid(), true, true, true);
+
+    // RECUPERO LE VISTE
+    $matrice_view = RegTools::prendi_viste(User_Session::gid(), true, true);
 
 
-	$sql_stat="SELECT id_stat, nome_stat, desc_stat, u.gid
+    // RECUPERO LE STATISTICHE
+
+    if (Common::is_admin()) {
+        $sql_add_stat = '';
+    } else {
+        $sql_add_stat = " AND ( (auth_stat=1) ";
+        $sql_add_stat .= "   OR (auth_stat=2  AND u.gid=" . User_Session::gid() . " )";
+        $sql_add_stat .= "   OR (auth_stat=3  AND autore=" . User_Session::id() . " ))";
+    }
+
+
+    $sql_stat = "SELECT id_stat, nome_stat, desc_stat, u.gid
 			  FROM {$db1['frontend']}{$db1['sep']}stat s
 			  INNER JOIN {$db1['frontend']}{$db1['sep']}utente u ON s.autore=u.id_utente
 			  WHERE published=1
 			  $sql_add_stat
 			  ORDER BY nome_stat
 			  ";
-	$q_stat = $vmreg->query($sql_stat);
+    $q_stat = $vmreg->query($sql_stat);
 
-	$matrice_stat = $vmreg->fetch_assoc_all($q_stat);
+    $matrice_stat = $vmreg->fetch_assoc_all($q_stat);
 
 
-	$LI1 = "";
+    $LI1 = "";
 
-		for($i=0;$i<count($matrice_tab);$i++){
+    for ($i = 0; $i < count($matrice_tab); $i++) {
 
-			$comment1 = preg_replace("/;? ?InnoDB.*|/ui","",$matrice_tab[$i]['commento']);
+        $comment1 = preg_replace("/;? ?InnoDB.*|/ui", "", $matrice_tab[$i]['commento']);
 
-			$tab_name = ($matrice_tab[$i]['table_alias']=='') ? $matrice_tab[$i]['table_name'] : $matrice_tab[$i]['table_alias'];
+        $tab_name = ($matrice_tab[$i]['table_alias'] == '') ? $matrice_tab[$i]['table_name'] : $matrice_tab[$i]['table_alias'];
 
-            $default_view_hash = (isset($matrice_tab[$i]['default_view']) && $matrice_tab[$i]['default_view'] == 'table') ? '#tab' : '';
+        $default_view_hash = (isset($matrice_tab[$i]['default_view']) && $matrice_tab[$i]['default_view'] == 'table') ? '#tab' : '';
 
-			$LI1.= "
+        $LI1 .= "
 			<li>
-				<a href=\"scheda.php?oid=".$matrice_tab[$i]['id_table'].$default_view_hash."\">".$tab_name."</a>
-				<div class=\"desc-tab\">".htmlentities(Common::vf_utf8_decode($comment1),ENT_QUOTES, FRONT_ENCODING)."</div>
+				<a href=\"scheda.php?oid=" . $matrice_tab[$i]['id_table'] . $default_view_hash . "\">" . $tab_name . "</a>
+				<div class=\"desc-tab\">" . htmlentities(Common::vf_utf8_decode($comment1), ENT_QUOTES, FRONT_ENCODING) . "</div>
 			</li>\n";
-		}
+    }
 
-	$LI2 = "";
+    $LI2 = "";
 
-		for($i=0;$i<count($matrice_view);$i++){
+    for ($i = 0; $i < count($matrice_view); $i++) {
 
-			$view_name = ($matrice_view[$i]['table_alias']=='') ? $matrice_view[$i]['table_name'] : $matrice_view[$i]['table_alias'];
+        $view_name = ($matrice_view[$i]['table_alias'] == '') ? $matrice_view[$i]['table_name'] : $matrice_view[$i]['table_alias'];
 
-			$LI2.= "
+        $LI2 .= "
 			<li>
-				<a href=\"scheda.php?oid=".$matrice_view[$i]['id_table']."\">".$view_name."</a>
+				<a href=\"scheda.php?oid=" . $matrice_view[$i]['id_table'] . "\">" . $view_name . "</a>
 				<div class=\"desc-tab\">&nbsp;</div>
 			</li>\n";
-		}
+    }
 
-	$LI3 = "";
+    $LI3 = "";
 
-		for($i=0;$i<count($matrice_stat);$i++){
+    for ($i = 0; $i < count($matrice_stat); $i++) {
 
-			$LI3.= "
+        $LI3 .= "
 			<li>
-				<a href=\"stats/stat.personal.php?id_s=".$matrice_stat[$i]['id_stat']."&amp;ref=home\">".$matrice_stat[$i]['nome_stat']."</a>
-				<div class=\"desc-tab\">".$matrice_stat[$i]['desc_stat']."</div>
+				<a href=\"stats/stat.personal.php?id_s=" . $matrice_stat[$i]['id_stat'] . "&amp;ref=home\">" . $matrice_stat[$i]['nome_stat'] . "</a>
+				<div class=\"desc-tab\">" . $matrice_stat[$i]['desc_stat'] . "</div>
 			</li>\n";
-		}
+    }
 
 ######################################################################################################################
 
 
-	if($LI1==''){
+    if ($LI1 == '') {
 
-		if($_SESSION['user']['livello']==3){
+        if (User_Session::level() == 3) {
 
-			$tabs=RegTools::prendi_tabelle();
-			if(count($tabs)==0){
+            $tabs = RegTools::prendi_tabelle();
+            if (count($tabs) == 0) {
 
-				$inizializza=" <a href=\"admin/menu_registri.php?initreg\">"._("Initialize registry")."</a>\n";
-			}
-			else $inizializza='';
-		}
-		else{
-			$inizializza='';
-		}
+                $inizializza = " <a href=\"admin/menu_registri.php?initreg\">" . _("Initialize registry") . "</a>\n";
+            } else
+                $inizializza = '';
+        } else {
+            $inizializza = '';
+        }
 
-		$LI1="<li>"._('At the moment there are no available tables').$inizializza."</li>";
-	}
-
-
-	$files_add_index=glob("{./usr/add_index.php,./usr/*/add_index.php}",GLOB_BRACE);
-
-	//if(file_exists("./usr/add_index.php")){
-	foreach($files_add_index as $file_add){	
-
-		include($file_add);
-
-		if(function_exists('add_index_top')){
-			echo add_index_top();
-		}
-
-		if(preg_match("|./usr/([\w]+)/.+|",$file_add,$dirusrname)){
-
-		    $fname=$dirusrname[1].'__add_index_top';
-
-		    if(function_exists($fname)){
-			echo $fname();
-		    }
-		}
-
-	}
+        $LI1 = "<li>" . _('At the moment there are no available tables') . $inizializza . "</li>";
+    }
 
 
-	echo "
+    $files_add_index = glob("{./usr/add_index.php,./usr/*/add_index.php}", GLOB_BRACE);
+
+    //if(file_exists("./usr/add_index.php")){
+    foreach ($files_add_index as $file_add) {
+
+        include($file_add);
+
+        if (function_exists('add_index_top')) {
+            echo add_index_top();
+        }
+
+        if (preg_match("|./usr/([\w]+)/.+|", $file_add, $dirusrname)) {
+
+            $fname = $dirusrname[1] . '__add_index_top';
+
+            if (function_exists($fname)) {
+                echo $fname();
+            }
+        }
+    }
+
+
+    echo "
 		<div id=\"box-tabelle\" class=\"box-home\">
 
 			<div class=\"box-home-txt\">
-				<h2>"._('Available tables')."</h2>
+				<h2>" . _('Available tables') . "</h2>
 				<ul class=\"lista-tabelle\">
 					$LI1
 				</ul>
@@ -337,45 +310,45 @@ function mostra_loggato(){
 		</div>	
 			";
 
-	if(count($matrice_view)>0){
+    if (count($matrice_view) > 0) {
 
-		echo "
+        echo "
 			<div id=\"box-viste\" class=\"box-home\">
 
 				<div class=\"box-home-txt\">
-					<h2>"._('Data views')."</h2>
+					<h2>" . _('Data views') . "</h2>
 					<ul class=\"lista-tabelle\">
 						$LI2
 					</ul>
 				</div>
 			</div>	
 				";
-	}
+    }
 
 
-	if(count($matrice_stat)>0){
+    if (count($matrice_stat) > 0) {
 
-		echo "
+        echo "
 			<div id=\"box-stat-home\" class=\"box-home\" style=\"clear:both;\">
 
 				<div class=\"box-home-txt\">
-					<h2>"._('Database statistics')."</h2>
+					<h2>" . _('Database statistics') . "</h2>
 					<ul class=\"lista-tabelle\">
 						$LI3
 					</ul>
 				</div>
 			</div>	
 				";
-	}
+    }
 
 
-	echo "
+    echo "
 		<div id=\"box-info\" class=\"box-home\" style=\"clear:both;\">
 
 			<div class=\"box-home-txt\">
-				<h2>"._('FAQs (Frequently Asked Questions) and answers')."</h2>
-				<p><a href=\"helpdocs.php\">"._('Useful documents')."</a></p>
-				<p><a href=\"credits.php\">"._('Credits')."</a></p>
+				<h2>" . _('FAQs (Frequently Asked Questions) and answers') . "</h2>
+				<p><a href=\"helpdocs.php\">" . _('Useful documents') . "</a></p>
+				<p><a href=\"credits.php\">" . _('Credits') . "</a></p>
 			</div>
 
 		</div>
@@ -383,7 +356,5 @@ function mostra_loggato(){
 		<p style=\"clear:both;\">&nbsp;</p>
 		";
 
-	echo closeLayout1();
-
-
+    echo closeLayout1();
 }

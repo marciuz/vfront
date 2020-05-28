@@ -98,7 +98,7 @@ proteggi(1);
 		$ORDERBY = (RegTools::is_campo($orderby_val)) ? "ORDER BY ".$orderby_val ." ".$sort_val : "";
 	}
 	else{
-		$orderby_val = RegTools::prendi_orderby($tabella,$_SESSION['gid']);		
+		$orderby_val = RegTools::prendi_orderby($tabella,User_Session::gid());		
 		$ORDERBY = ($orderby_val!="") ? "ORDER BY ".$orderby_val : "";	
 	}
 

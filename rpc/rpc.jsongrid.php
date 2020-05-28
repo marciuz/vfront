@@ -173,7 +173,7 @@ function xmlize_campo_grid($tag,$attr){
 	}
 	else{
 
-		$orderby_val = RegTools::prendi_orderby($tabella,$_SESSION['gid']);		
+		$orderby_val = RegTools::prendi_orderby($tabella,User_Session::gid());		
 		$ORDERBY = ($orderby_val!="") ? "ORDER BY ".$orderby_val : "";	
 
 	}

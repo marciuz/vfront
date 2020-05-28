@@ -59,7 +59,7 @@ function genera_xsl_base($rif_tabella,$solo_visibili=0){
 
 		}
 
-		list($cols,$alias)= RegTools::prendi_colonne_frontend($tabella,'column_name, alias_frontend',$solo_visibili,intval($_SESSION['gid']));
+		list($cols,$alias)= RegTools::prendi_colonne_frontend($tabella,'column_name, alias_frontend',$solo_visibili,intval(User_Session::gid()));
 
 		$titolo= _('Table')." $tabella";
 	}

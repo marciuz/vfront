@@ -77,7 +77,7 @@ function mime_content_type_image($filename)
 
 
 // Se c'� inserisce il file
-if(isset($_GET['add']) && count($_FILES)>0 && $_SESSION['user']['livello']>1){
+if(isset($_GET['add']) && count($_FILES)>0 && User_Session::level()>1){
 
 		// il formato � corretto?
 		if(strlen(mime_content_type_($_FILES['documento']['name']))==0){
@@ -115,7 +115,7 @@ if(isset($_GET['add']) && count($_FILES)>0 && $_SESSION['user']['livello']>1){
 // CANCELLAZIONE DEL FILE:
 
 
-if(isset($_GET['del']) && $_SESSION['user']['livello']>1){
+if(isset($_GET['del']) && User_Session::level()>1){
 
 	$id_file= $_GET['del'];
 
@@ -285,7 +285,7 @@ echo openLayout1(_("Useful documents"),$files);
 		</p>
 		</div>\n";
 
-	if($_SESSION['user']['livello']>1){
+	if(User_Session::level()>1){
 		echo "<p><a href=\"javascript:;\" onclick=\"document.getElementById('add_record').style.display='';\">"._('Add file')."</a></p>\n";
 
 	}
@@ -298,7 +298,7 @@ echo openLayout1(_("Useful documents"),$files);
 
 		<th class=\"lilla\">"._('Last modified')."</th>
 		<th class=\"lilla\">"._('Size')."</th>",
-		($_SESSION['user']['livello']>1) ?
+		(User_Session::level()>1) ?
 		"<th class=\"lilla\">"._('Delete')."</th>" : "",
 		"</tr>\n
 		";
@@ -311,7 +311,7 @@ echo openLayout1(_("Useful documents"),$files);
 			<td><a href=\"?doc=$i\">".$docs[$i]['nome']."</a></td>
 			<td>".date("d/m/Y H:i",$docs[$i]['data'])."</td>
 			<td>".round($docs[$i]['size']/1024,0)." Kb</td>",
-			($_SESSION['user']['livello']>1) ?
+			(User_Session::level()>1) ?
 			"<td><a href=\"javascript:;\" onclick=\"confirm_delete_f(this,$i);\" >"._('delete')."</a></td>" : "",
 			"</tr>";
 	}
@@ -349,7 +349,7 @@ echo openLayout1(_("Useful documents"),$files);
 
 </div>';
 
-  if($_SESSION['user']['livello']>1){
+  if(User_Session::level()>1){
   	echo $ADD_FILE;
   }
 

@@ -229,7 +229,7 @@ class Common {
     static public function permesso($perm) {
 
         // sempre e comunque gli amministratori possono accedere
-        if ($_SESSION['user']['livello'] == 3)
+        if (User_Session::level() == 3)
             return true;
 
         // DEBUG... per ora restituisce sempre vero...
@@ -260,7 +260,7 @@ class Common {
      */
     static public function is_admin() {
 
-        return ($_SESSION['user']['livello'] >= 3) ? true : false;
+        return (User_Session::level() >= 3) ? true : false;
     }
 
     static public function vf_utf8_encode($string) {

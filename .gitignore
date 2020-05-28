@@ -16,6 +16,7 @@ Desktop.ini
 conf/.testvfront
 conf/conf.vfront.php
 files/db/vfront.sqlite
+_debug/*
 
 
 # keep some hiddens

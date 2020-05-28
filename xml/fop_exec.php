@@ -48,7 +48,7 @@ $tabella = preg_replace("'[^a-z0-9_]'i","",$_GET['action']);
 
 		$gruppi=explode(",",$RS_rules['accesso_gruppo']);
 
-		if(is_array($gruppi) && in_array($_SESSION['gid'],$gruppi)){
+		if(is_array($gruppi) && in_array(User_Session::gid(),$gruppi)){
 
 			// va avanti
 		}

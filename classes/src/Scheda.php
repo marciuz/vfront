@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of class
+ * Components and behaviour fo the Scheda script.
  *
- * @author Marcello Verona
+ * @author M.Marcello Verona <marcelloverona@gmail.com>
  */
 class Scheda {
 
@@ -384,8 +384,8 @@ JS;
             // variabili da impostare dentro il ciclo.  
 
             $label=true;
-            $riga_singola=false;
-            $riga_singola_override=($C->in_line=='') ? false:true;
+            $single_row=false;
+            $single_row_override=($C->in_line=='') ? false:true;
             $href_nuovo_record="";
 
             if($_SESSION['VF_VARS']['js_test']){
@@ -393,7 +393,7 @@ JS;
                 if(!empty($C->jstest)) $this->rules[]=trim($C->jstest);
             }
 
-            // SE IMPOSTATO, sovrascrivo il tipo sovraimposto a quello di default
+            // IF SET, I overwrite the overridden type to the default type
             $data_type = $C->data_type;
             $C->data_type = ($C->in_tipo=='' || $C->in_tipo==null) ? $C->data_type : $C->in_tipo;
 
@@ -411,7 +411,7 @@ JS;
             // VARCHAR ---------------------------------------------------------
             else if(in_array(strtolower($C->data_type), array('varchar','char'))){
 
-                $riga_singola=true;
+                $single_row=true;
                 $input=Scheda_View::type_char($C->column_name, $C->character_maximum_length, $C->in_suggest, $this->table_name(), $C->in_line);
             }
 
@@ -420,7 +420,7 @@ JS;
 
             else if(in_array($C->data_type, array('text', 'mediumtext', 'longtext'))){
 
-                $riga_singola=true;
+                $single_row=true;
                 $input = Scheda_View::type_text($C->column_name, $C->in_line);
             }
 
@@ -429,14 +429,13 @@ JS;
 
             else if($C->data_type=='bool'){
 
-                $riga_singola=false;
                 $input = Scheda_View::type_bool($C->column_name, $db1['dbtype']);
             }
 
             // PASSWORD --------------------------------------------------------
             else if($C->data_type=='password'){
 
-                $riga_singola=true;
+                $single_row=true;
                 // se c'è almeno una codifica MD5 carica il file JS
                 if($C->in_default=='md5') $this->carica_md5=true;
                 if($C->in_default=='sha1') $this->carica_sha1=true;
@@ -448,7 +447,7 @@ JS;
             // Tipo richtext: FCKEDITOR ----------------------------------------
             else if($C->data_type=='richtext'){
 
-                $riga_singola=true;
+                $single_row=true;
                 $input = Scheda_View::type_richtext($C->column_name);
                 $this->CKEditors[]=$C->column_name;
             }
@@ -470,7 +469,6 @@ JS;
             // tipo speciale SELECT FROM ---------------------------------------
             else if($C->data_type=='select_from'){
 
-                $riga_singola=true;
                 $input = Scheda_View::type_selectfrom($C->column_name, $C->in_default, $this->table_name());
                 $this->fields_select_from[]="dati_".$C->column_name;
                 $this->n_tendine_attese++;
@@ -528,7 +526,7 @@ JS;
             }
 
 
-            // Se è tendina dinamica metti un span di feedback
+            // If it is dynamic drop-down put a feedback span.
 
 
             // Filter by field
@@ -561,7 +559,7 @@ JS;
             $class_type.= ($C->data_type == $data_type) ? '' : ' datatype--'.$data_type;
 
 
-            if($riga_singola_override){
+            if($single_row_override){
 
                 if($C->in_line==0){
 
@@ -601,7 +599,7 @@ JS;
             }
             else{
 
-                if($riga_singola){
+                if($single_row){
 
                     $FORM_0.="
                         <div class=\"row-s {$class_type}\">

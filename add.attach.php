@@ -171,7 +171,7 @@ if(count($_FILES)>0){
 				 $vmreg->escape($_POST['id']),
 				 $vmreg->escape($nome_pulito),
 				 '',
-				 $vmreg->escape(ucfirst($_SESSION['user']['nome'])." ".ucfirst($_SESSION['user']['cognome'])),
+				 $vmreg->escape(User_Session::fullname()),
 				 date('Y-m-d H:i:s')
 				 );
 

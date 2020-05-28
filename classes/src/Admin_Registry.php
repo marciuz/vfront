@@ -2,7 +2,7 @@
 /**
  * There are many functions here for the management of the register of VFront.
  *
- * @desc Libreria di funzioni per la gestione del registro di VFront
+ * @desc Library of functions for managing the registry of VFront.
  * @package VFront
  * @subpackage Administration
  * @author M.Marcello Verona
@@ -38,19 +38,19 @@ class Admin_Registry
 
 
     /**
-     * Funzione di inserimento di una tabella nel registro.
-     * Questa funzione scrive nelle tabelle registro_tab e registro_col
-     * informazioni su una tabella del database, recuperate a sua volta dall'information_schema
+     * Function for inserting a table in the register.
+     * This function writes in the tables register_tab and register_col
+     * information on a table in the database, retrieved in turn from the information_scheme
      *
-     * @param string $val Nome della tabella
-     * @param int $gid Identificativo del gruppo
+     * @param string $val Table name
+     * @param int $gid Group Identifier
      * @return void
      */
     public static function inserisci_registro($val, $gid=0)
     {
         global $vmreg, $db1;
 
-        // Verifica che non ci siano già record per questo gruppo
+        // Check that there are no records for this group already
         $test_gid=$vmreg->test_id("gid", $gid, "{$db1['frontend']}{$db1['sep']}registro_tab", "AND table_name='{$val['table_name']}'");
 
         if ($test_gid) {
@@ -97,13 +97,13 @@ class Admin_Registry
 
 
     /**
-     * Funzione di clonazione registro.
-     * Prende le impostazioni del gruppo $gid_old (il gruppo default = 0)
-     * e le applica al nuovo gruppo $gid_new
+     * Cloning registry function.
+     * Takes the $gid_old group settings (the default group = 0)
+     * and applies them to the new group $gid_new
      *
-     * @param int $gid_new ID del nuovo gruppo
-     * @param int $gid_old ID del gruppo origine
-     * @return bool Esito dell'operazione
+     * @param int $gid_new New group ID
+     * @param int $gid_old Origin group ID
+     * @return bool Outcome of the operation
      */
     public static function clona_settaggio($gid_new, $gid_old=0)
     {
@@ -133,11 +133,12 @@ class Admin_Registry
 
 
     /**
-     * Dato un gid crea un registro tabelle per quel gruppo partendo da zero.
-     * Come inizializza registro ma non crea il record nel gruppo.
-     * Restituisce vero|falso
-     * @param int $gid Id del gruppo
-     * @return bool Esito dell'operazione
+     * Given a gid creates a table log for that group from scratch.
+     * As it initializes register but does not create the record in the group.
+     * Returns true|false
+     *
+     * @param int $gid Group Id
+     * @return bool Outcome of the operation
      */
     public static function genera_registro_vuoto($gid)
     {

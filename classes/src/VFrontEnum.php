@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of class
+ * Enumerator for VFront
  *
- * @author marcello
+ * @author M.Marcello Verona <marcelloverona@gmail.com>
  */
 class VFrontEnum {
 

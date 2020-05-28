@@ -386,7 +386,7 @@ function duplica_allegati($tabella,$id_old,$id_new){
 			$q=$vmsql->query("INSERT INTO "._TABELLA_ALLEGATO." (tipoentita, codiceentita, autoreall, lastdata, nomefileall)
 							VALUES ('$tabella',
 							$id_new, 
-							'".$vmsql->escape($_SESSION['user']['nome']." ".$_SESSION['user']['cognome'])."', 
+							'".$vmsql->escape(User_Session::fullname())."', 
 							'".date("Y-m-d H:i:s")."', '".$matrice_att[$i]['nomefileall']."')"
 							);
 

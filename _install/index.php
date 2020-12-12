@@ -271,17 +271,17 @@ function step1(){
 
 		$php_modules = (array) @apache_get_modules();
 		$l_modrewrite=(in_array('mod_rewrite',$php_modules)) ? 1:0;
-		$class_alert['modrewrite']= ($l_modrewrite) ? 'install-ok' : 'install-alert';
-		$alert_rewrite_na='';
 	}
 	// caso CGI
 	else{
 
 		$php_modules= array();
-		$l_modrewrite='na';
-		$class_alert['modrewrite']= 'install-na';
-		$alert_rewrite_na=_('This information is not available, since it seems to be using PHP as CGI');
+		require_once("../inc/func.mod_rewrite.php");
+		$doc_root="http://".$_SERVER['HTTP_HOST'].str_replace("/_install/index.php",'',$_SERVER['PHP_SELF']);
+		$l_modrewrite=(check_mod_rewrite($doc_root)) ? 1:0;
 	}
+	$class_alert['modrewrite']= ($l_modrewrite) ? 'install-ok' : 'install-alert';
+	$alert_rewrite_na='';
 
 	$l_mysqli=(in_array('mysqli',$ext)) ? 1:0;
 	$l_mysql_old=(in_array('mysql',$ext)) ? 1:0;
